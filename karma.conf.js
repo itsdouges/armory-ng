@@ -14,7 +14,7 @@ function listFiles() {
 
   return wiredep(wiredepOptions).js
     .concat([
-      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
+      path.join(conf.paths.tmp, '/serve/app/app.module.js'),
       path.join(conf.paths.src, '/**/*.spec.js'),
       path.join(conf.paths.src, '/**/*.mock.js'),
       path.join(conf.paths.src, '/**/*.html')
@@ -46,9 +46,11 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-      'src/**/*.html': ['ng-html2js']
+      'src/**/*.html': ['ng-html2js'],
     }
   };
+
+  console.log(configuration.files);
 
   // This block is needed to execute Chrome on Travis
   // If you ever plan to use Chrome and Travis, you can keep it
@@ -61,6 +63,8 @@ module.exports = function(config) {
         flags: ['--no-sandbox']
       }
     };
+
+
     configuration.browsers = ['chrome-travis-ci'];
   }
 

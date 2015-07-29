@@ -21,7 +21,7 @@ gulp.task('styles', function () {
 
   var injectFiles = gulp.src([
     path.join(conf.paths.src, '/app/**/*.less'),
-    path.join('!' + conf.paths.src, '/app/index.less')
+    path.join('!' + conf.paths.src, '/app/app.less')
   ], { read: false });
 
   var injectOptions = {
@@ -36,7 +36,7 @@ gulp.task('styles', function () {
 
 
   return gulp.src([
-    path.join(conf.paths.src, '/app/index.less')
+    path.join(conf.paths.src, '/app/app.less')
   ])
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
