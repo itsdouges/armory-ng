@@ -1,0 +1,12 @@
+@height: -64px;
+
+.progress-indicator.animating {
+	background-image: url('../assets/images/progress-indicator-sprite.png');	
+	animation: loading 0.65s steps(9) infinite; 
+}
+
+@keyframes loading {
+	100% {
+		background-position-y: @height * 9;
+	}
+}

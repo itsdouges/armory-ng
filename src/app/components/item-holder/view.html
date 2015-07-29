@@ -1,0 +1,9 @@
+<div ng-mouseover="ctrl.setTootipVisibility(true)"
+		ng-mouseleave="ctrl.setTootipVisibility(false)" 
+		class="item item-default" 
+		ng-class="ctrl.getItem().rarity.toLowerCase()" 
+		style="background-image: url('{{ ctrl.isLoaded() ? ctrl.getIconUrl() : 'ne' }}')">
+	<div ng-if="ctrl.isBusy()" class="progress-indicator animating"></div>
+</div>
+
+<item-tooltip ng-if="ctrl.isLoaded() && ctrl.getTootipVisibility()"></item-tooltip>

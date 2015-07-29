@@ -50,8 +50,6 @@ module.exports = function(config) {
     }
   };
 
-  console.log(configuration.files);
-
   // This block is needed to execute Chrome on Travis
   // If you ever plan to use Chrome and Travis, you can keep it
   // If not, you can safely remove it

@@ -1,11 +1,18 @@
 import config from './app.config';
 import routerConfig from './app.routes';
-
 import runBlock from './app.run';
 
-import CharacterViewerDirective from './components/character-viewer/directive';
 import CharacterViewerController from './components/character-viewer/controller';
+import CharacterViewerDirective from './components/character-viewer/directive';
+
+import ItemController from './components/item-holder/controller';
+import ItemDirective from './components/item-holder/directive';
+import ItemTooltipDirective from './components/item-tooltip/directive';
+
 import CharacterService from './services/character';
+import MessageService from './services/message';
+import BusyService from './services/busy';
+import Gw2ApiService from './services/gw2-api';
 
 angular.module('gw2armory', [
   'ui.router'
@@ -17,7 +24,15 @@ angular.module('gw2armory', [
 .run(runBlock)
 
 .service('characterService', CharacterService)
+.service('messageService', MessageService)
+.service('busyService', BusyService)
+.service('gw2ApiService', Gw2ApiService)
+
+.controller('ItemHolderController', ItemController)
+.directive('itemHolder', () => new ItemDirective())
+.directive('itemTooltip', () => new ItemTooltipDirective())
 
 .controller('CharacterViewerController', CharacterViewerController)
 .directive('characterViewer', () => new CharacterViewerDirective())
+
 ;

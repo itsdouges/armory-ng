@@ -1,13 +1,18 @@
-describe('characterviewer controller', function (){
+describe('characterviewer controller', function () {
   var mockCharacterService;
   var mockStateParams;
   var mockMessageService;
+  var mockBusyService;
+
   var rootScope;
 
   beforeEach(module('gw2armory'));
   beforeEach(function() {
     mockCharacterService = {};
     mockStateParams = {};
+    mockBusyService = {
+      setBusy: function() {}
+    };
     mockMessageService = {
       clear: function() {},
       setError: function() {}
@@ -23,7 +28,8 @@ describe('characterviewer controller', function (){
       ctrl = $controller('CharacterViewerController', { 
         characterService: mockCharacterService,
         $stateParams: mockStateParams,
-        messageService: mockMessageService
+        messageService: mockMessageService,
+        busyService: mockBusyService
       });
     });
 
@@ -38,9 +44,31 @@ describe('characterviewer controller', function (){
       };
     });
 
+    spyOn(mockBusyService, 'setBusy');
+    
     var ctrl = systemUnderTest();
 
-    expect(ctrl.isBusy()).toBe(true);
+    expect(mockBusyService.setBusy).toHaveBeenCalledWith(true);
+  });
+
+  it('should call readCharacter with stateParams input when loading a character', function () {
+    var deferred;
+
+    inject(function($q)  { 
+      deferred = $q.defer();
+
+      mockCharacterService.readCharacter = function () { 
+        return deferred.promise; 
+      };
+    });
+
+    mockStateParams.name = 'charname';
+
+    spyOn(mockCharacterService, 'readCharacter').and.callThrough();
+
+    var ctrl = systemUnderTest();
+
+    expect(mockCharacterService.readCharacter).toHaveBeenCalledWith('charname');
   });
 
   it('should call messageService clear when loading a character', function () {
@@ -72,12 +100,14 @@ describe('characterviewer controller', function (){
       };
     });
 
+    spyOn(mockBusyService, 'setBusy');
+
     var ctrl = systemUnderTest();
 
     deferred.resolve();
     rootScope.$apply();
 
-    expect(ctrl.isBusy()).toBe(false);
+    expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
   });
 
   it('should set isBusy to false when loading was a failure', function () {
@@ -91,12 +121,14 @@ describe('characterviewer controller', function (){
       };
     });
 
+    spyOn(mockBusyService, 'setBusy');
+
     var ctrl = systemUnderTest();
 
     deferred.reject();
     rootScope.$apply();
 
-    expect(ctrl.isBusy()).toBe(false);
+    expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
   });
 
   it('should null the current character if a failure occured', function () {
