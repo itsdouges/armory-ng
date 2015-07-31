@@ -104,7 +104,7 @@ describe('characterviewer controller', function () {
 
     var ctrl = systemUnderTest();
 
-    deferred.resolve();
+    deferred.resolve({});
     rootScope.$apply();
 
     expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
@@ -131,7 +131,7 @@ describe('characterviewer controller', function () {
     expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
   });
 
-  it('should null the current character if a failure occured', function () {
+  it('should set error if error occurred while loading a character', function () {
     var deferred;
 
     inject(function($q)  { 
@@ -142,12 +142,14 @@ describe('characterviewer controller', function () {
       };
     });
 
+    spyOn(mockBusyService, 'setBusy');
+
     var ctrl = systemUnderTest();
 
     deferred.reject();
     rootScope.$apply();
 
-    expect(ctrl.currentCharacter()).toBe(null);
+    expect(ctrl.isError()).toBe(true);
   });
 
   it('should not call setError if no message is returned on failure', function () {
@@ -193,7 +195,7 @@ describe('characterviewer controller', function () {
     expect(mockMessageService.setError).toHaveBeenCalledWith(message);
   });
 
-  it('should set the current character on success', function () {
+  it('should null character on failure', function () {
     var deferred;
 
     inject(function($q)  { 
@@ -204,13 +206,53 @@ describe('characterviewer controller', function () {
       };
     });
 
-    var character = {};
+    var ctrl = systemUnderTest();
+
+    deferred.reject();
+    rootScope.$apply();
+
+    expect(ctrl.character).toBeNull();
+  });
+
+  it('should set character on success', function () {
+    var deferred;
+
+    inject(function($q)  { 
+      deferred = $q.defer();
+
+      mockCharacterService.readCharacter = function () { 
+        return deferred.promise; 
+      };
+    });
+
+    var character = {
+      name: 'hey'
+    };
 
     var ctrl = systemUnderTest();
 
     deferred.resolve(character);
     rootScope.$apply();
 
-    expect(ctrl.currentCharacter()).toBe(character);
+    expect(ctrl.character).toBe(character);
+  });
+
+  it('should set loaded on success', function () {
+    var deferred;
+
+    inject(function($q)  { 
+      deferred = $q.defer();
+
+      mockCharacterService.readCharacter = function () { 
+        return deferred.promise; 
+      };
+    });
+
+    var ctrl = systemUnderTest();
+
+    deferred.resolve({});
+    rootScope.$apply();
+
+    expect(ctrl.isLoaded()).toBe(true);
   });
 });

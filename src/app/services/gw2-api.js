@@ -8,10 +8,15 @@ class Gw2ApiService {
 	readItem(id) {
 		let promise = _http.get('https://api.guildwars2.com/v1/item_details.json?item_id=' + id);
 		
+		let scope = this;
+
 		let promiseOverride = promise.then(function(data) {
-			return data.data;
+			let item = data.data;
+			item.iconUrl = scope.buildRenderUrl(item.icon_file_id, item.icon_file_signature);
+
+			return item;
 		}, function(data) {
-			// TODO: Add retry logic.
+			return data;
 		});
 
 		return promiseOverride;

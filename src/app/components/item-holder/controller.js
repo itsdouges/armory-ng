@@ -1,65 +1,86 @@
-let _item;
-let _busy;
-let _loaded;
-let _gw2ApiService;
-let _tooltipVisible;
-
-let readSuccess = function(item) {
-	_item = item;
-	_busy = false;
-	_loaded = true;
-};
-
-let readFailure = function(errorMessage) {
-	_item = null;
-	_busy = false;
-};
-
 /**
  * CharacterViewerController
  */
-class ItemController {
-	constructor(gw2ApiService) {
-		'ngInject';
+function ItemController(gw2ApiService) {
+	'ngInject';
 
+	let _gw2ApiService;
+
+	let _item;
+	let _busy;
+	let _loaded;
+	let _tooltipVisible;
+	let _typeBackground;
+
+	function init() {
 		_gw2ApiService = gw2ApiService;
 		_tooltipVisible = false;
+		_typeBackground = buildTypeBackgroundUrl(this.type);
 
-		this.loadItem(this.id);	
+		loadItem(this.id);	
 	}
 
-	loadItem(id) {
+	function buildTypeBackgroundUrl(type) {
+		switch(type) {
+
+		}
+
+		return '../assets/images/item-default-icon.png';
+	}
+
+	function readSuccess(item) {
+		vm.item = item;
+		_busy = false;
+		_loaded = true;
+	};
+
+	function readFailure() {
+		vm.item = null;
+		_busy = false;
+	};
+
+	function loadItem(id) {
 		_busy = true;
 		_loaded = false;
 
-		_gw2ApiService
-			.readItem(id)
-			.then(readSuccess, readFailure);
+		if (id) {
+			_gw2ApiService
+				.readItem(id)
+				.then(readSuccess, readFailure);
+		} else {
+			_busy = false;
+		}
 	}
 
-	isBusy() {
+	function isBusy() {
 		return _busy;
 	}
 
-	isLoaded() {
+	function isLoaded() {
 		return _loaded;
 	}
 
-	getItem() {
-		return _item;
-	}
-
-	getIconUrl() {
-		return _gw2ApiService.buildRenderUrl(_item.icon_file_id, _item.icon_file_signature);
-	}
-
-	setTootipVisibility(visible) {
+	function setTootipVisibility(visible) {
 		_tooltipVisible	= visible;
 	}
 
-	getTootipVisibility() {
+	function getTootipVisibility() {
 		return _tooltipVisible;
 	}
+
+	init.call(this);
+
+	let vm = {
+		getTootipVisibility,
+		setTootipVisibility,
+		item: {},
+		typeBackground: _typeBackground,
+		isLoaded,
+		isBusy,
+		loadItem
+	};
+
+	return vm;
 }
 
 export default ItemController;

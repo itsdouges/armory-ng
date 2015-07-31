@@ -7,7 +7,7 @@ describe('item controller', function () {
     mockGw2ApiService = {};
   });
 
-  var systemUnderTest = function () {
+  var systemUnderTest = function (mockId, mockType) {
     var ctrl;
 
     inject(function($controller, $rootScope) {
@@ -15,6 +15,9 @@ describe('item controller', function () {
 
       ctrl = $controller('ItemHolderController', { 
         gw2ApiService: mockGw2ApiService
+      }, {
+        id: mockId,
+        type: mockType
       });
     });
 
@@ -31,7 +34,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	expect(mockGw2ApiService.readItem).toHaveBeenCalled();
   });
@@ -46,7 +49,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	expect(ctrl.isBusy()).toBe(true);
   });
@@ -61,7 +64,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	expect(ctrl.isLoaded()).toBe(false);
   });
@@ -79,7 +82,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	deferred.reject();
   	rootScope.$apply();
@@ -100,7 +103,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	deferred.reject();
   	rootScope.$apply();
@@ -121,7 +124,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	deferred.resolve();
   	rootScope.$apply();
@@ -142,7 +145,7 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	deferred.resolve();
   	rootScope.$apply();
@@ -163,14 +166,14 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	var model = {};
 
   	deferred.resolve(model);
   	rootScope.$apply();
 
-  	expect(ctrl.getItem()).toBe(model);
+  	expect(ctrl.item).toBe(model);
   });
 
   it('should set model to null on api failure', function () {
@@ -186,41 +189,27 @@ describe('item controller', function () {
 
   	spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+  	var ctrl = systemUnderTest(1);
 
   	deferred.reject();
   	rootScope.$apply();
 
-  	expect(ctrl.getItem()).toBe(null);
+  	expect(ctrl.item).toBe(null);
   });
 
-  it('should call build render url with getIconUrl', function () {
-    var deferred;
-
+  it('should not call read item if id is falsy', function () {
     inject(function($q) { 
       mockGw2ApiService.readItem = function () { 
-        deferred = $q.defer();
+        var deferred = $q.defer();
         return deferred.promise; 
       };
-
-      mockGw2ApiService.buildRenderUrl = function () {};
     });
 
-  	spyOn(mockGw2ApiService, 'buildRenderUrl').and.returnValue('ayy lmao');
+    spyOn(mockGw2ApiService, 'readItem').and.callThrough();
 
-  	var ctrl = systemUnderTest();
+    var ctrl = systemUnderTest();
 
-  	deferred.resolve({
-  		icon_file_id: 'file',
-  		icon_file_signature: 'sig'
-  	});
-
-  	rootScope.$apply();
-
-  	var uri = ctrl.getIconUrl();
-
-  	expect(mockGw2ApiService.buildRenderUrl).toHaveBeenCalledWith('file', 'sig');
-  	expect(uri).toBe('ayy lmao');
+    expect(mockGw2ApiService.readItem).not.toHaveBeenCalled();
   });
 
   it ('should hide tooltip on load', function () {
@@ -233,7 +222,7 @@ describe('item controller', function () {
       };
     });
 
-    var ctrl = systemUnderTest();
+    var ctrl = systemUnderTest(1);
 
     expect(ctrl.getTootipVisibility()).toBe(false);
   });
@@ -248,10 +237,25 @@ describe('item controller', function () {
       };
     });
 
-    var ctrl = systemUnderTest();
+    var ctrl = systemUnderTest(1);
 
     ctrl.setTootipVisibility(true);
 
     expect(ctrl.getTootipVisibility()).toBe(true);
+  });
+
+  it ('should return default type if no type is supplied', function () {
+    var deferred;
+
+    inject(function($q) { 
+      mockGw2ApiService.readItem = function () { 
+        deferred = $q.defer();
+        return deferred.promise; 
+      };
+    });
+
+    var ctrl = systemUnderTest(1);
+
+    expect(ctrl.typeBackground).toBe('../assets/images/item-default-icon.png');
   });
 });

@@ -4,6 +4,90 @@ let httpService;
 let q;
 let _timeout;
 
+// omg like unit test man
+
+function translateCharacter(character) {
+  return {
+    name: character.name,
+    age: character.age,
+    created: character.created,
+    deaths: character.deaths,
+    gender: character.gender,
+    guildId: character.guild,
+    level: character.level,
+    profession: character.profession,
+    race: character.race,
+    equipment: {
+      helmAquatic: character.equipment.filter((x) => {
+        return x.slot === 'HelmAquatic';
+      })[0],
+      backpack: character.equipment.filter((x) => {
+        return x.slot === 'Backpack';
+      })[0],
+      coat: character.equipment.filter((x) => {
+        return x.slot === 'Coat';
+      })[0],
+      boots: character.equipment.filter((x) => {
+        return x.slot === 'Boots';
+      })[0],
+      gloves: character.equipment.filter((x) => {
+        return x.slot === 'Gloves';
+      })[0],
+      helm: character.equipment.filter((x) => {
+        return x.slot === 'Helm';
+      })[0],
+      leggings: character.equipment.filter((x) => {
+        return x.slot === 'Leggings';
+      })[0],
+      shoulders: character.equipment.filter((x) => {
+        return x.slot === 'Shoulders';
+      })[0],
+      accessory1: character.equipment.filter((x) => {
+        return x.slot === 'Accessory1';
+      })[0],
+      accessory2: character.equipment.filter((x) => {
+        return x.slot === 'Accessory2';
+      })[0],
+      ring1: character.equipment.filter((x) => {
+        return x.slot === 'ring1';
+      })[0],
+      ring2: character.equipment.filter((x) => {
+        return x.slot === 'ring2';
+      })[0],
+      amulet: character.equipment.filter((x) => {
+        return x.slot === 'Amulet';
+      })[0],
+      weaponAquaticA: character.equipment.filter((x) => {
+        return x.slot === 'WeaponAquaticA';
+      })[0],
+      weaponAquaticB: character.equipment.filter((x) => {
+        return x.slot === 'WeaponAquaticB';
+      })[0],
+      weaponA1: character.equipment.filter((x) => {
+        return x.slot === 'WeaponA1';
+      })[0],
+      weaponA2: character.equipment.filter((x) => {
+        return x.slot === 'WeaponA2';
+      })[0],
+      weaponB1: character.equipment.filter((x) => {
+        return x.slot === 'WeaponB1';
+      })[0],
+      weaponB2: character.equipment.filter((x) => {
+        return x.slot === 'WeaponB2';
+      })[0],
+      sickle: character.equipment.filter((x) => {
+        return x.slot === 'Sickle';
+      })[0],
+      pick: character.equipment.filter((x) => {
+        return x.slot === 'Pick';
+      })[0],
+      axe: character.equipment.filter((x) => {
+        return x.slot === 'Axe';
+      })[0],
+    }
+  };
+}
+
 class CharacterService {
 	constructor($http, $q, $timeout) {
 		'ngInject';
@@ -16,7 +100,7 @@ class CharacterService {
 	}
 
 	readCharacter(name) {
-		var deferred = q.defer();
+		let deferred = q.defer();
 
 		_timeout(function () {
 			deferred.resolve({
@@ -401,7 +485,13 @@ class CharacterService {
 });
 		}, 1000);
 
-		return deferred.promise;
+    let wrappedPromise = deferred.promise.then(function (data) {
+      return translateCharacter(data);
+    }, function(e) {
+      return e;
+    });
+
+		return wrappedPromise;
 	}
 }
 

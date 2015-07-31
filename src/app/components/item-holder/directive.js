@@ -1,20 +1,19 @@
-class ItemDirective {
-	constructor () {
-		'ngInject';
+function ItemDirective() {
+	'ngInject';
 
-		let directive = {
-			restrict: 'E',
-			templateUrl: 'app/components/item-holder/view.html',
-			controller: 'ItemHolderController',
-			controllerAs: 'ctrl',
-			scope: true,
-			bindToController: {
-				id: '='
-			}
-		};
+	let directive = {
+		restrict: 'E',
+		templateUrl: 'app/components/item-holder/view.html',
+		controller: 'ItemHolderController',
+		controllerAs: 'ctrl',
+		scope: {},
+		bindToController: {
+			id: '=',
+			type: '@'
+		}
+	};
 
-		return directive;
-	}
+	return directive;
 }
 
 export default ItemDirective;

@@ -9,6 +9,8 @@ import ItemController from './components/item-holder/controller';
 import ItemDirective from './components/item-holder/directive';
 import ItemTooltipDirective from './components/item-tooltip/directive';
 
+import MouseFollowDirective from './components/mouse-follow/directive';
+
 import CharacterService from './services/character';
 import MessageService from './services/message';
 import BusyService from './services/busy';
@@ -28,11 +30,11 @@ angular.module('gw2armory', [
 .service('busyService', BusyService)
 .service('gw2ApiService', Gw2ApiService)
 
+.directive('mouseFollow', MouseFollowDirective)
+
 .controller('ItemHolderController', ItemController)
-.directive('itemHolder', () => new ItemDirective())
-.directive('itemTooltip', () => new ItemTooltipDirective())
+.directive('itemHolder', ItemDirective)
+.directive('itemTooltip', ItemTooltipDirective)
 
 .controller('CharacterViewerController', CharacterViewerController)
-.directive('characterViewer', () => new CharacterViewerDirective())
-
-;
+.directive('characterViewer', CharacterViewerDirective);

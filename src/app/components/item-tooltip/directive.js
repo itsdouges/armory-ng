@@ -1,16 +1,14 @@
-class ItemTooltipDirective {
-	constructor() {
-		'ngInject';
+function ItemTooltipDirective($window) {
+	'ngInject';
 
-		let directive = {
-			restrict: 'E',
-			templateUrl: 'app/components/item-tooltip/view.html',
-			controllerAs: 'ctrl',
-			require: '^itemHolder'
-		};
+	let directive = {
+		restrict: 'E',
+		templateUrl: 'app/components/item-tooltip/view.html',
+		controllerAs: 'ctrl',
+		require: '^itemHolder'
+	};
 
-		return directive;
-	}
+	return directive;
 }
 
 export default ItemTooltipDirective;
