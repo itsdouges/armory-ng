@@ -33,6 +33,7 @@ function ItemController(gw2ApiService) {
 		vm.item = item;
 		_busy = false;
 		_loaded = true;
+		console.log(item);
 	};
 
 	function readFailure() {
@@ -71,12 +72,12 @@ function ItemController(gw2ApiService) {
 
 	init.call(this);
 
-		vm.getTootipVisibility = getTootipVisibility;
-		vm.setTootipVisibility = setTootipVisibility;
-		vm.typeBackground = _typeBackground;
-		vm.isLoaded = isLoaded;
-		vm.isBusy = isBusy;
-		vm.loadItem = loadItem;
+	vm.getTootipVisibility = getTootipVisibility;
+	vm.setTootipVisibility = setTootipVisibility;
+	vm.typeBackground = _typeBackground;
+	vm.isLoaded = isLoaded;
+	vm.isBusy = isBusy;
+	vm.loadItem = loadItem;
 }
 
 export default ItemController;

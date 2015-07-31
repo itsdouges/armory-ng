@@ -1,3 +1,42 @@
 .item-tooltip {
-	width: 200px;
+	width: 300px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 1rem;
+	margin: 0.25em;
+	z-index: @top-z;
+	text-align: left;
+
+	border: 2px solid brown;
+	border-radius: 2px;
+}
+
+.item-tooltip-icon {
+	width: @small-size * 1px;
+	height: @small-size * 1px;
+	background-size: cover;
+	float: left;
+	margin-right: 0.3em;
+}
+
+.item-name {
+	font-size: 1.2em;
+}
+
+.title-strip {
+	margin: 0.25em;
+	height: @small-size * 1px;
+}
+
+.stats-summary {
+	margin: 0.25em;
+}
+
+.general-summary {
+	margin: 0.25em;
+}
+
+.stat {
+	color: green;
 }

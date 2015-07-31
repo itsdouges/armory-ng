@@ -1,5 +1,46 @@
-<div mouse-follow auto-position="true" class="item-tooltip">
-	{{ ctrl.getIconUrl() }}
-	{{ ctrl.getItem().name }}
-	{{ ctrl.getItem().description }}
+<div auto-position="true" class="item-tooltip">
+	<div class="title-strip">
+		<div class="item-tooltip-icon" style="background-image: url('{{ctrl.item.iconUrl}}')"></div>
+		<div class="item-name" ng-class="ctrl.item.rarity.toLowerCase()">
+			{{ ctrl.item.name }}
+		</div>
+	</div>
+
+	<div class="stats-summary float-clear">
+		<div ng-if="ctrl.item.armor">
+			<div>Defense: <span class="stat">{{ ctrl.item.armor.defense }}</span></div>
+			<div ng-repeat="stat in ctrl.item.armor.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
+		</div>
+
+		<div ng-if="ctrl.item.trinket">
+			<div ng-repeat="stat in ctrl.item.trinket.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
+		</div>
+
+		<div ng-if="ctrl.item.back">
+			<div ng-repeat="stat in ctrl.item.back.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
+		</div>
+
+		<div ng-if="ctrl.item.weapon">
+			<div ng-repeat="stat in ctrl.item.weapon.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
+		</div>
+	</div>
+
+	<div class="item-description">{{ ctrl.item.description }}</div>
+
+	<div class="general-summary">
+		<div>{{ ctrl.item.rarity }}</div>
+
+		<div ng-if="ctrl.item.armor">
+			<div>{{ ctrl.item.armor.weight_class }}</div>
+			<div>{{ ctrl.item.armor.weight_class + ' ' + ctrl.item.type }}</div>
+		</div>
+
+		<div>{{ 'Required Level:' + ctrl.item.level }}</div>
+
+		<div>
+			<span>{{ ctrl.item.gold }}</span>
+			<span>{{ ctrl.item.silver }}</span>
+			<span>{{ ctrl.item.copper }}</span>
+		</div>
+	</div>
 </div>

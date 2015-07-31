@@ -1,4 +1,4 @@
-function ItemTooltipDirective($window) {
+function ItemTooltipDirective() {
 	'ngInject';
 
 	let directive = {

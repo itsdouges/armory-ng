@@ -14,6 +14,9 @@ class Gw2ApiService {
 		let promiseOverride = promise.then(function(data) {
 			let item = data.data;
 			item.iconUrl = scope.buildRenderUrl(item.icon_file_id, item.icon_file_signature);
+			item.gold = Math.floor(item.vendor_value / 1000);
+			item.silver = Math.floor(item.vendor_value / 100);
+			item.copper = item.vendor_value % 100;
 
 			return item;
 		}, function(data) {

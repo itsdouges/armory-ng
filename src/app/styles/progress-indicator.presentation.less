@@ -1,12 +1,25 @@
 @height: -64px;
+@small-height: -43px; 
 
-.progress-indicator.animating {
+.progress-indicator {
+	background-size: cover;
+
 	background-image: url('../assets/images/progress-indicator-sprite.png');	
 	animation: loading 0.65s steps(9) infinite; 
+
+	&.small {
+		animation: small_loading 0.65s steps(9) infinite; 
+	}
 }
 
 @keyframes loading {
 	100% {
 		background-position-y: @height * 9;
+	}
+}
+
+@keyframes small_loading {
+	100% {
+		background-position-y: @small-height * 9;
 	}
 }
