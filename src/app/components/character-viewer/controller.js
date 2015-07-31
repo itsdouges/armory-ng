@@ -10,6 +10,7 @@ function CharacterViewerController(characterService, $stateParams, messageServic
 
 	let _error;
 	let _loaded;
+	let vm = this;
 
 	function init() {
 		_messageService = messageService;
@@ -63,14 +64,9 @@ function CharacterViewerController(characterService, $stateParams, messageServic
 
 	init();
 
-	let vm = {
-		loadCharacter,
-		isLoaded,
-		isError,
-		character: {}
-	};
-
-	return vm;
+	vm.loadCharacter = loadCharacter;
+	vm.isLoaded = isLoaded;
+	vm.isError = isError;
 }
 
 export default CharacterViewerController;

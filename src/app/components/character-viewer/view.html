@@ -1,29 +1,58 @@
-<div ng-if="ctrl.isLoaded()">
+<div class="character-viewer" ng-if="ctrl.isLoaded()">
 	<div class="character-title-strip">
-		<span class="fl character-profession-icon" ng-class="ctrl.character.profession.toLowerCase()"></span>
-		<div class="fl character-overview">
+		<span class="character-profession-icon left" ng-class="ctrl.character.profession.toLowerCase()"></span>
+		<div class="character-title left">
 			<span class="character-name">
 				{{ ctrl.character.name }}
 			</span>
 
 			<span class="character-level">
 				{{ ctrl.character.level }}
+				{{ ctrl.character.race }}
 				{{ ctrl.character.profession }}
 			</span>
 		</div>
 	</div>
 	
-	<div class="cl character-content">
-		<item-holder type="Helm" data-id="ctrl.character.equipment.helm.id"></item-holder>
-		<item-holder type="Shoulders" data-id="ctrl.character.equipment.shoulders.id"></item-holder>
-		<item-holder type="Coat" data-id="ctrl.character.equipment.coat.id"></item-holder>
-		<item-holder type="Gloves" data-id="ctrl.character.equipment.gloves.id"></item-holder>
-		<item-holder type="Leggings" data-id="ctrl.character.equipment.leggings.id"></item-holder>
-		<item-holder type="Boots" data-id="ctrl.character.equipment.boots.id"></item-holder>
-		<item-holder type="Weapon1" data-id="ctrl.character.equipment.weaponA1.id"></item-holder>
-		<item-holder type="Weapon2" data-id="ctrl.character.equipment.weaponA2.id"></item-holder>
-		<item-holder type="Weapon1" data-id="ctrl.character.equipment.weaponB1.id"></item-holder>
-		<item-holder type="Weapon2" data-id="ctrl.character.equipment.weaponB2.id"></item-holder>
+	<div class="character-content">
+		<div class="character-info-left">
+			<item-holder type="Helm" data-id="ctrl.character.equipment.helm.id"></item-holder>
+			<item-holder type="Shoulders" data-id="ctrl.character.equipment.shoulders.id"></item-holder>
+			<item-holder type="Coat" data-id="ctrl.character.equipment.coat.id"></item-holder>
+			<item-holder type="Gloves" data-id="ctrl.character.equipment.gloves.id"></item-holder>
+			<item-holder type="Leggings" data-id="ctrl.character.equipment.leggings.id"></item-holder>
+			<item-holder type="Boots" data-id="ctrl.character.equipment.boots.id"></item-holder>
+
+			<item-holder type="Weapon1" data-id="ctrl.character.equipment.weaponA1.id"></item-holder>
+			<item-holder mode="small" type="Weapon2" data-id="ctrl.character.equipment.weaponA2.id"></item-holder>
+
+			<item-holder mode="small" ng-if="ctrl.character.hasWeaponSwap" type="Weapon1" data-id="ctrl.character.equipment.weaponB1.id"></item-holder>
+			<item-holder mode="small" ng-if="ctrl.character.hasWeaponSwap" type="Weapon2" data-id="ctrl.character.equipment.weaponB2.id"></item-holder>
+		</div>
+
+		<div class="character-info-right">
+			<guild-block guid="{{ ctrl.character.guildId }}"></guild-block>
+
+			<crafting-block ng-repeat="model in ctrl.character.crafting" model="model"></crafting-block>
+
+			<div class="character-equipment-cluster">
+				<item-holder type="Backpack" data-id="ctrl.character.equipment.backpack.id"></item-holder>
+				<item-holder type="Accessory" data-id="ctrl.character.equipment.accessory1.id"></item-holder>
+				<item-holder type="Accessory" data-id="ctrl.character.equipment.accessory2.id"></item-holder>
+				<item-holder type="Amulet" data-id="ctrl.character.equipment.amulet.id"></item-holder>
+				<item-holder type="Ring" data-id="ctrl.character.equipment.ring1.id"></item-holder>
+				<item-holder type="Ring" data-id="ctrl.character.equipment.ring2.id"></item-holder>
+				<item-holder type="Sickle" data-id="ctrl.character.equipment.sickle.id"></item-holder>
+				<item-holder type="Axe" data-id="ctrl.character.equipment.axe.id"></item-holder>
+				<item-holder type="Pick" data-id="ctrl.character.equipment.pick.id"></item-holder>
+
+				<item-holder mode="small" type="HelmAcquatic" data-id="ctrl.character.equipment.helpAquatic.id"></item-holder>
+				<item-holder mode="small" type="WeaponAquatic" data-id="ctrl.character.equipment.weaponAquaticA.id"></item-holder>
+				<item-holder mode="small" ng-if="ctrl.character.hasWeaponSwap" type="WeaponAquatic" data-id="ctrl.character.equipment.weaponAquaticB.id"></item-holder>
+			</div>
+		</div>
+
+		<character-portrait character="ctrl.character" class="character-portrait-container">a</character-portrait>
 	</div>
 </div>
 

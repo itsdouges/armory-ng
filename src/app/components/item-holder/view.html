@@ -2,10 +2,10 @@
 		ng-mouseleave="ctrl.setTootipVisibility(false)"
 		class="item-container item-default"
 		style="background-image: url('{{ ctrl.typeBackground }}')"
-		ng-class="ctrl.item.rarity.toLowerCase()">
+		ng-class="[ctrl.item.rarity.toLowerCase(), ctrl.mode]">
 	<div class="item" 
 			style="background-image: url('{{ ctrl.isLoaded() ? ctrl.item.iconUrl : '' }}')">
-		<div ng-if="ctrl.isBusy()" class="progress-indicator animating"></div>
+		<div ng-class="ctrl.mode" ng-if="ctrl.isBusy()" class="progress-indicator animating"></div>
 	</div>
 </div>
 

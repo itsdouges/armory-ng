@@ -1,4 +1,5 @@
 let _http;
+let domain = 'https://api.guildwars2.com/v1/';
 
 class Gw2ApiService {
 	constructor($http) {
@@ -6,7 +7,7 @@ class Gw2ApiService {
 	}
 
 	readItem(id) {
-		let promise = _http.get('https://api.guildwars2.com/v1/item_details.json?item_id=' + id);
+		let promise = _http.get(`${domain}item_details.json?item_id=${id}`);
 		
 		let scope = this;
 
@@ -14,6 +15,20 @@ class Gw2ApiService {
 			let item = data.data;
 			item.iconUrl = scope.buildRenderUrl(item.icon_file_id, item.icon_file_signature);
 
+			return item;
+		}, function(data) {
+			return data;
+		});
+
+		return promiseOverride;
+	}
+
+	readGuild(guid) {
+		let promise = _http.get(`${domain}guild_details.json?guild_id=${guid}`);
+		let scope = this;
+
+		let promiseOverride = promise.then(function(data) {
+			let item = data.data;
 			return item;
 		}, function(data) {
 			return data;

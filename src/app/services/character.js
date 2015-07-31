@@ -6,10 +6,23 @@ let _timeout;
 
 // omg like unit test man
 
+function hasWeaponSwap(profession) {
+  switch(profession) {
+    //TODO: Fill in
+  }
+
+  return false;
+}
+
+// Todo: Make better
+function calculateAge(ageInDays) {
+  return `${ageInDays} days old`;
+}
+
 function translateCharacter(character) {
   return {
     name: character.name,
-    age: character.age,
+    age: calculateAge(character.age),
     created: character.created,
     deaths: character.deaths,
     gender: character.gender,
@@ -17,6 +30,8 @@ function translateCharacter(character) {
     level: character.level,
     profession: character.profession,
     race: character.race,
+    crafting: character.crafting,
+    hasWeaponSwap: hasWeaponSwap(character.profession),
     equipment: {
       helmAquatic: character.equipment.filter((x) => {
         return x.slot === 'HelmAquatic';
@@ -49,10 +64,10 @@ function translateCharacter(character) {
         return x.slot === 'Accessory2';
       })[0],
       ring1: character.equipment.filter((x) => {
-        return x.slot === 'ring1';
+        return x.slot === 'Ring1';
       })[0],
       ring2: character.equipment.filter((x) => {
-        return x.slot === 'ring2';
+        return x.slot === 'Ring2';
       })[0],
       amulet: character.equipment.filter((x) => {
         return x.slot === 'Amulet';

@@ -5,6 +5,15 @@ import runBlock from './app.run';
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
 
+import CharacterPortraitController from './components/character-portrait/controller';
+import CharacterPortraitDirective from './components/character-portrait/directive';
+
+import GuildBlockController from './components/guild-block/controller';
+import GuildBlockDirective from './components/guild-block/directive';
+
+import CraftingBlockController from './components/crafting-block/controller';
+import CraftingBlockDirective from './components/crafting-block/directive';
+
 import ItemController from './components/item-holder/controller';
 import ItemDirective from './components/item-holder/directive';
 import ItemTooltipDirective from './components/item-tooltip/directive';
@@ -37,4 +46,13 @@ angular.module('gw2armory', [
 .directive('itemTooltip', ItemTooltipDirective)
 
 .controller('CharacterViewerController', CharacterViewerController)
-.directive('characterViewer', CharacterViewerDirective);
+.directive('characterViewer', CharacterViewerDirective)
+
+.controller('GuildBlockController', GuildBlockController)
+.directive('guildBlock', GuildBlockDirective)
+
+.controller('CraftingBlockController', CraftingBlockController)
+.directive('craftingBlock', CraftingBlockDirective)
+
+.controller('CharacterPortraitController', CharacterPortraitController)
+.directive('characterPortrait', CharacterPortraitDirective);

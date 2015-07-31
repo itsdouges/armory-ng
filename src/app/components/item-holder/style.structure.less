@@ -2,8 +2,23 @@
 	width: 64px;
 	height: 64px;
 	border-width: 2px;
-	float: left;
-	margin: 0.25em;
+	font-size: 0;
+
+	&.small {
+		width: 43px;
+		height: 43px;
+
+		.item {
+			width: 43px;
+			height: 43px;	
+		}
+	}
+}
+
+item-holder {
+	margin: 0.1rem;
+	font-size: 0;
+	display: inline-block;
 }
 
 .item {
@@ -14,6 +29,3 @@
 .item-tooltip {
 
 }
-
-//https://d1h9a8s8eodvjz.cloudfront.net/fonts/menomonia/08-02-12/menomonia.css
-//https://d1h9a8s8eodvjz.cloudfront.net/fonts/menomonia/08-02-12/menomonia-italic.css

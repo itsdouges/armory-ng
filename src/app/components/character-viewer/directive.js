@@ -4,8 +4,7 @@ function CharacterViewerDirective() {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/character-viewer/view.html',
-		controller: 'CharacterViewerController',
-		controllerAs: 'ctrl'
+		controller: 'CharacterViewerController as ctrl'
 	};
 
 	return directive;

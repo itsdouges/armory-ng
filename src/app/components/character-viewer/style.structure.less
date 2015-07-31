@@ -1,12 +1,24 @@
+@thick-width: 235;
+@thin-width: 76;
+
+.character-viewer {
+	max-width: 840px;
+	min-width: 790px;
+}
+
 .character-title-strip {
 	padding: 1em;
 	position: relative;
 	overflow: auto;
 }
 
-.character-overview {
-	margin: 1em;
+.character-title {
+	margin: 1em 1em 1em 2em;
 	overflow: auto;
+}
+
+.character-overview {
+	margin: 0 0.4em;
 }
 
 .character-name {
@@ -20,7 +32,37 @@
 }
 
 .character-content {
+	position: relative;
+	overflow: auto;
+}
 
+.character-portrait-container:before {
+	content: "";
+	display: block;
+	padding-top: 135%;
+}
+
+.character-portrait-container {
+	position: relative;
+	display: block;
+	overflow: hidden;
+}
+
+.character-info-left {
+	margin: 0 0.2em;
+	width: @thin-width * 1px;
+	float: left;
+	text-align: center;
+}
+
+.character-info-right {
+	margin: 0 0.2em;
+	width: @thick-width * 1px;
+	float: right;
+}
+
+.character-equipment-cluster {
+	overflow: auto;
 }
 
 .character-profession-icon {

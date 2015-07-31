@@ -9,7 +9,8 @@ function ItemDirective() {
 		scope: {},
 		bindToController: {
 			id: '=',
-			type: '@'
+			type: '@',
+			mode: '@'
 		}
 	};
 

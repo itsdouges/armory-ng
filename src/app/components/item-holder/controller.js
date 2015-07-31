@@ -11,6 +11,7 @@ function ItemController(gw2ApiService) {
 	let _loaded;
 	let _tooltipVisible;
 	let _typeBackground;
+	let vm = this;
 
 	function init() {
 		_gw2ApiService = gw2ApiService;
@@ -70,17 +71,12 @@ function ItemController(gw2ApiService) {
 
 	init.call(this);
 
-	let vm = {
-		getTootipVisibility,
-		setTootipVisibility,
-		item: {},
-		typeBackground: _typeBackground,
-		isLoaded,
-		isBusy,
-		loadItem
-	};
-
-	return vm;
+		vm.getTootipVisibility = getTootipVisibility;
+		vm.setTootipVisibility = setTootipVisibility;
+		vm.typeBackground = _typeBackground;
+		vm.isLoaded = isLoaded;
+		vm.isBusy = isBusy;
+		vm.loadItem = loadItem;
 }
 
 export default ItemController;

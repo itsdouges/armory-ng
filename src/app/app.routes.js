@@ -16,7 +16,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('auth.main.character', {
       url: '/characters/{name}',
-      templateUrl: 'app/routes/viewer/viewer.html'
+      templateUrl: 'app/routes/characters/characters.html'
     })
     .state('auth.main.not-found', {
       url: '/404',

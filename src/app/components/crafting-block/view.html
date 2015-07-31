@@ -1,0 +1,5 @@
+<div title="{{ ctrl.model.discipline }}" class="craft-container" ng-class="ctrl.model.active ? 'active' : ''">
+	<span class="craft-icon" ng-class="ctrl.model.discipline.toLowerCase()"></span>
+	<span class="craft-rating-block" style="width: {{ ctrl.calcWidth() }}"></span>
+	<span class="craft-rating">{{ ctrl.model.rating }}/{{ ctrl.total }}</span>	
+</div>
