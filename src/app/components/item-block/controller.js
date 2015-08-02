@@ -6,8 +6,6 @@
 function ItemController(gw2ApiService) {
 	'ngInject';
 
-	let _gw2ApiService;
-
 	let _item;
 	let _busy;
 	let _loaded;
@@ -16,7 +14,6 @@ function ItemController(gw2ApiService) {
 	let vm = this;
 
 	function init() {
-		_gw2ApiService = gw2ApiService;
 		_tooltipVisible = false;
 		_typeBackground = buildTypeBackgroundUrl(this.type);
 
@@ -31,7 +28,7 @@ function ItemController(gw2ApiService) {
 		} 
 	}
 
-	// test dis
+	// TODO: test dis
 	function buildTypeBackgroundUrl(type) {
 		if (type) {
 			return `../assets/images/${type}-slot-icon.png`;
@@ -57,10 +54,10 @@ function ItemController(gw2ApiService) {
 		_loaded = false;
 
 		loadFromSkin ? 
-			_gw2ApiService
+			gw2ApiService
 				.readSkin(id)
 				.then(readSuccess, readFailure) :
-			_gw2ApiService
+			gw2ApiService
 				.readItem(id)
 				.then(readSuccess, readFailure);
 	}
@@ -74,7 +71,9 @@ function ItemController(gw2ApiService) {
 	}
 
 	function setTootipVisibility(visible) {
-		_tooltipVisible	= visible;
+		if (_tooltipVisible != visible) {
+			_tooltipVisible	= visible;
+		}
 	}
 
 	function getTootipVisibility() {

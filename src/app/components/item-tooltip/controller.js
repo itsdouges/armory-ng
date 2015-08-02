@@ -1,3 +1,5 @@
+// todo: handle touch screens (click to view, x to close)
+
 function ItemTooltipController(gw2ApiService, $q) {
 	let vm = this;
 	let _loaded;
@@ -103,10 +105,6 @@ function ItemTooltipController(gw2ApiService, $q) {
 
 	function isBusy() {
 		return _busy;
-	}
-
-	function getUpgradeCount(id) {
-
 	}
 
 	init();

@@ -1,40 +1,28 @@
 // Parked for now.
 
+// todo: move logic to controller + unit test bro.
+// todo: add in edge cases to handle mouse location in the browser.
+// todo: disable for touch screens
+
 function MouseFollowDirective ($window) {
 	'ngInject';
 
-	let _window = $window;
-
 	function link (scope, element, attrs) {
-		let offsetX;
-		let offsetY;
-
-		console.log(scope.autoPosition);
-
 		function onMouseMove(e) {
-			if (!offsetX) {
-				offsetX = e.pageX;
-				offsetY = e.pageY;
-			}
-
-			let css = `translate3d(${e.pageX - offsetX}px, ${e.pageY - offsetY}px, 0)`;
+			let css = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
 			element[0].style.transform = css;
 		}
 
-		angular.element(_window).on('mousemove', onMouseMove);
+		$window.addEventListener('mousemove', onMouseMove, false);
 
 	  element.on('$destroy', function () {
-	  	// TODO: This is currently a memory leak. Fix it.
-			angular.element(_window).off('mousemouse', onMouseMove);
+			$window.removeEventListener('mousemove', onMouseMove, false);
 		 });
 	}
 
 	let directive = {
 		restrict: 'A',
-		link: link,
-		scope: {
-			autoPosition: '@'
-		}
+		link: link
 	};
 
 	return directive;

@@ -2,6 +2,7 @@ let _http;
 let domain = 'https://api.guildwars2.com/';
 
 // TODO: Clean this js up. Terrible!
+// TODO: TEST THIS FILE OMG!
 
 function calcTwoHanded(type) {
 	switch(type) {
@@ -23,7 +24,7 @@ class Gw2ApiService {
 	}
 
 	readSkin(id) {
-		let promise = _http.get(`${domain}v2/skins/${id}`);
+		let promise = _http.get(`${domain}v2/skins/${id}`, { cache: true });
 		let scope = this;
 
 		let promiseOverride = promise.then(function(data) {
@@ -37,7 +38,7 @@ class Gw2ApiService {
 	}
 
 	readItem(id) {
-		let promise = _http.get(`${domain}v2/items/${id}`);
+		let promise = _http.get(`${domain}v2/items/${id}`, { cache: true });
 		
 		let scope = this;
 
@@ -79,7 +80,7 @@ class Gw2ApiService {
 			id_query += `${id},`;
 		});
 
-		let promise = _http.get(`${domain}v2/items?ids=${id_query}`);
+		let promise = _http.get(`${domain}v2/items?ids=${id_query}`, { cache: true });
 		
 		let scope = this;
 
@@ -114,7 +115,7 @@ class Gw2ApiService {
 	}
 
 	readGuild(guid) {
-		let promise = _http.get(`${domain}v1/guild_details.json?guild_id=${guid}`);
+		let promise = _http.get(`${domain}v1/guild_details.json?guild_id=${guid}`, { cache: true });
 		let scope = this;
 
 		let promiseOverride = promise.then(function(data) {

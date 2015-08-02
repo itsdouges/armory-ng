@@ -1,7 +1,7 @@
 <!-- todo: clean up logic in this view bro -->
 <!-- todo: styling man -->
 
-<div class="item-tooltip-container">
+<div mouse-follow class="item-tooltip-container">
 	<div ng-if="!ctrl.isBusy()">
 		{{ ctrl.typeName }}
 
@@ -12,8 +12,9 @@
 			</div>
 
 			<div class="item-is-gear">
-				<div>Defense: {{ ctrl.model.details.defense }}</div>
+				<div ng-if="ctrl.model.details.defense">Defense: {{ ctrl.model.details.defense }}</div>
 				
+				<!-- todo: parse some values that are one word into do (i.e. conditiondamage -> condition damage) -->
 				<div ng-repeat="infix in ctrl.model.details.infix_upgrade.attributes">
 					{{ '+' + infix.modifier + ' ' + infix.attribute }}
 				</div>
