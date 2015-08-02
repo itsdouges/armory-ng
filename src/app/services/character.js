@@ -185,11 +185,17 @@ class CharacterService {
     {
       "id": 11146,
       "slot": "Leggings",
+      "upgrades": [
+        24800
+      ],
       "skin": 34
     },
     {
       "id": 11349,
       "slot": "Shoulders",
+      "upgrades": [
+        24800
+      ],
       "skin": 5793
     },
     {
@@ -501,6 +507,32 @@ class CharacterService {
 		}, 1000);
 
     let wrappedPromise = deferred.promise.then(function (data) {
+      // todo: make more efficent/clean up bro.
+      let characterUpgrades = {};
+
+      data.equipment.forEach(function(equip) {
+        if (equip.upgrades) {
+          let upgrade_id;
+
+          equip.upgrades.forEach(function(upgrade) {
+            upgrade_id = upgrade;
+
+            if (!characterUpgrades[upgrade_id]) {
+              characterUpgrades[upgrade_id] = {
+                count: 1
+              };
+            } else {
+              characterUpgrades[upgrade_id].count += 1;
+            }
+          });
+
+          equip.upgrade_count = characterUpgrades[upgrade_id];
+        }
+      });
+      // end todo
+
+      let translatedCharacter = translateCharacter(data);
+
       return translateCharacter(data);
     }, function(e) {
       return e;

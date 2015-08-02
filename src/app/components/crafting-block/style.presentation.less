@@ -1,7 +1,8 @@
 .craft-rating {
 	text-align: center;
 	font-size: 0.8em;
-	line-height: 2em
+	line-height: 2em;
+	color: white;
 }
 
 .craft-icon {
@@ -40,17 +41,22 @@
 
 .craft-container {
 	border-radius: 2px;
-
-	&.active {
-		border: 1px solid green;
-		outline: 1px solid green;
-
-		.craft-rating-block {
-			background: green;
-		}
-	}
+	background: black;
+	z-index: @bottom-z;
 }
 
 .craft-rating-block {
-	background: blue;
+	z-index: @top-z;
+	background-color: @orange;
+}
+
+.craft-rating-block:after {
+	content: "";
+	box-sizing: border-box;
+	display: block;
+	width: 5px;
+	border-right: 3px solid white;
+	height: 100%;
+	background: linear-gradient(to right, @orange, @white);
+	float: right;
 }

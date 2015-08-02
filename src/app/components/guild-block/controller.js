@@ -17,8 +17,6 @@ function GuildBlockController(gw2ApiService) {
 	function success(guild) {
 		vm.guild = guild;
 
-		console.log(guild);
-
 		_busy = false;
 		_loaded = true;
 	}

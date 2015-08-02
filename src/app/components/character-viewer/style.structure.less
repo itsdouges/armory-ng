@@ -13,7 +13,7 @@
 }
 
 .character-title {
-	margin: 1em 1em 1em 1.5em;
+	margin: 1em 1em 0 1.5em;
 	overflow: auto;
 }
 
@@ -34,12 +34,13 @@
 .character-content {
 	position: relative;
 	overflow: auto;
+	margin-top: -20px;
 }
 
 .character-portrait-container:before {
 	content: "";
 	display: block;
-	padding-top: 135%;
+	padding-top: 165%;
 }
 
 .character-portrait-container {
@@ -49,14 +50,14 @@
 }
 
 .character-info-left {
-	margin: 0 0.2em;
+	margin: @potrait-top-spacer 0.2em 0 0.2em;
 	width: @thin-width * 1px;
 	float: left;
 	text-align: center;
 }
 
 .character-info-right {
-	margin: 0 0.2em;
+	margin: @potrait-top-spacer 0.2em 0 0.2em;
 	width: @thick-width * 1px;
 	float: right;
 }

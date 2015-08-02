@@ -1,6 +1,3 @@
-@height: -64px;
-@small-height: -43px; 
-
 .progress-indicator {
 	background-size: cover;
 
@@ -14,12 +11,12 @@
 
 @keyframes loading {
 	100% {
-		background-position-y: @height * 9;
+		background-position-y: -@medium-size * 9px;
 	}
 }
 
 @keyframes small_loading {
 	100% {
-		background-position-y: @small-height * 9;
+		background-position-y: -@small-size * 9px;
 	}
 }

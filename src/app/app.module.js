@@ -11,12 +11,17 @@ import CharacterPortraitDirective from './components/character-portrait/directiv
 import GuildBlockController from './components/guild-block/controller';
 import GuildBlockDirective from './components/guild-block/directive';
 
+import HeaderBlockController from './components/header-block/controller';
+import HeaderBlockDirective from './components/header-block/directive';
+
 import CraftingBlockController from './components/crafting-block/controller';
 import CraftingBlockDirective from './components/crafting-block/directive';
 
-import ItemController from './components/item-holder/controller';
-import ItemDirective from './components/item-holder/directive';
+import ItemController from './components/item-block/controller';
+import ItemDirective from './components/item-block/directive';
+
 import ItemTooltipDirective from './components/item-tooltip/directive';
+import ItemTooltipController from './components/item-tooltip/controller';
 
 import MouseFollowDirective from './components/mouse-follow/directive';
 
@@ -26,7 +31,8 @@ import BusyService from './services/busy';
 import Gw2ApiService from './services/gw2-api';
 
 angular.module('gw2armory', [
-  'ui.router'
+  'ui.router',
+  'ngSanitize'
 ])
 
 .config(config)
@@ -41,8 +47,10 @@ angular.module('gw2armory', [
 
 .directive('mouseFollow', MouseFollowDirective)
 
-.controller('ItemHolderController', ItemController)
-.directive('itemHolder', ItemDirective)
+.controller('itemBlockController', ItemController)
+.directive('itemBlock', ItemDirective)
+
+.controller('ItemTooltipController', ItemTooltipController)
 .directive('itemTooltip', ItemTooltipDirective)
 
 .controller('CharacterViewerController', CharacterViewerController)
@@ -50,6 +58,9 @@ angular.module('gw2armory', [
 
 .controller('GuildBlockController', GuildBlockController)
 .directive('guildBlock', GuildBlockDirective)
+
+.controller('HeaderBlockController', HeaderBlockController)
+.directive('headerBlock', HeaderBlockDirective)
 
 .controller('CraftingBlockController', CraftingBlockController)
 .directive('craftingBlock', CraftingBlockDirective)

@@ -8,7 +8,6 @@
 
 			<span class="character-level">
 				{{ ctrl.character.level }}
-				{{ ctrl.character.race }}
 				{{ ctrl.character.profession }}
 			</span>
 		</div>
@@ -16,18 +15,18 @@
 	
 	<div class="character-content">
 		<div class="character-info-left">
-			<item-holder type="Helm" data-id="ctrl.character.equipment.helm.id"></item-holder>
-			<item-holder type="Shoulders" data-id="ctrl.character.equipment.shoulders.id"></item-holder>
-			<item-holder type="Coat" data-id="ctrl.character.equipment.coat.id"></item-holder>
-			<item-holder type="Gloves" data-id="ctrl.character.equipment.gloves.id"></item-holder>
-			<item-holder type="Leggings" data-id="ctrl.character.equipment.leggings.id"></item-holder>
-			<item-holder type="Boots" data-id="ctrl.character.equipment.boots.id"></item-holder>
+			<item-block slot-name="Headgear" type="head" item="ctrl.character.equipment.helm"></item-block>
+			<item-block slot-name="Shoulders" type="shoulder" item="ctrl.character.equipment.shoulders"></item-block>
+			<item-block slot-name="Chest" type="chest" item="ctrl.character.equipment.coat"></item-block>
+			<item-block slot-name="Gloves" type="hand" item="ctrl.character.equipment.gloves"></item-block>
+			<item-block slot-name="Leggings" type="leg" item="ctrl.character.equipment.leggings"></item-block>
+			<item-block slot-name="Boots" type="feet" item="ctrl.character.equipment.boots"></item-block>
 
-			<item-holder type="Weapon1" data-id="ctrl.character.equipment.weaponA1.id"></item-holder>
-			<item-holder mode="small" type="Weapon2" data-id="ctrl.character.equipment.weaponA2.id"></item-holder>
+			<item-block slot-name="Main-Hand Weapon" type="sword" item="ctrl.character.equipment.weaponA1"></item-block>
+			<item-block slot-name="Off-Hand Weapon" mode="small" type="shield" item="ctrl.character.equipment.weaponA2"></item-block>
 
-			<item-holder mode="small" ng-if="ctrl.character.hasWeaponSwap" type="Weapon1" data-id="ctrl.character.equipment.weaponB1.id"></item-holder>
-			<item-holder mode="small" ng-if="ctrl.character.hasWeaponSwap" type="Weapon2" data-id="ctrl.character.equipment.weaponB2.id"></item-holder>
+			<item-block slot-name="Main-Hand Weapon" mode="small" ng-if="ctrl.character.hasWeaponSwap" type="shield" item="ctrl.character.equipment.weaponB1"></item-block>
+			<item-block slot-name="Off-Hand Weapon" mode="small" ng-if="ctrl.character.hasWeaponSwap" type="sword" item="ctrl.character.equipment.weaponB2"></item-block>
 		</div>
 
 		<div class="character-info-right">
@@ -36,19 +35,20 @@
 			<crafting-block ng-repeat="model in ctrl.character.crafting" model="model"></crafting-block>
 
 			<div class="character-equipment-cluster">
-				<item-holder type="Backpack" data-id="ctrl.character.equipment.backpack.id"></item-holder>
-				<item-holder type="Accessory" data-id="ctrl.character.equipment.accessory1.id"></item-holder>
-				<item-holder type="Accessory" data-id="ctrl.character.equipment.accessory2.id"></item-holder>
-				<item-holder type="Amulet" data-id="ctrl.character.equipment.amulet.id"></item-holder>
-				<item-holder type="Ring" data-id="ctrl.character.equipment.ring1.id"></item-holder>
-				<item-holder type="Ring" data-id="ctrl.character.equipment.ring2.id"></item-holder>
-				<item-holder type="Sickle" data-id="ctrl.character.equipment.sickle.id"></item-holder>
-				<item-holder type="Axe" data-id="ctrl.character.equipment.axe.id"></item-holder>
-				<item-holder type="Pick" data-id="ctrl.character.equipment.pick.id"></item-holder>
+				<item-block slot-name="Back" type="back" item="ctrl.character.equipment.backpack"></item-block>
+				<item-block slot-name="Accessory" type="beartrinket" item="ctrl.character.equipment.accessory1"></item-block>
+				<item-block slot-name="Accessory" type="cubetrinket" item="ctrl.character.equipment.accessory2"></item-block>
+				<item-block slot-name="Amulet" type="amulet" item="ctrl.character.equipment.amulet"></item-block>
+				<item-block slot-name="Ring" type="rightring" item="ctrl.character.equipment.ring1"></item-block>
+				<item-block slot-name="Ring" type="leftring" item="ctrl.character.equipment.ring2"></item-block>
 
-				<item-holder mode="small" type="HelmAcquatic" data-id="ctrl.character.equipment.helpAquatic.id"></item-holder>
-				<item-holder mode="small" type="WeaponAquatic" data-id="ctrl.character.equipment.weaponAquaticA.id"></item-holder>
-				<item-holder mode="small" ng-if="ctrl.character.hasWeaponSwap" type="WeaponAquatic" data-id="ctrl.character.equipment.weaponAquaticB.id"></item-holder>
+				<item-block slot-name="Foraging" type="sickle" item="ctrl.character.equipment.sickle"></item-block>
+				<item-block slot-name="Logging" type="axe" item="ctrl.character.equipment.axe"></item-block>
+				<item-block slot-name="Mining" type="pick" item="ctrl.character.equipment.pick"></item-block>
+
+				<item-block slot-name="Acquatic Headgear" mode="small" type="head" item="ctrl.character.equipment.helpAquatic"></item-block>
+				<item-block slot-name="Acquatic Weapon" mode="small" type="sword" item="ctrl.character.equipment.weaponAquaticA"></item-block>
+				<item-block slot-name="Acquatic Weapon" mode="small" ng-if="ctrl.character.hasWeaponSwap" type="sword" item="ctrl.character.equipment.weaponAquaticB"></item-block>
 			</div>
 		</div>
 

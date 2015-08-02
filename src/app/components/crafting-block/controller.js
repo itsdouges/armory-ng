@@ -10,17 +10,18 @@ function CraftingBlockController() {
 		} else {
 			vm.total = 500;
 		}
+
+		// todo: test
+		vm.current = calcWidthPercent(vm.model.rating, vm.total);
 	}
 
-	function calcWidthPercent() {
-		let percent = (vm.model.rating / vm.total) || 0;
+	function calcWidthPercent(rating, total) {
+		let percent = (rating / total) || 0;
 
 		return `${percent * 100}%`;
 	}
 
 	init();
-
-	vm.calcWidth = calcWidthPercent;
 }
 
 export default CraftingBlockController;

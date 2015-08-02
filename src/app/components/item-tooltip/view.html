@@ -1,46 +1,70 @@
-<div auto-position="true" class="item-tooltip">
-	<div class="title-strip">
-		<div class="item-tooltip-icon" style="background-image: url('{{ctrl.item.iconUrl}}')"></div>
-		<div class="item-name" ng-class="ctrl.item.rarity.toLowerCase()">
-			{{ ctrl.item.name }}
+<!-- todo: clean up logic in this view bro -->
+<!-- todo: styling man -->
+
+<div class="item-tooltip-container">
+	<div ng-if="!ctrl.isBusy()">
+		{{ ctrl.typeName }}
+
+		<div class="item-tooltip-content" ng-if="ctrl.isLoaded()">
+			<div class="item-header">
+				<span class="" style="background-image: url('{{ ctrl.model.icon }}')"></span>
+				<span>{{ ctrl.model.name }}</span>
+			</div>
+
+			<div class="item-is-gear">
+				<div>Defense: {{ ctrl.model.details.defense }}</div>
+				
+				<div ng-repeat="infix in ctrl.model.details.infix_upgrade.attributes">
+					{{ '+' + infix.modifier + ' ' + infix.attribute }}
+				</div>
+
+				<!-- todo: make upgrade into a component, too much logic up in this bitch -->
+				<div ng-if="ctrl.model.details.upgrade_one" class="item-first-upgrade">
+					<div>
+						<span class="" style="background-image: url('{{ ctrl.model.details.upgrade_one.icon }}')"></span>
+						<span>{{ ctrl.model.details.upgrade_one.name }}</span>
+						<span ng-if="ctrl.model.details.upgrade_one.details.bonuses">{{ '(' + ctrl.model.details.upgrade_one.total_count + '/' + ctrl.model.details.upgrade_one.details.bonuses.length + ')' }}</span>
+					</div>
+
+					<div ng-if="ctrl.model.details.upgrade_one.details.bonuses" ng-repeat="(key, bonus) in ctrl.model.details.upgrade_one.details.bonuses">
+						<span ng-class="{ 'upgrade-on': key < ctrl.model.details.upgrade_one.total_count }">{{ '(' + (key + 1) + '): ' + bonus }}</span>
+					</div>
+
+					<!-- todo: split the buff string into array ('\n') and then put on new lines -->
+					<div ng-if="ctrl.model.details.upgrade_one.details.infix_upgrade.buff">
+						{{ ctrl.model.details.upgrade_one.details.infix_upgrade.buff.description }}
+					</div>
+				</div>
+
+				<div ng-if="ctrl.model.isTwoHanded" class="item-second-upgrade">
+					<!-- todo: implent second slot for 2hand weapons -->
+					ayy slot abailable lol
+				</div>
+
+				<div class="skin-details">
+					<div ng-if="ctrl.model.original_name">Transmuted</div>
+
+					<!-- todo: if account owned skins is released make this update if the user is logged in -->
+					<div ng-if="!ctrl.model.original_name">Skin Locked</div>
+					{{ ctrl.model.original_name || ctrl.model.name }}
+				</div>
+			</div>
+
+			<div class="item-summary">
+				<div>{{ ctrl.model.rarity }}</div>
+				<div>{{ ctrl.model.details.weight_class }}</div>
+				<div>{{ ctrl.model.details.type }} {{ ctrl.model.type }}</div>
+				<div>{{ ctrl.model.description }}</div>
+				<div ng-if="ctrl.model.level">{{ 'Required Level: ' + ctrl.model.level }}</div>
+				<div>{{ ctrl.model.boundStatus }}</div>
+				<div>
+					<span ng-if="ctrl.model.gold">{{ ctrl.model.gold }}</span>
+					<span ng-if="ctrl.model.silver">{{ ctrl.model.silver }}</span>
+					<span ng-if="ctrl.model.copper">{{ ctrl.model.copper }}</span>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="stats-summary float-clear">
-		<div ng-if="ctrl.item.armor">
-			<div>Defense: <span class="stat">{{ ctrl.item.armor.defense }}</span></div>
-			<div ng-repeat="stat in ctrl.item.armor.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
-		</div>
-
-		<div ng-if="ctrl.item.trinket">
-			<div ng-repeat="stat in ctrl.item.trinket.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
-		</div>
-
-		<div ng-if="ctrl.item.back">
-			<div ng-repeat="stat in ctrl.item.back.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
-		</div>
-
-		<div ng-if="ctrl.item.weapon">
-			<div ng-repeat="stat in ctrl.item.weapon.infix_upgrade.attributes" class="stat">+{{ stat.modifier + ' ' + stat.attribute }}</div>
-		</div>
-	</div>
-
-	<div class="item-description">{{ ctrl.item.description }}</div>
-
-	<div class="general-summary">
-		<div>{{ ctrl.item.rarity }}</div>
-
-		<div ng-if="ctrl.item.armor">
-			<div>{{ ctrl.item.armor.weight_class }}</div>
-			<div>{{ ctrl.item.armor.weight_class + ' ' + ctrl.item.type }}</div>
-		</div>
-
-		<div>{{ 'Required Level:' + ctrl.item.level }}</div>
-
-		<div>
-			<span>{{ ctrl.item.gold }}</span>
-			<span>{{ ctrl.item.silver }}</span>
-			<span>{{ ctrl.item.copper }}</span>
-		</div>
-	</div>
+	<div ng-if="ctrl.isBusy()" class="progress-indicator animating"></div>
 </div>

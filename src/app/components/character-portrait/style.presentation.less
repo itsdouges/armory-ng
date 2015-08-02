@@ -1,3 +1,51 @@
 .character-portrait {
-	background: gray;
+	background: black;
+}
+
+.portrait-top-in {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 239px;
+	background: url('../assets/images/portrait-top-in.png');
+}
+
+.portrait-bottom-in {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 315px;
+	background: url('../assets/images/portrait-bottom-in.png');
+}
+
+@potrait-top-spacer: 37px;
+.portrait-top-out {
+	height: @potrait-top-spacer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: url('../assets/images/portrait-top-out.png');
+}
+
+.portrait-bottom-out {
+	height: 94px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: url('../assets/images/portrait-bottom-out.png');
+}
+
+.portrait {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	background-size: contain;
+	background-position: center center;
+	background-image: url('../assets/images/example-character.png');	
 }

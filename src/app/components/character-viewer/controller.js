@@ -34,9 +34,7 @@ function CharacterViewerController(characterService, $stateParams, messageServic
 
 	function readSuccess(character) {
 		_loaded = true;
-
-		console.log(character);
-
+		
 		vm.character = character;
 
 		_busyService.setBusy(false);

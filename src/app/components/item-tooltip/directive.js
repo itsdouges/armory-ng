@@ -4,8 +4,15 @@ function ItemTooltipDirective() {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/item-tooltip/view.html',
-		controllerAs: 'ctrl',
-		require: '^itemHolder'
+		controller: 'ItemTooltipController as ctrl',
+		scope: {},
+		bindToController: {
+			// skinId: '@',
+			// itemId: '@',
+			// upgrades: '=',
+			item: '=',
+			slotName: '@'
+		}
 	};
 
 	return directive;
