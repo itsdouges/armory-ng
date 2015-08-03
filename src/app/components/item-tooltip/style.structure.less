@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.5); 
+	background-color: rgba(0, 0, 0, 0.4); 
 	font-size: 1rem;
 	padding: 5px;
 	z-index: @top-z;
@@ -20,12 +20,12 @@
 	color: @gray;
 	text-shadow: 1px 1px 1px rgb(0, 0, 0);
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, @tooltip-opacity);
-	max-width: 328px;
+	max-width: 313px;
 
  	border: 1px solid rgb(0, 0, 0);
   border: 1px solid rgba(0, 0, 0, @tooltip-opacity);
 
-	background-size: 654px 623px;
+	background-size: 630px 647px;
 	background-clip: padding-box;
 	background-image: url('../assets/images/tooltip-bg.png');
 }
@@ -35,7 +35,10 @@
 	height: 40px;
 	display: table-cell;
 	vertical-align: middle;
-	font-family: 'Menomonia' serif;
+}
+
+.item-pre-header {
+	font-size: 16px;
 }
 
 .tooltip-icon {
@@ -61,4 +64,5 @@
 
 .item-cost {
 	margin-left: 4px;
+	position: relative;
 }

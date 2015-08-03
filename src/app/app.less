@@ -7,11 +7,15 @@
 
 body {
   margin: 0;
-  font-family: 'Menomonia';
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+.serif {
+  font-family: 'Menomonia';
 }
 
 .container {
@@ -32,6 +36,11 @@ a {
   image-rendering: pixelated; /* Chrome */
   image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
   -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+
+.sticky-bottom {
+  position: absolute;
+  bottom: 0;
 }
 
 .left {

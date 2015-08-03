@@ -1,0 +1,22 @@
+<div ng-if="ctrl.hasUpgrade()">
+	<div class="blue">
+		<span style="icon icon-mini" style="background-image: url('{{ ctrl.upgrade.icon }}')"></span>
+
+		<span>{{ ctrl.upgrade.name }}</span>
+
+		<span ng-if="ctrl.upgrade.details.bonuses">
+			{{ '(' + ctrl.upgrade.total_count + '/' + ctrl.upgrade.details.bonuses.length + ')' }}
+		</span>
+	</div>
+
+	<div ng-if="ctrl.upgrade.details.bonuses" ng-repeat="(key, bonus) in ctrl.upgrade.details.bonuses">
+		<span ng-class="{ 'blue': key < ctrl.upgrade.total_count }">
+			{{ '(' + (key + 1) + '): ' + bonus }}
+		</span>
+	</div>
+
+	<!-- todo: split the buff string into array ('\n') and then put on new lines -->
+	<div ng-if="ctrl.upgrade.details.infix_upgrade.buff">
+		{{ ctrl.upgrade.details.infix_upgrade.buff.description }}
+	</div>
+</div>

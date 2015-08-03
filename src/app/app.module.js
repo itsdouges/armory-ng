@@ -23,6 +23,9 @@ import ItemDirective from './components/item-block/directive';
 import ItemTooltipDirective from './components/item-tooltip/directive';
 import ItemTooltipController from './components/item-tooltip/controller';
 
+import UpgradeComponentDirective from './components/upgrade-component/directive';
+import UpgradeComponentController from './components/upgrade-component/controller';
+
 import MouseFollowDirective from './components/mouse-follow/directive';
 
 import CharacterService from './services/character';
@@ -58,6 +61,9 @@ angular.module('gw2armory', [
 
 .controller('GuildBlockController', GuildBlockController)
 .directive('guildBlock', GuildBlockDirective)
+
+.controller('UpgradeComponentController', UpgradeComponentController)
+.directive('upgradeComponent', UpgradeComponentDirective)
 
 .controller('HeaderBlockController', HeaderBlockController)
 .directive('headerBlock', HeaderBlockDirective)
