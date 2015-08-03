@@ -3,32 +3,34 @@
 
 <div mouse-follow class="item-tooltip-container">
 	<div ng-if="!ctrl.isBusy()">
-		{{ ctrl.typeName }}
+		<i class="dark-gray">{{ ctrl.typeName }}</i>
 
 		<div class="item-tooltip-content" ng-if="ctrl.isLoaded()">
 			<div class="item-header">
-				<span class="" style="background-image: url('{{ ctrl.model.icon }}')"></span>
-				<span>{{ ctrl.model.name }}</span>
+				<span class="text-middle icon icon-mini tooltip-icon" style="background-image: url('{{ ctrl.model.icon }}')"></span>
+				<span class="text-middle item-name" ng-class="ctrl.model.rarity.toLowerCase()">{{ ctrl.model.name }}</span>
 			</div>
 
 			<div class="item-is-gear">
-				<div ng-if="ctrl.model.details.defense">Defense: {{ ctrl.model.details.defense }}</div>
+				<div ng-if="ctrl.model.details.defense">Defense: <span class="green">{{ ctrl.model.details.defense }}</span></div>
 				
 				<!-- todo: parse some values that are one word into do (i.e. conditiondamage -> condition damage) -->
-				<div ng-repeat="infix in ctrl.model.details.infix_upgrade.attributes">
+				<div class="green" ng-repeat="infix in ctrl.model.details.infix_upgrade.attributes">
 					{{ '+' + infix.modifier + ' ' + infix.attribute }}
 				</div>
 
+				<div class="tooltip-gap"></div>
+
 				<!-- todo: make upgrade into a component, too much logic up in this bitch -->
 				<div ng-if="ctrl.model.details.upgrade_one" class="item-first-upgrade">
-					<div>
-						<span class="" style="background-image: url('{{ ctrl.model.details.upgrade_one.icon }}')"></span>
+					<div class="blue">
+						<span style="background-image: url('{{ ctrl.model.details.upgrade_one.icon }}')"></span>
 						<span>{{ ctrl.model.details.upgrade_one.name }}</span>
 						<span ng-if="ctrl.model.details.upgrade_one.details.bonuses">{{ '(' + ctrl.model.details.upgrade_one.total_count + '/' + ctrl.model.details.upgrade_one.details.bonuses.length + ')' }}</span>
 					</div>
 
 					<div ng-if="ctrl.model.details.upgrade_one.details.bonuses" ng-repeat="(key, bonus) in ctrl.model.details.upgrade_one.details.bonuses">
-						<span ng-class="{ 'upgrade-on': key < ctrl.model.details.upgrade_one.total_count }">{{ '(' + (key + 1) + '): ' + bonus }}</span>
+						<span ng-class="{ 'blue': key < ctrl.model.details.upgrade_one.total_count }">{{ '(' + (key + 1) + '): ' + bonus }}</span>
 					</div>
 
 					<!-- todo: split the buff string into array ('\n') and then put on new lines -->
@@ -38,9 +40,12 @@
 				</div>
 
 				<div ng-if="ctrl.model.isTwoHanded" class="item-second-upgrade">
+					<div class="tooltip-gap"></div>
 					<!-- todo: implent second slot for 2hand weapons -->
 					ayy slot abailable lol
 				</div>
+
+				<div class="tooltip-gap"></div>
 
 				<div class="skin-details">
 					<div ng-if="ctrl.model.original_name">Transmuted</div>
@@ -51,6 +56,8 @@
 				</div>
 			</div>
 
+			<div class="tooltip-gap"></div>
+
 			<div class="item-summary">
 				<div>{{ ctrl.model.rarity }}</div>
 				<div>{{ ctrl.model.details.weight_class }}</div>
@@ -58,10 +65,10 @@
 				<div>{{ ctrl.model.description }}</div>
 				<div ng-if="ctrl.model.level">{{ 'Required Level: ' + ctrl.model.level }}</div>
 				<div>{{ ctrl.model.boundStatus }}</div>
-				<div>
-					<span ng-if="ctrl.model.gold">{{ ctrl.model.gold }}</span>
-					<span ng-if="ctrl.model.silver">{{ ctrl.model.silver }}</span>
-					<span ng-if="ctrl.model.copper">{{ ctrl.model.copper }}</span>
+				<div class="item-cost">
+					<span class="gold" ng-if="ctrl.model.gold">{{ ctrl.model.gold }}<span class="icon icon-micro icon-gold"></span></span>
+					<span class="silver" ng-if="ctrl.model.silver">{{ ctrl.model.silver }}<span class="icon icon-micro icon-silver"></span></span>
+					<span class="copper" ng-if="ctrl.model.copper">{{ ctrl.model.copper }}<span class="icon icon-micro icon-copper"></span></span>
 				</div>
 			</div>
 		</div>

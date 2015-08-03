@@ -1,47 +1,58 @@
+@tooltip-opacity: 0.7;
+
 .item-tooltip-container {
 	position: fixed;
 	top: 0;
 	left: 0;
 	font-size: 1rem;
-	padding: 3px;
+	padding: 5px;
 	z-index: @top-z;
 	text-align: left;
 
-	border: 2px solid brown;
-	border-radius: 2px;
-
+	border-radius: 1px;
+	box-shadow: 1px 1px 1px rgb(0, 0, 0);
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, @tooltip-opacity);
 	pointer-events: none; // todo: this may be a problem when handling touch devices
-}
+	color: @gray;
+	text-shadow: 1px 1px 2px rgb(0, 0, 0);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, @tooltip-opacity);
+	max-width: 328px;
 
-.item-tooltip-content {
+ 	border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, @tooltip-opacity);
 
-}
-
-.item-tooltip-icon {
-	width: @small-size * 1px;
-	height: @small-size * 1px;
-	background-size: cover;
-	float: left;
-	margin-right: 0.3em;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+	background-size: 654px 623px;
+	background-clip: padding-box;
+	background-image: url('../assets/images/tooltip-bg.png');
 }
 
 .item-name {
-	font-size: 1.2em;
+	font-size: 1.05em;
+	height: 40px;
+	display: table-cell;
+	vertical-align: middle;
 }
 
-.title-strip {
-	margin: 0.25em;
-	height: @small-size * 1px;
+.tooltip-icon {
+	border: 1px solid white;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	float: left;
+	margin-top: 3px;
+	margin-right: 4px;
 }
 
-.stats-summary {
-	margin: 0.25em;
+.tooltip-gap {
+	height: 18px;
+	display: block;
 }
 
-.general-summary {
-	margin: 0.25em;
+.item-header {
+	overflow: auto;
 }
 
-.stat {
-	color: green;
+.item-cost {
+	margin-left: 4px;
 }

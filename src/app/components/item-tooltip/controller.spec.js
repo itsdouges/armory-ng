@@ -259,7 +259,10 @@ describe('item tooltip controller', function () {
         upgrades: [
           333,
           444
-        ]
+        ],
+        upgrade_count: {
+          count: 1
+        }
       }
     });
 
@@ -312,7 +315,10 @@ describe('item tooltip controller', function () {
         upgrades: [
           333,
           444
-        ]
+        ],
+        upgrade_count: {
+          count: 2
+        }
       }
     });
 
