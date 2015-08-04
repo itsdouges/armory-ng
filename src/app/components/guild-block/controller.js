@@ -1,4 +1,3 @@
-// TODO: Test a bit lolz
 // TODO: Replace dependency on gw2w2w
 
 function GuildBlockController(gw2ApiService) {

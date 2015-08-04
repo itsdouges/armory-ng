@@ -1,8 +1,6 @@
 function CraftingBlockController() {
 	let vm = this;
 
-	// TODO: Test.. you lazy shit !
-
 	function init() {
 		if (vm.model.discipline === 'Chef' || 
 			vm.model.discipline === 'Jewler') {
@@ -11,14 +9,13 @@ function CraftingBlockController() {
 			vm.total = 500;
 		}
 
-		// todo: test
 		vm.current = calcWidthPercent(vm.model.rating, vm.total);
 	}
 
 	function calcWidthPercent(rating, total) {
-		let percent = (rating / total) || 0;
+		let percent = Math.ceil((rating / total || 0) * 100);
 
-		return `${percent * 100}%`;
+		return `${percent}%`;
 	}
 
 	init();

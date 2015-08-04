@@ -45,6 +45,43 @@ describe('item controller', function () {
   	expect(mockGw2ApiService.readSkin).toHaveBeenCalledWith(1234);
   });
 
+  it('should set type background url as expected', function () {
+    inject(function($q) { 
+      mockGw2ApiService.readSkin = function () { 
+        var deferred = $q.defer();
+        return deferred.promise; 
+      };
+    });
+
+    var ctrl = systemUnderTest({
+      item: {
+        skin: 1234,
+        id: 4444,
+      },
+      type: 'ayy-type'
+    });
+
+    expect(ctrl.typeBackground).toBe('../assets/images/ayy-type-slot-icon.png');
+  });
+
+  it('should set type background url as expected if no type passed in', function () {
+    inject(function($q) { 
+      mockGw2ApiService.readSkin = function () { 
+        var deferred = $q.defer();
+        return deferred.promise; 
+      };
+    });
+
+    var ctrl = systemUnderTest({
+      item: {
+        skin: 1234,
+        id: 4444
+      }
+    });
+
+    expect(ctrl.typeBackground).toBe('../assets/images/item-default-icon.png');
+  });
+
   it('should call readItem if no skinId is passed in', function () {
     inject(function($q) { 
       mockGw2ApiService.readItem = function () { 

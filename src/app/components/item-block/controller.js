@@ -28,7 +28,6 @@ function ItemController(gw2ApiService) {
 		} 
 	}
 
-	// TODO: test dis
 	function buildTypeBackgroundUrl(type) {
 		if (type) {
 			return `../assets/images/${type}-slot-icon.png`;
