@@ -10,6 +10,14 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'app/routes/main.html',
       abstract: true
     })
+    .state('auth.main.login', {
+      url: '/login',
+      templateUrl: 'app/routes/login/login.html'
+    })
+    .state('auth.main.account', {
+      url: '/account',
+      templateUrl: 'app/routes/account/account.html'
+    })
     .state('auth.main.home', {
     	url: '/',
     	templateUrl: 'app/routes/home/home.html',

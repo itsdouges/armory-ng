@@ -1,6 +1,8 @@
 <div ng-if="ctrl.hasUpgrade()">
+	<div class="tooltip-gap"></div>
+
 	<div class="blue">
-		<span style="icon icon-mini" style="background-image: url('{{ ctrl.upgrade.icon }}')"></span>
+		<span class="icon icon-micro" style="background-image: url('{{ ctrl.upgrade.icon }}')"></span>
 
 		<span>{{ ctrl.upgrade.name }}</span>
 
@@ -9,14 +11,25 @@
 		</span>
 	</div>
 
-	<div ng-if="ctrl.upgrade.details.bonuses" ng-repeat="(key, bonus) in ctrl.upgrade.details.bonuses">
-		<span ng-class="{ 'blue': key < ctrl.upgrade.total_count }">
-			{{ '(' + (key + 1) + '): ' + bonus }}
-		</span>
+	<div ng-if="ctrl.upgrade.details.bonuses">
+		<div ng-repeat="(key, bonus) in ctrl.upgrade.details.bonuses">
+			<span ng-class="{ 'blue': key < ctrl.upgrade.total_count }">
+				{{ '(' + (key + 1) + '): ' + bonus }}
+			</span>
+		</div>
 	</div>
 
 	<!-- todo: split the buff string into array ('\n') and then put on new lines -->
 	<div ng-if="ctrl.upgrade.details.infix_upgrade.buff">
-		{{ ctrl.upgrade.details.infix_upgrade.buff.description }}
+		<div class="blue" ng-repeat="buff in ctrl.upgrade.details.infix_upgrade.buff.description">
+			{{ buff }}
+		</div>
 	</div>
+</div>
+
+<div ng-if="!ctrl.hasUpgrade()">
+	<div class="tooltip-gap"></div>
+
+	<span class="icon icon-micro icon-upgrade"></span>
+	<span>Unused Upgrade Slot</span>
 </div>

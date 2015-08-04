@@ -4,7 +4,41 @@ let domain = 'https://api.guildwars2.com/';
 // TODO: Clean this js up. Terrible!
 // TODO: TEST THIS FILE OMG!
 
-function calcTwoHanded(type) {
+function parseGw2Markup(text) {
+	return text;
+
+	if (!text) {
+		return;
+	}
+
+	let classRegEx = /@\w+/;
+	let className = classRegEx.exec(text);
+
+	if (className) {
+		className = className[0];
+	}
+
+	if (className && className.indexOf('@')) {
+		className = className.substr(1);
+	}
+
+	let tagsRegEx = /<c[^>]*>|<.c>/;
+	let tags = tagsRegEx.exec(text);
+
+	let description = text.replace(tags, '');
+
+	return description;
+}
+
+function splitBonusDescription(text) {
+	return text.split('\n');
+}
+
+function canTransmute(type) {
+
+}
+
+function hasTwoSlots(type) {
 	switch(type) {
 		case 'Greatsword':
 		case 'Hammer':
@@ -12,6 +46,23 @@ function calcTwoHanded(type) {
 		case 'Rifle':
 		case 'ShortBow':
 		case 'Staff':
+		case 'HarpoonGun':
+		case 'Trident':
+		case 'Spear':
+			return true;
+	}
+
+	return false;
+}
+
+function hasInitialUpgradeSlot(type) {
+	switch(type) {
+		case 'Weapon': 
+		case 'Armor':
+		case 'Trinket':
+		case 'Accessory':
+		case 'Amulet':
+		case 'Back':
 			return true;
 	}
 
@@ -57,8 +108,17 @@ class Gw2ApiService {
 				}
 			});
 
+			item.description = parseGw2Markup(item.description);
+
+			// test..
+			if (item.details.bonuses) {
+				item.details.bonuses = splitBonusDescription(item.details.bonuses);
+			}
+
+			item.has_slot_one = hasInitialUpgradeSlot(item.details.type);
+
 			if (item.type === 'Weapon') {
-				item.isTwoHanded = calcTwoHanded(item.details.type);
+				item.has_slot_two = hasTwoSlots(item.details.type);
 			}
 
 			return item;
@@ -101,8 +161,17 @@ class Gw2ApiService {
 					}
 				});
 
+				// test..
+				if (item.details.infix_upgrade && item.details.infix_upgrade.buff && item.details.infix_upgrade.buff.description) {
+					item.details.infix_upgrade.buff.description = splitBonusDescription(item.details.infix_upgrade.buff.description);
+				}
+
+				item.description = parseGw2Markup(item.description);
+
+				item.has_slot_one = hasInitialUpgradeSlot(item.type);
+
 				if (item.type === 'Weapon') {
-					item.isTwoHanded = calcTwoHanded(item.details.type);
+					item.has_slot_two = hasTwoSlots(item.details.type);
 				}
 			});
 

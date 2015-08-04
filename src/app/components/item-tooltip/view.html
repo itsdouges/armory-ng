@@ -18,17 +18,20 @@
 				<div ng-if="ctrl.model.details.defense">
 					Defense: <span class="green">{{ ctrl.model.details.defense }}</span>
 				</div>
+
+				<div ng-if="ctrl.model.type === 'Weapon'">
+					<span>Weapon Strength:</span>
+					<span class="green">{{ ctrl.model.details.min_power }} - {{ ctrl.model.details.max_power }}</span>
+				</div>
 				
 				<!-- todo: parse some values that are one word into do (i.e. conditiondamage -> condition damage) -->
 				<div class="green" ng-repeat="infix in ctrl.model.details.infix_upgrade.attributes">
 					{{ '+' + infix.modifier + ' ' + infix.attribute }}
 				</div>
 
-				<div class="tooltip-gap"></div>
+				<upgrade-component ng-if="ctrl.model.has_slot_one" upgrade="ctrl.model.details.upgrade_one"></upgrade-component>
 
-				<upgrade-component upgrade="ctrl.model.details.upgrade_one"></upgrade-component>
-
-				<upgrade-component ng-if="ctrl.model.isTwoHanded" upgrade="ctrl.model.details.upgrade_two"></upgrade-component>
+				<upgrade-component ng-if="ctrl.model.has_slot_two" upgrade="ctrl.model.details.upgrade_two"></upgrade-component>
 
 				<div class="tooltip-gap"></div>
 
