@@ -60,11 +60,17 @@ function CharacterViewerController(characterService, $stateParams, messageServic
 		return _error;
 	}
 
+    
+	function hasWeaponSwap() {
+		return !!vm.character.hasWeaponSwap;
+	}
+
 	init();
 
 	vm.loadCharacter = loadCharacter;
 	vm.isLoaded = isLoaded;
 	vm.isError = isError;
+	vm.hasWeaponSwap = hasWeaponSwap;
 }
 
 export default CharacterViewerController;

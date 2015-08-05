@@ -140,7 +140,7 @@ class CharacterService {
       "active": true
     },
     {
-      "discipline": "Jewler",
+      "discipline": "Jeweler",
       "rating": 400,
       "active": true
     },

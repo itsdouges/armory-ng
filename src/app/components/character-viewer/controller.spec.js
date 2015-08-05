@@ -255,4 +255,48 @@ describe('characterviewer controller', function () {
 
     expect(ctrl.isLoaded()).toBe(true);
   });
+
+  it('should return true if has weapon slot', function () {
+    var deferred;
+
+    inject(function($q)  { 
+      deferred = $q.defer();
+
+      mockCharacterService.readCharacter = function () { 
+        return deferred.promise; 
+      };
+    });
+
+    var ctrl = systemUnderTest();
+
+    deferred.resolve({
+      hasWeaponSwap: true
+    });
+
+    rootScope.$apply();
+
+    expect(ctrl.hasWeaponSwap()).toBe(true);
+  });
+
+  it('should return false if has no weapon slot', function () {
+    var deferred;
+
+    inject(function($q)  { 
+      deferred = $q.defer();
+
+      mockCharacterService.readCharacter = function () { 
+        return deferred.promise; 
+      };
+    });
+
+    var ctrl = systemUnderTest();
+
+    deferred.resolve({
+      hasWeaponSwap: false
+    });
+    
+    rootScope.$apply();
+
+    expect(ctrl.hasWeaponSwap()).toBe(false);
+  });
 });

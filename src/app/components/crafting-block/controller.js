@@ -3,7 +3,7 @@ function CraftingBlockController() {
 
 	function init() {
 		if (vm.model.discipline === 'Chef' || 
-			vm.model.discipline === 'Jewler') {
+			vm.model.discipline === 'Jeweler') {
 			vm.total = 400;
 		} else {
 			vm.total = 500;
@@ -18,7 +18,13 @@ function CraftingBlockController() {
 		return `${percent}%`;
 	}
 
+	function isActive() {
+		return !!vm.model.active;
+	}
+
 	init();
+
+	vm.isActive = isActive;
 }
 
 export default CraftingBlockController;

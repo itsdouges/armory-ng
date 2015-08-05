@@ -25,8 +25,8 @@
 			<item-block slot-name="Main-Hand Weapon" type="sword" item="ctrl.character.equipment.weaponA1"></item-block>
 			<item-block slot-name="Off-Hand Weapon" mode="small" type="shield" item="ctrl.character.equipment.weaponA2"></item-block>
 
-			<item-block slot-name="Main-Hand Weapon" mode="small" ng-if="ctrl.character.hasWeaponSwap" type="shield" item="ctrl.character.equipment.weaponB1"></item-block>
-			<item-block slot-name="Off-Hand Weapon" mode="small" ng-if="ctrl.character.hasWeaponSwap" type="sword" item="ctrl.character.equipment.weaponB2"></item-block>
+			<item-block slot-name="Main-Hand Weapon" mode="small" ng-if="ctrl.hasWeaponSwap()" type="shield" item="ctrl.character.equipment.weaponB1"></item-block>
+			<item-block slot-name="Off-Hand Weapon" mode="small" ng-if="ctrl.hasWeaponSwap()" type="sword" item="ctrl.character.equipment.weaponB2"></item-block>
 		</div>
 
 		<div class="character-info-right">
@@ -48,7 +48,7 @@
 
 				<item-block slot-name="Acquatic Headgear" mode="small" type="head" item="ctrl.character.equipment.helpAquatic"></item-block>
 				<item-block slot-name="Acquatic Weapon" mode="small" type="sword" item="ctrl.character.equipment.weaponAquaticA"></item-block>
-				<item-block slot-name="Acquatic Weapon" mode="small" ng-if="ctrl.character.hasWeaponSwap" type="sword" item="ctrl.character.equipment.weaponAquaticB"></item-block>
+				<item-block slot-name="Acquatic Weapon" mode="small" ng-if="ctrl.hasWeaponSwap()" type="sword" item="ctrl.character.equipment.weaponAquaticB"></item-block>
 			</div>
 		</div>
 

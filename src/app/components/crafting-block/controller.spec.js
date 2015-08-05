@@ -34,9 +34,9 @@ describe('CraftingBlockController', function () {
     expect(ctrl.total).toBe(400);
   });
 
-  it ('should set the crafting total to 400 if jewler', function () {
+  it ('should set the crafting total to 400 if jeweler', function () {
     var ctrl = systemUnderTest({
-      discipline: 'Jewler'
+      discipline: 'Jeweler'
     });
 
     expect(ctrl.total).toBe(400);
@@ -48,7 +48,6 @@ describe('CraftingBlockController', function () {
 
     expect(ctrl.current).toBe('0%');
   });
-
 
   it ('should set the expected percent with input 1', function () {
     var ctrl = systemUnderTest({
@@ -65,5 +64,21 @@ describe('CraftingBlockController', function () {
     });
 
     expect(ctrl.current).toBe('60%');
+  });
+
+  it ('should return true if active', function () {
+    var ctrl = systemUnderTest({
+      active: true
+    });
+
+    expect(ctrl.isActive()).toBe(true);
+  });
+
+  it ('should return false if not active', function () {
+    var ctrl = systemUnderTest({
+      active: false
+    });
+
+    expect(ctrl.isActive()).toBe(false);
   });
 });

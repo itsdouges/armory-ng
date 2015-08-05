@@ -16,7 +16,6 @@ function ItemTooltipController(gw2ApiService, $q) {
 		}
 	}
 
-	// todo: extract to gw2api?
 	function readSuccess(items) {
 		let arrayOfItems = items[0];
 		let skin = items[1];
@@ -28,7 +27,7 @@ function ItemTooltipController(gw2ApiService, $q) {
 		})[0];
 
 		if (!item) {
-			throw new Error('Item shouldn\'t be undefined.');
+			throw new Error('Item shouldn\'t be undefined, check your code.');
 		}
 
 		if (skin) {

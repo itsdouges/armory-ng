@@ -14,6 +14,7 @@ function ItemController(gw2ApiService) {
 	let vm = this;
 
 	function init() {
+		_busy = false;
 		_tooltipVisible = false;
 		_typeBackground = buildTypeBackgroundUrl(this.type);
 
@@ -69,20 +70,20 @@ function ItemController(gw2ApiService) {
 		return _loaded;
 	}
 
-	function setTootipVisibility(visible) {
+	function setTooltipVisibility(visible) {
 		if (_tooltipVisible != visible) {
 			_tooltipVisible	= visible;
 		}
 	}
 
-	function getTootipVisibility() {
-		return _tooltipVisible;
+	function getTooltipVisibility() {
+		return _tooltipVisible && !isBusy();
 	}
 
 	init.call(this);
 
-	vm.getTootipVisibility = getTootipVisibility;
-	vm.setTootipVisibility = setTootipVisibility;
+	vm.getTooltipVisibility = getTooltipVisibility;
+	vm.setTooltipVisibility = setTooltipVisibility;
 	vm.typeBackground = _typeBackground;
 	vm.isLoaded = isLoaded;
 	vm.isBusy = isBusy;

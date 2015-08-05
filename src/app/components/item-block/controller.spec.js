@@ -395,7 +395,7 @@ describe('item controller', function () {
 
     var ctrl = systemUnderTest({});
 
-    expect(ctrl.getTootipVisibility()).toBe(false);
+    expect(ctrl.getTooltipVisibility()).toBe(false);
   });
 
   it ('should show tooltip if set to true', function () {
@@ -410,9 +410,9 @@ describe('item controller', function () {
 
     var ctrl = systemUnderTest({});
 
-    ctrl.setTootipVisibility(true);
+    ctrl.setTooltipVisibility(true);
 
-    expect(ctrl.getTootipVisibility()).toBe(true);
+    expect(ctrl.getTooltipVisibility()).toBe(true);
   });
 
   it ('should return default type if no type is supplied', function () {

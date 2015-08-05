@@ -1,10 +1,49 @@
+@potrait-top-spacer: 37px;
+
 .character-portrait {
 	position: absolute;
 	top: 37px;
 	right: 0;
 	left: 0;
 	bottom: 94px;
+}
 
-	background-size: cover;
-	background-image: url('../assets/images/asura-portrait-bg.png');
+.portrait-top-in {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 239px;
+}
+
+.portrait-bottom-in {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 315px;
+}
+
+.portrait-bottom-out {
+	height: 94px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.portrait-top-out {
+	height: @potrait-top-spacer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.portrait {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
 }
