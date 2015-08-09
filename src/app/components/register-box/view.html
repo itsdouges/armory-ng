@@ -1,0 +1,64 @@
+<form ng-submit="ctrl.sendData()" class="box">
+	<h1>Register</h1>
+
+	<div class="message-box error">{{ ctrl.error }}</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label class="label" for="register-email">Email</label>
+		</div>
+
+		<div class="input-container">
+			<input ng-keyup="ctrl.checkEmail()" class="control" id="register-email" type="email" ng-model="ctrl.user.email" required="required" />
+			{{ ctrl.user.emailAvailable }}
+			{{ ctrl.emailLoading }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-alias">Alias</label>
+		</div>
+
+		<div class="input-container">
+			<input ng-keyup="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.user.alias" required="required" />
+			{{ ctrl.user.aliasAvailable }}
+			{{ ctrl.aliasLoading }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-password">Password</label>
+		</div>
+
+		<div class="input-container">
+			<input ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password1" required="required" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-confirm-password">Confirm Password</label>
+		</div>
+
+		<div class="input-container">
+			<input ng-keyup="ctrl.checkPasswords()" id="register-confirm-password" type="password" ng-model="ctrl.user.password2" required="required" />
+			{{ ctrl.user.passwordsValid }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-token">Api Token</label>
+		</div>
+
+		<div class="input-container">
+			<input ng-keyup="ctrl.checkToken()" id="register-token" type="text" ng-model="ctrl.user.token" required="required" />
+			{{ ctrl.user.tokenValid }}
+			{{ ctrl.tokenLoading }}
+		</div>
+	</div>
+
+	<busy-button button-disabled="!ctrl.validateUser()" busy="ctrl.loading">Register</busy-button>
+</form>

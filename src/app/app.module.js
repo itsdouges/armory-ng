@@ -23,11 +23,21 @@ import ItemDirective from './components/item-block/directive';
 import ItemTooltipDirective from './components/item-tooltip/directive';
 import ItemTooltipController from './components/item-tooltip/controller';
 
+import LoginDirective from './components/login-box/directive';
+import LoginController from './components/login-box/controller';
+
+import BusyButtonDirective from './components/busy-button/directive';
+import BusyButtonController from './components/busy-button/controller';
+
+import RegisterDirective from './components/register-box/directive';
+import RegisterController from './components/register-box/controller';
+
 import UpgradeComponentDirective from './components/upgrade-component/directive';
 import UpgradeComponentController from './components/upgrade-component/controller';
 
 import MouseFollowDirective from './components/mouse-follow/directive';
 
+import UsersService from './services/users'
 import CharacterService from './services/character';
 import MessageService from './services/message';
 import BusyService from './services/busy';
@@ -47,11 +57,15 @@ angular.module('gw2armory', [
 .service('messageService', MessageService)
 .service('busyService', BusyService)
 .service('gw2ApiService', Gw2ApiService)
+.service('usersService', UsersService)
 
 .directive('mouseFollow', MouseFollowDirective)
 
-.controller('itemBlockController', ItemController)
+.controller('ItemBlockController', ItemController)
 .directive('itemBlock', ItemDirective)
+
+.controller('BusyButtonController', BusyButtonController)
+.directive('busyButton', BusyButtonDirective)
 
 .controller('ItemTooltipController', ItemTooltipController)
 .directive('itemTooltip', ItemTooltipDirective)
@@ -70,6 +84,12 @@ angular.module('gw2armory', [
 
 .controller('CraftingBlockController', CraftingBlockController)
 .directive('craftingBlock', CraftingBlockDirective)
+
+.controller('LoginController', LoginController)
+.directive('loginBox', LoginDirective)
+
+.controller('RegisterController', RegisterController)
+.directive('registerBox', RegisterDirective)
 
 .controller('CharacterPortraitController', CharacterPortraitController)
 .directive('characterPortrait', CharacterPortraitDirective);

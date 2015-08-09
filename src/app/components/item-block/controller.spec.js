@@ -13,7 +13,7 @@ describe('item controller', function () {
     inject(function($controller, $rootScope) {
       rootScope = $rootScope;
 
-      ctrl = $controller('itemBlockController', { 
+      ctrl = $controller('ItemBlockController', { 
         gw2ApiService: mockGw2ApiService
       }, {
         item: mockControllerBinds.item,

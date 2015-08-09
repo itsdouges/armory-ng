@@ -70,9 +70,20 @@ function hasInitialUpgradeSlot(type) {
 }
 
 class Gw2ApiService {
-	constructor($http) {
+	constructor($http, $q) {
 		_http = $http;
+		this.$q = $q;
 	}
+
+	checkToken () {
+		var defer = this.$q.defer();
+
+		setTimeout(function () {
+			defer.resolve(true);
+		}, 1000);
+
+		return defer.promise;
+	};
 
 	readSkin(id) {
 		let promise = _http.get(`${domain}v2/skins/${id}`, { cache: true });

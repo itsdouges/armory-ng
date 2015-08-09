@@ -4,7 +4,7 @@ function ItemDirective() {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/item-block/view.html',
-		controller: 'itemBlockController as ctrl',
+		controller: 'ItemBlockController as ctrl',
 		scope: {},
 		bindToController: {
 			item: '=',
