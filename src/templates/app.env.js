@@ -3,6 +3,12 @@
 
 'use strict';
 
-var environment = <%= env %>;
+var environment = {
+	client_name: '<%= env.client_name %>',
+	api: {
+		endpoint: '<%= env.api.endpoint %>',
+		secret: '<%= env.api.secret %>'
+	}
+};
 
 export default environment;
