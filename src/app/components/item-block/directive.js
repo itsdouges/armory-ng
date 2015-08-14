@@ -1,3 +1,5 @@
+'use strict';
+
 function ItemDirective() {
 	'ngInject';
 
@@ -8,12 +10,9 @@ function ItemDirective() {
 		scope: {},
 		bindToController: {
 			item: '=',
-			// itemId: '=',
-			// skinId: '=',
-			// upgrades: '=',
-			type: '@', // TODO: Rename to slot type
+			type: '@',
 			mode: '@',
-			slotName: '@' // TODO: Rename to slot name
+			slotName: '@'
 		}
 	};
 

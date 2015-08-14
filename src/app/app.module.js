@@ -1,6 +1,9 @@
+'use strict';
+
 import config from './app.config';
 import routerConfig from './app.routes';
 import runBlock from './app.run';
+import environment from './app.env';
 
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
@@ -32,16 +35,21 @@ import BusyButtonController from './components/busy-button/controller';
 import RegisterDirective from './components/register-box/directive';
 import RegisterController from './components/register-box/controller';
 
+import InputValidityDirective from './components/input-validity/directive';
+import InputValidityController from './components/input-validity/controller';
+
 import UpgradeComponentDirective from './components/upgrade-component/directive';
 import UpgradeComponentController from './components/upgrade-component/controller';
 
 import MouseFollowDirective from './components/mouse-follow/directive';
 
-import UsersService from './services/users'
+import AuthService from './services/auth/auth'
 import CharacterService from './services/character';
 import MessageService from './services/message';
 import BusyService from './services/busy';
 import Gw2ApiService from './services/gw2-api';
+import debounce from './services/helpers/debouncer';
+import RegistrationService from './services/registration/registration';
 
 angular.module('gw2armory', [
   'ui.router',
@@ -50,6 +58,7 @@ angular.module('gw2armory', [
 
 .config(config)
 .config(routerConfig)
+.constant('env', environment)
 
 .run(runBlock)
 
@@ -57,7 +66,9 @@ angular.module('gw2armory', [
 .service('messageService', MessageService)
 .service('busyService', BusyService)
 .service('gw2ApiService', Gw2ApiService)
-.service('usersService', UsersService)
+.service('authService', AuthService)
+.service('debounce', debounce)
+.service('registrationService', RegistrationService)
 
 .directive('mouseFollow', MouseFollowDirective)
 
@@ -78,6 +89,9 @@ angular.module('gw2armory', [
 
 .controller('UpgradeComponentController', UpgradeComponentController)
 .directive('upgradeComponent', UpgradeComponentDirective)
+
+.controller('InputValidityController', InputValidityController)
+.directive('inputValidity', InputValidityDirective)
 
 .controller('HeaderBlockController', HeaderBlockController)
 .directive('headerBlock', HeaderBlockDirective)

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('CraftingBlockController', function () {
   var rootScope;
   var mockGw2ApiService;

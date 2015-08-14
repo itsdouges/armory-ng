@@ -1,3 +1,5 @@
+'use strict';
+
 describe('item controller', function () {
 	var mockGw2ApiService;
 	var rootScope;

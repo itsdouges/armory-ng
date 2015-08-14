@@ -1,3 +1,5 @@
+'use strict';
+
 describe('item tooltip controller', function () {
 	var mockGw2ApiService;
 	var rootScope;
@@ -5,7 +7,6 @@ describe('item tooltip controller', function () {
 	beforeEach(module('gw2armory'));
   beforeEach(function() {
     mockGw2ApiService = {};
-    mockQ = {};
   });
 
   var systemUnderTest = function (mockControllerBinds) {

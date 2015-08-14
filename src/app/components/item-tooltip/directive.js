@@ -1,3 +1,5 @@
+'use strict';
+
 function ItemTooltipDirective() {
 	'ngInject';
 
@@ -7,9 +9,6 @@ function ItemTooltipDirective() {
 		controller: 'ItemTooltipController as ctrl',
 		scope: {},
 		bindToController: {
-			// skinId: '@',
-			// itemId: '@',
-			// upgrades: '=',
 			item: '=',
 			slotName: '@'
 		}

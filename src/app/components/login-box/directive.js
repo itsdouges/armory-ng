@@ -1,3 +1,5 @@
+'use strict';
+
 function LoginDirective() {
 	let directive = {
 		restrict: 'E',

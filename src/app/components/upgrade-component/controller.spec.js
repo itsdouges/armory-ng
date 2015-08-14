@@ -1,3 +1,5 @@
+'use strict';
+
 describe('item tooltip controller', function () {
 	var rootScope;
 

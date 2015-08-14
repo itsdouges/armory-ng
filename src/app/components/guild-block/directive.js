@@ -1,3 +1,5 @@
+'use strict';
+
 function GuildBlockDirective() {
 	let directive = {
 		restrict: 'E',

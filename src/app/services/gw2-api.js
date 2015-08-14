@@ -1,3 +1,5 @@
+'use strict';
+
 let _http;
 let domain = 'https://api.guildwars2.com/';
 

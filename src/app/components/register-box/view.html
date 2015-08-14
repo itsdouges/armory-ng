@@ -1,5 +1,5 @@
 <form ng-submit="ctrl.sendData()" class="box">
-	<h1>Register</h1>
+	<h2>Register</h2>
 
 	<div class="message-box error">{{ ctrl.error }}</div>
 
@@ -10,8 +10,10 @@
 
 		<div class="input-container">
 			<input ng-keyup="ctrl.checkEmail()" class="control" id="register-email" type="email" ng-model="ctrl.user.email" required="required" />
-			{{ ctrl.user.emailAvailable }}
-			{{ ctrl.emailLoading }}
+			<input-validity 
+				data-busy="ctrl.emailLoading"
+				data-valid="ctrl.user.emailAvailable">
+			</input-validity>
 		</div>
 	</div>
 
@@ -22,8 +24,11 @@
 
 		<div class="input-container">
 			<input ng-keyup="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.user.alias" required="required" />
-			{{ ctrl.user.aliasAvailable }}
-			{{ ctrl.aliasLoading }}
+
+			<input-validity 
+				data-busy="ctrl.aliasLoading"
+				data-valid="ctrl.user.aliasAvailable">
+			</input-validity>
 		</div>
 	</div>
 
@@ -34,6 +39,10 @@
 
 		<div class="input-container">
 			<input ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password1" required="required" />
+
+			<input-validity
+				data-valid="ctrl.user.passwordsValid ">
+			</input-validity>
 		</div>
 	</div>
 
@@ -44,7 +53,10 @@
 
 		<div class="input-container">
 			<input ng-keyup="ctrl.checkPasswords()" id="register-confirm-password" type="password" ng-model="ctrl.user.password2" required="required" />
-			{{ ctrl.user.passwordsValid }}
+
+			<input-validity
+				data-valid="ctrl.user.passwordsValid ">
+			</input-validity>
 		</div>
 	</div>
 
@@ -55,8 +67,11 @@
 
 		<div class="input-container">
 			<input ng-keyup="ctrl.checkToken()" id="register-token" type="text" ng-model="ctrl.user.token" required="required" />
-			{{ ctrl.user.tokenValid }}
-			{{ ctrl.tokenLoading }}
+
+			<input-validity 
+				data-busy="ctrl.tokenLoading"
+				data-valid="ctrl.user.tokenValid">
+			</input-validity>
 		</div>
 	</div>
 

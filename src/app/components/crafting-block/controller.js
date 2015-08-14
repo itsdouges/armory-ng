@@ -1,3 +1,5 @@
+'use strict';
+
 function CraftingBlockController() {
 	let vm = this;
 

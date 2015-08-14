@@ -1,11 +1,15 @@
+'use strict';
+
 describe('login box', function () {
-	var mockUsersService;
+	var mockauthService;
 	var rootScope;
+	var mockState;
 	var q;
 
 	beforeEach(module('gw2armory'));
 	beforeEach(function() {
-		mockUsersService = {};
+		mockauthService = {};
+		mockState = {};
 	});
 
 	var systemUnderTest = function (mockControllerBinds) {
@@ -16,7 +20,8 @@ describe('login box', function () {
 			q = $q;
 
 			ctrl = $controller('LoginController', {
-				usersService: mockUsersService
+				authService: mockauthService,
+				$state: mockState
 			});
 		});
 
@@ -27,30 +32,30 @@ describe('login box', function () {
 		var ctrl = systemUnderTest();
 		var loginDefer;
 
-		mockUsersService.login = function () {
+		mockauthService.login = function () {
 			loginDefer = q.defer();
 			return loginDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'login').and.callThrough();
+		spyOn(mockauthService, 'login').and.callThrough();
 
 		ctrl.login();
 
 		rootScope.$apply();
 
-		expect(mockUsersService.login).not.toHaveBeenCalled();
+		expect(mockauthService.login).not.toHaveBeenCalled();
 	});
 
 	it ('should call user service if valid', function () {
 		var ctrl = systemUnderTest();
 		var loginDefer;
 
-		mockUsersService.login = function () {
+		mockauthService.login = function () {
 			loginDefer = q.defer();
 			return loginDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'login').and.callThrough();
+		spyOn(mockauthService, 'login').and.callThrough();
 
 		ctrl.user = {
 			email: 'ayy',
@@ -61,19 +66,19 @@ describe('login box', function () {
 
 		rootScope.$apply();
 
-		expect(mockUsersService.login).toHaveBeenCalled();
+		expect(mockauthService.login).toHaveBeenCalled();
 	});
 
 	it ('should set loading when calling login service', function () {
 		var ctrl = systemUnderTest();
 		var loginDefer;
 
-		mockUsersService.login = function () {
+		mockauthService.login = function () {
 			loginDefer = q.defer();
 			return loginDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'login').and.callThrough();
+		spyOn(mockauthService, 'login').and.callThrough();
 
 		ctrl.user = {
 			email: 'ayy',
@@ -85,72 +90,16 @@ describe('login box', function () {
 		expect(ctrl.loading).toBe(true);
 	});
 
-	it ('should redirect to user info on success if user doesnt have valid token', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
-
-		mockUsersService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
-
-		spyOn(mockUsersService, 'login').and.callThrough();
-
-		ctrl.user = {
-			email: 'ayy',
-			password: 'nahh'
-		};
-
-		ctrl.login();
-
-		loginDefer.resolve({
-			validToken: false
-		});
-
-		rootScope.$apply();
-
-		// figure out implementation when I have the net..
-		expect(true).toBe(false);
-	});
-
-	it ('should redirect to home on success if user has a valid token', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
-
-		mockUsersService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
-
-		spyOn(mockUsersService, 'login').and.callThrough();
-
-		ctrl.user = {
-			email: 'ayy',
-			password: 'nahh'
-		};
-
-		ctrl.login();
-
-		loginDefer.resolve({
-			validToken: true
-		});
-
-		rootScope.$apply();
-
-		// figure out implementation when I have the net..
-		expect(true).toBe(false);
-	});
-
 	it ('should show error message if an error occurred', function () {
 		var ctrl = systemUnderTest();
 		var loginDefer;
 
-		mockUsersService.login = function () {
+		mockauthService.login = function () {
 			loginDefer = q.defer();
 			return loginDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'login').and.callThrough();
+		spyOn(mockauthService, 'login').and.callThrough();
 
 		ctrl.user = {
 			email: 'ayy',
@@ -171,12 +120,12 @@ describe('login box', function () {
 		var ctrl = systemUnderTest();
 		var loginDefer;
 
-		mockUsersService.login = function () {
+		mockauthService.login = function () {
 			loginDefer = q.defer();
 			return loginDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'login').and.callThrough();
+		spyOn(mockauthService, 'login').and.callThrough();
 
 		ctrl.user = {
 			email: 'ayy',

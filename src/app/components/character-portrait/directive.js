@@ -1,3 +1,5 @@
+'use strict';
+
 function CharacterPortraitDirective() {
 	let directive = {
 		restrict: 'E',

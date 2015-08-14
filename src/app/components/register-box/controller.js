@@ -1,17 +1,14 @@
-function RegisterController(usersService, gw2ApiService) {
+'use strict';
+
+function RegisterController(registerService, gw2ApiService, $state, debounce) {
 	var scope = this;
 
 	function init() {
 		scope.user = {};
 	}
 
-	function registerSuccess(user) {
-		// redirect to home screen (or something ?);
-	}
-
 	function registerFailure(errorMessage) {
 		scope.error = errorMessage;
-
 		scope.loading = false;
 	}
 
@@ -32,10 +29,10 @@ function RegisterController(usersService, gw2ApiService) {
 		}
 
 		scope.loading = true;
-console.log('loading bro');
-		usersService
+		
+		registerService
 			.register(scope.user)
-			.then(registerSuccess, registerFailure);
+			.then(null, registerFailure);
 	};
 
 	function checkEmailSuccess(isAvailable) {
@@ -49,7 +46,7 @@ console.log('loading bro');
 		scope.error = errorMessage;
 	}
 
-	this.checkEmail = function() {
+	this.checkEmail = debounce.func(function() {
 		if (!scope.user.email) {
 			return;
 		}
@@ -57,10 +54,10 @@ console.log('loading bro');
 		scope.user.emailAvailable = false;
 		scope.emailLoading = true;
 
-		usersService
+		registerService
 			.checkEmail(scope.user.email)
 			.then(checkEmailSuccess, checkEmailFailure);
-	};
+	});
 
 	function checkTokenSuccess(valid) {
 		scope.tokenLoading = false;
@@ -73,7 +70,7 @@ console.log('loading bro');
 		scope.error = errorMessage;
 	}
 
-	this.checkToken = function() {
+	this.checkToken = debounce.func(function() {
 		if (!scope.user.token) {
 			return;
 		}
@@ -84,7 +81,7 @@ console.log('loading bro');
 		gw2ApiService
 			.checkToken(scope.user.token)
 			.then(checkTokenSuccess, checkTokenFailure);
-	};
+	});
 
 	function checkAliasSuccess(isAvailable) {
 		scope.aliasLoading = false;
@@ -97,7 +94,7 @@ console.log('loading bro');
 		scope.error = errorMessage;
 	}
 
-	this.checkAlias = function() {
+	this.checkAlias = debounce.func(function() {
 		if (!scope.user.alias) {
 			return;
 		}
@@ -105,16 +102,16 @@ console.log('loading bro');
 		scope.user.aliasAvailable = false;
 		scope.aliasLoading = true;
 
-		usersService
+		registerService
 			.checkAlias(scope.user.alias)
 			.then(checkAliasSuccess, checkAliasFailure);
-	};
+	});
 
-	this.checkPasswords = function() {
+	this.checkPasswords = debounce.func(function() {
 		var password1 = scope.user.password1;
 		var password2 = scope.user.password2;
 
-		if (!password || !password2) {
+		if (!password1 || !password2) {
 			scope.user.passwordsValid = false;
 		} else if (password1 === password2) {
 			scope.user.passwordsValid = true;
@@ -123,7 +120,7 @@ console.log('loading bro');
 		}
 
 		// TODO: Password regex here.
-	};
+	}, 100);
 
 	init();
 }

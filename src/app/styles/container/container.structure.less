@@ -1,0 +1,33 @@
+.container {
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0;
+	display: block;
+	padding: 0 0.5em;
+}
+
+@media only screen and (min-width: @mobile) {
+	.container {
+	  padding: 0 2em;
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+	.container {
+	  min-width: @tablet;
+	  max-width: @tablet * 1.2;
+	  padding: 0 1em;
+	}
+}
+
+@media only screen and (min-width: @pc) {
+	.container {
+	  max-width: @pc;
+	}
+}
+
+@media only screen and (min-width: @big-pc) {
+	.container {
+
+	}
+}

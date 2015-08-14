@@ -1,3 +1,5 @@
+'use strict';
+
 describe('characterviewer controller', function () {
   var mockCharacterService;
   var mockStateParams;

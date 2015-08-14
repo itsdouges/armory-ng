@@ -1,3 +1,5 @@
+'use strict';
+
 function UpgradeComponent() {
 	let vm = this;
 	let upgradePassedIn;

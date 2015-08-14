@@ -1,3 +1,5 @@
+'use strict';
+
 // todo: cross browser implementation, something breaks in AT LEAST I.E.
 
 /**

@@ -1,4 +1,9 @@
+'use strict';
+
 describe('busy button', function () {
+	var rootScope;
+	var q;
+	
 	beforeEach(module('gw2armory'));
 
 	var systemUnderTest = function (mockBinds) {

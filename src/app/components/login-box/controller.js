@@ -1,4 +1,6 @@
-function LoginController(usersService) {
+'use strict';
+
+function LoginController(authService, $state) {
 	var scope = this;
 
 	scope.login = function () {
@@ -10,18 +12,10 @@ function LoginController(usersService) {
 
 		scope.loading = true;
 
-		usersService
+		authService
 			.login(scope.user.email, scope.user.password)
-			.then(loginSuccess, loginFailure);
+			.then(null, loginFailure);
 	};
-
-	function loginSuccess(user) {
-		if (user.validToken) {
-			// redirect to home
-		} else {
-			// redirect to user token page
-		}
-	}
 
 	function loginFailure(errorMessage) {
 		scope.error = errorMessage;

@@ -1,1 +1,6 @@
-<button ng-disabled="!ctrl.isEnabled()"><span ng-if="!ctrl.busy" ng-transclude></span><span ng-if="ctrl.busy">Loading..</span></button>
+<button class="primary positive" ng-class="ctrl.busy ? 'busy' : ''" ng-disabled="!ctrl.isEnabled()">
+	<span ng-show="!ctrl.busy" ng-transclude></span>
+	<span ng-if="ctrl.busy" class="icon icon-mini icon-progress">
+		<span class="hide-text">Loading..</span>
+	</span>
+</button>

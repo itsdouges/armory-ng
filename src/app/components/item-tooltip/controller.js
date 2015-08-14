@@ -1,3 +1,5 @@
+'use strict';
+
 // todo: handle touch screens (click to view, x to close)
 
 function ItemTooltipController(gw2ApiService, $q) {

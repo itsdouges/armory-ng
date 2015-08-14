@@ -1,3 +1,5 @@
+'use strict';
+
 // todo: move logic to controller + unit test bro.
 // todo: add in edge cases to handle mouse location in the browser.
 // todo: disable for touch screens
@@ -13,7 +15,7 @@ function MouseFollowDirective ($window) {
 
 		$window.addEventListener('mousemove', onMouseMove, false);
 
-	  element.on('$destroy', function () {
+  		element.on('$destroy', function () {
 			$window.removeEventListener('mousemove', onMouseMove, false);
 		 });
 	}

@@ -1,0 +1,48 @@
+input[type=button].positive,
+button.positive {
+	float: right;
+}
+
+input[type=button].negative,
+button.negative {
+	float: left;
+}
+	
+input[type=button].primary,
+button.primary {
+	border: 1px solid @blue;
+	background-color: @fine;
+}
+
+input[type=button],
+button {
+	font-size: 1.2em;
+	border-radius: 1px;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+	width: 100%;
+	margin: 0;
+	font-size: 1.5em;
+}
+
+@media only screen and (min-width: @mobile) {
+
+}
+
+@media only screen and (min-width: @tablet) {
+	input[type=button].positive,
+	button.positive {
+		font-size: 1em;
+	}
+}
+
+@media only screen and (min-width: @pc) {
+
+}
+
+@media only screen and (min-width: @big-pc) {
+
+}

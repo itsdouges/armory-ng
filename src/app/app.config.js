@@ -1,3 +1,5 @@
+'use strict';
+
 function config ($logProvider) {
   'ngInject';
   

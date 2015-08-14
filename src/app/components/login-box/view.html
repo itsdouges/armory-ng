@@ -1,5 +1,5 @@
 <form ng-submit="ctrl.login()" class="box">
-	<h1>Login</h1>
+	<h2>Login</h2>
 
 	<div class="message-box error">{{ ctrl.error }}</div>
 
@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="input-container">
-			<input class="control" id="email" type="email" ng-model="ctrl.user.email" required="required" />
+			<input class="control" id="email" type="text" ng-model="ctrl.user.email" required="required" />
 		</div>
 	</div>
 
@@ -23,5 +23,5 @@
 		</div>
 	</div>
 
-	<busy-button busy="ctrl.loading">Woo</busy-button>
+	<busy-button busy="ctrl.loading">Login</busy-button>
 </form>

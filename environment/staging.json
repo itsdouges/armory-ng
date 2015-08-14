@@ -1,0 +1,7 @@
+{
+	client_name: 'gw2Armory',
+	api: {
+		endpoint: 'https://api.staging.armory.net.au',
+		secret: 'lol+'
+	}
+}

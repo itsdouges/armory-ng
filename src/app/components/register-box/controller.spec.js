@@ -1,13 +1,17 @@
+'use strict';
+
 describe('register box', function () {
-	var mockUsersService;
+	var mockRegisterService;
 	var mockGw2ApiService;
+	var mockState;
 	var rootScope;
 	var q;
 
 	beforeEach(module('gw2armory'));
 	beforeEach(function() {
-		mockUsersService = {};
+		mockRegisterService = {};
 		mockGw2ApiService = {};
+		mockState = {};
 	});
 
 	var systemUnderTest = function (mockBinds) {
@@ -17,9 +21,19 @@ describe('register box', function () {
 			rootScope = $rootScope;
 			q = $q;
 
+			var mockDebounce = {
+				func: function (func) {
+					return function () {
+						func.apply(this, arguments);
+					};
+				}
+			}
+
 			ctrl = $controller('RegisterController', {
-				usersService: mockUsersService,
-				gw2ApiService: mockGw2ApiService
+				registerService: mockRegisterService,
+				gw2ApiService: mockGw2ApiService,
+				$state: mockState,
+				debounce: mockDebounce
 			}, mockBinds);
 		});
 
@@ -30,30 +44,30 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 		var registerDefer;
 
-		mockUsersService.register = function () {
+		mockRegisterService.register = function () {
 			registerDefer = q.defer();
 			return registerDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'register').and.callThrough();
+		spyOn(mockRegisterService, 'register').and.callThrough();
 
 		ctrl.user = {};
 
 		ctrl.sendData();
 
-		expect(mockUsersService.register).not.toHaveBeenCalled();
+		expect(mockRegisterService.register).not.toHaveBeenCalled();
 	});
 
 	it ('should set loading to true and call sendData service', function () {
 		var ctrl = systemUnderTest();
 		var registerDefer;
 
-		mockUsersService.register = function () {
+		mockRegisterService.register = function () {
 			registerDefer = q.defer();
 			return registerDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'register').and.callThrough();
+		spyOn(mockRegisterService, 'register').and.callThrough();
 
 		ctrl.user = {
 			emailAvailable: true,
@@ -64,7 +78,7 @@ describe('register box', function () {
 
 		ctrl.sendData();
 
-		expect(mockUsersService.register).toHaveBeenCalled();
+		expect(mockRegisterService.register).toHaveBeenCalled();
 		expect(ctrl.loading).toBe(true);
 	});
 
@@ -94,53 +108,23 @@ describe('register box', function () {
 		expect(ctrl.user.passwordsValid).toBe(false);
 	});
 
-	it ('should redirect to home screen on successful sendData', function () {
-		var ctrl = systemUnderTest();
-		var registerDefer;
-
-		mockUsersService.register = function () {
-			registerDefer = q.defer();
-			return registerDefer.promise;
-		};
-
-		spyOn(mockUsersService, 'register').and.callThrough();
-
-		ctrl.user = {
-			emailAvailable: true,
-			aliasAvailable: true,
-			tokenValid: true,
-			password2: 'pass',
-			password1: 'pass'
-		};
-
-		ctrl.sendData();
-
-		registerDefer.resolve({
-			token: 'ayy'
-		});
-
-		// todo: implement when i have the internet
-
-		expect(true).toBe(false);
-	});
-
 	it('should check email is available and set email loading to true', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
-		mockUsersService.checkEmail = function () {
+		mockRegisterService.checkEmail = function () {
 			emailDefer = q.defer();
 			return emailDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'checkEmail').and.callThrough();
+		spyOn(mockRegisterService, 'checkEmail').and.callThrough();
 
 		ctrl.user.email = 'email@email.com';
 		ctrl.checkEmail();
 
 		emailDefer.resolve(true);
 
-		expect(mockUsersService.checkEmail).toHaveBeenCalledWith('email@email.com');
+		expect(mockRegisterService.checkEmail).toHaveBeenCalledWith('email@email.com');
 
 		expect(ctrl.emailLoading).toBe(true);
 		rootScope.$apply();
@@ -152,19 +136,19 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
-		mockUsersService.checkEmail = function () {
+		mockRegisterService.checkEmail = function () {
 			emailDefer = q.defer();
 			return emailDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'checkEmail').and.callThrough();
+		spyOn(mockRegisterService, 'checkEmail').and.callThrough();
 
 		ctrl.user.email = 'email@email.com';
 		ctrl.checkEmail();
 
 		emailDefer.resolve(false);
 
-		expect(mockUsersService.checkEmail).toHaveBeenCalledWith('email@email.com');
+		expect(mockRegisterService.checkEmail).toHaveBeenCalledWith('email@email.com');
 
 		expect(ctrl.emailLoading).toBe(true);
 		rootScope.$apply();
@@ -176,19 +160,19 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
-		mockUsersService.checkEmail = function () {
+		mockRegisterService.checkEmail = function () {
 			emailDefer = q.defer();
 			return emailDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'checkEmail').and.callThrough();
+		spyOn(mockRegisterService, 'checkEmail').and.callThrough();
 
 		ctrl.user.email = 'email@email.com';
 		ctrl.checkEmail();
 
 		emailDefer.reject('error occurred');
 
-		expect(mockUsersService.checkEmail).toHaveBeenCalledWith('email@email.com');
+		expect(mockRegisterService.checkEmail).toHaveBeenCalledWith('email@email.com');
 
 		expect(ctrl.emailLoading).toBe(true);
 		rootScope.$apply();
@@ -275,19 +259,19 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
-		mockUsersService.checkAlias = function () {
+		mockRegisterService.checkAlias = function () {
 			emailDefer = q.defer();
 			return emailDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'checkAlias').and.callThrough();
+		spyOn(mockRegisterService, 'checkAlias').and.callThrough();
 
 		ctrl.user.alias = '123123TOKENMAN';
 		ctrl.checkAlias();
 
 		emailDefer.resolve(true);
 
-		expect(mockUsersService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
+		expect(mockRegisterService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
 
 		expect(ctrl.aliasLoading).toBe(true);
 		rootScope.$apply();
@@ -299,19 +283,19 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
-		mockUsersService.checkAlias = function () {
+		mockRegisterService.checkAlias = function () {
 			emailDefer = q.defer();
 			return emailDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'checkAlias').and.callThrough();
+		spyOn(mockRegisterService, 'checkAlias').and.callThrough();
 
 		ctrl.user.alias = '123123TOKENMAN';
 		ctrl.checkAlias();
 
 		emailDefer.resolve(false);
 
-		expect(mockUsersService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
+		expect(mockRegisterService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
 
 		expect(ctrl.aliasLoading).toBe(true);
 		rootScope.$apply();
@@ -323,19 +307,19 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
-		mockUsersService.checkAlias = function () {
+		mockRegisterService.checkAlias = function () {
 			emailDefer = q.defer();
 			return emailDefer.promise;
 		};
 
-		spyOn(mockUsersService, 'checkAlias').and.callThrough();
+		spyOn(mockRegisterService, 'checkAlias').and.callThrough();
 
 		ctrl.user.alias = '123123TOKENMAN';
 		ctrl.checkAlias();
 
 		emailDefer.reject('ahh fuk an error lol');
 
-		expect(mockUsersService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
+		expect(mockRegisterService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
 
 		expect(ctrl.aliasLoading).toBe(true);
 		rootScope.$apply();

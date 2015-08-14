@@ -1,3 +1,5 @@
+'use strict';
+
 function RegisterDirective() {
 	let directive = {
 		restrict: 'E',
