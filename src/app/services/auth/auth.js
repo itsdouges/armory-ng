@@ -2,7 +2,7 @@
 
 let USER_TOKEN_KEY = 'gw2armoryuser_TOKEN';
 
-function AuthService($http, $state, userService, $q) {
+function AuthService($http, $state, $q) {
 	let scope = this;
 	let user = {};
 

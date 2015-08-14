@@ -14,11 +14,6 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.login', {
       url: '/login',
-      resolve: {
-        loggedIn: function (authService) {
-          authService.checkAuthentication(true);
-        }
-      },
       templateUrl: 'app/routes/login/login.html'
     })
     .state('main.character', {

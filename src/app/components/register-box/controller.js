@@ -1,14 +1,13 @@
 'use strict';
 
-function RegisterController(registerService, gw2ApiService, $state, debounce) {
+function RegisterController(registrationService, gw2ApiService, $state, debounce) {
 	var scope = this;
 
 	function init() {
 		scope.user = {};
 	}
 
-	function registerFailure(errorMessage) {
-		scope.error = errorMessage;
+	function registerFailure() {
 		scope.loading = false;
 	}
 
@@ -30,7 +29,7 @@ function RegisterController(registerService, gw2ApiService, $state, debounce) {
 
 		scope.loading = true;
 		
-		registerService
+		registrationService
 			.register(scope.user)
 			.then(null, registerFailure);
 	};
@@ -40,10 +39,9 @@ function RegisterController(registerService, gw2ApiService, $state, debounce) {
 		scope.user.emailAvailable = isAvailable;
 	}
 
-	function checkEmailFailure(errorMessage) {
+	function checkEmailFailure() {
 		scope.emailLoading = false;
 		scope.user.emailAvailable = false;
-		scope.error = errorMessage;
 	}
 
 	this.checkEmail = debounce.func(function() {
@@ -54,7 +52,7 @@ function RegisterController(registerService, gw2ApiService, $state, debounce) {
 		scope.user.emailAvailable = false;
 		scope.emailLoading = true;
 
-		registerService
+		registrationService
 			.checkEmail(scope.user.email)
 			.then(checkEmailSuccess, checkEmailFailure);
 	});
@@ -67,7 +65,6 @@ function RegisterController(registerService, gw2ApiService, $state, debounce) {
 	function checkTokenFailure(errorMessage) {
 		scope.tokenLoading = false;
 		scope.user.tokenValid = false;
-		scope.error = errorMessage;
 	}
 
 	this.checkToken = debounce.func(function() {
@@ -91,7 +88,6 @@ function RegisterController(registerService, gw2ApiService, $state, debounce) {
 	function checkAliasFailure(errorMessage) {
 		scope.aliasLoading = false;
 		scope.user.aliasAvailable = false;
-		scope.error = errorMessage;
 	}
 
 	this.checkAlias = debounce.func(function() {
@@ -102,7 +98,7 @@ function RegisterController(registerService, gw2ApiService, $state, debounce) {
 		scope.user.aliasAvailable = false;
 		scope.aliasLoading = true;
 
-		registerService
+		registrationService
 			.checkAlias(scope.user.alias)
 			.then(checkAliasSuccess, checkAliasFailure);
 	});

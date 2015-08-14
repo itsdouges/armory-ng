@@ -1,9 +1,12 @@
 'use strict';
 
+// TODO: Split this up into angular modules. This file is getting too big !
+
 import config from './app.config';
 import routerConfig from './app.routes';
 import runBlock from './app.run';
 import environment from '../generated/app.env';
+import armoryInterceptor from './interceptors/armory-interceptor';
 
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
@@ -62,6 +65,8 @@ angular.module('gw2armory', [
 
 .run(runBlock)
 
+.factory('armoryApiInterceptor', armoryInterceptor)
+
 .service('characterService', CharacterService)
 .service('messageService', MessageService)
 .service('busyService', BusyService)
@@ -93,7 +98,7 @@ angular.module('gw2armory', [
 .controller('InputValidityController', InputValidityController)
 .directive('inputValidity', InputValidityDirective)
 
-.controller('HeaderBlockController', HeaderBlockController)
+.controller('HeaderController', HeaderBlockController)
 .directive('headerBlock', HeaderBlockDirective)
 
 .controller('CraftingBlockController', CraftingBlockController)

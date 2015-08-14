@@ -30,7 +30,7 @@ describe('register box', function () {
 			}
 
 			ctrl = $controller('RegisterController', {
-				registerService: mockRegisterService,
+				registrationService: mockRegisterService,
 				gw2ApiService: mockGw2ApiService,
 				$state: mockState,
 				debounce: mockDebounce
@@ -178,8 +178,6 @@ describe('register box', function () {
 		rootScope.$apply();
 		expect(ctrl.emailLoading).toBe(false);
 		expect(ctrl.user.emailAvailable).toBe(false);
-
-		expect(ctrl.error).toBe('error occurred');
 	});
 
 	it('should set valid token state when token is valid', function () {
@@ -252,7 +250,6 @@ describe('register box', function () {
 		rootScope.$apply();
 		expect(ctrl.tokenLoading).toBe(false);
 		expect(ctrl.user.tokenValid).toBe(false);
-		expect(ctrl.error).toBe('ahh fuk an error lol');
 	});
 
 	it('should set valid alias state when token is valid', function () {
@@ -325,6 +322,5 @@ describe('register box', function () {
 		rootScope.$apply();
 		expect(ctrl.aliasLoading).toBe(false);
 		expect(ctrl.user.aliasAvailable).toBe(false);
-		expect(ctrl.error).toBe('ahh fuk an error lol');
 	});
 });
