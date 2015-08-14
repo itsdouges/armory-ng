@@ -1,5 +1,5 @@
 'use strict';
 
-var environment = [object Object];
+var environment = <%= env %>;
 
 export default environment;

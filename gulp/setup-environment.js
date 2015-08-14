@@ -1,14 +1,21 @@
 'use strict';
 
+var path = require('path');
+var conf = require('./conf');
+
 var gulp = require('gulp');
 var template = require('gulp-template');
+var data = require('gulp-data');
 
-gulp.task('build:env', function () {
-	var data = require('../environment/local-dev.json');
+gulp.task('env:dev', function () {
+	var env_data = require('../environment/local-dev.json');
 
-    return gulp.src('../src/app/app.env.js')
-        .pipe(template({
-        	env: data
+    return gulp.src(path.join(conf.paths.templates, '/app.env.js'))
+		.pipe(data(function () {
+            return {
+            	env: env_data
+            };
         }))
-        .pipe(gulp.dest('../.tmp'));
-});
+        .pipe(template())
+        .pipe(gulp.dest(path.join(conf.paths.src, '/app')));
+})

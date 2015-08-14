@@ -1,7 +1,7 @@
 {
-	client_name: 'gw2Armory',
-	api: {
-		endpoint: 'https://api.armory.net.au',
-		secret: 'lol+'
+	"client_name": "gw2Armory",
+	"api": {
+		"endpoint": "localhost:4040",
+		"secret": "lol"
 	}
 }
