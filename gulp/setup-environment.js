@@ -8,7 +8,7 @@ var template = require('gulp-template');
 var data = require('gulp-data');
 
 gulp.task('env:dev', function () {
-	var env_data = require('../environment/local-dev.json');
+	var env_data = require('../src/environment/local-dev.json');
 
     return gulp.src(path.join(conf.paths.templates, '/app.env.js'))
 		.pipe(data(function () {
@@ -17,5 +17,5 @@ gulp.task('env:dev', function () {
             };
         }))
         .pipe(template())
-        .pipe(gulp.dest(path.join(conf.paths.src, '/app')));
+        .pipe(gulp.dest(path.join(conf.paths.generated, '/')));
 })

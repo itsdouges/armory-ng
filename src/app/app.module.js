@@ -3,7 +3,7 @@
 import config from './app.config';
 import routerConfig from './app.routes';
 import runBlock from './app.run';
-import environment from './app.env';
+import environment from '../generated/app.env';
 
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';

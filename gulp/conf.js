@@ -11,12 +11,16 @@ var gutil = require('gulp-util');
 /**
  *  The main paths of your project handle these with care
  */
+
+var source = 'src';
+
 exports.paths = {
-  src: 'src',
+  src: source,
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  templates: 'templates'
+  templates: source + '/templates',
+  generated: source + '/generated'
 };
 
 /**
