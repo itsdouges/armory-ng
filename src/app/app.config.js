@@ -6,7 +6,7 @@ function config ($logProvider, $httpProvider) {
   // Enable log
   $logProvider.debugEnabled(true);
 
-  $httpProvider.interceptors.push('armoryApiInterceptor');
+  $httpProvider.interceptors.push('httpAuthInterceptor');
 }
 
 export default config;
