@@ -3,22 +3,14 @@
 /**
  * CharacterViewerController
  */
-function CharacterViewerController(characterService, $stateParams, messageService, busyService) {
+function CharacterViewerController(characterService, $stateParams) {
 	'ngInject';
-
-	let _characterService;
-	let _messageService;
-	let _busyService;
 
 	let _error;
 	let _loaded;
 	let vm = this;
 
 	function init() {
-		_messageService = messageService;
-		_characterService = characterService;
-		_busyService = busyService;
-
 		loadCharacter($stateParams.name);	
 	}
 
@@ -26,10 +18,7 @@ function CharacterViewerController(characterService, $stateParams, messageServic
 		_error = false;
 		_loaded = false;
 
-		_busyService.setBusy(true);
-		_messageService.clear();
-
-		_characterService
+		characterService
 			.readCharacter(name)
 			.then(readSuccess, readFailure);
 	}
@@ -38,20 +27,14 @@ function CharacterViewerController(characterService, $stateParams, messageServic
 		_loaded = true;
 		
 		vm.character = character;
-
-		_busyService.setBusy(false);
 	}
 
 	function readFailure(errorMessage) {
 		_error = true;
 
+		// TODO: Handle character not found error (404)
+
 		vm.character = null;
-
-		if (errorMessage) {
-			_messageService.setError(errorMessage);
-		}
-
-		_busyService.setBusy(false);
 	}
 
 	function isLoaded() {
