@@ -2,100 +2,85 @@
 // TODO: Clean this js up. Terrible!
 // TODO: TEST THIS FILE OMG!
 
-	this.buildRenderUri = (id, signature) => {
-		return `https://render.guildwars2.com/file/${signature}/${id}.png`;
-	}
-
-function parseItem(item) {
-				item.gold = Math.floor(item.vendor_value / 1000);
-			item.silver = Math.floor(item.vendor_value / 100);
-			item.copper = item.vendor_value % 100;
-
-			item.flags.forEach(function(flag) {
-				// TODO: Will have to modify this if I open up inventory..
-				if (flag === 'SoulBindOnUse' || flag === 'SoulbindOnAcquire') {
-					item.boundStatus = 'Souldbound';
-				} else if (flag === 'AccountBoundOnUse' || flag === 'AccountBound') {
-					item.boundStatus = 'Account Bound';
-				}
-			});
-
-				// test..
-				if (item.details.infix_upgrade && item.details.infix_upgrade.buff && item.details.infix_upgrade.buff.description) {
-					item.details.infix_upgrade.buff.description = splitBonusDescription(item.details.infix_upgrade.buff.description);
-				}
-
-				item.description = parseGw2Markup(item.description);
-
-				item.has_slot_one = hasInitialUpgradeSlot(item.type);
-
-				if (item.type === 'Weapon') {
-					item.has_slot_two = hasTwoSlots(item.details.type);
-				}
-}
-
-
-function parseGw2Markup(text) {
-	return text;
-
-	if (!text) {
-		return;
-	}
-
-	let classRegEx = /@\w+/;
-	let className = classRegEx.exec(text);
-
-	if (className) {
-		className = className[0];
-	}
-
-	if (className && className.indexOf('@')) {
-		className = className.substr(1);
-	}
-
-	let tagsRegEx = /<c[^>]*>|<.c>/;
-	let tags = tagsRegEx.exec(text);
-
-	let description = text.replace(tags, '');
-
-	return description;
-}
-
-function splitBonusDescription(text) {
-	return text.split('\n');
-}
-
-function canTransmute(type) {
+function Gw2ParseService() {
 
 }
 
-function hasTwoSlots(type) {
-	switch(type) {
-		case 'Greatsword':
-		case 'Hammer':
-		case 'Longbow':
-		case 'Rifle':
-		case 'ShortBow':
-		case 'Staff':
-		case 'HarpoonGun':
-		case 'Trident':
-		case 'Spear':
-			return true;
-	}
+Gw2ParseService.prototype.parseItem = (inItem) => {
+	let parseVendorValue = (item) => {
+		item.vendor_value = item.vendor_value || 0;
+		item.gold = Math.floor(item.vendor_value / 1000);
+		item.silver = Math.floor(item.vendor_value / 100);
+		item.copper = item.vendor_value % 100;
+	};
 
-	return false;
-}
+	let parseFlags = (item) => {
+		if (!item.flags) {
+			return;
+		}
 
-function hasInitialUpgradeSlot(type) {
-	switch(type) {
-		case 'Weapon': 
-		case 'Armor':
-		case 'Trinket':
-		case 'Accessory':
-		case 'Amulet':
-		case 'Back':
-			return true;
-	}
+		item.flags.forEach((flag) => {
+			switch(flag){
+				case 'SoulBindOnUse':
+				case 'SoulbindOnAcquire':
+					item.boundStatus = 'Soulbound';
+					return;
 
-	return false;
-}
+				case 'AccountBoundOnUse':
+				case 'AccountBound':
+					item.boundStatus = 'Accountbound';
+					return;
+			}
+		});
+	};
+
+	let parseInfixDescription = (item) => {
+		if (item.details && item.details.infix_upgrade && item.details.infix_upgrade.buff && item.details.infix_upgrade.buff.description) {
+			item.details.infix_upgrade.buff.description = item.details.infix_upgrade.buff.description.split('\n');
+		}
+	};
+
+	let parseAvailableWeaponSlots = (item) => {
+		let hasSlotOne = false;
+		let hasSlotTwo = false;
+
+		switch(item.type) {
+			case 'Weapon': 
+			case 'Armor':
+			case 'Trinket':
+			case 'Accessory':
+			case 'Amulet':
+			case 'Back':
+				item.has_slot_one = true;
+		}
+
+		if (item.type !== 'Weapon' || !item.details) {
+			return; 
+		}
+
+		switch(item.details.type) {
+			case 'Greatsword':
+			case 'Hammer':
+			case 'Longbow':
+			case 'Rifle':
+			case 'ShortBow':
+			case 'Staff':
+			case 'HarpoonGun':
+			case 'Trident':
+			case 'Spear':
+				item.has_slot_two = true;
+		}
+	};
+
+	let parseDescription = (item) => {
+		// TODO: Implement :-).
+	};
+
+	parseVendorValue(inItem);
+	parseFlags(inItem);
+	parseInfixDescription(inItem);
+	parseAvailableWeaponSlots(inItem);
+	parseDescription(inItem);
+};
+
+export default Gw2ParseService;
