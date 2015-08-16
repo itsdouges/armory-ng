@@ -17,7 +17,7 @@ describe('item tooltip controller', function () {
 
       ctrl = $controller('ItemTooltipController', {
       	$q: $q,
-      	gw2ApiService: mockGw2ApiService
+      	gw2Service: mockGw2ApiService
       }, {
         slotName: mockControllerBinds.slotName,
         item: mockControllerBinds.item

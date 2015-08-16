@@ -16,7 +16,7 @@ describe('item controller', function () {
       rootScope = $rootScope;
 
       ctrl = $controller('ItemBlockController', { 
-        gw2ApiService: mockGw2ApiService
+        gw2Service: mockGw2ApiService
       }, {
         item: mockControllerBinds.item,
         type: mockControllerBinds.type,

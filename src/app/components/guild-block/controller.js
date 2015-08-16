@@ -2,7 +2,7 @@
 
 // TODO: Replace dependency on gw2w2w
 
-function GuildBlockController(gw2ApiService) {
+function GuildBlockController(gw2Service) {
 	/* ngInject */
 
 	let vm = this;
@@ -34,11 +34,11 @@ function GuildBlockController(gw2ApiService) {
 		vm.error = false;
 
 		if (vm.guid) {
-			gw2ApiService.readGuild(vm.guid)
+			gw2Service.readGuild(vm.guid)
 				.then(success, failure);
-			} else {
-				failure();
-			}
+		} else {
+			failure();
+		}
 	}
 
 	function isBusy() {

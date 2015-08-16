@@ -30,8 +30,7 @@ function Gw2ApiService ($http, env, $q, gw2ParseService) {
 				cache: true 
 			})
 			.then((data) => {
-				let item = data.data;
-				return item;
+				return data.data;
 			});
 
 		return promise;
@@ -43,8 +42,8 @@ function Gw2ApiService ($http, env, $q, gw2ParseService) {
 				cache: true 
 			})
 			.then((data) => {
-				let item = gw2ParseService.parseItem(data.data);
-				return item;
+				gw2ParseService.parseItem(data.data);
+				return data.data;
 			});
 
 		return promise;
@@ -58,12 +57,11 @@ function Gw2ApiService ($http, env, $q, gw2ParseService) {
 				cache: true 
 			})
 			.then((data) => {
-				let items = data.data;
-				items.forEach(function(item) {
+				data.data.forEach(function(item) {
 					item = gw2ParseService.parseItem(item);
 				});
 
-				return items;
+				return data.data;
 			});
 
 		return promise;

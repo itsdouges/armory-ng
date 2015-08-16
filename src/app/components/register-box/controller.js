@@ -1,6 +1,6 @@
 'use strict';
 
-function RegisterController(registrationService, gw2ApiService, $state, debounce) {
+function RegisterController(registrationService, gw2Service, $state, debounce) {
 	var scope = this;
 
 	function init() {
@@ -75,7 +75,7 @@ function RegisterController(registrationService, gw2ApiService, $state, debounce
 		scope.user.tokenValid = false;
 		scope.tokenLoading = true;
 
-		gw2ApiService
+		gw2Service
 			.checkToken(scope.user.token)
 			.then(checkTokenSuccess, checkTokenFailure);
 	});

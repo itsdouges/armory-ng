@@ -175,7 +175,6 @@ describe('gw2 api wrapper', function () {
 
 		httpBackend.flush();
 
-		expect(actual).toEqual(result);
 		expect(mockGw2ParseService.parseItem).toHaveBeenCalledWith(expected);
 	});
 

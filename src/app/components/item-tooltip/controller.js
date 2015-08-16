@@ -2,7 +2,7 @@
 
 // todo: handle touch screens (click to view, x to close)
 
-function ItemTooltipController(gw2ApiService, $q) {
+function ItemTooltipController(gw2Service, $q) {
 	let vm = this;
 	let _loaded;
 	let _busy;
@@ -82,7 +82,7 @@ function ItemTooltipController(gw2ApiService, $q) {
 		let itemIds = [itemId];
 
 		if (skinId) {
-			skinPromise = gw2ApiService.readSkin(skinId);
+			skinPromise = gw2Service.readSkin(skinId);
 		}
 
 		if (upgrades) {
@@ -92,7 +92,7 @@ function ItemTooltipController(gw2ApiService, $q) {
 		}
 
 		let promises = [
-			gw2ApiService.readItems(itemIds),
+			gw2Service.readItems(itemIds),
 			skinPromise
 		];
 

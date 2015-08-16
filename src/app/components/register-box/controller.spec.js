@@ -31,7 +31,7 @@ describe('register box', function () {
 
 			ctrl = $controller('RegisterController', {
 				registrationService: mockRegisterService,
-				gw2ApiService: mockGw2ApiService,
+				gw2Service: mockGw2ApiService,
 				$state: mockState,
 				debounce: mockDebounce
 			}, mockBinds);

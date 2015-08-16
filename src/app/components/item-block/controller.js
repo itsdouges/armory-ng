@@ -5,7 +5,7 @@
 /**
  * CharacterViewerController
  */
-function ItemController(gw2ApiService) {
+function ItemController(gw2Service) {
 	'ngInject';
 
 	let _item;
@@ -56,10 +56,10 @@ function ItemController(gw2ApiService) {
 		_loaded = false;
 
 		loadFromSkin ? 
-			gw2ApiService
+			gw2Service
 				.readSkin(id)
 				.then(readSuccess, readFailure) :
-			gw2ApiService
+			gw2Service
 				.readItem(id)
 				.then(readSuccess, readFailure);
 	}
