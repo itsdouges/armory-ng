@@ -48,8 +48,8 @@ import MouseFollowDirective from './components/mouse-follow/directive';
 import AuthService from './services/auth/auth'
 import CharacterService from './services/character';
 import MessageService from './services/message';
-import BusyService from './services/busy';
-import Gw2ApiService from './services/gw2-api';
+// import BusyService from './services/busy';
+import Gw2Service from './services/gw2/gw2';
 import debounce from './services/helpers/debouncer';
 import RegistrationService from './services/registration/registration';
 
@@ -68,8 +68,8 @@ angular.module('gw2armory', [
 
 .service('characterService', CharacterService)
 .service('messageService', MessageService)
-.service('busyService', BusyService)
-.service('gw2ApiService', Gw2ApiService)
+// .service('busyService', BusyService)
+.service('gw2Service', Gw2Service)
 .service('authService', AuthService)
 .service('debounce', debounce)
 .service('registrationService', RegistrationService)

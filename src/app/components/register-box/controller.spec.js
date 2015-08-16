@@ -82,6 +82,8 @@ describe('register box', function () {
 		expect(ctrl.loading).toBe(true);
 	});
 
+	// todo: write test for error case for register !
+
 	it ('should return true is passwords are valid', function () {
 		var ctrl = systemUnderTest();
 
@@ -122,7 +124,7 @@ describe('register box', function () {
 		ctrl.user.email = 'email@email.com';
 		ctrl.checkEmail();
 
-		emailDefer.resolve(true);
+		emailDefer.resolve();
 
 		expect(mockRegisterService.checkEmail).toHaveBeenCalledWith('email@email.com');
 
@@ -146,31 +148,7 @@ describe('register box', function () {
 		ctrl.user.email = 'email@email.com';
 		ctrl.checkEmail();
 
-		emailDefer.resolve(false);
-
-		expect(mockRegisterService.checkEmail).toHaveBeenCalledWith('email@email.com');
-
-		expect(ctrl.emailLoading).toBe(true);
-		rootScope.$apply();
-		expect(ctrl.emailLoading).toBe(false);
-		expect(ctrl.user.emailAvailable).toBe(false);
-	});
-
-	it('should check email and return an error', function () {
-		var ctrl = systemUnderTest();
-		var emailDefer;
-
-		mockRegisterService.checkEmail = function () {
-			emailDefer = q.defer();
-			return emailDefer.promise;
-		};
-
-		spyOn(mockRegisterService, 'checkEmail').and.callThrough();
-
-		ctrl.user.email = 'email@email.com';
-		ctrl.checkEmail();
-
-		emailDefer.reject('error occurred');
+		emailDefer.reject();
 
 		expect(mockRegisterService.checkEmail).toHaveBeenCalledWith('email@email.com');
 
@@ -194,7 +172,7 @@ describe('register box', function () {
 		ctrl.user.token = '123123TOKENMAN';
 		ctrl.checkToken();
 
-		emailDefer.resolve(true);
+		emailDefer.resolve();
 
 		expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
 
@@ -218,31 +196,7 @@ describe('register box', function () {
 		ctrl.user.token = '123123TOKENMAN';
 		ctrl.checkToken();
 
-		emailDefer.resolve(false);
-
-		expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
-
-		expect(ctrl.tokenLoading).toBe(true);
-		rootScope.$apply();
-		expect(ctrl.tokenLoading).toBe(false);
-		expect(ctrl.user.tokenValid).toBe(false);
-	});
-
-	it('should set error token state when a error was returned', function () {
-		var ctrl = systemUnderTest();
-		var emailDefer;
-
-		mockGw2ApiService.checkToken = function () {
-			emailDefer = q.defer();
-			return emailDefer.promise;
-		};
-
-		spyOn(mockGw2ApiService, 'checkToken').and.callThrough();
-
-		ctrl.user.token = '123123TOKENMAN';
-		ctrl.checkToken();
-
-		emailDefer.reject('ahh fuk an error lol');
+		emailDefer.reject();
 
 		expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
 
@@ -266,7 +220,7 @@ describe('register box', function () {
 		ctrl.user.alias = '123123TOKENMAN';
 		ctrl.checkAlias();
 
-		emailDefer.resolve(true);
+		emailDefer.resolve();
 
 		expect(mockRegisterService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
 
@@ -276,7 +230,7 @@ describe('register box', function () {
 		expect(ctrl.user.aliasAvailable).toBe(true);
 	});
 
-	it('should set invalid alias state when token wasnt valid', function () {
+	it('should set invalid alias state when alias wasnt available', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 
@@ -290,31 +244,7 @@ describe('register box', function () {
 		ctrl.user.alias = '123123TOKENMAN';
 		ctrl.checkAlias();
 
-		emailDefer.resolve(false);
-
-		expect(mockRegisterService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
-
-		expect(ctrl.aliasLoading).toBe(true);
-		rootScope.$apply();
-		expect(ctrl.aliasLoading).toBe(false);
-		expect(ctrl.user.aliasAvailable).toBe(false);
-	});
-
-	it('should set error alias state when a error was returned', function () {
-		var ctrl = systemUnderTest();
-		var emailDefer;
-
-		mockRegisterService.checkAlias = function () {
-			emailDefer = q.defer();
-			return emailDefer.promise;
-		};
-
-		spyOn(mockRegisterService, 'checkAlias').and.callThrough();
-
-		ctrl.user.alias = '123123TOKENMAN';
-		ctrl.checkAlias();
-
-		emailDefer.reject('ahh fuk an error lol');
+		emailDefer.reject();
 
 		expect(mockRegisterService.checkAlias).toHaveBeenCalledWith('123123TOKENMAN');
 

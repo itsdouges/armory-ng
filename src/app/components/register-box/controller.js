@@ -34,9 +34,9 @@ function RegisterController(registrationService, gw2ApiService, $state, debounce
 			.then(null, registerFailure);
 	};
 
-	function checkEmailSuccess(isAvailable) {
+	function checkEmailSuccess() {
 		scope.emailLoading = false;
-		scope.user.emailAvailable = isAvailable;
+		scope.user.emailAvailable = true;
 	}
 
 	function checkEmailFailure() {
@@ -57,12 +57,12 @@ function RegisterController(registrationService, gw2ApiService, $state, debounce
 			.then(checkEmailSuccess, checkEmailFailure);
 	});
 
-	function checkTokenSuccess(valid) {
+	function checkTokenSuccess() {
 		scope.tokenLoading = false;
-		scope.user.tokenValid = valid;
+		scope.user.tokenValid = true;
 	}
 
-	function checkTokenFailure(errorMessage) {
+	function checkTokenFailure() {
 		scope.tokenLoading = false;
 		scope.user.tokenValid = false;
 	}
@@ -80,12 +80,12 @@ function RegisterController(registrationService, gw2ApiService, $state, debounce
 			.then(checkTokenSuccess, checkTokenFailure);
 	});
 
-	function checkAliasSuccess(isAvailable) {
+	function checkAliasSuccess() {
 		scope.aliasLoading = false;
-		scope.user.aliasAvailable = isAvailable;
+		scope.user.aliasAvailable = true;
 	}
 
-	function checkAliasFailure(errorMessage) {
+	function checkAliasFailure() {
 		scope.aliasLoading = false;
 		scope.user.aliasAvailable = false;
 	}

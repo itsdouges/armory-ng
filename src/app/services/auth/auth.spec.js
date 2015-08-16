@@ -226,27 +226,6 @@ describe('auth service', function () {
 		expect(systemUnderTest.isAuthenticated()).toBe(false);
 	});
 
-	// it ('should redirect to login page if token is invalid', function () {
-	// 	mockEnv.api.endpoint = 'api.com';
-
-	// 	spyOn(mockState, 'go');
-
-	// 	httpBackend
-	// 		.expectGET('api.com/token', {
-	// 			Authorization: 'Bearer Swager',
-	// 			Accept: 'application/json, text/plain, */*'
-	// 		})
-	// 		.respond(401);
-
-	// 	localStorage.setItem(STORAGE_KEY, 'Bearer Swager');
-		
-	// 	systemUnderTest.checkAuthentication();
-
-	// 	httpBackend.flush();
-
-	// 	expect(mockState.go).toHaveBeenCalledWith('main.login');
-	// });
-
 	it ('should reject promise if token is invalid', function () {
 		mockEnv.api.endpoint = 'api.com';
 

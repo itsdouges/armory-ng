@@ -8,6 +8,9 @@ var environment = {
 	api: {
 		endpoint: '<%= env.api.endpoint %>',
 		secret: '<%= env.api.secret %>'
+	},
+	gw2: {
+		endpoint: '<%= env.gw2.endpoint %>'
 	}
 };
 

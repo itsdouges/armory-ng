@@ -4,5 +4,8 @@
 		"endpoint": "localhost:4040",
 		"secret": "lol"
 	},
+	"gw2": {
+		"endpoint" : "https://api.guildwars2.com/"
+	},
 	"verbose" : true
 }
