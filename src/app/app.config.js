@@ -8,4 +8,11 @@ function config ($logProvider, $httpProvider, env) {
   $httpProvider.interceptors.push('httpAuthInterceptor');
 }
 
-export default config;
+function run () {
+  'ngInject';
+}
+
+export default {
+	config,
+	run
+}

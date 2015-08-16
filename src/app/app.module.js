@@ -2,9 +2,8 @@
 
 // TODO: Split this up into angular modules. This file is getting too big !
 
-import config from './app.config';
+import configuration from './app.config';
 import routerConfig from './app.routes';
-import runBlock from './app.run';
 import environment from '../generated/app.env';
 import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 
@@ -59,11 +58,11 @@ angular.module('gw2armory', [
   'ngSanitize'
 ])
 
-.config(config)
+.config(configuration.config)
 .config(routerConfig)
 .constant('env', environment)
 
-.run(runBlock)
+.run(configuration.run)
 
 .factory('httpAuthInterceptor', httpAuthInterceptor)
 
