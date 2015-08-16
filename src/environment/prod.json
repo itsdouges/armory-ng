@@ -3,5 +3,6 @@
 	"api": {
 		"endpoint": "localhost:4040",
 		"secret": "lol"
-	}
+	},
+	"verbose": false
 }

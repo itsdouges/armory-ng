@@ -1,10 +1,9 @@
 'use strict';
 
-function config ($logProvider, $httpProvider) {
+function config ($logProvider, $httpProvider, env) {
   'ngInject';
   
-  // Enable log
-  $logProvider.debugEnabled(true);
+  $logProvider.debugEnabled(env.verbose);
 
   $httpProvider.interceptors.push('httpAuthInterceptor');
 }

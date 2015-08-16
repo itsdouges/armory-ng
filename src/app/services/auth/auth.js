@@ -2,7 +2,7 @@
 
 let USER_TOKEN_KEY = 'gw2armoryuser_TOKEN';
 
-function AuthService($http, $state, $q) {
+function AuthService($http, $state, $q, env) {
 	let scope = this;
 	let user = {};
 
@@ -39,7 +39,7 @@ function AuthService($http, $state, $q) {
 		let token = localStorage.getItem(USER_TOKEN_KEY);
 		if (token) {
 			var promise = $http.
-				get('https://api.armory.net.au/token', {
+				get(`${env.api.endpoint}/token`, {
 					headers: { 
 						Authorization: token
 					}
@@ -49,7 +49,7 @@ function AuthService($http, $state, $q) {
 				user.authenticated = true;
 			}, function () {
 				resetUser();
-				$state.go('main.login');
+				//$state.go('main.login');
 			});
 
 			return promise;
@@ -73,7 +73,7 @@ function AuthService($http, $state, $q) {
 
 	this.login = function (email, password) {
 		$http
-			.post('https://api.armory.net.au/token', {
+			.post(`${env.api.endpoint}/token`, {
 				username: email,
 				password: password
 			})
