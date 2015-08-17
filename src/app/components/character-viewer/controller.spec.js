@@ -28,7 +28,7 @@ describe('characterviewer controller', function () {
       rootScope = $rootScope;
 
       ctrl = $controller('CharacterViewerController', { 
-        characterService: mockCharacterService,
+        gw2Service: mockCharacterService,
         $stateParams: mockStateParams,
         // messageService: mockMessageService,
         // busyService: mockBusyService

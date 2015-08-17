@@ -5,3 +5,4 @@ bower_components/
 .tmp/
 dist/
 src/generated/
+.DS_Store

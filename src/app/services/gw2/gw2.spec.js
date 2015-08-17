@@ -2,7 +2,6 @@
 
 describe('gw2 api wrapper', function () {
 	var httpBackend;
-	var http;
 	var systemUnderTest;
 	var mockEnv;
 	var mockGw2ParseService;
@@ -11,6 +10,7 @@ describe('gw2 api wrapper', function () {
 
 	beforeEach(function() {
 		mockEnv = {
+			api: {},
 			gw2: {
 				endpoint: 'gw2.com/'
 			}
@@ -156,7 +156,7 @@ describe('gw2 api wrapper', function () {
 			ayy: 'lmao'
 		};
 
-		spyOn(mockGw2ParseService, 'parseItem').and.returnValue(result);
+		spyOn(mockGw2ParseService, 'parseItem');
 
 		var expected = {
 			lmao: true
@@ -185,7 +185,7 @@ describe('gw2 api wrapper', function () {
 			ayy: 'lmao'
 		};
 
-		spyOn(mockGw2ParseService, 'parseItem').and.returnValue(result);
+		spyOn(mockGw2ParseService, 'parseItem');
 
 		var itemsResponse = [
 			{
@@ -231,6 +231,34 @@ describe('gw2 api wrapper', function () {
 
 		httpBackend.flush();
 
+		expect(expected).toEqual(actual);
+	});
+
+	it ('should call character endpoint and return data', function () {
+		mockGw2ParseService.parseCharacter = function () {};
+
+		var expected = {
+			lmao: true
+		};
+
+		mockEnv.api.endpoint = 'api.com/';
+
+		spyOn(mockGw2ParseService, 'parseCharacter');
+
+		httpBackend
+			.expectGET('api.com/characters/Blastrn')
+			.respond(expected);
+
+		var actual;
+		systemUnderTest
+			.readCharacter('Blastrn')
+			.then(function (data) {
+				actual = data;
+			});
+
+		httpBackend.flush();
+
+		expect(mockGw2ParseService.parseCharacter).toHaveBeenCalledWith(expected);
 		expect(expected).toEqual(actual);
 	});
 

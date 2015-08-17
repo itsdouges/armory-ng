@@ -3,7 +3,7 @@
 /**
  * CharacterViewerController
  */
-function CharacterViewerController(characterService, $stateParams) {
+function CharacterViewerController(gw2Service, $stateParams) {
 	'ngInject';
 
 	let _error;
@@ -18,7 +18,7 @@ function CharacterViewerController(characterService, $stateParams) {
 		_error = false;
 		_loaded = false;
 
-		characterService
+		gw2Service
 			.readCharacter(name)
 			.then(readSuccess, readFailure);
 	}
