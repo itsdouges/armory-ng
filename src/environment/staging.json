@@ -1,7 +1,7 @@
 {
 	"client_name": "gw2Armory",
 	"api": {
-		"endpoint": "localhost:4040",
+		"endpoint": "localhost:4040/",
 		"secret": "lol"
 	},
 	"verbose": false

@@ -1,19 +1,27 @@
 'use strict';
 
 function HttpAuthInterceptor(env, $q, $injector) {
-	function handleUnauthorizedError(rejection) {
-		// todo: use a switch statement ;)
-
-		if (rejection.status === 500) {
-			// handle server error
+	function handle401(rejection) {
+		if (rejection.config.url.indexOf(env.api.endpoint) === -1) {
+			return;
 		}
 
-		if (rejection.status === 401) {
-			if (rejection.config.url.indexOf(env.api.endpoint) === -1) {
-				return;
-			}
+		$injector.get('$state').go('main.login');
+	}
 
-			$injector.get('$state').go('main.login');
+	function handle500(rejection) {
+		
+	}
+
+	function handleError(rejection) {
+		switch(rejection.status) {
+			case 500:
+				handle500(rejection);
+				return;
+			case 401:
+				handle401(rejection);
+			default:
+				return;
 		}
 	}
 
@@ -22,7 +30,7 @@ function HttpAuthInterceptor(env, $q, $injector) {
 			return config;
 		},
 		'responseError': function (rejection) {
-			handleUnauthorizedError(rejection);
+			handleError(rejection);
 
 			return $q.reject(rejection);
 		}
