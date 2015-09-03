@@ -1,8 +1,7 @@
 {
 	"client_name": "gw2Armory",
 	"api": {
-		"endpoint": "http://localhost:4040/",
-		"secret": "lol"
+		"endpoint": "http://192.168.59.103:8082/"
 	},
 	"gw2": {
 		"endpoint" : "https://api.guildwars2.com/"

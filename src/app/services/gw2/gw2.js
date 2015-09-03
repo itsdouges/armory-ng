@@ -4,26 +4,6 @@
  *	Comment this
  */
 function Gw2ApiService ($http, env, $q, gw2ParseService) {
-	Gw2ApiService.prototype.checkToken = (token) => {
-		var promise = $http
-			.get(`${env.gw2.endpoint}v2/tokeninfo`, {
-				headers: {
-					Authorization: token
-				}
-			})
-			.then((success) => {
-				let valid = success.data.permissions.filter((x) => {
-					return x === 'characters' || x === 'account';
-				});
-
-				if (valid.length != 2) {
-					return $q.reject();
-				}
-			});
-
-		return promise;
-	};
-
 	Gw2ApiService.prototype.readSkin = (id) => {
 		let promise = $http
 			.get(`${env.gw2.endpoint}v2/skins/${id}`, { 

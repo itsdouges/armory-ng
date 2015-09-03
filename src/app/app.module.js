@@ -49,7 +49,7 @@ import AuthService from './services/auth/auth';
 import Gw2ParseService from './services/gw2/gw2-parse';
 import Gw2Service from './services/gw2/gw2';
 import debounce from './services/helpers/debouncer';
-import RegistrationService from './services/registration/registration';
+import RegistrationService from './services/user/user';
 
 angular.module('gw2armory', [
   'ui.router',
