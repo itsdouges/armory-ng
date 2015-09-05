@@ -7,6 +7,8 @@ function AuthService($http, $state, $q, env) {
 	let user = {};
 
 	function resetUser() {
+		console.log('clearing local data');
+
 		user = {
 			authenticated: false
 		};
@@ -30,38 +32,37 @@ function AuthService($http, $state, $q, env) {
 		if (user.authenticated) {
 			console.log('ur auth');
 
-			var defer = $q.defer();
-			defer.resolve();
-
-			return defer.promise;
+			return $q.resolve();
 		}
 
 		let token = localStorage.getItem(USER_TOKEN_KEY);
 		if (token) {
-			var promise = $http.
-				get(`${env.api.endpoint}/token`, {
+			console.log('u have a token saved, lets check it');
+
+			return $http.
+				get(`${env.api.endpoint}token`, {
 					headers: { 
 						Authorization: token
 					}
-				});
-
-			promise.then(function () {
+				}).then(function () {
 				user.authenticated = true;
 			}, function () {
 				resetUser();
-				//$state.go('main.login');
+
+				return $q.reject();
 			});
-
-			return promise;
 		} else {
+			console.log('ur not auth, lets redirect u to login');
 			// reject, change state to login
-
+			// TODO: Is there a better way to do this ?
+			// 
 			var defer = $q.defer();
-			defer.reject();
 			defer.promise.then(null, function() {
 				resetUser();
 				$state.go('main.login');
 			});
+
+			defer.reject();
 
 			return defer.promise;
 		}
@@ -72,12 +73,24 @@ function AuthService($http, $state, $q, env) {
 	};
 
 	this.login = function (email, password) {
-		$http
-			.post(`${env.api.endpoint}/token`, {
+		// TEST PROMISE RETURN
+		return $http
+			.post(`${env.api.endpoint}token`, {
 				username: email,
-				password: password
+				password: password,
+				grant_type: 'password'
+			}, {
+				headers: {
+					Authorization: 'Basic ' + env.api.token
+				}
 			})
-			.then(loginSuccess, resetUser);
+			.then(loginSuccess, function (response) {
+				resetUser();
+
+				// TODO: TEST !
+
+				return $q.reject(response.data.error_description);
+			});
 	};
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
-function RegisterController(registrationService, gw2Service, $state, debounce) {
-	var scope = this;
+function RegisterController(registrationService, gw2Service, $state, debounce, authService) {
+	let scope = this;
 
 	function init() {
 		scope.user = {};
@@ -14,7 +14,6 @@ function RegisterController(registrationService, gw2Service, $state, debounce) {
 	this.validateUser = function () {
 		if (scope.user.emailAvailable &&
 			scope.user.aliasAvailable &&
-			scope.user.tokenValid &&
 			scope.user.passwordsValid) {
 			return true;
 		}
@@ -31,7 +30,10 @@ function RegisterController(registrationService, gw2Service, $state, debounce) {
 		
 		registrationService
 			.register(scope.user)
-			.then(null, registerFailure);
+			.then(function () {
+				// TODO: test
+				return authService.login(scope.user.email, scope.user.password);
+			}, registerFailure);
 	};
 
 	function checkEmailSuccess() {
@@ -39,73 +41,64 @@ function RegisterController(registrationService, gw2Service, $state, debounce) {
 		scope.user.emailAvailable = true;
 	}
 
-	function checkEmailFailure() {
+	function checkEmailFailure(messages) {
 		scope.emailLoading = false;
 		scope.user.emailAvailable = false;
 	}
 
-	this.checkEmail = debounce.func(function() {
-		if (!scope.user.email) {
-			return;
-		}
-
+	let checkEmailDebounce;
+	this.checkEmail = function () {
 		scope.user.emailAvailable = false;
-		scope.emailLoading = true;
 
-		registrationService
-			.checkEmail(scope.user.email)
-			.then(checkEmailSuccess, checkEmailFailure);
-	});
+		checkEmailDebounce = checkEmailDebounce || debounce.func(function() {
+				if (!scope.user.email) {
+					return;
+				}
 
-	function checkTokenSuccess() {
-		scope.tokenLoading = false;
-		scope.user.tokenValid = true;
-	}
+				scope.emailLoading = true;
 
-	function checkTokenFailure() {
-		scope.tokenLoading = false;
-		scope.user.tokenValid = false;
-	}
+				registrationService 
+					.checkEmail(scope.user.email)
+					.then(checkEmailSuccess, checkEmailFailure);
+			});
 
-	this.checkToken = debounce.func(function() {
-		if (!scope.user.token) {
-			return;
-		}
-
-		scope.user.tokenValid = false;
-		scope.tokenLoading = true;
-
-		gw2Service
-			.checkToken(scope.user.token)
-			.then(checkTokenSuccess, checkTokenFailure);
-	});
+		checkEmailDebounce();
+	};
 
 	function checkAliasSuccess() {
 		scope.aliasLoading = false;
 		scope.user.aliasAvailable = true;
 	}
 
-	function checkAliasFailure() {
+	function checkAliasFailure(messages) {
 		scope.aliasLoading = false;
 		scope.user.aliasAvailable = false;
+
+		console.log(messages);
 	}
 
-	this.checkAlias = debounce.func(function() {
-		if (!scope.user.alias) {
-			return;
-		}
-
+	var checkAliasDebounce;
+	this.checkAlias = function () {
 		scope.user.aliasAvailable = false;
-		scope.aliasLoading = true;
 
-		registrationService
-			.checkAlias(scope.user.alias)
-			.then(checkAliasSuccess, checkAliasFailure);
-	});
+		checkAliasDebounce = checkAliasDebounce || debounce.func(function() {
+				if (!scope.user.alias) {
+					return;
+				}
+
+				scope.aliasLoading = true;
+
+				registrationService
+					.checkAlias(scope.user.alias)
+					.then(checkAliasSuccess, checkAliasFailure);
+			});
+
+		checkAliasDebounce();
+	};
 
 	this.checkPasswords = debounce.func(function() {
-		var password1 = scope.user.password1;
-		var password2 = scope.user.password2;
+		let password1 = scope.user.password;
+		let password2 = scope.user.password2;
 
 		if (!password1 || !password2) {
 			scope.user.passwordsValid = false;

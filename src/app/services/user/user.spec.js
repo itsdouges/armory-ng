@@ -1,7 +1,6 @@
 'use strict';
 
-describe('registration service', function () {
-	var mockAuthService;
+describe('user service', function () {
 	var httpBackend;
 	var rootScope;
 	var systemUnderTest;
@@ -9,13 +8,6 @@ describe('registration service', function () {
 	beforeEach(module('gw2armory'));
 
 	beforeEach(function() {
-		mockAuthService = {};
-
-		module(function ($provide) {
-			$provide.value('authService', mockAuthService);
-			mockAuthService.login = function () {};
-		});
-
 		inject(function($rootScope, $httpBackend, registrationService) {
 			rootScope = $rootScope;
 			httpBackend = $httpBackend;
@@ -23,151 +15,182 @@ describe('registration service', function () {
 		});
 	});
 
-	it ('should call check email api', function () {
-		httpBackend
-			.expectGET('http://192.168.59.103:8082/users/check/email/email@email.com')
-			.respond(200);
+	describe('check', function () {
+		describe('email', function () {
+			it ('should call check email api', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/email/email@email.com')
+					.respond(200);
 
-		systemUnderTest.checkEmail('email@email.com');
-	});
-
-	it ('should resolve true if email is available', function () {
-		httpBackend
-			.expectGET('http://192.168.59.103:8082/users/check/email/email@email.com')
-			.respond(200, true);
-
-		var data;
-		systemUnderTest
-			.checkEmail('email@email.com')
-			.then(function (available) {
-				data = available;
+				systemUnderTest.checkEmail('email@email.com');
 			});
 
-		httpBackend.flush();
+			it ('should resolve true if email is available', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/email/email@email.com')
+					.respond(200, true);
 
-		expect(data).toBe(true);
-	});
+				var data;
+				systemUnderTest
+					.checkEmail('email@email.com')
+					.then(function (available) {
+						data = available;
+					});
 
-	it ('should resolve false if email is not available', function () {
-		httpBackend
-			.expectGET('http://192.168.59.103:8082/users/check/email/email@email.com')
-			.respond(200, false);
+				httpBackend.flush();
 
-		var data;
-		systemUnderTest
-			.checkEmail('email@email.com')
-			.then(function (available) {
-				data = available;
+				expect(data).toBe(true);
 			});
 
-		httpBackend.flush();
+			it ('should resolve false if email is not available', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/email/email@email.com')
+					.respond(200, false);
 
-		expect(data).toBe(false);
-	});
+				var data;
+				systemUnderTest
+					.checkEmail('email@email.com')
+					.then(function (available) {
+						data = available;
+					});
 
-	it ('should call check alias api', function () {
-		httpBackend
-			.expectGET('http://192.168.59.103:8082/users/check/alias/alias')
-			.respond(200);
+				httpBackend.flush();
 
-		systemUnderTest.checkAlias('alias');
-	});
+				expect(data).toBe(false);
+			});
+		});
 
-	it ('should resolve true if alias is available', function () {
-		httpBackend
-			.expectGET('http://192.168.59.103:8082/users/check/alias/alias')
-			.respond(200, true);
+		describe('alias', function () {
+			it ('should call check alias api', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/alias/alias')
+					.respond(200);
 
-		var data;
-		systemUnderTest
-			.checkAlias('alias')
-			.then(function (available) {
-				data = available;
+				systemUnderTest.checkAlias('alias');
 			});
 
-		httpBackend.flush();
+			it ('should resolve true if alias is available', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/alias/alias')
+					.respond(200, true);
 
-		expect(data).toBe(true);
-	});
+				var data;
+				systemUnderTest
+					.checkAlias('alias')
+					.then(function (available) {
+						data = available;
+					});
 
-	it ('should resolve false if alias is not available', function () {
-		httpBackend
-			.expectGET('http://192.168.59.103:8082/users/check/alias/alias')
-			.respond(200, false);
+				httpBackend.flush();
 
-		var data;
-		systemUnderTest
-			.checkAlias('alias')
-			.then(function (available) {
-				data = available;
+				expect(data).toBe(true);
 			});
 
-		httpBackend.flush();
+			it ('should resolve false if alias is not available', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/alias/alias')
+					.respond(200, false);
 
-		expect(data).toBe(false);
+				var data;
+				systemUnderTest
+					.checkAlias('alias')
+					.then(function (available) {
+						data = available;
+					});
+
+				httpBackend.flush();
+
+				expect(data).toBe(false);
+			});
+		});
+
+		describe('token', function () {
+			it ('should call check token api', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/token/a')
+					.respond(200);
+
+				systemUnderTest.checkToken('a');
+			});
+
+			it ('should resolve true if alias is available', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/token/b')
+					.respond(200, true);
+
+				var data;
+				systemUnderTest
+					.checkToken('b')
+					.then(function (available) {
+						data = available;
+					});
+
+				httpBackend.flush();
+
+				expect(data).toBe(true);
+			});
+
+			it ('should resolve false if alias is not available', function () {
+				httpBackend
+					.expectGET('http://192.168.59.103:8082/users/check/token/c')
+					.respond(200, false);
+
+				var data;
+				systemUnderTest
+					.checkToken('c')
+					.then(function (available) {
+						data = available;
+					});
+
+				httpBackend.flush();
+
+				expect(data).toBe(false);
+			});
+		});
 	});
 
-	it ('should call register api with users object', function () {
-		var user = {
-			email: 'ahh',
-			password: 'heheh'
-		};
-
-		httpBackend
-			.expectPOST('http://192.168.59.103:8082/users', user)
-			.respond(200);
-
-		systemUnderTest.register(user);
-	});
-
-	it ('should call login if registration was successful', function () {
-		spyOn(mockAuthService, 'login');
-
-		var user = {
-			email: 'email1',
-			password: 'password1'
-		};
-
-		httpBackend
-			.expectPOST('http://192.168.59.103:8082/users', user)
-			.respond(200);
-
-		systemUnderTest.register(user);
-
-		httpBackend.flush();
-
-		expect(mockAuthService.login).toHaveBeenCalledWith('email1', 'password1');
-	});
-
-	it ('should reject with errors if registration was a bad request', function () {
-		spyOn(mockAuthService, 'login');
-
-		var user = {
-			email: 'email1',
-			password: 'password1'
-		};
-
-		var data = {
-				errors: [
-					'ayy',
-					'nahh'
-				]
+	describe('registration', function () {
+		it ('should call register api with users object', function () {
+			var user = {
+				email: 'ahh',
+				password: 'heheh'
 			};
 
-		httpBackend
-			.expectPOST('http://192.168.59.103:8082/users', user)
-			.respond(400, data);
+			httpBackend
+				.expectPOST('http://192.168.59.103:8082/users', user)
+				.respond(200);
 
-		var result;
-		systemUnderTest
-			.register(user)
-			.then(function (errors) {
-				result = errors;
-			});
+			systemUnderTest.register(user);
+		});
 
-		httpBackend.flush();
+		it ('should reject with errors if registration was a bad request', function () {
+			var user = {
+				email: 'email1',
+				password: 'password1'
+			};
 
-		expect(result).toEqual(data);
+			var data = {
+					errors: [
+						'ayy',
+						'nahh'
+					]
+				};
+
+			httpBackend
+				.expectPOST('http://192.168.59.103:8082/users', user)
+				.respond(400, data);
+
+			var result;
+			systemUnderTest
+				.register(user)
+				.then(function (errors) {
+					result = errors;
+				});
+
+			httpBackend.flush();
+
+			expect(result).toEqual(data);
+		});
 	});
 
 	afterEach(function() {

@@ -10,6 +10,7 @@
 
 		<div class="input-container">
 			<input ng-keyup="ctrl.checkEmail()" class="control" id="register-email" type="email" ng-model="ctrl.user.email" required="required" />
+			
 			<input-validity 
 				data-busy="ctrl.emailLoading"
 				data-valid="ctrl.user.emailAvailable">
@@ -38,7 +39,7 @@
 		</div>
 
 		<div class="input-container">
-			<input ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password1" required="required" />
+			<input ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password" required="required" />
 
 			<input-validity
 				data-valid="ctrl.user.passwordsValid ">
@@ -60,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<!-- <div class="row">
 		<div class="label-container">
 			<label for="register-token">Api Token</label>
 		</div>
@@ -73,7 +74,7 @@
 				data-valid="ctrl.user.tokenValid">
 			</input-validity>
 		</div>
-	</div>
+	</div> -->
 
 	<busy-button button-disabled="!ctrl.validateUser()" busy="ctrl.loading">Register</busy-button>
 </form>

@@ -12,12 +12,14 @@ function LoginController(authService, $state) {
 
 		scope.loading = true;
 
-		authService
+		return authService
 			.login(scope.user.email, scope.user.password)
 			.then(null, loginFailure);
 	};
 
 	function loginFailure(errorMessage) {
+		console.log(errorMessage);
+		
 		scope.error = errorMessage;
 		scope.loading = false;
 	}

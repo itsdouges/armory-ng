@@ -36,12 +36,13 @@ describe('auth service', function () {
 	});
 
 	it ('should call token api during login', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expect('POST', 'api.com/token', {
 				username: 'email',
-				password: 'password'
+				password: 'password',
+				grant_type: 'password'
 			})
 			.respond({
 				token: 'Bearer ayyylmao'
@@ -51,12 +52,13 @@ describe('auth service', function () {
 	});
 
 	it ('should save token to local storage after successful login', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expect('POST', 'api.com/token', {
 				username: 'email',
-				password: 'password'
+				password: 'password',
+				grant_type: 'password'
 			})
 			.respond({
 				token_type: 'Bearer',
@@ -71,13 +73,14 @@ describe('auth service', function () {
 	});
 
 	it ('should redirect to me route after successful login', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 		spyOn(mockState, 'go');
 
 		httpBackend
 			.expect('POST', 'api.com/token', {
 				username: 'email',
-				password: 'password'
+				password: 'password',
+				grant_type: 'password'
 			})
 			.respond({
 				token_type: 'Bearer',
@@ -92,13 +95,14 @@ describe('auth service', function () {
 	});
 
 	it ('should set user to authenticated after successful login', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 		mockState.go = function () {};
 
 		httpBackend
 			.expect('POST', 'api.com/token', {
 				username: 'email',
-				password: 'password'
+				password: 'password',
+				grant_type: 'password'
 			})
 			.respond({
 				token_type: 'Bearer',
@@ -113,12 +117,13 @@ describe('auth service', function () {
 	});
 
 	it ('should reset user variable after unsuccessful login', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expect('POST', 'api.com/token', {
 				username: 'email',
-				password: 'password'
+				password: 'password',
+				grant_type: 'password'
 			})
 			.respond(401, {
 				error: 'invalid_grant'
@@ -135,12 +140,13 @@ describe('auth service', function () {
 	});
 
 	it ('should resolve promise immediately if user is already authenticated', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expect('POST', 'api.com/token', {
 				username: 'email',
-				password: 'password'
+				password: 'password',
+				grant_type: 'password'
 			})
 			.respond({
 				token_type: 'Bearer',
@@ -165,7 +171,7 @@ describe('auth service', function () {
 	});
 
 	it ('should resolve promise if saved token is valid', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expectGET('api.com/token', {
@@ -188,7 +194,7 @@ describe('auth service', function () {
 	});
 
 	it ('should set authenticated to true if saved token is valid', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expectGET('api.com/token', {
@@ -207,7 +213,7 @@ describe('auth service', function () {
 	});
 
 	it ('should reset user if token is invalid', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		httpBackend
 			.expectGET('api.com/token', {
@@ -227,7 +233,7 @@ describe('auth service', function () {
 	});
 
 	it ('should reject promise if token is invalid', function () {
-		mockEnv.api.endpoint = 'api.com';
+		mockEnv.api.endpoint = 'api.com/';
 
 		spyOn(mockState, 'go');
 

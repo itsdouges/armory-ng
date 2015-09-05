@@ -72,7 +72,6 @@ describe('register box', function () {
 		ctrl.user = {
 			emailAvailable: true,
 			aliasAvailable: true,
-			tokenValid: true,
 			passwordsValid: true
 		};
 
@@ -88,7 +87,7 @@ describe('register box', function () {
 		var ctrl = systemUnderTest();
 
 		ctrl.user = {
-			password1: 'pass',
+			password: 'pass',
 			password2: 'pass'
 		};
 
@@ -158,55 +157,55 @@ describe('register box', function () {
 		expect(ctrl.user.emailAvailable).toBe(false);
 	});
 
-	it('should set valid token state when token is valid', function () {
-		var ctrl = systemUnderTest();
-		var emailDefer;
+	// it('should set valid token state when token is valid', function () {
+	// 	var ctrl = systemUnderTest();
+	// 	var emailDefer;
 
-		mockGw2ApiService.checkToken = function () {
-			emailDefer = q.defer();
-			return emailDefer.promise;
-		};
+	// 	mockGw2ApiService.checkToken = function () {
+	// 		emailDefer = q.defer();
+	// 		return emailDefer.promise;
+	// 	};
 
-		spyOn(mockGw2ApiService, 'checkToken').and.callThrough();
+	// 	spyOn(mockGw2ApiService, 'checkToken').and.callThrough();
 
-		ctrl.user.token = '123123TOKENMAN';
-		ctrl.checkToken();
+	// 	ctrl.user.token = '123123TOKENMAN';
+	// 	ctrl.checkToken();
 
-		emailDefer.resolve();
+	// 	emailDefer.resolve();
 
-		expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
+	// 	expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
 
-		expect(ctrl.tokenLoading).toBe(true);
-		rootScope.$apply();
-		expect(ctrl.tokenLoading).toBe(false);
-		expect(ctrl.user.tokenValid).toBe(true);
-	});
+	// 	expect(ctrl.tokenLoading).toBe(true);
+	// 	rootScope.$apply();
+	// 	expect(ctrl.tokenLoading).toBe(false);
+	// 	expect(ctrl.user.tokenValid).toBe(true);
+	// });
 
-	it('should set invalid token state when token wasnt valid', function () {
-		var ctrl = systemUnderTest();
-		var emailDefer;
+	// it('should set invalid token state when token wasnt valid', function () {
+	// 	var ctrl = systemUnderTest();
+	// 	var emailDefer;
 
-		mockGw2ApiService.checkToken = function () {
-			emailDefer = q.defer();
-			return emailDefer.promise;
-		};
+	// 	mockGw2ApiService.checkToken = function () {
+	// 		emailDefer = q.defer();
+	// 		return emailDefer.promise;
+	// 	};
 
-		spyOn(mockGw2ApiService, 'checkToken').and.callThrough();
+	// 	spyOn(mockGw2ApiService, 'checkToken').and.callThrough();
 
-		ctrl.user.token = '123123TOKENMAN';
-		ctrl.checkToken();
+	// 	ctrl.user.token = '123123TOKENMAN';
+	// 	ctrl.checkToken();
 
-		emailDefer.reject();
+	// 	emailDefer.reject();
 
-		expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
+	// 	expect(mockGw2ApiService.checkToken).toHaveBeenCalledWith('123123TOKENMAN');
 
-		expect(ctrl.tokenLoading).toBe(true);
-		rootScope.$apply();
-		expect(ctrl.tokenLoading).toBe(false);
-		expect(ctrl.user.tokenValid).toBe(false);
-	});
+	// 	expect(ctrl.tokenLoading).toBe(true);
+	// 	rootScope.$apply();
+	// 	expect(ctrl.tokenLoading).toBe(false);
+	// 	expect(ctrl.user.tokenValid).toBe(false);
+	// });
 
-	it('should set valid alias state when token is valid', function () {
+	it('should set valid alias state when alias is valid', function () {
 		var ctrl = systemUnderTest();
 		var emailDefer;
 

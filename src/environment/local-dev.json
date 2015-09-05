@@ -1,7 +1,9 @@
 {
 	"client_name": "gw2Armory",
 	"api": {
-		"endpoint": "http://192.168.59.103:8082/"
+		"endpoint": "http://192.168.59.103:8082/",
+		"token": "Z3cyQXJtb3J5V2ViOlNXQGcwci0=",
+		"www": "Who goes there?"
 	},
 	"gw2": {
 		"endpoint" : "https://api.guildwars2.com/"

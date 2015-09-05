@@ -14,6 +14,7 @@ function HttpAuthInterceptor(env, $q, $injector) {
 	}
 
 	function handleError(rejection) {
+
 		switch(rejection.status) {
 			case 500:
 				handle500(rejection);
@@ -26,12 +27,11 @@ function HttpAuthInterceptor(env, $q, $injector) {
 	}
 
 	let factory = {
-		'request': function (config) {
+		request: function (config) {
 			return config;
 		},
-		'responseError': function (rejection) {
+		responseError: function (rejection) {
 			handleError(rejection);
-
 			return $q.reject(rejection);
 		}
 	};

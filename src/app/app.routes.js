@@ -26,7 +26,6 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.with-auth', {
       abstract: true,
-      controller: 'AuthController',
       template: '<ui-view />',
       resolve: {
         authenticated: function (authService) {
