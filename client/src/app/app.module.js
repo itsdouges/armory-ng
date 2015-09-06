@@ -7,8 +7,8 @@ import routerConfig from './app.routes';
 import environment from '../generated/app.env';
 import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 
-import CharactersGridController from './components/characters-grid/controller';
-import CharactersGridDirective from './components/characters-grid/directive';
+import CharactersStripController from './components/characters-strip/controller';
+import CharactersStripDirective from './components/characters-strip/directive';
 
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
@@ -101,8 +101,8 @@ angular.module('gw2armory', [
 .controller('ItemTooltipController', ItemTooltipController)
 .directive('itemTooltip', ItemTooltipDirective)
 
-.controller('CharactersGridController', CharactersGridController)
-.directive('charactersGrid', CharactersGridDirective)
+.controller('CharactersStripController', CharactersStripController)
+.directive('charactersStrip', CharactersStripDirective)
 
 .controller('CharacterViewerController', CharacterViewerController)
 .directive('characterViewer', CharacterViewerDirective)
