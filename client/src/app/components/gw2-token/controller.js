@@ -24,15 +24,20 @@ function Gw2TokenController (userService, debounce, $scope) {
 		}
 
 		scope.busy = true;
+		scope.creating = true;
 
+		console.log(scope.token);
 		$scope.$emit('token-added', scope.token);
 
 		userService
 			.addToken(scope.token.token)
 			.then(() => {
-				scope.token.valid = false;
-				scope.token.token = undefined;
+				scope.token = {
+					valid: false
+				};
+
 				scope.busy = false;
+				scope.creating = false;
 
 				console.log('added');
 			});

@@ -14,11 +14,12 @@ function UserTokensController (userService, $scope) {
 			});
 	}
 
-	$scope.$on('token-added', (token) => {
+	$scope.$on('token-added', (e, token) => {
 		scope.tokens.push(token);
 	});
 
-	$scope.$on('token-deleted', (token) => {
+	$scope.$on('token-deleted', (e, token) => {
+		console.log(token);
 		var index = scope.tokens.indexOf(token);
 		scope.tokens.splice(index, 1);
 	});

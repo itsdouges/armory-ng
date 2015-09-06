@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="input-container">
-		<input ng-keyup="ctrl.checkToken()" id="add-token" type="text" ng-model="ctrl.token.token" required="required" />
+		<input ng-disabled="ctrl.creating" ng-keyup="ctrl.checkToken()" id="add-token" type="text" ng-model="ctrl.token.token" required="required" />
 
 		<input-validity
 			data-busy="ctrl.busy"
@@ -14,13 +14,15 @@
 
 	{{ ctrl.message }}
 
-	<button>Save</button>
+	<button ng-disabled="!ctrl.token.valid || ctrl.creating">Save</button>
 </form>
 
 <div class="row" ng-if="ctrl.isMode('view')">
 	<div>
 		{{ ctrl.token.accountName }} 
-		<span>{{ ctrl.token.valid ? '(valid)' : '(invalid)' }}</span>
+		<span>
+			{{ ctrl.token.valid ? '(valid)' : '(invalid)' }}
+		</span>
 	</div>
 
 	<div>
