@@ -136,6 +136,8 @@ describe('characterviewer controller', function () {
   it('should set error if error occurred while loading a character', function () {
     var deferred;
 
+    mockStateParams.name = 'charname';
+
     inject(function($q)  { 
       deferred = $q.defer();
 
@@ -198,6 +200,8 @@ describe('characterviewer controller', function () {
   it('should null character on failure', function () {
     var deferred;
 
+    mockStateParams.name = 'charname';
+
     inject(function($q)  { 
       deferred = $q.defer();
 
@@ -216,6 +220,8 @@ describe('characterviewer controller', function () {
 
   it('should set character on success', function () {
     var deferred;
+
+    mockStateParams.name = 'charname';
 
     inject(function($q)  { 
       deferred = $q.defer();
@@ -240,6 +246,8 @@ describe('characterviewer controller', function () {
   it('should set loaded on success', function () {
     var deferred;
 
+    mockStateParams.name = 'charname';
+
     inject(function($q)  { 
       deferred = $q.defer();
 
@@ -258,6 +266,8 @@ describe('characterviewer controller', function () {
 
   it('should return true if has weapon slot', function () {
     var deferred;
+
+    mockStateParams.name = 'charname';
 
     inject(function($q)  { 
       deferred = $q.defer();
@@ -280,6 +290,8 @@ describe('characterviewer controller', function () {
 
   it('should return false if has no weapon slot', function () {
     var deferred;
+
+    mockStateParams.name = 'charname';
 
     inject(function($q)  { 
       deferred = $q.defer();

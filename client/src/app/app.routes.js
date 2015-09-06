@@ -33,6 +33,10 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
+    .state('main.with-auth.settings', {
+      url: '/settings',
+      templateUrl: 'app/routes/settings/settings.html'
+    })
     .state('main.with-auth.me', {
       url: '/me',
       templateUrl: 'app/routes/me/me.html'

@@ -1,3 +1,7 @@
 <div class="header header-default">
 	<user-status></user-status>
+
+	<ul>
+		<li ng-if="ctrl.isAuthenticated()"><a href="/me">My Characters</a></li>
+	</ul>
 </div>

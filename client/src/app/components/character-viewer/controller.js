@@ -3,7 +3,7 @@
 /**
  * CharacterViewerController
  */
-function CharacterViewerController(gw2Service, $stateParams) {
+function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 	'ngInject';
 
 	let _error;
@@ -11,7 +11,9 @@ function CharacterViewerController(gw2Service, $stateParams) {
 	let vm = this;
 
 	function init() {
-		loadCharacter($stateParams.name);	
+		if ($stateParams.name) {
+			loadCharacter($stateParams.name);
+		}
 	}
 
 	function loadCharacter(name) {
@@ -25,6 +27,8 @@ function CharacterViewerController(gw2Service, $stateParams) {
 
 	function readSuccess(character) {
 		_loaded = true;
+
+		console.log(character);
 		
 		vm.character = character;
 	}
@@ -44,11 +48,15 @@ function CharacterViewerController(gw2Service, $stateParams) {
 	function isError() {
 		return _error;
 	}
-
     
 	function hasWeaponSwap() {
 		return !!vm.character.hasWeaponSwap;
 	}
+
+	$rootScope.$on('char-selected', (e, name) => {
+		console.log(name);
+		loadCharacter(name);
+	});
 
 	init();
 

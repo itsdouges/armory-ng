@@ -3,7 +3,7 @@
 function HeaderDirective() {
 	let directive = {
 		restrict: 'E',
-		controller: 'HeaderController',
+		controller: 'HeaderController as ctrl',
 		templateUrl: 'app/components/header-block/view.html'
 	};
 

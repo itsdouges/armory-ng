@@ -6,7 +6,10 @@
 function Gw2ApiService ($http, env, $q, gw2ParseService) {
 	Gw2ApiService.prototype.readSkin = (id) => {
 		let promise = $http
-			.get(`${env.gw2.endpoint}v2/skins/${id}`, { 
+			.get(`${env.gw2.endpoint}v2/skins/${id}`, {
+				headers: {
+					Authorization: undefined
+				},
 				cache: true 
 			})
 			.then((data) => {
@@ -19,6 +22,9 @@ function Gw2ApiService ($http, env, $q, gw2ParseService) {
 	Gw2ApiService.prototype.readItem = (id) => {
 		let promise = $http
 			.get(`${env.gw2.endpoint}v2/items/${id}`, { 
+				headers: {
+					Authorization: undefined
+				},
 				cache: true 
 			})
 			.then((data) => {
@@ -34,6 +40,9 @@ function Gw2ApiService ($http, env, $q, gw2ParseService) {
 
 		let promise = $http
 			.get(`${env.gw2.endpoint}v2/items?ids=${id_query}`, { 
+				headers: {
+					Authorization: undefined
+				},
 				cache: true 
 			})
 			.then((data) => {
@@ -50,6 +59,9 @@ function Gw2ApiService ($http, env, $q, gw2ParseService) {
 	Gw2ApiService.prototype.readGuild = (guid) => {
 		let promise = $http
 			.get(`${env.gw2.endpoint}v1/guild_details.json?guild_id=${guid}`, { 
+				headers: {
+					Authorization: undefined
+				},
 				cache: true 
 			})
 			.then((data) => {

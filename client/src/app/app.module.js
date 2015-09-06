@@ -7,6 +7,9 @@ import routerConfig from './app.routes';
 import environment from '../generated/app.env';
 import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 
+import CharactersGridController from './components/characters-grid/controller';
+import CharactersGridDirective from './components/characters-grid/directive';
+
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
 
@@ -24,6 +27,9 @@ import UserUpdateDirective from './components/user-update/directive';
 
 import CharacterPortraitController from './components/character-portrait/controller';
 import CharacterPortraitDirective from './components/character-portrait/directive';
+
+import CharacterHeadshotController from './components/character-headshot/controller';
+import CharacterHeadshotDirective from './components/character-headshot/directive';
 
 import GuildBlockController from './components/guild-block/controller';
 import GuildBlockDirective from './components/guild-block/directive';
@@ -62,6 +68,7 @@ import Gw2ParseService from './services/gw2/gw2-parse';
 import Gw2Service from './services/gw2/gw2';
 import debounce from './services/helpers/debouncer';
 import UserService from './services/user/user';
+import CharactersService from './services/characters/characters';
 
 angular.module('gw2armory', [
   'ui.router',
@@ -81,6 +88,7 @@ angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 .service('userService', UserService)
+.service('charactersService', CharactersService)
 
 .directive('mouseFollow', MouseFollowDirective)
 
@@ -92,6 +100,9 @@ angular.module('gw2armory', [
 
 .controller('ItemTooltipController', ItemTooltipController)
 .directive('itemTooltip', ItemTooltipDirective)
+
+.controller('CharactersGridController', CharactersGridController)
+.directive('charactersGrid', CharactersGridDirective)
 
 .controller('CharacterViewerController', CharacterViewerController)
 .directive('characterViewer', CharacterViewerDirective)
@@ -128,6 +139,9 @@ angular.module('gw2armory', [
 
 .controller('RegisterController', RegisterController)
 .directive('registerBox', RegisterDirective)
+
+.controller('CharacterHeadshotController', CharacterHeadshotController)
+.directive('characterHeadshot', CharacterHeadshotDirective)
 
 .controller('CharacterPortraitController', CharacterPortraitController)
 .directive('characterPortrait', CharacterPortraitDirective);

@@ -1,1 +1,8 @@
-status
+<ul ng-if="ctrl.isAuthenticated()">
+	<li><a href="/settings">Settings</a></li>
+	<li><a ng-click="ctrl.logout()" href="">Logout</a></li>
+</ul>
+
+<ul ng-if="!ctrl.isAuthenticated()">
+	<li><a href="/login">Login</a></li>
+</ul>
