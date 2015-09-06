@@ -1,3 +1,7 @@
-<gw2-token ng-repeat="token in ctrl.tokens" token="token" mode="remove"></gw2-token>
+<div ng-if="!ctrl.tokens.length">
+	you dont have any tokens! click here to get one yo.	
+</div>
+
+<gw2-token ng-repeat="token in ctrl.tokens" token="token" mode="view"></gw2-token>
 
 <gw2-token mode="add"></gw2-token>

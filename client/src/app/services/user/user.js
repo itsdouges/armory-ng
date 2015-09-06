@@ -65,7 +65,7 @@ function UserService ($http, env, $q, authService) {
 	};
 
 	/**
-	 * Authenticated read tokens.
+	 * Authenticated list tokens.
 	 */
 	this.readTokens = function () {
 		// TODO: TESTME
@@ -75,6 +75,28 @@ function UserService ($http, env, $q, authService) {
 			.then(function (response) {
 				return response.data;
 			});
+	};
+
+	/**
+	 * Authenticated add token.
+	 */
+	this.addToken = function (token) {
+		// TODO: TESTME
+
+		return $http
+			.post(`${env.api.endpoint}users/me/gw2-tokens`, {
+				token: token
+			});
+	};
+
+	/**
+	 * Authenticated remove token.
+	 */
+	this.deleteToken = function (token) {
+		// TODO: TESTME
+
+		return $http
+			.delete(`${env.api.endpoint}users/me/gw2-tokens/${token}`);
 	};
 }
 

@@ -9,6 +9,7 @@ function Gw2TokenDirective () {
 			mode: '@',
 			token: '='
 		},
+		require: '^userTokens',
 		templateUrl: 'app/components/gw2-token/view.html',
 	};
 

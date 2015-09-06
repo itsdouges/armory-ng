@@ -2,10 +2,10 @@
 
 function UserUpdateController (userService) {
 	function init () {
-		userService.readMe()
-			.then(function (data) {
-				console.log(data);
-			});
+		// userService.readMe()
+		// 	.then(function (data) {
+		// 		console.log(data);
+		// 	});
 	}
 
 	init();

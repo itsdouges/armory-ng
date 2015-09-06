@@ -1,18 +1,31 @@
-<div ng-if="ctrl.isMode('add')" class="row">
+<form ng-submit="ctrl.saveToken()" class="row" ng-if="ctrl.isMode('add')">
 	<div class="label-container">
-		<label for="add-token">Add token</label>
+		<label ng-if="ctrl.isMode('add')" for="add-token">Add token</label>
 	</div>
 
 	<div class="input-container">
 		<input ng-keyup="ctrl.checkToken()" id="add-token" type="text" ng-model="ctrl.token.token" required="required" />
 
-		<input-validity 
+		<input-validity
 			data-busy="ctrl.busy"
-			data-valid="ctrl.token.isValid">
+			data-valid="ctrl.token.valid">
 		</input-validity>
 	</div>
 
 	{{ ctrl.message }}
 
-	<a ng-click="ctrl.saveToken()" href="">Save</a>
+	<button>Save</button>
+</form>
+
+<div class="row" ng-if="ctrl.isMode('view')">
+	<div>
+		{{ ctrl.token.accountName }} 
+		<span>{{ ctrl.token.valid ? '(valid)' : '(invalid)' }}</span>
+	</div>
+
+	<div>
+		{{ ctrl.token.token }}
+	</div>
+
+	<a ng-if="ctrl.isMode('view')" ng-click="ctrl.deleteToken()" href="">Remove</a>
 </div>
