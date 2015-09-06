@@ -8,10 +8,10 @@ describe('user service', function () {
 	beforeEach(module('gw2armory'));
 
 	beforeEach(function() {
-		inject(function($rootScope, $httpBackend, registrationService) {
+		inject(function($rootScope, $httpBackend, userService) {
 			rootScope = $rootScope;
 			httpBackend = $httpBackend;
-			systemUnderTest = registrationService;
+			systemUnderTest = userService;
 		});
 	});
 
@@ -107,7 +107,7 @@ describe('user service', function () {
 		describe('token', function () {
 			it ('should call check token api', function () {
 				httpBackend
-					.expectGET('http://192.168.59.103:8082/users/check/token/a')
+					.expectGET('http://192.168.59.103:8082/users/check/gw2-token/a')
 					.respond(200);
 
 				systemUnderTest.checkToken('a');
@@ -115,7 +115,7 @@ describe('user service', function () {
 
 			it ('should resolve true if alias is available', function () {
 				httpBackend
-					.expectGET('http://192.168.59.103:8082/users/check/token/b')
+					.expectGET('http://192.168.59.103:8082/users/check/gw2-token/b')
 					.respond(200, true);
 
 				var data;
@@ -132,7 +132,7 @@ describe('user service', function () {
 
 			it ('should resolve false if alias is not available', function () {
 				httpBackend
-					.expectGET('http://192.168.59.103:8082/users/check/token/c')
+					.expectGET('http://192.168.59.103:8082/users/check/gw2-token/c')
 					.respond(200, false);
 
 				var data;
@@ -190,6 +190,24 @@ describe('user service', function () {
 			httpBackend.flush();
 
 			expect(result).toEqual(data);
+		});
+	});
+
+	describe('read', function () {
+		it ('should call check read api with token', function () {
+			httpBackend
+				.expectGET('http://192.168.59.103:8082/users/me')
+				.respond(200);
+
+			systemUnderTest.readMe();
+		});
+
+		it ('should call check read token api with token', function () {
+			httpBackend
+				.expectGET('http://192.168.59.103:8082/users/me/gw2-tokens')
+				.respond(200);
+
+			systemUnderTest.readTokens();
 		});
 	});
 

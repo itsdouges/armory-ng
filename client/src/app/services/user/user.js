@@ -1,7 +1,6 @@
 'use strict';
 
-// TODO: Remove auth service
-function RegistrationService($http, env, $q) {
+function UserService ($http, env, $q, authService) {
 	function registerSuccess(response) {
 		console.log('success registerSuccess');
 	}
@@ -46,11 +45,37 @@ function RegistrationService($http, env, $q) {
 
 	this.checkToken = function (token) {
 		return $http
-			.get(`${env.api.endpoint}users/check/token/${token}`)
+			.get(`${env.api.endpoint}users/check/gw2-token/${token}`)
 			.then(function (response) {
 				return response.data;
 			}, handleCheckError);
 	};
+
+	/**
+	 * Authenticated read user.
+	 */
+	this.readMe = function () {
+		// TODO: TESTME
+
+		return $http
+			.get(`${env.api.endpoint}users/me`)
+			.then(function (response) {
+				return response.data;
+			});
+	};
+
+	/**
+	 * Authenticated read tokens.
+	 */
+	this.readTokens = function () {
+		// TODO: TESTME
+
+		return $http
+			.get(`${env.api.endpoint}users/me/gw2-tokens`)
+			.then(function (response) {
+				return response.data;
+			});
+	};
 }
 
-export default RegistrationService;
+export default UserService;

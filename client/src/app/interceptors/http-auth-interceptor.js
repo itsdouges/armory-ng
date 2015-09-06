@@ -1,6 +1,8 @@
 'use strict';
 
 function HttpAuthInterceptor(env, $q, $injector) {
+	var authService;
+
 	function handle401(rejection) {
 		if (rejection.config.url.indexOf(env.api.endpoint) === -1) {
 			return;
@@ -28,6 +30,7 @@ function HttpAuthInterceptor(env, $q, $injector) {
 
 	let factory = {
 		request: function (config) {
+			// TODO: Intercept and attach auth token.
 			return config;
 		},
 		responseError: function (rejection) {

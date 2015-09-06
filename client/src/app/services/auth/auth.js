@@ -13,6 +13,9 @@ function AuthService($http, $state, $q, env) {
 			authenticated: false
 		};
 
+		// TODO: Test setting of header. Bit lazy today..
+
+		$http.defaults.headers.common.Authorization = undefined;
 		localStorage.setItem(USER_TOKEN_KEY, '');
 	}
 
@@ -21,6 +24,7 @@ function AuthService($http, $state, $q, env) {
 
 		localStorage.setItem(USER_TOKEN_KEY, `${response.data.token_type} ${response.data.access_token}`);
 
+		$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
 		console.log('success login');
 
 		$state.go('main.with-auth.me');
@@ -29,7 +33,7 @@ function AuthService($http, $state, $q, env) {
 	this.checkAuthentication = function () {
 		console.log('check auth');
 
-		if (user.authenticated) {
+		if (scope.isAuthenticated()) {
 			console.log('ur auth');
 
 			return $q.resolve();
@@ -46,6 +50,7 @@ function AuthService($http, $state, $q, env) {
 					}
 				}).then(function () {
 				user.authenticated = true;
+				$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
 			}, function () {
 				resetUser();
 
@@ -91,6 +96,12 @@ function AuthService($http, $state, $q, env) {
 
 				return $q.reject(response.data.error_description);
 			});
+	};
+
+	this.logout = function () {
+		// TODO: Test this.
+		resetUser();
+		$state.go('main.login');
 	};
 }
 

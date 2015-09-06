@@ -1,0 +1,18 @@
+<div ng-if="ctrl.isMode('add')" class="row">
+	<div class="label-container">
+		<label for="add-token">Add token</label>
+	</div>
+
+	<div class="input-container">
+		<input ng-keyup="ctrl.checkToken()" id="add-token" type="text" ng-model="ctrl.token.token" required="required" />
+
+		<input-validity 
+			data-busy="ctrl.busy"
+			data-valid="ctrl.token.isValid">
+		</input-validity>
+	</div>
+
+	{{ ctrl.message }}
+
+	<a ng-click="ctrl.saveToken()" href="">Save</a>
+</div>

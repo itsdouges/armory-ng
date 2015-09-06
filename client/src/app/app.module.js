@@ -10,6 +10,18 @@ import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
 
+import Gw2TokenController from './components/gw2-token/controller';
+import Gw2TokenDirective from './components/gw2-token/directive';
+
+import UserStatusController from './components/user-status/controller';
+import UserStatusDirective from './components/user-status/directive';
+
+import UserTokensController from './components/user-tokens/controller';
+import UserTokensDirective from './components/user-tokens/directive';
+
+import UserUpdateController from './components/user-update/controller';
+import UserUpdateDirective from './components/user-update/directive';
+
 import CharacterPortraitController from './components/character-portrait/controller';
 import CharacterPortraitDirective from './components/character-portrait/directive';
 
@@ -49,7 +61,7 @@ import AuthService from './services/auth/auth';
 import Gw2ParseService from './services/gw2/gw2-parse';
 import Gw2Service from './services/gw2/gw2';
 import debounce from './services/helpers/debouncer';
-import RegistrationService from './services/user/user';
+import UserService from './services/user/user';
 
 angular.module('gw2armory', [
   'ui.router',
@@ -68,7 +80,7 @@ angular.module('gw2armory', [
 .service('gw2Service', Gw2Service)
 .service('authService', AuthService)
 .service('debounce', debounce)
-.service('registrationService', RegistrationService)
+.service('userService', UserService)
 
 .directive('mouseFollow', MouseFollowDirective)
 
@@ -83,6 +95,18 @@ angular.module('gw2armory', [
 
 .controller('CharacterViewerController', CharacterViewerController)
 .directive('characterViewer', CharacterViewerDirective)
+
+.controller('Gw2TokenController', Gw2TokenController)
+.directive('gw2Token', Gw2TokenDirective)
+
+.controller('UserTokensController', UserTokensController)
+.directive('userTokens', UserTokensDirective)
+
+.controller('UserStatusController', UserStatusController)
+.directive('userStatus', UserStatusDirective)
+
+.controller('UserUpdateController', UserUpdateController)
+.directive('userUpdate', UserUpdateDirective)
 
 .controller('GuildBlockController', GuildBlockController)
 .directive('guildBlock', GuildBlockDirective)

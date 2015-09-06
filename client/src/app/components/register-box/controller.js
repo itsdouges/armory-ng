@@ -1,6 +1,6 @@
 'use strict';
 
-function RegisterController(registrationService, gw2Service, $state, debounce, authService) {
+function RegisterController(userService, gw2Service, $state, debounce, authService) {
 	let scope = this;
 
 	function init() {
@@ -28,7 +28,7 @@ function RegisterController(registrationService, gw2Service, $state, debounce, a
 
 		scope.loading = true;
 		
-		registrationService
+		userService
 			.register(scope.user)
 			.then(function () {
 				// TODO: test
@@ -57,7 +57,7 @@ function RegisterController(registrationService, gw2Service, $state, debounce, a
 
 				scope.emailLoading = true;
 
-				registrationService 
+				userService 
 					.checkEmail(scope.user.email)
 					.then(checkEmailSuccess, checkEmailFailure);
 			});
@@ -73,8 +73,6 @@ function RegisterController(registrationService, gw2Service, $state, debounce, a
 	function checkAliasFailure(messages) {
 		scope.aliasLoading = false;
 		scope.user.aliasAvailable = false;
-
-		console.log(messages);
 	}
 
 	var checkAliasDebounce;
@@ -88,7 +86,7 @@ function RegisterController(registrationService, gw2Service, $state, debounce, a
 
 				scope.aliasLoading = true;
 
-				registrationService
+				userService
 					.checkAlias(scope.user.alias)
 					.then(checkAliasSuccess, checkAliasFailure);
 			});
