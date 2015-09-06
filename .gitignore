@@ -6,3 +6,5 @@ bower_components/
 dist/
 src/generated/
 .DS_Store
+DS_Store
+npm-debug.log
