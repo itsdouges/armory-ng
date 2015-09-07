@@ -1,5 +1,15 @@
-<ul class="characters-grid">
-	<li ng-click="ctrl.selectCharacter(c.name)" ng-repeat="c in ctrl.characters">
-		<character-headshot character="c"></character-headshot>
-	</li>
-</ul>
+<div class="characters-strip-container">
+	<a href="" class="strip-control left" ng-click="ctrl.previous($event)">
+		<span>&lt;</span>
+	</a>
+
+	<ul class="characters-strip" ng-style="ctrl.sliderStyle">
+		<li class="characters-strip-item" ng-click="ctrl.selectCharacter(c.name)" ng-repeat="c in ctrl.characters">
+			<character-headshot character="c"></character-headshot>
+		</li>
+	</ul>
+
+	<a href="" class="strip-control right" ng-click="ctrl.next($event)">
+		<span>&gt;</span>
+	</a>
+</div>

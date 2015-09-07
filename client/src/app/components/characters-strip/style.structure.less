@@ -1,10 +1,78 @@
-.characters-grid {
-	overflow: hidden;
-	height: 5em;
+@slider-button-width: 4; //in percent
 
-	li {
-		width: 20%;
-		overflow: auto;
-		display: inline-block;
+characters-strip {
+	display: block;
+	white-space: nowrap;
+}
+
+.characters-strip {
+	color: white;
+	display: block;
+	overflow-x: visible;
+	padding: 0;
+	margin: 0;
+	white-space: nowrap;
+
+	transition: transform 0.4s;
+}
+
+.NumberOfSliderItems(@items) {
+	width: (100 / @items) * 1%;
+}
+
+.characters-strip-item {
+	.NumberOfSliderItems(2);
+	overflow: auto;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+@media only screen and (min-width: @mobile) {
+
+}
+
+@media only screen and (min-width: @tablet) {
+	.characters-strip-item {
+		.NumberOfSliderItems(3);
+	}
+}
+
+@media only screen and (min-width: @pc) {
+	.characters-strip-item {
+		.NumberOfSliderItems(4);
+	}
+}
+
+@media only screen and (min-width: @big-pc) {
+	.characters-strip-item {
+		.NumberOfSliderItems(5);
+	}
+}
+
+.characters-strip-container {
+	background: black;
+	position: relative;
+	padding: 0 @slider-button-width * 1%;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.strip-control {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: @slider-button-width * 1%;
+	cursor: pointer;
+	overflow: auto;
+	display: flex;
+	align-items: center;
+	z-index: 10;
+
+	&.left {
+		left: 0;
+	}
+
+	&.right {
+		right: 0;
 	}
 }
