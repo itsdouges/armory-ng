@@ -2,11 +2,16 @@
 
 function CharactersStripDirective () {
 	let link = (scope, element, attrs, controller) => {
-		element.find('ul')[0].addEventListener( 
-		     'webkitTransitionEnd',
-		     function(event) { 
-		         alert( "Finished transition!" ); 
-		     }, false);
+		let slider = element.find('ul')[0];
+
+		scope.$on('slider:set-transition-end-event', (e, cb) => {
+			slider.addEventListener( 
+			     'webkitTransitionEnd',
+			     function(e) { 
+			     	console.log(e);
+			     	cb();
+			     }, false);
+		});
 	};
 
 	let directive = {

@@ -16,6 +16,29 @@ function CharactersStripController (charactersService, $scope) {
 				.then((items) => {
 					characters = items;
 					setCharactersOffset(sliderItems);
+
+					$scope.$emit('slider:set-transition-end-event', () => {
+
+						// requestAnimationFrame(() => {
+						// 	setSliderStyle(sliderTranslateX);
+						// });
+
+						$scope.$apply(() => {
+							console.log('ay lmao');
+							
+							setCharactersOffset(-sliderItems);
+						});
+
+
+
+						requestAnimationFrame(() => {
+							setSliderStyle(sliderTranslateX, true);
+							// toggleSliderTransitions();
+
+							$scope.$apply();
+						});
+
+					});					
 				});
 		}
 
@@ -23,17 +46,22 @@ function CharactersStripController (charactersService, $scope) {
 	}
 
 	this.next = (e) => {
-		// setSliderStyle(sliderTranslateX * 2);
-		setCharactersOffset(sliderItems);
+		// setCharactersOffset(-sliderItems);
+		setSliderStyle(sliderTranslateX * 2);
+		// 
 		// requestAnimationFrame(() => {
 		// 	setSliderStyle(sliderTranslateX);
 		// });
 	};
 
 	this.previous = (e) => {
-		setCharactersOffset(-sliderItems);
+		setCharactersOffset(sliderItems);
 		// setSliderStyle(0);
 	};
+
+	// function disableSliderTransitions() {
+	// 	scope.sliderStyle.disable
+	// }
 
 	function setCharactersOffset(offset) {
 		var tempc,
@@ -56,14 +84,23 @@ function CharactersStripController (charactersService, $scope) {
 		}
 
 		scope.characters = tempc.slice(0, maxItems);
-		// console.log(scope.characters.length);
 	}
 
-	function setSliderStyle(x) {
-		scope.sliderStyle = {
-			transform: `translate3d(-${x}%, 0, 0)`,
-			'webkit-transform': `translate3d(-${x}%, 0, 0)`
+	function toggleSliderTransitions() {
+		
+	}
+
+	function setSliderStyle(translateX, noTransition) {
+		let style = {
+			transform: `translate3d(-${translateX}%, 0, 0)`,
+			'webkit-transform': `translate3d(-${translateX}%, 0, 0)`
 		};
+
+		if (noTransition) {
+			style.transition = 'inherit';
+		}
+
+		scope.sliderStyle = style;
 	}
 
 	this.selectCharacter = (name) => {
