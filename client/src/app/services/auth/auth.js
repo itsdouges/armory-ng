@@ -27,7 +27,8 @@ function AuthService($http, $state, $q, env) {
 		$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
 		console.log('success login');
 
-		$state.go('main.with-auth.me');
+		// todo: redirect to settings if no tokens are available
+		$state.go('main.with-auth.characters');
 	}
 
 	this.checkAuthentication = function () {
@@ -64,7 +65,7 @@ function AuthService($http, $state, $q, env) {
 			var defer = $q.defer();
 			defer.promise.then(null, function() {
 				resetUser();
-				$state.go('main.login');
+				
 			});
 
 			defer.reject();
@@ -101,7 +102,7 @@ function AuthService($http, $state, $q, env) {
 	this.logout = function () {
 		// TODO: Test this.
 		resetUser();
-		$state.go('main.login');
+		$state.go('main.without-auth.login');
 	};
 }
 

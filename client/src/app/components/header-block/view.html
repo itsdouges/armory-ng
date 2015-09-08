@@ -1,7 +1,16 @@
 <div class="header header-default">
+	<h1 class="site-title">
+		<a href="/">
+			<span>Guild Wars 2 Armory</span>
+
+			<img src="../assets/images/logo.png" />
+		</a>
+	</h1>
+
 	<user-status></user-status>
 
 	<ul>
-		<li ng-if="ctrl.isAuthenticated()"><a href="/me">My Characters</a></li>
+		<li ng-if="ctrl.isAuthenticated()"><a href="/me">My Details</a></li>
+		<li ng-if="ctrl.isAuthenticated()"><a href="/me/characters">My Characters</a></li>
 	</ul>
 </div>

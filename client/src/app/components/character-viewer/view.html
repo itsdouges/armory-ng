@@ -56,6 +56,14 @@
 	</div>
 </div>
 
+<div ng-if="!ctrl.isLoaded() && !ctrl.busy">
+	<img src="../assets/images/select-a-character.png" />
+</div>
+
+<div ng-if="ctrl.busy">
+	loading man
+</div>
+
 <div ng-if="ctrl.isError()">
 	an error occurred, could be something
 </div>

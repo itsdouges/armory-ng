@@ -9,6 +9,7 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 	let _error;
 	let _loaded;
 	let vm = this;
+	let loadingCharacterName;
 
 	function init() {
 		if ($stateParams.name) {
@@ -19,6 +20,7 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 	function loadCharacter(name) {
 		_error = false;
 		_loaded = false;
+		vm.busy = true;
 
 		gw2Service
 			.readCharacter(name)
@@ -31,6 +33,8 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 		console.log(character);
 		
 		vm.character = character;
+
+		vm.busy = false;
 	}
 
 	function readFailure(errorMessage) {
@@ -39,6 +43,7 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 		// TODO: Handle character not found error (404)
 
 		vm.character = null;
+		vm.busy = false;
 	}
 
 	function isLoaded() {
@@ -55,6 +60,12 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 
 	$rootScope.$on('char-selected', (e, name) => {
 		console.log(name);
+
+		if (name === loadingCharacterName) {
+			return;
+		}
+
+		loadingCharacterName = name;
 		loadCharacter(name);
 	});
 
