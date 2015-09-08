@@ -4,9 +4,10 @@ function CharactersStripController (charactersService, $scope) {
 	let scope = this;
 	let characters;
 	const sliderTranslateX = 100;
+	let transitionDirection;
 
 	// todo: browser resize event, change amountviewd depending.
-	let sliderItems = 4;
+	let sliderItems;
 	let currentPosition;
 
 	function init () {
@@ -18,26 +19,21 @@ function CharactersStripController (charactersService, $scope) {
 					setCharactersOffset(sliderItems);
 
 					$scope.$emit('slider:set-transition-end-event', () => {
-
-						// requestAnimationFrame(() => {
-						// 	setSliderStyle(sliderTranslateX);
-						// });
-
 						$scope.$apply(() => {
-							console.log('ay lmao');
-							
-							setCharactersOffset(-sliderItems);
+							if (transitionDirection === 'previous') {
+								setCharactersOffset(sliderItems);
+							} else if (transitionDirection === 'next') {
+								setCharactersOffset(-sliderItems);
+							} else {
+								throw 'transition not handled';
+							}
 						});
-
-
 
 						requestAnimationFrame(() => {
-							setSliderStyle(sliderTranslateX, true);
-							// toggleSliderTransitions();
-
-							$scope.$apply();
+							$scope.$apply(() => {
+								setSliderStyle(sliderTranslateX, true);
+							});
 						});
-
 					});					
 				});
 		}
@@ -46,27 +42,19 @@ function CharactersStripController (charactersService, $scope) {
 	}
 
 	this.next = (e) => {
-		// setCharactersOffset(-sliderItems);
+		transitionDirection = 'next';
 		setSliderStyle(sliderTranslateX * 2);
-		// 
-		// requestAnimationFrame(() => {
-		// 	setSliderStyle(sliderTranslateX);
-		// });
 	};
 
 	this.previous = (e) => {
-		setCharactersOffset(sliderItems);
-		// setSliderStyle(0);
+		transitionDirection = 'previous';
+		setSliderStyle(0);
 	};
-
-	// function disableSliderTransitions() {
-	// 	scope.sliderStyle.disable
-	// }
 
 	function setCharactersOffset(offset) {
 		var tempc,
 			i,
-			maxItems = sliderItems * 3;
+			maxItems = sliderItems * 3 + 2;
 
 		if (offset >= 0) {
 			tempc = characters;
@@ -86,10 +74,6 @@ function CharactersStripController (charactersService, $scope) {
 		scope.characters = tempc.slice(0, maxItems);
 	}
 
-	function toggleSliderTransitions() {
-		
-	}
-
 	function setSliderStyle(translateX, noTransition) {
 		let style = {
 			transform: `translate3d(-${translateX}%, 0, 0)`,
@@ -102,6 +86,10 @@ function CharactersStripController (charactersService, $scope) {
 
 		scope.sliderStyle = style;
 	}
+
+	this.setSliderItems = (numberOfItems) => {
+		sliderItems = numberOfItems;
+	};
 
 	this.selectCharacter = (name) => {
 		$scope.$emit('char-selected', name);
