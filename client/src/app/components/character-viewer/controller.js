@@ -30,7 +30,7 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 	function readSuccess(character) {
 		_loaded = true;
 
-		console.log(character);
+		// console.log(character);
 		
 		vm.character = character;
 
@@ -58,16 +58,16 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 		return !!vm.character.hasWeaponSwap;
 	}
 
-	$rootScope.$on('char-selected', (e, name) => {
-		console.log(name);
+	// $rootScope.$on('char-selected', (e, name) => {
+	// 	console.log(name);
 
-		if (name === loadingCharacterName) {
-			return;
-		}
+	// 	if (name === loadingCharacterName) {
+	// 		return;
+	// 	}
 
-		loadingCharacterName = name;
-		loadCharacter(name);
-	});
+	// 	loadingCharacterName = name;
+	// 	loadCharacter(name);
+	// });
 
 	init();
 

@@ -16,3 +16,5 @@ export default {
 	config,
 	run
 }
+
+// how to run in prod https://docs.angularjs.org/guide/production

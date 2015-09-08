@@ -10,13 +10,15 @@ function CharactersStripDirective ($window, debounce) {
 		let slider = element.find('ul')[0];
 
 		let transitionEvent;
-		scope.$on('slider:set-transition-end-event', (e, cb) => {
+		let scopeEvent = (e, cb) => {
 			transitionEvent = () => {
 				cb();
 			};
 
 			slider.addEventListener('webkitTransitionEnd', transitionEvent, false);
-		});
+		};
+
+		scope.$on('slider:set-transition-end-event', scopeEvent);
 
 		let resizeEvent = () => {
 			let windowWidth = $window.innerWidth;
@@ -38,6 +40,7 @@ function CharactersStripDirective ($window, debounce) {
 		scope.$on('$destroy', () => {
 			$window.removeEventListener('resize', debounceResize);
 			slider.removeEventListener('webkitTransitionEnd', transitionEvent);
+			// scope.$off('slider:set-transition-end-event', scopeEvent);
 		});
 
 		resizeEvent();

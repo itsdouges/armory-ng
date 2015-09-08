@@ -10,9 +10,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.without-auth', {
       abstract: true,
-      template: '<ui-view />',
+      template: '<ui-view></ui-view>',
       resolve: {
-        authenticated: function (authService, $state, $q) {
+        authenticated: function (authService, $q) {
           return authService.checkAuthentication()
             .then(null, () => {
               return $q.resolve();
@@ -28,17 +28,13 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/login',
       templateUrl: 'app/routes/login/login.html'
     })
-    .state('main.without-auth.character', {
-      url: '/characters/{name}',
-      templateUrl: 'app/routes/characters/characters.html'
-    })
     .state('main.without-auth.not-found', {
       url: '/404',
       template: 'cant find it man'
     })
     .state('main.with-auth', {
       abstract: true,
-      template: '<ui-view />',
+      template: '<ui-view></ui-view>',
       resolve: {
         authenticated: function (authService, $state) {
           return authService.checkAuthentication()
@@ -59,6 +55,10 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('main.with-auth.characters', {
       url: '/me/characters',
       templateUrl: 'app/routes/me/characters/characters.html'
+    })
+    .state('main.with-auth.characters.character', {
+      url: '/:name',
+      templateUrl: 'app/routes/me/characters/character/character.html'
     });
 
 	$locationProvider.html5Mode(true);

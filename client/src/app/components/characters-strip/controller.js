@@ -1,12 +1,11 @@
 'use strict';
 
-function CharactersStripController (charactersService, $scope) {
+function CharactersStripController (charactersService, $scope, $state) {
 	let scope = this;
 	let characters;
 	const sliderTranslateX = 100;
 	let transitionDirection;
 
-	// todo: browser resize event, change amountviewd depending.
 	let sliderItems;
 	let currentPosition;
 
@@ -16,6 +15,8 @@ function CharactersStripController (charactersService, $scope) {
 				.myList()
 				.then((items) => {
 					characters = items;
+					characters.push.apply(items, items); // TODO: Implement some real handling of small data
+
 					setCharactersOffset(sliderItems);
 
 					$scope.$emit('slider:set-transition-end-event', () => {
@@ -91,9 +92,10 @@ function CharactersStripController (charactersService, $scope) {
 		sliderItems = numberOfItems;
 	};
 
-	this.selectCharacter = (name) => {
-		$scope.$emit('char-selected', name);
-	};
+	// this.selectCharacter = (name) => {
+	// 	// $scope.$emit('char-selected', name);
+	// 	$state.go('/me');
+	// };
 
 	init();
 }

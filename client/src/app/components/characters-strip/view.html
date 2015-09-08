@@ -4,7 +4,7 @@
 	</a>
 
 	<ul class="characters-strip" ng-style="ctrl.sliderStyle">
-		<li class="characters-strip-item" ng-click="ctrl.selectCharacter(c.name)" ng-repeat="c in ctrl.characters">
+		<li class="characters-strip-item" ng-repeat="c in ctrl.characters track by $index">
 			<character-headshot character="c"></character-headshot>
 		</li>
 	</ul>
