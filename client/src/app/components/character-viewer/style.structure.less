@@ -3,9 +3,9 @@
 
 .character-title-strip {
 	padding: 0.5em;
-	position: relative;
-	overflow: auto;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 }
 
 .character-title {
@@ -43,33 +43,76 @@
 .character-profession-icon {
 	width: 128px;
 	height: 128px;
-	margin: 0.5em;
-	display: inline-block;
+	margin: 0.5em auto;
+	display: block;
 }
 
 .character-info-left {
 	text-align: center;
 }
 
+.character-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.character-content-inner {
+	display: flex;
+	flex-direction: column;
+}
+
 // todo: move portrait-top-out one layer lower. its over character atm should be behind.
 
 @media only screen and (min-width: @mobile) {
+	.character-profession-icon {
+		margin: 0.5em;
+	}
 
+	.character-title-strip {
+		flex-direction: row;
+		align-items: center;
+		text-align: left;
+	}
+
+	.character-content-inner {
+		flex-direction: row;
+	}
+
+	.character-portrait-container {
+		width: 65%;
+	}
+
+	.character-info-right {
+		width: 35%;
+	}
 }
 
 @media only screen and (min-width: @tablet) {
+	// .character-profession-icon {
+	// 	float: left;
+	// }
+
+	// .character-title {
+	// 	float: left;
+	// }
+
 
 }
 
-@media only screen and (min-width: @pc) {
+@media only screen and (min-width: 800px) {
+	.character-content {
+		flex-direction: row;
+	}
 
+	.character-info-right {
+		max-width: 40%;
+	}
+
+	.character-info-left {
+		width: 85px;
+	}
 }
 
 @media only screen and (min-width: @big-pc) {
 
-}
-
-.character-content {
-	display: flex;
-	flex-direction: column;
 }

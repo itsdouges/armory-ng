@@ -140,13 +140,13 @@
 						ng-if="ctrl.hasWeaponSwap()" 
 						type="sword" 
 						item="ctrl.character.equipment.weaponAquaticB"></item-block>
+
+						<guild-block guid="{{ ctrl.character.guildId }}"></guild-block>
+
+						<crafting-block 
+							ng-repeat="model in ctrl.character.crafting" 
+							model="model"></crafting-block>
 					</div>
-
-					<guild-block guid="{{ ctrl.character.guildId }}"></guild-block>
-
-					<crafting-block 
-						ng-repeat="model in ctrl.character.crafting" 
-						model="model"></crafting-block>
 				</div>
 		</div>
 	</div>
