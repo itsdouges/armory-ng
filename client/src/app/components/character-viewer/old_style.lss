@@ -1,0 +1,102 @@
+@thick-width: 235;
+@thin-width: 76;
+
+// todo: move portrait-top-out one layer lower. its over character atm should be behind.
+
+@media only screen and (min-width: @mobile) {
+
+}
+
+@media only screen and (min-width: @tablet) {
+
+
+
+.character-viewer {
+	max-width: 840px;
+	// min-width: 790px;
+}
+
+.character-content {
+	position: relative;
+	overflow: auto;
+	margin-top: -20px;
+}
+
+
+
+.character-info-left {
+	margin: @potrait-top-spacer 0.2em 0 0.2em;
+	width: @thin-width * 1px;
+	float: left;
+	text-align: center;
+	background: blue;
+}
+
+
+
+.character-info-right {
+	margin: @potrait-top-spacer 0.2em 0 0.2em;
+	width: @thick-width * 1px;
+	float: right;
+	background: purple;
+}
+}
+
+@media only screen and (min-width: @pc) {
+
+}
+
+@media only screen and (min-width: @big-pc) {
+
+}
+
+.character-title-strip {
+	padding: 0.5em;
+	position: relative;
+	overflow: auto;
+}
+
+.character-title {
+	margin: 1em 1em 0 1.5em;
+	overflow: auto;
+}
+
+.character-overview {
+	margin: 0 0.4em;
+}
+
+.character-name {
+	font-size: 3.5em;
+	display: block;
+}
+
+.character-level {
+	font-size: 2em;
+	display: block;
+}
+
+.character-portrait-container:before {
+	content: "";
+	display: block;
+	padding-top: 165%;
+}
+
+.character-portrait-container {
+	position: relative;
+	display: block;
+	overflow: hidden;
+}
+
+.character-equipment-cluster {
+	overflow: auto;
+}
+
+.character-profession-icon {
+	width: 128px;
+	height: 128px;
+	display: inline-block;
+}
+
+.character-info-left {
+	text-align: center;
+}

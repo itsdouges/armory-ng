@@ -92,9 +92,12 @@ function CharactersStripController (charactersService, $scope, $state) {
 		sliderItems = numberOfItems;
 	};
 
-	// this.selectCharacter = (name) => {
-	// 	// $scope.$emit('char-selected', name);
-	// 	$state.go('/me');
+	// this.selectCharacter = ($event, name) => {
+	// 	$scope.$emit('char-selected', name);
+	// 	console.log(name);
+
+	// 	console.log($event);
+	// 	// $state.go('/me');
 	// };
 
 	init();

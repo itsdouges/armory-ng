@@ -1,67 +1,39 @@
 @thick-width: 235;
 @thin-width: 76;
 
-// todo: move portrait-top-out one layer lower. its over character atm should be behind.
-
-.character-viewer {
-	max-width: 840px;
-	min-width: 790px;
-}
-
 .character-title-strip {
 	padding: 0.5em;
 	position: relative;
 	overflow: auto;
+	text-align: center;
 }
 
 .character-title {
-	margin: 1em 1em 0 1.5em;
 	overflow: auto;
 }
 
-.character-overview {
-	margin: 0 0.4em;
-}
-
 .character-name {
-	font-size: 3.5em;
+	font-size: 2.5em;
 	display: block;
 }
 
 .character-level {
-	font-size: 2em;
+	font-size: 1.5em;
 	display: block;
-}
-
-.character-content {
-	position: relative;
-	overflow: auto;
-	margin-top: -20px;
-}
-
-.character-portrait-container:before {
-	content: "";
-	display: block;
-	padding-top: 165%;
 }
 
 .character-portrait-container {
 	position: relative;
 	display: block;
-	overflow: hidden;
+	// height: 30em;
+	width: 100%;
+	// overflow: hidden;
 }
 
-.character-info-left {
-	margin: @potrait-top-spacer 0.2em 0 0.2em;
-	width: @thin-width * 1px;
-	float: left;
-	text-align: center;
-}
-
-.character-info-right {
-	margin: @potrait-top-spacer 0.2em 0 0.2em;
-	width: @thick-width * 1px;
-	float: right;
+.character-portrait-container:before {
+	content: "";
+	display: block;
+	padding-top: 200%;
 }
 
 .character-equipment-cluster {
@@ -71,5 +43,33 @@
 .character-profession-icon {
 	width: 128px;
 	height: 128px;
+	margin: 0.5em;
 	display: inline-block;
+}
+
+.character-info-left {
+	text-align: center;
+}
+
+// todo: move portrait-top-out one layer lower. its over character atm should be behind.
+
+@media only screen and (min-width: @mobile) {
+
+}
+
+@media only screen and (min-width: @tablet) {
+
+}
+
+@media only screen and (min-width: @pc) {
+
+}
+
+@media only screen and (min-width: @big-pc) {
+
+}
+
+.character-content {
+	display: flex;
+	flex-direction: column;
 }

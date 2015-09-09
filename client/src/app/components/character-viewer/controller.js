@@ -3,18 +3,27 @@
 /**
  * CharacterViewerController
  */
-function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
+function CharacterViewerController(gw2Service, $stateParams, $scope) {
 	'ngInject';
 
 	let _error;
 	let _loaded;
 	let vm = this;
-	let loadingCharacterName;
+	// let loadingCharacterName;
 
 	function init() {
-		if ($stateParams.name) {
-			loadCharacter($stateParams.name);
+		console.log($stateParams);
+
+		console.log('init');
+
+
+		$scope.$watch(() => {
+			return $stateParams.name;
+		}, (name) => {
+		if (name) {
+			loadCharacter(name);
 		}
+		});
 	}
 
 	function loadCharacter(name) {
@@ -30,7 +39,7 @@ function CharacterViewerController(gw2Service, $stateParams, $rootScope) {
 	function readSuccess(character) {
 		_loaded = true;
 
-		// console.log(character);
+		console.log(character);
 		
 		vm.character = character;
 
