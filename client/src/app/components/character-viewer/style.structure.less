@@ -1,5 +1,5 @@
-@thick-width: 235;
-@thin-width: 76;
+@thick-width: 228;
+@thin-width: 84;
 
 .character-title-strip {
 	padding: 0.5em;
@@ -25,19 +25,13 @@
 .character-portrait-container {
 	position: relative;
 	display: block;
-	// height: 30em;
 	width: 100%;
-	// overflow: hidden;
 }
 
 .character-portrait-container:before {
 	content: "";
 	display: block;
 	padding-top: 200%;
-}
-
-.character-equipment-cluster {
-	overflow: auto;
 }
 
 .character-profession-icon {
@@ -47,8 +41,16 @@
 	display: block;
 }
 
+.character-equipment-cluster {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
 .character-info-left {
-	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .character-content {
@@ -59,6 +61,11 @@
 .character-content-inner {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+}
+
+.character-info-right {
+	text-align: center;
 }
 
 // todo: move portrait-top-out one layer lower. its over character atm should be behind.
@@ -83,33 +90,49 @@
 	}
 
 	.character-info-right {
-		width: 35%;
+		width: 37%;
+		margin-top: 15px;
+	}
+
+	.character-portrait-container:before {
+		// padding-top: 170%;
 	}
 }
 
 @media only screen and (min-width: @tablet) {
-	// .character-profession-icon {
-	// 	float: left;
-	// }
-
-	// .character-title {
-	// 	float: left;
-	// }
-
 
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 845px) {
+	.character-info-left {
+		justify-content: flex-start;
+		flex-direction: column;
+	}
+
+	.character-portrait-container {
+		margin-top: -35px;
+	}
+
 	.character-content {
 		flex-direction: row;
+		max-width: 820px;
 	}
 
 	.character-info-right {
-		max-width: 40%;
+		max-width: 30%;
+		margin: 0;
+	}
+
+	.character-equipment-cluster {
+		// width: @thick-width * 1px;
 	}
 
 	.character-info-left {
-		width: 85px;
+		width: @thin-width * 1px;
+	}
+
+	.character-portrait-container:before {
+		padding-top: 175%;
 	}
 }
 

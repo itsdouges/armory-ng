@@ -14,6 +14,10 @@
 				{{ ctrl.character.level }}
 				{{ ctrl.character.profession }}
 			</span>
+
+<!-- 			<span class="character-level">
+				Gusman.6098
+			</span> -->
 		</div>
 	</div>
 
@@ -79,6 +83,8 @@
 
 
 				<div class="character-info-right">
+				<img style="width: 100%;" src="../assets/images/attribute-screen.jpg" />
+
 					<div class="character-equipment-cluster">
 						<item-block 
 							slot-name="Back" 
@@ -140,13 +146,14 @@
 						ng-if="ctrl.hasWeaponSwap()" 
 						type="sword" 
 						item="ctrl.character.equipment.weaponAquaticB"></item-block>
-
-						<guild-block guid="{{ ctrl.character.guildId }}"></guild-block>
-
-						<crafting-block 
-							ng-repeat="model in ctrl.character.crafting" 
-							model="model"></crafting-block>
 					</div>
+
+					<guild-block guid="{{ ctrl.character.guildId }}"></guild-block>
+
+					<h3>Crafting</h3>
+					<crafting-block 
+						ng-repeat="model in ctrl.character.crafting" 
+						model="model"></crafting-block>
 				</div>
 		</div>
 	</div>
