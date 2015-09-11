@@ -39,7 +39,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         authenticated: function (authService, $state) {
           return authService.checkAuthentication()
             .then(null, () => {
-              $state.go('main.login');
+              $state.go('main.without-auth.login');
             });
         }
       }
