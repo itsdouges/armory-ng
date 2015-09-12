@@ -47,7 +47,7 @@ function ItemTooltipController(gw2Service, $q) {
 			})[0];
 
 			// todo: unit test this
-			upgrade1.total_count = vm.item.upgrade_count && vm.item.upgrade_count.length;
+			upgrade1.total_count = vm.item.counts && vm.item.counts.total;
 
 			upgrade2 = arrayOfItems.filter(function(item) {
 				return item.id === vm.item.upgrades[1];

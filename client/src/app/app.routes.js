@@ -48,17 +48,12 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/settings',
       templateUrl: 'app/routes/settings/settings.html'
     })
-    .state('main.with-auth.me', {
-      url: '/me',
-      templateUrl: 'app/routes/me/me.html'
-    })
     .state('main.with-auth.characters', {
       url: '/me/characters',
       templateUrl: 'app/routes/me/characters/characters.html'
     })
     .state('main.with-auth.characters.character', {
-      url: '/:name',
-      templateUrl: 'app/routes/me/characters/character/character.html'
+      url: '/:name'
     });
 
 	$locationProvider.html5Mode(true);

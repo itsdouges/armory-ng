@@ -1,4 +1,7 @@
 @potrait-top-spacer: 37px;
+@pz-foreground: 10;
+@pz-background: 1;
+@pz-middle: 5;
 
 .character-portrait {
 	position: absolute;
@@ -14,6 +17,8 @@
 	left: 0;
 	right: 0;
 	height: 239px;
+	background-size: cover;
+	z-index: @pz-background;
 }
 
 .portrait-bottom-in {
@@ -21,7 +26,9 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	background-size: cover;
 	height: 315px;
+	z-index: @pz-foreground;
 }
 
 .portrait-bottom-out {
@@ -29,6 +36,7 @@
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	background-size: cover;
 	right: 0;
 }
 
@@ -37,6 +45,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	background-size: cover;
 	right: 0;
 }
 
@@ -46,4 +55,6 @@
 	left: 0;
 	right: 0;
 	top: 0;
+	background-repeat: no-repeat;
+	z-index: @pz-middle;
 }

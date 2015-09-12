@@ -1,7 +1,7 @@
-@thick-width: 228;
+@thick-width: 224;
 @thin-width: 84;
 
-.character-title-strip {
+.character-top-strip {
 	padding: 0.5em;
 	text-align: center;
 	display: flex;
@@ -13,12 +13,14 @@
 }
 
 .character-name {
-	font-size: 2.5em;
+	font-size: 3.25em;
 	display: block;
+	margin: 0 0 -0.2em 0;
 }
 
 .character-level {
 	font-size: 1.5em;
+	margin-left: 0.2em;
 	display: block;
 }
 
@@ -26,6 +28,8 @@
 	position: relative;
 	display: block;
 	width: 100%;
+	align-self: stretch;
+	margin-bottom: -2em;
 }
 
 .character-portrait-container:before {
@@ -76,10 +80,14 @@
 		margin: 0.5em;
 	}
 
-	.character-title-strip {
+	.character-top-strip {
 		flex-direction: row;
 		align-items: center;
 		text-align: left;
+	}
+
+	.character-title {
+		margin-top: 0.75em;
 	}
 
 	.character-content-inner {
@@ -87,22 +95,26 @@
 	}
 
 	.character-portrait-container {
-		width: 65%;
+		// width: 67%;
 	}
 
 	.character-info-right {
-		width: 37%;
+		width: @thick-width * 1px;
 		margin-top: 15px;
 	}
 
-	.character-portrait-container:before {
-		// padding-top: 170%;
+	.character-equipment-cluster {
+		margin-right: 0;
 	}
 }
 
 @media only screen and (min-width: @tablet) {
+	.character-portrait-container {
+		// width: 65%;
+	}
+
 	.character-info-right {
-		max-width: 34%;
+		width: 330px;
 	}
 }
 
@@ -122,7 +134,6 @@
 	}
 
 	.character-info-right {
-		max-width: 32%;
 		margin: 0;
 	}
 

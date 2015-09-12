@@ -1,17 +1,18 @@
 <div 
 	class="character-viewer" 
 	ng-if="ctrl.isLoaded()">
-	<div class="character-title-strip">
+	<div class="character-top-strip">
 		<span
 			class="character-profession-icon" 
 			ng-class="ctrl.character.profession.toLowerCase()"></span>
 		<div class="character-title">
-			<span class="character-name serif">
+			<h2 class="character-name serif">
 				{{ ctrl.character.name }}
-			</span>
+			</h2>
 
 			<span class="character-level">
 				{{ ctrl.character.level }}
+				{{ ctrl.character.race }}
 				{{ ctrl.character.profession }}
 			</span>
 
@@ -81,7 +82,6 @@
 						character="ctrl.character" 
 						class="character-portrait-container"></character-portrait>
 
-
 				<div class="character-info-right">
 					<div class="character-equipment-cluster">
 						<item-block 
@@ -146,9 +146,9 @@
 						item="ctrl.character.equipment.weaponAquaticB"></item-block>
 					</div>
 
-					<guild-block guid="{{ ctrl.character.guildId }}"></guild-block>
+					<guild-block guid="59BDB177-85C5-E311-9621-AC162DAE8ACD"></guild-block>
+					<!-- <guild-block guid="{{ ctrl.character.guildId }}"></guild-block> -->
 
-					<h3>Crafting</h3>
 					<crafting-block 
 						ng-repeat="model in ctrl.character.crafting" 
 						model="model"></crafting-block>

@@ -5,19 +5,69 @@
 // todo: disable for touch screens
 
 function MouseFollowDirective ($window) {
-	'ngInject';
+	let state = {};
+	let domEle;
+	let mouse = {};
 
 	function link (scope, element, attrs) {
-		function onMouseMove(e) {
-			let css = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+		domEle = element[0];
+
+		scope.$watch(() => {
+			return domEle.offsetWidth;
+		}, () => {
+			calculateState();
+			calculateElementPosition();
+		});
+
+		function calculateState() {
+			let elementWidth = domEle.offsetWidth;
+			let elementHeight = domEle.offsetHeight;
+
+			let elementRelativeToWindowPosition = domEle.getBoundingClientRect();
+			if (elementRelativeToWindowPosition.right > $window.innerWidth) {
+				state.flipRight = true;
+			} else if (state.flipRight && elementRelativeToWindowPosition.right + elementWidth <= $window.innerWidth) {
+				state.flipRight = false;
+			}
+
+			if (elementRelativeToWindowPosition.bottom > $window.innerHeight) {
+				state.flipTop = true;
+			} else if (state.flipTop && elementRelativeToWindowPosition.bottom + elementHeight <= $window.innerHeight) {
+				state.flipTop = false;
+			}
+		}
+
+		function calculateElementPosition() {
+			let elementWidth = domEle.offsetWidth;
+			let elementHeight = domEle.offsetHeight;
+
+			let x = mouse.x;
+			let y = mouse.y;
+
+			if (state.flipRight) {
+				x -= elementWidth;
+			}
+
+			if (state.flipTop) {
+				y -= elementHeight;
+			}
+
+			let css = `translate3d(${x}px, ${y}px, 0)`;
 			element[0].style.transform = css;
 		}
 
-		$window.addEventListener('mousemove', onMouseMove, false);
+		function onMouseMove(e) {
+			mouse.x = e.clientX;
+			mouse.y = e.clientY;
 
-  		element.on('$destroy', function () {
-			$window.removeEventListener('mousemove', onMouseMove, false);
-		 });
+			calculateState();
+			calculateElementPosition();
+		}
+
+		$window.addEventListener('mousemove', onMouseMove, false);
+		element.on('$destroy', () => {
+			$window.removeEventListener('mousemove', onMouseMove);
+		});
 	}
 
 	let directive = {
