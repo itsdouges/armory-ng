@@ -4,24 +4,44 @@ character-headshot,
 	cursor: pointer;
 	overflow: hidden;
 	align-items: center;
+	color: black;
+}
+
+character-headshot {
+	padding: 5px;
+	transition: background 0.3s;
 }
 
 character-headshot:hover {
-	outline: 2px solid red;
+	.character-headshot {
+		color: white;
+	}
+
+	background: rgba(0, 0, 0, 0.7);
 }
 
-.character-headshot-name {
-	font-size: 1.2em;
-	font-family: 'Menomonia';
-	overflow: hidden;
-	opacity: 0.9;
-}
-
-.character-headshot-profession {
+.character-headshot-info {
 	font-size: 0.8em;
 	overflow: hidden;
 	font-weight: 100;
 	opacity: 0.85;
+}
+
+.character-headshot-name {
+	font-size: 1.7em;
+	font-family: 'Menomonia';
+	overflow: hidden;
+	opacity: 0.9;
+	font-weight: bold;
+	margin-bottom: -3px;
+}
+
+.character-headshot-profession {
+	margin-bottom: -3px;
+}
+
+.character-headshot-accountname {
+	font-style: italic;
 }
 
 .character-headshot-image {

@@ -11,8 +11,12 @@ function CharactersStripDirective ($window, debounce) {
 
 		let transitionEvent;
 		let scopeEvent = (e, cb) => {
-			transitionEvent = () => {
-				cb();
+			transitionEvent = (e) => {
+				if (e.propertyName === 'transform') {
+					cb();
+				}
+				
+				return true;
 			};
 
 			slider.addEventListener('webkitTransitionEnd', transitionEvent, false);

@@ -3,18 +3,55 @@
 characters-strip {
 	display: block;
 	white-space: nowrap;
+	position: relative;
+	padding: 26px 0;
+	overflow: hidden;
 }
 
 .characters-strip {
 	color: white;
 	display: block;
-	overflow-x: visible;
 	padding: 0;
 	margin: 0;
 	white-space: nowrap;
-	padding: 0.4em 0;
 	transition: transform 0.4s;
 	min-height: 4em;
+	overflow: visible;
+}
+
+.characters-strip-border-container {
+	position: absolute;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-around;
+
+	&.top {
+		top: 0;
+	}
+
+	&.bottom {
+		bottom: 0;
+		transform: scaleY(-1);
+	}
+}
+
+.characters-strip-border {
+	flex-shrink: 0;
+	height: 26px;
+	width: 284px;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-image: url('../assets/images/slider-border.png');
+	overflow: hidden;
+
+	&.left {
+
+	}
+
+	&.right {
+		transform: scaleX(-1);
+	}
 }
 
 .NumberOfSliderItems(@items) {
@@ -51,10 +88,10 @@ characters-strip {
 }
 
 .characters-strip-container {
-	background: black;
+	background: #EEEEEE;
 	position: relative;
 	padding: 0 @slider-button-width * 1%;
-	overflow: hidden;
+	overflow: visible;
 	white-space: nowrap;
 }
 
@@ -68,6 +105,10 @@ characters-strip {
 	display: flex;
 	align-items: center;
 	z-index: 10;
+	transition: background 0.3s;
+	
+	background-repeat: no-repeat;
+	background-position: center;
 
 	&.left {
 		left: 0;
@@ -76,4 +117,8 @@ characters-strip {
 	&.right {
 		right: 0;
 	}
+}
+
+.strip-control:hover {
+	background-color: rgba(0, 0, 0, 0.7);
 }
