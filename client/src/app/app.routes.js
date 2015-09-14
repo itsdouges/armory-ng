@@ -8,7 +8,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'app/routes/main.html',
       abstract: true
     })
-    .state('main.without-auth', {
+    .state('main.no-auth', {
       abstract: true,
       template: '<ui-view></ui-view>',
       resolve: {
@@ -20,15 +20,23 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    .state('main.without-auth.home', {
+    .state('main.no-auth.with-container', {
+      abstract: true,
+      template: '<div class="container"><ui-view></ui-view></div>'
+    })
+    .state('main.no-auth.home', {
       url: '/',
       templateUrl: 'app/routes/home/home.html',
     })
-    .state('main.without-auth.login', {
+    .state('main.no-auth.with-container.login', {
       url: '/login',
       templateUrl: 'app/routes/login/login.html'
     })
-    .state('main.without-auth.not-found', {
+    .state('main.no-auth.with-container.signup', {
+      url: '/signup',
+      templateUrl: 'app/routes/signup/signup.html'
+    })
+    .state('main.no-auth.not-found', {
       url: '/404',
       template: 'cant find it man'
     })
@@ -44,7 +52,11 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    .state('main.with-auth.settings', {
+    .state('main.with-auth.with-container', {
+      abstract: true,
+      template: '<div class="container"><ui-view></ui-view></div>'
+    })
+    .state('main.with-auth.with-container.settings', {
       url: '/settings',
       templateUrl: 'app/routes/settings/settings.html'
     })

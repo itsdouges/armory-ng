@@ -15,10 +15,6 @@
 				{{ ctrl.character.race }}
 				{{ ctrl.character.profession }}
 			</span>
-
-<!-- 			<span class="character-level">
-				Gusman.6098
-			</span> -->
 		</div>
 	</div>
 
@@ -160,9 +156,8 @@
 	<img src="../assets/images/select-a-character.png" />
 </div>
 
-<div ng-if="ctrl.busy">
-	loading man
-</div>
+<progress-indicator busy="ctrl.busy"></progress-indicator>
+
 
 <div ng-if="ctrl.isError()">
 	an error occurred, could be something

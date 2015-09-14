@@ -1,11 +1,6 @@
-input[type=button].positive,
-button.positive {
-	float: right;
-}
-
 input[type=button].negative,
 button.negative {
-	float: left;
+
 }
 	
 input[type=button].primary,
@@ -14,8 +9,21 @@ button.primary {
 	background-color: @fine;
 }
 
+input[type=button].positive:hover,
+input[type=button].positive:focus,
+button.positive:hover,
+button.positive:focus {
+	background-color: @masterwork;
+}
+
+.button-group {
+	display: flex;
+	justify-content: flex-end;
+}
+
 input[type=button],
 button {
+	transition: background-color 0.2s;
 	font-size: 1.2em;
 	border-radius: 1px;
 }
@@ -23,6 +31,7 @@ button {
 input[type=text],
 input[type=password],
 input[type=email] {
+	padding: 0.4em;
 	width: 100%;
 	margin: 0;
 	font-size: 1.5em;
@@ -35,7 +44,7 @@ input[type=email] {
 @media only screen and (min-width: @tablet) {
 	input[type=button].positive,
 	button.positive {
-		font-size: 1em;
+		// font-size: 1em;
 	}
 }
 

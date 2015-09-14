@@ -1,5 +1,6 @@
 <ul class="user-status">
 	<li ng-if="!ctrl.isAuthenticated()"><a href="/login">Login</a></li>
+	<li ng-if="!ctrl.isAuthenticated()"><a href="/signup">Signup</a></li>
 	<li ng-if="ctrl.isAuthenticated()"><a href="/me/characters">My Characters</a></li>
 	<li ng-if="ctrl.isAuthenticated()"><a href="/settings">Settings</a></li>
 	<li ng-if="ctrl.isAuthenticated()"><a ng-click="ctrl.logout()" href="">Logout</a></li>

@@ -30,6 +30,7 @@
 	- item tooltip
 		- functionality
 			- general fixes
+			- touch to display (touch-device only)
 			- gw2 markup parser
 	- character slider
 		- arrow icons

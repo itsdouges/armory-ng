@@ -10,6 +10,9 @@ import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 import CharactersStripController from './components/characters-strip/controller';
 import CharactersStripDirective from './components/characters-strip/directive';
 
+import ProgressIndicatorController from './components/progress-indicator/controller';
+import ProgressIndicatorDirective from './components/progress-indicator/directive';
+
 import CharacterViewerController from './components/character-viewer/controller';
 import CharacterViewerDirective from './components/character-viewer/directive';
 
@@ -100,6 +103,9 @@ angular.module('gw2armory', [
 
 .controller('ItemTooltipController', ItemTooltipController)
 .directive('itemTooltip', ItemTooltipDirective)
+
+.controller('ProgressIndicatorController', ProgressIndicatorController)
+.directive('progressIndicator', ProgressIndicatorDirective)
 
 .controller('CharactersStripController', CharactersStripController)
 .directive('charactersStrip', CharactersStripDirective)

@@ -1,5 +1,5 @@
-<form ng-submit="ctrl.login()" class="box">
-	<h2>Login</h2>
+<form ng-submit="ctrl.login()">
+	<h1>Login</h1>
 
 	<div class="message-box error">{{ ctrl.error }}</div>
 
@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="input-container">
-			<input class="control" id="email" type="text" ng-model="ctrl.user.email" required="required" />
+			<input placeholder="Email" class="control" id="email" type="text" ng-model="ctrl.user.email" required="required" />
 		</div>
 	</div>
 
@@ -19,9 +19,11 @@
 		</div>
 
 		<div class="input-container">
-			<input id="password" type="password" ng-model="ctrl.user.password" required="required" />
+			<input placeholder="Password" id="password" type="password" ng-model="ctrl.user.password" required="required" />
 		</div>
 	</div>
 
-	<busy-button busy="ctrl.loading">Login</busy-button>
+	<div class="button-group">
+		<busy-button busy="ctrl.loading">Login</busy-button>
+	</div>
 </form>

@@ -22,6 +22,9 @@ function CharacterViewerController(gw2Service, $stateParams, $scope) {
 		}, (name) => {
 		if (name) {
 			loadCharacter(name);
+		} else {
+			vm.character = {};
+			_loaded = false;
 		}
 		});
 	}

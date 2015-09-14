@@ -1,16 +1,35 @@
-.box {
-	width: 100%;
-	margin: 0;
-	display: inline-block;
-	margin: 0 auto;
-	padding: 1em;
-	
-	border: 1px solid black;
-	vertical-align: top;
+@large-card: 100%;
+@medium-card: 500px;
+@small-card: 200px;
+
+.card {
+	padding: 2em;
+	border-radius: 1px;
+	.box-shadow-low;
+}
+
+.card-primary {
+	background: rgba(238, 238, 238, 0.7);
+}
+
+@media only screen and (min-width: @mobile) {
+	.card-medium {
+		flex-basis: 100%;
+	}
 }
 
 @media only screen and (min-width: @tablet) {
-	.box {
-		width: 45%;
+	.card-medium {
+		flex-basis: @mobile;
 	}
+}
+
+@media only screen and (min-width: @pc) {
+	// .card-medium {
+	// 	width: @tablet;
+	// }
+}
+
+@media only screen and (min-width: @big-pc) {
+
 }

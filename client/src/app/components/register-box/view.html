@@ -1,5 +1,5 @@
-<form ng-submit="ctrl.sendData()" class="box">
-	<h2>Register</h2>
+<form ng-submit="ctrl.sendData()">
+	<h1>Signup</h1>
 
 	<div class="message-box error">{{ ctrl.error }}</div>
 
@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="input-container">
-			<input ng-keyup="ctrl.checkEmail()" class="control" id="register-email" type="email" ng-model="ctrl.user.email" required="required" />
+			<input placeholder="Email" ng-keyup="ctrl.checkEmail()" class="control" id="register-email" type="email" ng-model="ctrl.user.email" required="required" />
 			
 			<input-validity 
 				data-busy="ctrl.emailLoading"
@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="input-container">
-			<input ng-keyup="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.user.alias" required="required" />
+			<input placeholder="Alias" ng-keyup="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.user.alias" required="required" />
 
 			<input-validity 
 				data-busy="ctrl.aliasLoading"
@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="input-container">
-			<input ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password" required="required" />
+			<input placeholder="Password" ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password" required="required" />
 
 			<input-validity
 				data-valid="ctrl.user.passwordsValid ">
@@ -53,7 +53,7 @@
 		</div>
 
 		<div class="input-container">
-			<input ng-keyup="ctrl.checkPasswords()" id="register-confirm-password" type="password" ng-model="ctrl.user.password2" required="required" />
+			<input placeholder="Confirm Password" ng-keyup="ctrl.checkPasswords()" id="register-confirm-password" type="password" ng-model="ctrl.user.password2" required="required" />
 
 			<input-validity
 				data-valid="ctrl.user.passwordsValid ">
@@ -61,20 +61,9 @@
 		</div>
 	</div>
 
-	<!-- <div class="row">
-		<div class="label-container">
-			<label for="register-token">Api Token</label>
-		</div>
-
-		<div class="input-container">
-			<input ng-keyup="ctrl.checkToken()" id="register-token" type="text" ng-model="ctrl.user.token" required="required" />
-
-			<input-validity 
-				data-busy="ctrl.tokenLoading"
-				data-valid="ctrl.user.tokenValid">
-			</input-validity>
-		</div>
-	</div> -->
-
-	<busy-button button-disabled="!ctrl.validateUser()" busy="ctrl.loading">Register</busy-button>
+	<div class="button-group">
+		<busy-button button-disabled="!ctrl.validateUser()" busy="ctrl.loading">
+			Register
+		</busy-button>
+	</div>
 </form>

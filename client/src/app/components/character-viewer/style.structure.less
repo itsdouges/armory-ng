@@ -1,6 +1,10 @@
 @thick-width: 224;
 @thin-width: 78;
 
+character-viewer {
+	width: 100%;
+}
+
 .character-top-strip {
 	padding: 0.5em;
 	text-align: center;
@@ -77,6 +81,10 @@
 // todo: move portrait-top-out one layer lower. its over character atm should be behind.
 
 @media only screen and (min-width: @mobile) {
+	.character-equipment-cluster {
+		justify-content: flex-start;
+	}
+
 	.character-profession-icon {
 		margin: 0.5em;
 	}
@@ -95,11 +103,6 @@
 		flex-direction: row;
 	}
 
-	.character-equipment-cluster {
-		margin-right: 0;
-	}
-
-
 	.character-portrait-container:before {
 		content: "";
 		display: block;
@@ -109,7 +112,7 @@
 	.character-info-right {
 		flex-shrink: 0;
 		margin-top: 15px;
-		width: @thick-width * 2/3 * 1px;
+		width: 152px;
 	}
 }
 
