@@ -1,5 +1,5 @@
 @thick-width: 224;
-@thin-width: 84;
+@thin-width: 78;
 
 .character-top-strip {
 	padding: 0.5em;
@@ -56,6 +56,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	flex-shrink: 0;
 }
 
 .character-content {
@@ -94,36 +95,25 @@
 		flex-direction: row;
 	}
 
-	.character-portrait-container {
-		// width: 67%;
+	.character-equipment-cluster {
+		margin-right: 0;
+	}
+
+
+	.character-portrait-container:before {
+		content: "";
+		display: block;
+		padding-top: 175%;
 	}
 
 	.character-info-right {
-		width: @thick-width * 1px;
+		flex-shrink: 0;
 		margin-top: 15px;
-	}
-
-	.character-equipment-cluster {
-		margin-right: 0;
+		width: @thick-width * 2/3 * 1px;
 	}
 }
 
 @media only screen and (min-width: @tablet) {
-	.character-portrait-container {
-		// width: 65%;
-	}
-
-	.character-info-right {
-		width: 330px;
-	}
-}
-
-@media only screen and (min-width: 845px) {
-	.character-info-left {
-		justify-content: flex-start;
-		flex-direction: column;
-	}
-
 	.character-portrait-container {
 		margin-top: -35px;
 	}
@@ -133,20 +123,21 @@
 		max-width: 820px;
 	}
 
+	.character-info-left {
+		justify-content: flex-start;
+		flex-direction: column;
+		margin: 0 0.25rem;
+	}
+
 	.character-info-right {
+		width: @thick-width * 1px;
 		margin: 0;
 	}
+}
 
-	.character-equipment-cluster {
-		// width: @thick-width * 1px;
-	}
-
-	.character-info-left {
-		width: @thin-width * 1px;
-	}
-
+@media only screen and (min-width: 845px) {
 	.character-portrait-container:before {
-		padding-top: 175%;
+		
 	}
 }
 
