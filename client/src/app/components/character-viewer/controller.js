@@ -9,14 +9,8 @@ function CharacterViewerController(gw2Service, $stateParams, $scope) {
 	let _error;
 	let _loaded;
 	let vm = this;
-	// let loadingCharacterName;
 
 	function init() {
-		console.log($stateParams);
-
-		console.log('init');
-
-
 		$scope.$watch(() => {
 			return $stateParams.name;
 		}, (name) => {
@@ -69,17 +63,6 @@ function CharacterViewerController(gw2Service, $stateParams, $scope) {
 	function hasWeaponSwap() {
 		return !!vm.character.hasWeaponSwap;
 	}
-
-	// $rootScope.$on('char-selected', (e, name) => {
-	// 	console.log(name);
-
-	// 	if (name === loadingCharacterName) {
-	// 		return;
-	// 	}
-
-	// 	loadingCharacterName = name;
-	// 	loadCharacter(name);
-	// });
 
 	init();
 

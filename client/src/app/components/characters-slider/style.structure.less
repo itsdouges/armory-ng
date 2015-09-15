@@ -1,7 +1,7 @@
 @slider-button-width: 5; //in percent
 @slider-button-width-big: 10; //in percent
 
-characters-strip {
+characters-slider {
 	display: block;
 	white-space: nowrap;
 	position: relative;
@@ -9,7 +9,7 @@ characters-strip {
 	overflow: hidden;
 }
 
-.characters-strip {
+.characters-slider {
 	color: white;
 	display: block;
 	padding: 0;
@@ -20,7 +20,7 @@ characters-strip {
 	overflow: visible;
 }
 
-.characters-strip-border-container {
+.characters-slider-border-container {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -37,7 +37,7 @@ characters-strip {
 	}
 }
 
-.characters-strip-border {
+.characters-slider-border {
 	flex-shrink: 0;
 	height: 26px;
 	width: 284px;
@@ -55,18 +55,30 @@ characters-strip {
 	}
 }
 
+.slider-message {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	margin: 0 auto;
+	display: inline-block;
+	text-align: center;
+	line-height: 380%;
+}
+
 .NumberOfSliderItems(@items) {
 	width: (100 / @items) * 1%;
 }
 
-.characters-strip-item {
+.characters-slider-item {
 	.NumberOfSliderItems(2);
 	overflow: auto;
 	display: inline-block;
 	vertical-align: bottom;
 }
 
-.characters-strip-container {
+.characters-slider-container {
 	background: @primary;
 	.box-shadow-medium();
 	position: relative;
@@ -75,7 +87,7 @@ characters-strip {
 	white-space: nowrap;
 }
 
-.strip-control {
+.slider-control {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -91,6 +103,10 @@ characters-strip {
 	background-position: center;
 	background-color: rgba(0, 0, 0, 0.4);
 
+	> span {
+		display: none;
+	}
+
 	&.left {
 		left: 0;
 	}
@@ -100,7 +116,7 @@ characters-strip {
 	}
 }
 
-.strip-control:hover {
+.slider-control:hover {
 	background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -109,27 +125,27 @@ characters-strip {
 }
 
 @media only screen and (min-width: @tablet) {
-	.characters-strip-item {
+	.characters-slider-item {
 		.NumberOfSliderItems(3);
 	}
 
-	.strip-control {
+	.slider-control {
 		width: @slider-button-width * 1%;
 	}
 
-	.characters-strip-container {
+	.characters-slider-container {
 		padding: 0 @slider-button-width * 1%;
 	}
 }
 
 @media only screen and (min-width: @pc) {
-	.characters-strip-item {
+	.characters-slider-item {
 		.NumberOfSliderItems(4);
 	}
 }
 
 @media only screen and (min-width: @big-pc) {
-	.characters-strip-item {
+	.characters-slider-item {
 		.NumberOfSliderItems(5);
 	}
 }

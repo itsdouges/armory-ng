@@ -1,7 +1,9 @@
 <h2>Tokens</h2>
 
 <div ng-if="!ctrl.tokens.length">
-	you dont have any tokens! click here to get one yo.	
+	<p>
+		Let's add some tokens! <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Head over to ArenaNet applications and create some.</strong></a>
+	</p>
 </div>
 
 <gw2-token ng-repeat="token in ctrl.tokens" token="token" mode="view"></gw2-token>

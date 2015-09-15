@@ -7,8 +7,8 @@ import routerConfig from './app.routes';
 import environment from '../generated/app.env';
 import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 
-import CharactersStripController from './components/characters-strip/controller';
-import CharactersStripDirective from './components/characters-strip/directive';
+import CharactersSliderController from './components/characters-slider/controller';
+import CharactersSliderDirective from './components/characters-slider/directive';
 
 import ProgressIndicatorController from './components/progress-indicator/controller';
 import ProgressIndicatorDirective from './components/progress-indicator/directive';
@@ -110,8 +110,8 @@ angular.module('gw2armory', [
 .controller('ProgressIndicatorController', ProgressIndicatorController)
 .directive('progressIndicator', ProgressIndicatorDirective)
 
-.controller('CharactersStripController', CharactersStripController)
-.directive('charactersStrip', CharactersStripDirective)
+.controller('CharactersSliderController', CharactersSliderController)
+.directive('charactersSlider', CharactersSliderDirective)
 
 .controller('CharacterViewerController', CharacterViewerController)
 .directive('characterViewer', CharacterViewerDirective)
