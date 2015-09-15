@@ -1,6 +1,6 @@
 'use strict';
 
-function UserUpdateController (userService) {
+function ChangeAliasController (userService) {
 	function init () {
 		// userService.readMe()
 		// 	.then(function (data) {
@@ -11,4 +11,4 @@ function UserUpdateController (userService) {
 	init();
 }
 
-export default UserUpdateController;
+export default ChangeAliasController;

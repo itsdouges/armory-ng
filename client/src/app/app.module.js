@@ -25,8 +25,11 @@ import UserStatusDirective from './components/user-status/directive';
 import UserTokensController from './components/user-tokens/controller';
 import UserTokensDirective from './components/user-tokens/directive';
 
-import UserUpdateController from './components/user-update/controller';
-import UserUpdateDirective from './components/user-update/directive';
+import ChangeAliasController from './components/change-alias/controller';
+import ChangeAliasDirective from './components/change-alias/directive';
+
+import ChangePasswordController from './components/change-password/controller';
+import ChangePasswordDirective from './components/change-password/directive';
 
 import CharacterPortraitController from './components/character-portrait/controller';
 import CharacterPortraitDirective from './components/character-portrait/directive';
@@ -122,8 +125,11 @@ angular.module('gw2armory', [
 .controller('UserStatusController', UserStatusController)
 .directive('userStatus', UserStatusDirective)
 
-.controller('UserUpdateController', UserUpdateController)
-.directive('userUpdate', UserUpdateDirective)
+.controller('ChangeAliasController', ChangeAliasController)
+.directive('changeAlias', ChangeAliasDirective)
+
+.controller('ChangePasswordController', ChangePasswordController)
+.directive('changePassword', ChangePasswordDirective)
 
 .controller('GuildBlockController', GuildBlockController)
 .directive('guildBlock', GuildBlockDirective)
