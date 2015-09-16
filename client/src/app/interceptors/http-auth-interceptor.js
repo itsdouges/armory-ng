@@ -8,7 +8,7 @@ function HttpAuthInterceptor(env, $q, $injector) {
 			return;
 		}
 
-		$injector.get('$state').go('main.login');
+		$injector.get('$state').go('main.no-auth.with-container.login');
 	}
 
 	function handle500(rejection) {

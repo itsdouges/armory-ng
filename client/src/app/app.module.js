@@ -40,8 +40,11 @@ import CharacterHeadshotDirective from './components/character-headshot/directiv
 import GuildBlockController from './components/guild-block/controller';
 import GuildBlockDirective from './components/guild-block/directive';
 
-import HeaderBlockController from './components/header-block/controller';
-import HeaderBlockDirective from './components/header-block/directive';
+import HeaderBlockController from './components/header/controller';
+import HeaderBlockDirective from './components/header/directive';
+
+import FooterController from './components/footer/controller';
+import FooterDirective from './components/footer/directive';
 
 import CraftingBlockController from './components/crafting-block/controller';
 import CraftingBlockDirective from './components/crafting-block/directive';
@@ -143,6 +146,9 @@ angular.module('gw2armory', [
 
 .controller('HeaderController', HeaderBlockController)
 .directive('header', HeaderBlockDirective)
+
+.controller('FooterController', FooterController)
+.directive('footer', FooterDirective)
 
 .controller('CraftingBlockController', CraftingBlockController)
 .directive('craftingBlock', CraftingBlockDirective)
