@@ -1,20 +1,26 @@
 .header {
 	background-repeat: no-repeat;
 	background-position: top center;
-	background: @primary;
 	position: relative;
-	.box-shadow-low;
+	padding: 1em;
+	min-height: 3.5em;
+	text-align: center;
+}
+
+header-block {
+	display: flex;
 }
 
 .site-title {
-	padding: 0.5em;
+	font-family: Open Sans;
 	margin: 0;
-
-	> a {
-
-	}
+	margin-bottom: -10px;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 
-.site-icon {
-
+@media only screen and (min-width: @mobile) {
+	.header {
+		text-align: left;
+	}
 }

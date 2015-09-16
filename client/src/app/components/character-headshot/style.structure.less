@@ -10,6 +10,10 @@ character-headshot,
 character-headshot {
 	padding: 5px;
 	transition: background 0.3s;
+
+	a > {
+		width: 100%;
+	}
 }
 
 character-headshot:hover {
@@ -21,6 +25,7 @@ character-headshot:hover {
 }
 
 .character-headshot-info {
+	width: 100%;
 	font-size: 0.8em;
 	overflow: hidden;
 	font-weight: 100;
@@ -47,6 +52,7 @@ character-headshot:hover {
 .character-headshot-image {
 	height: 4em;
 	width: 4em;
+	flex-shrink: 0;
 	margin-right: 0.6em;
 	background-repeat: no-repeat;
 	background-position: top center;

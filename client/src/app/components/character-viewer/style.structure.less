@@ -78,7 +78,11 @@ character-viewer {
 	text-align: center;
 }
 
-// todo: move portrait-top-out one layer lower. its over character atm should be behind.
+.character-viewer-empty {
+	height: 30em;
+	margin: 5em auto;
+	background: url('../assets/images/quaggan-vacation.jpg') no-repeat center center;
+}
 
 @media only screen and (min-width: @mobile) {
 	.character-equipment-cluster {
@@ -93,10 +97,6 @@ character-viewer {
 		flex-direction: row;
 		align-items: center;
 		text-align: left;
-	}
-
-	.character-title {
-		margin-top: 0.75em;
 	}
 
 	.character-content-inner {
@@ -114,9 +114,17 @@ character-viewer {
 		margin-top: 15px;
 		width: 152px;
 	}
+
+	.character-portrait-container {
+		margin-left: 0.5rem;
+	}
 }
 
 @media only screen and (min-width: @tablet) {
+	.character-portrait-container {
+		margin-left: 0;
+	}
+
 	.character-portrait-container {
 		margin-top: -35px;
 	}

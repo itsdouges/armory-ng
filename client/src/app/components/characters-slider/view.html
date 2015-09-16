@@ -1,5 +1,5 @@
 <div class="characters-slider-border-container top">
-	<div class="characters-slider-border left"></div>
+	<div class="characters-slider-border top-left"></div>
 	<div class="characters-slider-border right"></div>
 </div>
 
@@ -10,7 +10,7 @@
 
 	<div class="slider-message" ng-if="ctrl.sliderEmpty">Oh, you have no characters.. why not <a href="/settings"><strong>add a few api tokens</strong></a> to your account?</div>
 
-	<ul class="characters-slider" ng-style="ctrl.sliderStyle">
+	<ul ng-show="!ctrl.sliderEmpty" class="characters-slider" ng-style="ctrl.sliderStyle">
 		<li class="characters-slider-item" ng-repeat="c in ctrl.characters track by $index">
 			<character-headshot character="c"></character-headshot>
 		</li>
@@ -22,6 +22,6 @@
 </div>
 
 <div class="characters-slider-border-container bottom">
-	<div class="characters-slider-border left"></div>
+	<div class="characters-slider-border bottom-left"></div>
 	<div class="characters-slider-border right"></div>
 </div>

@@ -102,7 +102,7 @@ function AuthService($http, $state, $q, env) {
 	this.logout = function () {
 		// TODO: Test this.
 		resetUser();
-		$state.go('main.without-auth.login');
+		$state.go('main.no-auth.with-container.login');
 	};
 }
 

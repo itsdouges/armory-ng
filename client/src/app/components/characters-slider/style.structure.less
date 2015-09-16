@@ -16,7 +16,6 @@ characters-slider {
 	margin: 0;
 	white-space: nowrap;
 	transition: transform 0.4s;
-	min-height: 4em;
 	overflow: visible;
 }
 
@@ -46,8 +45,12 @@ characters-slider {
 	background-image: url('../assets/images/slider-border.png');
 	overflow: hidden;
 
-	&.left {
+	&.top-left {
+		margin-right: 7em;
+	}
 
+	&.bottom-left {
+		margin-right: 2em;
 	}
 
 	&.right {
@@ -56,15 +59,10 @@ characters-slider {
 }
 
 .slider-message {
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
 	margin: 0 auto;
-	display: inline-block;
 	text-align: center;
-	line-height: 380%;
+	white-space: normal;
+	padding: 1.3em 0;
 }
 
 .NumberOfSliderItems(@items) {
@@ -85,6 +83,7 @@ characters-slider {
 	padding: 0 @slider-button-width-big * 1%;
 	overflow: visible;
 	white-space: nowrap;
+	min-height: 4rem;
 }
 
 .slider-control {

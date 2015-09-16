@@ -78,7 +78,8 @@ import CharactersService from './services/characters/characters';
 
 angular.module('gw2armory', [
   'ui.router',
-  'ngSanitize'
+  'ngSanitize',
+  'ngAnimate'
 ])
 
 .config(configuration.config)
@@ -141,7 +142,7 @@ angular.module('gw2armory', [
 .directive('inputValidity', InputValidityDirective)
 
 .controller('HeaderController', HeaderBlockController)
-.directive('headerBlock', HeaderBlockDirective)
+.directive('header', HeaderBlockDirective)
 
 .controller('CraftingBlockController', CraftingBlockController)
 .directive('craftingBlock', CraftingBlockDirective)

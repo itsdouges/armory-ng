@@ -46,6 +46,8 @@ function CharacterViewerController(gw2Service, $stateParams, $scope) {
 	function readFailure(errorMessage) {
 		_error = true;
 
+		console.log(errorMessage);
+
 		// TODO: Handle character not found error (404)
 
 		vm.character = null;

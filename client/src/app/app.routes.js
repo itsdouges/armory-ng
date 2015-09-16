@@ -22,9 +22,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.with-container', {
       abstract: true,
-      template: '<div class="container"><ui-view></ui-view></div>'
+      template: '<div class="container with-columns center-items"><ui-view></ui-view></div>'
     })
-    .state('main.no-auth.home', {
+    .state('main.no-auth.with-container.home', {
       url: '/',
       templateUrl: 'app/routes/home/home.html',
     })
@@ -38,7 +38,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.not-found', {
       url: '/404',
-      template: 'cant find it man'
+      templateUrl: 'app/routes/404/404.html'
     })
     .state('main.with-auth', {
       abstract: true,

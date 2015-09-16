@@ -1,6 +1,4 @@
-<div 
-	class="character-viewer" 
-	ng-if="ctrl.isLoaded()">
+<div ng-if="ctrl.isLoaded()">
 	<div class="character-top-strip">
 		<span
 			class="character-profession-icon" 
@@ -150,12 +148,9 @@
 	</div>
 </div>
 
-<div ng-if="!ctrl.isLoaded() && !ctrl.busy">
-	<img src="../assets/images/select-a-character.png" />
-</div>
+<div class="character-viewer-empty" ng-if="!ctrl.isLoaded() && !ctrl.busy"></div>
 
 <progress-indicator busy="ctrl.busy"></progress-indicator>
-
 
 <div ng-if="ctrl.isError()">
 	an error occurred, could be something

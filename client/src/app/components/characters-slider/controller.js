@@ -11,6 +11,7 @@ function CharactersSliderController (charactersService, $scope, $state) {
 
 	function init () {
 		scope.sliderControlsDisabled = true;
+		scope.sliderEmpty = false;
 
 		let promise;
 
@@ -31,6 +32,8 @@ function CharactersSliderController (charactersService, $scope, $state) {
 		.then((items) => {
 			characters = items;
 
+			console.log(items);
+
 			if (!characters || !characters.length) {
 					scope.sliderEmpty = true;
 					return;
@@ -39,9 +42,13 @@ function CharactersSliderController (charactersService, $scope, $state) {
 			}
 
 			// TODO: Implement some real handling of small data
-			characters.push.apply(items, items);
 
 			setCharactersOffset(sliderItems);
+
+			if (characters.length <= sliderItems) {
+				setSliderStyle(0);
+				return;
+			}
 
 			$scope.$emit('slider:set-transition-end-event', () => {
 				$scope.$apply(() => {
