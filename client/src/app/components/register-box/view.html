@@ -1,17 +1,19 @@
-<form ng-submit="ctrl.sendData()">
-	<div class="message-box error">{{ ctrl.error }}</div>
+<form ng-submit="ctrl.register()">
+	<div class="message-box error">{{ ctrl.errors.message }}</div>
 
 	<div class="row">
 		<div class="label-container">
 			<label class="label" for="register-email">Email</label>
 		</div>
 
+		{{ ctrl.user.emailErrors }}
+
 		<div class="input-container">
-			<input placeholder="Email" ng-keyup="ctrl.checkEmail()" class="control" id="register-email" type="email" ng-model="ctrl.user.email" required="required" />
+			<input placeholder="Email" ng-model="ctrl.inputs.email" ng-change="ctrl.checkEmail()" class="control" id="register-email" type="email" required="required" />
 			
 			<input-validity 
-				data-busy="ctrl.emailLoading"
-				data-valid="ctrl.user.emailAvailable">
+				data-busy="ctrl.user.emailValidating"
+				data-valid="ctrl.user.emailValid">
 			</input-validity>
 		</div>
 	</div>
@@ -21,12 +23,14 @@
 			<label for="register-alias">Alias</label>
 		</div>
 
+		{{ ctrl.user.aliasErrors }}
+
 		<div class="input-container">
-			<input placeholder="Alias" ng-keyup="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.user.alias" required="required" />
+			<input placeholder="Alias" ng-change="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.inputs.alias" required="required" />
 
 			<input-validity 
-				data-busy="ctrl.aliasLoading"
-				data-valid="ctrl.user.aliasAvailable">
+				data-busy="ctrl.user.aliasValidating"
+				data-valid="ctrl.user.aliasValid">
 			</input-validity>
 		</div>
 	</div>
@@ -36,11 +40,13 @@
 			<label for="register-password">Password</label>
 		</div>
 
+		{{ ctrl.user.passwordErrors }}
+
 		<div class="input-container">
-			<input placeholder="Password" ng-keyup="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.user.password" required="required" />
+			<input placeholder="Password" ng-change="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.inputs.password1" required="required" />
 
 			<input-validity
-				data-valid="ctrl.user.passwordsValid ">
+				data-valid="ctrl.user.passwordValue">
 			</input-validity>
 		</div>
 	</div>
@@ -51,16 +57,16 @@
 		</div>
 
 		<div class="input-container">
-			<input placeholder="Confirm Password" ng-keyup="ctrl.checkPasswords()" id="register-confirm-password" type="password" ng-model="ctrl.user.password2" required="required" />
+			<input placeholder="Confirm Password" id="register-confirm-password" type="password" ng-change="ctrl.checkPasswords()" ng-model="ctrl.inputs.password2" required="required" />
 
 			<input-validity
-				data-valid="ctrl.user.passwordsValid ">
+				data-valid="ctrl.user.passwordValue">
 			</input-validity>
 		</div>
 	</div>
 
 	<div class="button-group">
-		<busy-button button-disabled="!ctrl.validateUser()" busy="ctrl.loading">
+		<busy-button button-disabled="!ctrl.canRegister" busy="ctrl.loading">
 			Register
 		</busy-button>
 	</div>

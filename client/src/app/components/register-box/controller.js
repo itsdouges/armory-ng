@@ -1,24 +1,21 @@
 'use strict';
 
-function RegisterController(userService, gw2Service, $state, debounce, authService) {
+import { actionCreators } from '../../actions/user';
+import { registerSelector } from '../../selectors/user';
+
+function RegisterController(userService, gw2Service, $state, debounce, authService, $ngRedux, $scope) {
 	let scope = this;
 
-	function init() {
-		scope.user = {};
+	const unsubscribe = $ngRedux.connect(registerSelector)(this);
+	$scope.$on('$destroy', unsubscribe);
+
+	function init () {
+		scope.inputs = {};
 	}
 
-	function registerFailure() {
+	function registerFailure (message) {
 		scope.loading = false;
-	}
-
-	this.validateUser = function () {
-		if (scope.user.emailAvailable &&
-			scope.user.aliasAvailable &&
-			scope.user.passwordsValid) {
-			return true;
-		}
-
-		return false;
+		scope.errors.message = message;
 	}
 
 	this.sendData = function () {
@@ -26,6 +23,7 @@ function RegisterController(userService, gw2Service, $state, debounce, authServi
 			return;
 		}
 
+		scope.errors.message = undefined;
 		scope.loading = true;
 		
 		userService
@@ -36,77 +34,31 @@ function RegisterController(userService, gw2Service, $state, debounce, authServi
 			}, registerFailure);
 	};
 
-	function checkEmailSuccess() {
-		scope.emailLoading = false;
-		scope.user.emailAvailable = true;
-	}
-
-	function checkEmailFailure(messages) {
-		scope.emailLoading = false;
-		scope.user.emailAvailable = false;
-	}
-
 	let checkEmailDebounce;
-	this.checkEmail = function () {
-		scope.user.emailAvailable = false;
+	this.checkEmail = () => {
+		$ngRedux.dispatch(actionCreators.invalidateEmail());
 
-		checkEmailDebounce = checkEmailDebounce || debounce.func(function() {
-				if (!scope.user.email) {
-					return;
-				}
-
-				scope.emailLoading = true;
-
-				userService 
-					.checkEmail(scope.user.email)
-					.then(checkEmailSuccess, checkEmailFailure);
-			});
+		checkEmailDebounce = checkEmailDebounce || debounce.func(() => {
+			$ngRedux.dispatch(actionCreators.validateEmailThunk(scope.inputs.email));
+		});
 
 		checkEmailDebounce();
 	};
 
-	function checkAliasSuccess() {
-		scope.aliasLoading = false;
-		scope.user.aliasAvailable = true;
-	}
-
-	function checkAliasFailure(messages) {
-		scope.aliasLoading = false;
-		scope.user.aliasAvailable = false;
-	}
-
 	var checkAliasDebounce;
-	this.checkAlias = function () {
-		scope.user.aliasAvailable = false;
+	this.checkAlias = () => {
+		$ngRedux.dispatch(actionCreators.invalidateAlias());
 
-		checkAliasDebounce = checkAliasDebounce || debounce.func(function() {
-				if (!scope.user.alias) {
-					return;
-				}
-
-				scope.aliasLoading = true;
-
-				userService
-					.checkAlias(scope.user.alias)
-					.then(checkAliasSuccess, checkAliasFailure);
-			});
+		checkAliasDebounce = checkAliasDebounce || debounce.func(() => {
+			$ngRedux.dispatch(actionCreators.checkAliasThunk(scope.inputs.alias));
+		});
 
 		checkAliasDebounce();
 	};
 
-	this.checkPasswords = debounce.func(function() {
-		let password1 = scope.user.password;
-		let password2 = scope.user.password2;
-
-		if (!password1 || !password2) {
-			scope.user.passwordsValid = false;
-		} else if (password1 === password2) {
-			scope.user.passwordsValid = true;
-		} else {
-			scope.user.passwordsValid = false;
-		}
-
-		// TODO: Password regex here.
+	this.checkPasswords = debounce.func(() => {
+		let action = actionCreators.checkPasswords(scope.inputs.password1, scope.inputs.password2);
+		$ngRedux.dispatch(action);
 	}, 100);
 
 	init();

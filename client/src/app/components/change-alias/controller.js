@@ -1,14 +1,18 @@
 'use strict';
 
-function ChangeAliasController (userService) {
-	function init () {
-		// userService.readMe()
-		// 	.then(function (data) {
-		// 		console.log(data);
-		// 	});
-	}
+// import updateAlias from '../../actions/user';
 
-	init();
+class ChangeAliasController {
+	// constructor ($ngRedux, $scope) {
+	// 	const unsubscribe = $ngRedux.connect(this.mapStateToTarget, updateAlias)(this);
+	// 	$scope.$on('$destroy', unsubscribe);
+	// }
+
+	// mapStateToTarget (state) {
+ //    return {
+ //      user: state.alias
+ //    };
+ //  }
 }
 
 export default ChangeAliasController;

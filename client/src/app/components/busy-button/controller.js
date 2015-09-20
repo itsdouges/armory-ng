@@ -5,8 +5,6 @@ function BusyButtonController() {
 
 	this.isEnabled = function () {
 		let enabled = !scope.busy && !scope.buttonDisabled;
-		console.log(`busy button enabled: ${enabled}`);
-		
 		return enabled;
 	}
 }

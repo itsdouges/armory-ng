@@ -1,6 +1,7 @@
 'use strict';
 
-// TODO: Split this up into angular modules. This file is getting too big !
+import { polyfill } from 'es6-promise';
+polyfill();
 
 import configuration from './app.config';
 import routerConfig from './app.routes';
@@ -19,8 +20,8 @@ import CharacterViewerDirective from './components/character-viewer/directive';
 import Gw2TokenController from './components/gw2-token/controller';
 import Gw2TokenDirective from './components/gw2-token/directive';
 
-import UserStatusController from './components/user-status/controller';
-import UserStatusDirective from './components/user-status/directive';
+import UserLinksController from './components/user-links/controller';
+import UserLinksDirective from './components/user-links/directive';
 
 import UserTokensController from './components/user-tokens/controller';
 import UserTokensDirective from './components/user-tokens/directive';
@@ -79,14 +80,21 @@ import debounce from './services/helpers/debouncer';
 import UserService from './services/user/user';
 import CharactersService from './services/characters/characters';
 
+import 'ng-redux';
+import reducers from './reducers';
+import { combineReducers } from 'redux';
+import store from './app.redux-store';
+
 angular.module('gw2armory', [
   'ui.router',
-  'ngSanitize',
-  'ngAnimate'
+  'ngRedux'
+  // 'ngAnimate' // TODO: This is affecting a few ng-if/off that I don't want to. Find a work around.
 ])
 
 .config(configuration.config)
 .config(routerConfig)
+.config(store)
+
 .constant('env', environment)
 
 .run(configuration.run)
@@ -126,8 +134,8 @@ angular.module('gw2armory', [
 .controller('UserTokensController', UserTokensController)
 .directive('userTokens', UserTokensDirective)
 
-.controller('UserStatusController', UserStatusController)
-.directive('userStatus', UserStatusDirective)
+.controller('UserLinksController', UserLinksController)
+.directive('userLinks', UserLinksDirective)
 
 .controller('ChangeAliasController', ChangeAliasController)
 .directive('changeAlias', ChangeAliasDirective)

@@ -16,8 +16,15 @@
 }
 
 @media only screen and (min-width: @mobile) {
-	.card-medium {
+	.card {
 		flex-grow: 1;
+	}
+
+	.card-small {
+		width: @mobile - 50%;
+	}
+
+	.card-medium {
 		width: @mobile - 20;
 	}
 }

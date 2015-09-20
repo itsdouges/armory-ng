@@ -6,9 +6,7 @@ function UserService ($http, env, $q, authService) {
 	}
 
 	function registerFailure(response) {
-		if (response.status === 400) {
-			return response.data;
-		}
+		return $q.reject(response.data);
 
 		// log + handle
 	}

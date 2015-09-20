@@ -1,6 +1,6 @@
 'use strict';
 
-function UserStatusController (authService, userService, $scope) {
+function UserLinksController (authService, userService, $scope) {
 	let scope = this;
 
 	this.isAuthenticated = authService.isAuthenticated;
@@ -20,4 +20,4 @@ function UserStatusController (authService, userService, $scope) {
 	// this.getUserData();
 }
 
-export default UserStatusController;
+export default UserLinksController;
