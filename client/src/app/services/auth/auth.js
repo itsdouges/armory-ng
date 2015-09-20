@@ -1,48 +1,23 @@
 'use strict';
 
-let USER_TOKEN_KEY = 'gw2armoryuser_TOKEN';
+import { actionCreators } from '../../actions/user/auth'
 
-function AuthService($http, $state, $q, env) {
+function AuthService($http, $state, $q, env, $ngRedux) {
 	let scope = this;
-	let user = {};
-
-	function resetUser() {
-		console.log('clearing local data');
-
-		user = {
-			authenticated: false
-		};
-
-		// TODO: Test setting of header. Bit lazy today..
-
-		$http.defaults.headers.common.Authorization = undefined;
-		localStorage.setItem(USER_TOKEN_KEY, '');
-	}
-
-	function loginSuccess(response) {
-		user.authenticated = true;
-
-		localStorage.setItem(USER_TOKEN_KEY, `${response.data.token_type} ${response.data.access_token}`);
-
-		$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
-		console.log('success login');
-
-		// todo: redirect to settings if no tokens are available
-		$state.go('main.with-auth.characters');
-	}
 
 	this.checkAuthentication = function () {
-		console.log('check auth');
+		console.log('checking auth');
 
-		if (scope.isAuthenticated()) {
-			console.log('ur auth');
+		let state = $ngRedux.getState();
+		if (state.user.loggedIn) {
+			console.log('ur auth! whalecome!');
 
 			return $q.resolve();
 		}
 
-		let token = localStorage.getItem(USER_TOKEN_KEY);
+		let token = state.user.token;
 		if (token) {
-			console.log('u have a token saved, lets check it');
+			console.log('u have a token saved, lets check it..');
 
 			return $http.
 				get(`${env.api.endpoint}token`, {
@@ -50,59 +25,25 @@ function AuthService($http, $state, $q, env) {
 						Authorization: token
 					}
 				}).then(function () {
-				user.authenticated = true;
-				$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
+					console.log('yeah ur legit');
+
+					$ngRedux.dispatch(actionCreators.authenticateUser());
+
+					return $q.resolve();
 			}, function () {
-				resetUser();
+				console.log('bad token, get outta here!');
+
+				$ngRedux.dispatch(actionCreators.clearUserData());
 
 				return $q.reject();
 			});
 		} else {
-			console.log('ur not auth, lets redirect u to login');
-			// reject, change state to login
-			// TODO: Is there a better way to do this ?
-			// 
-			var defer = $q.defer();
-			defer.promise.then(null, function() {
-				resetUser();
-				
-			});
+			console.log('not auth, get outta here!');
 
-			defer.reject();
+			$ngRedux.dispatch(actionCreators.clearUserData());
 
-			return defer.promise;
+			return $q.reject();
 		}
-	};
-
-	this.isAuthenticated = function () {
-		return user.authenticated;
-	};
-
-	this.login = function (email, password) {
-		// TEST PROMISE RETURN
-		return $http
-			.post(`${env.api.endpoint}token`, {
-				username: email,
-				password: password,
-				grant_type: 'password'
-			}, {
-				headers: {
-					Authorization: 'Basic ' + env.api.token
-				}
-			})
-			.then(loginSuccess, function (response) {
-				resetUser();
-
-				// TODO: TEST !
-
-				return $q.reject(response.data.error_description);
-			});
-	};
-
-	this.logout = function () {
-		// TODO: Test this.
-		resetUser();
-		$state.go('main.no-auth.with-container.login');
 	};
 }
 

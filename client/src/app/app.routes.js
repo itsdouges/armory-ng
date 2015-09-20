@@ -1,8 +1,6 @@
 'use strict';
 
 function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
-  'ngInject';
-  
   $stateProvider
     .state('main', {
       templateUrl: 'app/routes/main.html',

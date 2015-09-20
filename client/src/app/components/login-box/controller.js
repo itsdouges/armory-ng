@@ -1,28 +1,43 @@
 'use strict';
 
-function LoginController(authService, $state) {
-	var scope = this;
+import { actionCreators } from '../../actions/user';
 
-	scope.login = function () {
-		var user = scope.user;
+function LoginController($ngRedux, $scope) {
+	const unsubscribe = $ngRedux.connect(selector)(this);
+	$scope.$on('$destroy', unsubscribe);
 
-		if (!user || !user.email || !user.password) {
-			return;
-		}
+	let scope = this;
 
-		scope.loading = true;
-
-		return authService
-			.login(scope.user.email, scope.user.password)
-			.then(null, loginFailure);
+	this.login = () => {
+		$ngRedux.dispatch(actionCreators.fetchTokenThunk(scope.email, scope.password));
 	};
 
-	function loginFailure(errorMessage) {
-		console.log(errorMessage);
+	function selector (state) {
+		return {
+			fetchingToken: state.user.fetchingToken
+		};
+	};
+
+	// scope.login = function () {
+	// 	var user = scope.user;
+
+	// 	if (!user || !user.email || !user.password) {
+	// 		return;
+	// 	}
+
+	// 	scope.loading = true;
+
+	// 	return authService
+	// 		.login(scope.user.email, scope.user.password)
+	// 		.then(null, loginFailure);
+	// };
+
+	// function loginFailure(errorMessage) {
+	// 	console.log(errorMessage);
 		
-		scope.error = errorMessage;
-		scope.loading = false;
-	}
+	// 	scope.error = errorMessage;
+	// 	scope.loading = false;
+	// }
 }
 
 export default LoginController;

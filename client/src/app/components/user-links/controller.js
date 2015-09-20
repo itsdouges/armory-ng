@@ -1,23 +1,15 @@
 'use strict';
 
-function UserLinksController (authService, userService, $scope) {
-	let scope = this;
+import { actionCreators } from '../../actions/user/auth';
+import { userDataSelector } from '../../selectors/user';
 
-	this.isAuthenticated = authService.isAuthenticated;
-
-	// this.getUserData = () => {
-	// 	userService.readMe()
-	// 		.then(function (data) {
-	// 			console.log(data);
-	// 			scope.user = data;
-	// 		});
-	// };
+function UserLinksController ($ngRedux, $scope) {
+	const unsubscribe = $ngRedux.connect(userDataSelector)(this);
+	$scope.$on('$destroy', unsubscribe);
 
 	this.logout = () => {
-		authService.logout();
+		$ngRedux.dispatch(actionCreators.clearUserData());
 	};
-
-	// this.getUserData();
 }
 
 export default UserLinksController;

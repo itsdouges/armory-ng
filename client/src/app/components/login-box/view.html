@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="input-container">
-			<input placeholder="Email" class="control" id="email" type="text" ng-model="ctrl.user.email" required="required" />
+			<input placeholder="Email" class="control" id="email" type="text" ng-model="ctrl.email" required="required" />
 		</div>
 	</div>
 
@@ -17,11 +17,11 @@
 		</div>
 
 		<div class="input-container">
-			<input placeholder="Password" id="password" type="password" ng-model="ctrl.user.password" required="required" />
+			<input placeholder="Password" id="password" type="password" ng-model="ctrl.password" required="required" />
 		</div>
 	</div>
 
 	<div class="button-group">
-		<busy-button busy="ctrl.loading">Login</busy-button>
+		<busy-button busy="ctrl.fetchingToken">Login</busy-button>
 	</div>
 </form>

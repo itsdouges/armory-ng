@@ -88,7 +88,7 @@ function validatePasswordsReducer (userState, action) {
 	return newUserState;
 }
 
-export function reduceValidator (state, action) {
+export function validatorReducer (state, action) {
 	switch(action.type) {
 		case actions.INVALIDATE_EMAIL:
 			return invalidateEmail(state);

@@ -1,15 +1,15 @@
 'use strict';
 
 function UserService ($http, env, $q, authService) {
-	function registerSuccess(response) {
-		console.log('success registerSuccess');
-	}
+	// function registerSuccess(response) {
+	// 	console.log('success registerSuccess');
+	// }
 
-	function registerFailure(response) {
-		return $q.reject(response.data);
+	// function registerFailure(response) {
+	// 	return $q.reject(response.data);
 
-		// log + handle
-	}
+	// 	// log + handle
+	// }
 
 	function handleCheckError(response) {
 		console.log('error!');

@@ -1,5 +1,7 @@
 'use strict';
 
+// todo: convert to axios interceptors
+
 function HttpAuthInterceptor(env, $q, $injector) {
 	var authService;
 

@@ -3,7 +3,7 @@
 import { actionCreators } from '../../actions/user';
 import { registerSelector } from '../../selectors/user';
 
-function RegisterController(userService, gw2Service, $state, debounce, authService, $ngRedux, $scope) {
+function RegisterController(userService, debounce, authService, $ngRedux, $scope) {
 	let scope = this;
 
 	const unsubscribe = $ngRedux.connect(registerSelector)(this);
@@ -12,6 +12,10 @@ function RegisterController(userService, gw2Service, $state, debounce, authServi
 	function init () {
 		scope.inputs = {};
 	}
+
+	this.register = () => {
+		$ngRedux.dispatch(actionCreators.registerThunk(scope.user));
+	};
 
 	function registerFailure (message) {
 		scope.loading = false;

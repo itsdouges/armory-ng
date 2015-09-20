@@ -13,3 +13,12 @@ export const registerSelector = createSelector(
 		};
 	}
 );
+
+export const userDataSelector = createSelector(
+	userSelector,
+	(user) => {
+		return {
+			user
+		};
+	}
+);

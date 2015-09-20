@@ -1,5 +1,3 @@
-import actions from 'redux-actions';
-
 export const CONNECTIVITY_ISSUE = 'CONNECTIVITY_ISSUE';
 export const GENERAL_SERVER_ERROR = 'GENERAL_SERVER_ERROR';
 
