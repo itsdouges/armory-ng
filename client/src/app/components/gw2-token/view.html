@@ -1,26 +1,3 @@
-<form ng-submit="ctrl.saveToken()" class="row" ng-if="ctrl.isMode('add')">
-	<div class="label-container">
-		<label for="add-token">Add token</label>
-	</div>
-
-	<div class="input-container">
-		<input placeholder="Add token" ng-disabled="ctrl.creating" ng-keyup="ctrl.checkToken()" id="add-token" type="text" ng-model="ctrl.token.token" required="required" />
-
-		<input-validity
-			data-busy="ctrl.busy"
-			data-valid="ctrl.token.valid">
-		</input-validity>
-	</div>
-
-	{{ ctrl.message }}
-
-	<div class="button-group">
-		<button class="primary" ng-disabled="!ctrl.token.valid || ctrl.creating">
-			Add
-		</button>
-	</div>
-</form>
-
 <div class="gw2-token" ng-if="ctrl.isMode('view')">
 	<div>
 		<i ng-if="!ctrl.token.valid" class="fa fa-times"></i>

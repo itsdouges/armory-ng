@@ -2,6 +2,7 @@
   "name": "gw2armory",
   "version": "0.0.0",
   "dependencies": {
+    "angular": "^1.5.0-beta.0",
     "axios": "^0.5.4",
     "es6-promise": "^3.0.2",
     "isomorphic-fetch": "^2.1.1",
@@ -9,6 +10,7 @@
     "redux": "^3.0.0",
     "redux-actions": "^0.8.0",
     "redux-thunk": "^1.0.0",
+    "redux-ui-router": "^0.2.0",
     "reselect": "^1.1.0"
   },
   "scripts": {

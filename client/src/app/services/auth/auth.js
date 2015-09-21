@@ -1,5 +1,7 @@
 'use strict';
 
+import axios from 'axios';
+
 import { actionCreators } from '../../actions/user/auth'
 
 function AuthService($http, $state, $q, env, $ngRedux) {

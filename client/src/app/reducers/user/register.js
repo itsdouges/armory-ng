@@ -7,15 +7,24 @@ function registeringUserReducer (state, action) {
 		...state
 	};
 
-	console.log('lmao');
-
 	newState.registering = action.payload;
 
 	return newState;
 }
 
 function registeringUserResultReducer (state, action) {
+	let newState = {
+		...state
+	};
 
+	if (action.error) {
+		newState.registerErrors = action.payload;
+	} else {
+		newState.registerErrors = undefined;
+		newState.registerSuccess = true;
+	}
+
+	return newState;
 }
 
 export function registerReducer (state, action) {

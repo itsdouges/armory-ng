@@ -2,6 +2,10 @@
 
 import axios from 'axios';
 
+import * as hmm from 'redux-ui-router';
+console.log(hmm);
+
+import * as authActions from './auth';
 import config from '../../../generated/app.env';
 
 export const actions = {
@@ -13,6 +17,20 @@ function isRegistering (registering) {
 	return {
 		type: actions.REGISTERING_USER,
 		payload: !!registering
+	};
+}
+
+function registerResultSuccess () {
+	return {
+		type: actions.REGISTER_USER_RESULT
+	};
+}
+
+function registerResultError (message) {
+	return {
+		type: actions.REGISTER_USER_RESULT,
+		payload: message,
+		error: true
 	};
 }
 
@@ -29,10 +47,11 @@ function registerThunk (user) {
 		return axios
 			.post(`${config.api.endpoint}users`, mappedUser)
 			.then(() => {
-				console.log('success bro');
+				dispatch(registerResultSuccess());
+				dispatch(authActions.actionCreators.fetchTokenThunk(mappedUser.email, mappedUser.password));
+			}, (response) => {
+				dispatch(registerResultError(response.data));
 				dispatch(isRegistering(false));
-
-				// redirect
 			});
 	};
 }

@@ -55,7 +55,7 @@ function validateAliasResultReducer (userState, action) {
 		newUserState.aliasErrors = action.payload;
 	} else {
 		newUserState.aliasValue = action.payload;
-		newUserState.emailErrors = undefined;
+		newUserState.aliasErrors = undefined;
 	}
 
 	newUserState.aliasValid = !action.error;

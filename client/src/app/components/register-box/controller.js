@@ -17,27 +17,6 @@ function RegisterController(userService, debounce, authService, $ngRedux, $scope
 		$ngRedux.dispatch(actionCreators.registerThunk(scope.user));
 	};
 
-	function registerFailure (message) {
-		scope.loading = false;
-		scope.errors.message = message;
-	}
-
-	this.sendData = function () {
-		if (!scope.validateUser()) {
-			return;
-		}
-
-		scope.errors.message = undefined;
-		scope.loading = true;
-		
-		userService
-			.register(scope.user)
-			.then(function () {
-				// TODO: test
-				return authService.login(scope.user.email, scope.user.password);
-			}, registerFailure);
-	};
-
 	let checkEmailDebounce;
 	this.checkEmail = () => {
 		$ngRedux.dispatch(actionCreators.invalidateEmail());

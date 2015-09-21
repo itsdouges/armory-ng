@@ -1,30 +1,21 @@
 'use strict';
 
-function UserTokensController (userService, $scope) {
-	var scope = this;
+import { actionCreators } from '../../actions/user/data';
+import { userDataSelector } from '../../selectors/user';
 
-	function init () {
-		scope.tokens = [];
+class UserTokensController {
+	constructor ($ngRedux, $scope, userService) {
+		this.$ngRedux = $ngRedux;
 
-		userService
-			.readTokens()
-			.then((tokens) => {
-				scope.tokens = tokens || scope.tokens;
-				console.log(scope.tokens);
-			});
+		const unsubscribe = $ngRedux.connect(userDataSelector)(this);
+		$scope.$on('$destroy', unsubscribe);
+
+		this.$ngRedux.dispatch(actionCreators.fetchGw2TokensThunk());
 	}
 
-	$scope.$on('token-added', (e, token) => {
-		scope.tokens.push(token);
-	});
-
-	$scope.$on('token-deleted', (e, token) => {
-		console.log(token);
-		var index = scope.tokens.indexOf(token);
-		scope.tokens.splice(index, 1);
-	});
-
-	init();
+	validateToken () {
+		this.$ngRedux.dispatch(actionCreators.validateGw2TokenThunk(this.newGw2Token));
+	}
 }
 
 export default UserTokensController;

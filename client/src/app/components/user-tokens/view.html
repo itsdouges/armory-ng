@@ -1,9 +1,32 @@
 <div ng-if="!ctrl.tokens.length">
 	<p>
-		Let's add some tokens! <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Head over to ArenaNet applications and create some.</strong></a>
+		Need api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Head over to ArenaNet applications and create some.</strong></a>
 	</p>
 </div>
 
+{{ ctrl.user }}
+
 <gw2-token ng-repeat="token in ctrl.tokens" token="token" mode="view"></gw2-token>
 
-<gw2-token mode="add"></gw2-token>
+<form ng-submit="ctrl.saveToken()" class="row">
+	<div class="label-container">
+		<label for="add-token">Add token</label>
+	</div>
+
+	<div class="input-container">
+		<input placeholder="Add token" ng-disabled="ctrl.creating" ng-change="ctrl.validateToken()" id="add-token" type="text" ng-model="ctrl.newGw2Token" required="required" />
+
+		<input-validity
+			data-busy="ctrl.user.validatingGw2Token"
+			data-valid="ctrl.user.validGw2Token">
+		</input-validity>
+	</div>
+
+	{{ ctrl.error }}
+
+	<div class="button-group">
+		<button class="primary" ng-disabled="!ctrl.user.validGw2Token || ctrl.user.addingGw2Token">
+			Add
+		</button>
+	</div>
+</form>

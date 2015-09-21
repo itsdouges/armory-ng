@@ -80,14 +80,19 @@ import debounce from './services/helpers/debouncer';
 import UserService from './services/user/user';
 import CharactersService from './services/characters/characters';
 
-import 'ng-redux';
+import 'angular';
+import ngRedux from 'ng-redux';
+import uiRouter from 'angular-ui-router';
+import ngReduxRouter from 'redux-ui-router';
+
 import reducers from './reducers';
 import { combineReducers } from 'redux';
 import store from './app.redux-store';
 
 angular.module('gw2armory', [
-  'ui.router',
-  'ngRedux'
+	ngRedux,
+  uiRouter,
+  ngReduxRouter
   // 'ngAnimate' // TODO: This is affecting a few ng-if/off that I don't want to. Find a work around.
 ])
 
