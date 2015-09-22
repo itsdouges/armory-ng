@@ -37,9 +37,10 @@ function clearUserDataReducer (state) {
 	return newState;
 }
 
-function authenticateUserReducer (state) {
+function authenticateUserReducer (state, action) {
 	let newState = {
-		...state
+		...state,
+		...action.payload
 	};
 
 	newState.loggedIn = true;
@@ -59,7 +60,7 @@ export function authReducer (state, action) {
 			return clearUserDataReducer(state);
 
 		case actions.AUTHENTICATE_USER:
-			return authenticateUserReducer(state);
+			return authenticateUserReducer(state, action);
 
 		default:
 			return state;

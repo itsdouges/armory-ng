@@ -3,48 +3,51 @@
 import axios from 'axios';
 
 import { actionCreators } from '../../actions/user/auth'
+import { userAuthSelector } from '../../selectors/user';
 
-function AuthService($http, $state, $q, env, $ngRedux) {
+import stateGo from 'redux-ui-router/lib/state-go';
+
+// TODO: Figure out the best way to hook this into redux.
+function AuthService ($state, env, $ngRedux) {
 	let scope = this;
 
 	this.checkAuthentication = function () {
 		console.log('checking auth');
 
-		let state = $ngRedux.getState();
-		if (state.user.loggedIn) {
+		let userAuthStatus = userAuthSelector($ngRedux.getState());
+		if (userAuthStatus.loggedIn) {
 			console.log('ur auth! whalecome!');
 
-			return $q.resolve();
+			return Promise.resolve();
 		}
 
-		let token = state.user.token;
-		if (token) {
+		if (userAuthStatus.token) {
 			console.log('u have a token saved, lets check it..');
 
-			return $http.
-				get(`${env.api.endpoint}token`, {
+			return axios.
+				get(`${env.api.endpoint}/users/me`, {
 					headers: { 
-						Authorization: token
+						Authorization: userAuthStatus.token
 					}
-				}).then(function () {
+				}).then(function (response) {
 					console.log('yeah ur legit');
 
-					$ngRedux.dispatch(actionCreators.authenticateUser());
+					$ngRedux.dispatch(actionCreators.authenticateUser(response.data));
 
-					return $q.resolve();
+					return Promise.resolve();
 			}, function () {
 				console.log('bad token, get outta here!');
 
 				$ngRedux.dispatch(actionCreators.clearUserData());
 
-				return $q.reject();
+				return Promise.reject();
 			});
 		} else {
 			console.log('not auth, get outta here!');
 
 			$ngRedux.dispatch(actionCreators.clearUserData());
 
-			return $q.reject();
+			return Promise.reject();
 		}
 	};
 }

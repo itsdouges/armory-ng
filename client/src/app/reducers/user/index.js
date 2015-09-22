@@ -34,12 +34,12 @@ export default function reduce (state = initialState, action) {
 
 		case actions.VALIDATING_GW2_TOKEN:
 		case actions.VALIDATE_GW2_TOKEN_RESULT:
-		case actions.DELETING_GW2_TOKEN:
-		case actions.DELETE_GW2_TOKEN_RESULT:
+		case actions.REMOVE_GW2_TOKEN:
 		case actions.ADDING_GW2_TOKEN:
 		case actions.ADD_GW2_TOKEN_RESULT:
 		case actions.FETCH_GW2_TOKEN_RESULT:
 		case actions.FETCHING_GW2_TOKENS:
+		case actions.INVALIDATE_GW2_TOKEN:
 			return dataReducer(state, action);
 
 		default:

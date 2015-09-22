@@ -3,6 +3,7 @@
 import axios from 'axios';
 
 import config from '../../../generated/app.env';
+import showToast from '../toast';
 
 export const actions = {
 	FETCHING_GW2_TOKENS: 'FETCHING_GW2_TOKENS',
@@ -11,8 +12,7 @@ export const actions = {
 	ADDING_GW2_TOKEN: 'ADDING_GW2_TOKEN',
 	ADD_GW2_TOKEN_RESULT: 'ADD_GW2_TOKEN_RESULT',
 
-	DELETING_GW2_TOKEN: 'DELETING_GW2_TOKEN',
-	DELETE_GW2_TOKEN_RESULT: 'DELETE_GW2_TOKEN_RESULT',
+	REMOVE_GW2_TOKEN: 'REMOVE_GW2_TOKEN',
 
 	VALIDATING_GW2_TOKEN: 'VALIDATING_GW2_TOKEN',
 	VALIDATE_GW2_TOKEN_RESULT: 'VALIDATE_GW2_TOKEN_RESULT'
@@ -52,10 +52,11 @@ function validateGw2TokenResultSuccess () {
 	};
 }
 
-function validateGw2TokenResultError () {
+function validateGw2TokenResultError (message) {
 	return {
 		type: actions.VALIDATE_GW2_TOKEN_RESULT,
-		error: true
+		error: true,
+		payload: message
 	};
 }
 
@@ -75,8 +76,9 @@ function validateGw2TokenThunk (token) {
 			.then(() => {
 				dispatch(validateGw2TokenResultSuccess());
 				dispatch(validatingGw2Token(false));
-			}, () => {
-				dispatch(validateGw2TokenResultError());
+			}, (response) => {
+				dispatch(showToast(response.data[0]));
+				dispatch(validateGw2TokenResultError(response.data));
 				dispatch(validatingGw2Token(false));
 			});
 	};
@@ -90,8 +92,10 @@ function addGw2TokenThunk (token) {
 			.post(`${config.api.endpoint}users/me/gw2-tokens`, {
 				token: token
 			})
-			.then(() => {
-				dispatch(addGw2TokenResultSuccess(token));
+			.then((response) => {
+				// TODO: Update backend to return token data.
+				dispatch(showToast('Added token!'));
+				dispatch(addGw2TokenResultSuccess(response.data));
 				dispatch(addingGw2Token(false));
 			});
 	};
@@ -110,8 +114,28 @@ function fetchGw2TokensThunk () {
 		};
 }
 
+function removeGw2Token (token) {
+	return {
+		type: actions.REMOVE_GW2_TOKEN,
+		payload: token
+	};
+}
+
+function removeGw2TokenThunk (token) {
+	return (dispatch) => {
+		dispatch(removeGw2Token(token));
+
+		return axios
+			.delete(`${config.api.endpoint}users/me/gw2-tokens/${token}`)
+			.then((response) => {
+				dispatch(showToast('Removed token!'));
+			});
+	};
+}
+
 export const actionCreators = {
 	fetchGw2TokensThunk,
 	addGw2TokenThunk,
-	validateGw2TokenThunk
+	validateGw2TokenThunk,
+	removeGw2TokenThunk
 };

@@ -1,0 +1,9 @@
+<div class="gw2-token">
+	<span>
+		<i ng-if="!ctrl.token.valid" class="fa fa-times"></i>
+		<i ng-if="ctrl.token.valid" class="fa fa-check"></i>
+		<strong>{{ ::ctrl.token.accountName }}</strong>
+	</span>
+
+	<a ng-click="ctrl.removeToken({ token: ctrl.token.token })" href="">Remove</a>
+</div>

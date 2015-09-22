@@ -37,7 +37,55 @@ function validateGw2TokenResultReducer (state, action) {
 		...state
 	};
 
+	if (action.error) {
+		newState.gw2TokenError = action.payload;
+	} else {
+		newState.gw2TokenError = undefined;
+	}
+		
 	newState.validGw2Token = !action.error;
+
+	return newState;
+}
+
+function addingGw2TokenReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.addingGw2Token = action.payload;
+
+	return newState;
+}
+
+function addGw2TokenResultReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.gw2Tokens.push(action.payload);
+
+	return newState;
+}
+
+function invalidateGw2Token (state) {
+	let newState = {
+		...state
+	};
+
+	newState.validGw2Token = false;
+
+	return newState;
+}
+
+function removeGw2Token (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.gw2Tokens = newState.gw2Tokens.filter((token) => {
+		return token.token != action.payload;
+	});
 
 	return newState;
 }
@@ -55,6 +103,18 @@ export function dataReducer (state, action) {
 
 		case actions.VALIDATE_GW2_TOKEN_RESULT:
 			return validateGw2TokenResultReducer(state, action);
+
+		case actions.ADDING_GW2_TOKEN:
+			return addingGw2TokenReducer(state, action);
+
+		case actions.ADD_GW2_TOKEN_RESULT:
+			return addGw2TokenResultReducer(state, action);
+
+		case actions.INVALIDATE_GW2_TOKEN:
+			return invalidateGw2Token(state);
+
+		case actions.REMOVE_GW2_TOKEN:
+			return removeGw2Token(state, action);
 
 		default:
 			return state;

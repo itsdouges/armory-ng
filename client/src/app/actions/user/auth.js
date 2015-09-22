@@ -1,8 +1,11 @@
 'use strict';
 
 import axios from 'axios';
+import stateGo from 'redux-ui-router/lib/state-go';
 
 import config from '../../../generated/app.env';
+
+import showToast from '../toast'; 
 
 const LOCAL_USER_TOKEN_KEY = 'gw2armoryuser_TOKEN';
 
@@ -20,9 +23,10 @@ function fetchTokenSuccess (token) {
 	};
 }
 
-function authenticateUser () {
+function authenticateUser (user) {
 	return {
-		type: actions.AUTHENTICATE_USER
+		type: actions.AUTHENTICATE_USER,
+		payload: user
 	};
 }
 
@@ -57,6 +61,10 @@ function fetchTokenThunk (email, password) {
 				let combinedToken = `${response.data.token_type} ${response.data.access_token}`;
 
 				dispatch(fetchTokenSuccess(combinedToken));
+				dispatch(stateGo('main.with-auth.characters'));
+				dispatch(fetchingToken(false));
+			}, (response) => {
+				dispatch(showToast(response.data.error_description));
 				dispatch(fetchingToken(false));
 			});
 	};

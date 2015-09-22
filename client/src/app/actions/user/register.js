@@ -2,11 +2,10 @@
 
 import axios from 'axios';
 
-import * as hmm from 'redux-ui-router';
-console.log(hmm);
-
 import * as authActions from './auth';
 import config from '../../../generated/app.env';
+
+import showToast from '../toast'; 
 
 export const actions = {
 	REGISTERING_USER: 'REGISTERING_USER',
@@ -48,6 +47,7 @@ function registerThunk (user) {
 			.post(`${config.api.endpoint}users`, mappedUser)
 			.then(() => {
 				dispatch(registerResultSuccess());
+				dispatch(showToast('Welcome to the club!'));
 				dispatch(authActions.actionCreators.fetchTokenThunk(mappedUser.email, mappedUser.password));
 			}, (response) => {
 				dispatch(registerResultError(response.data));

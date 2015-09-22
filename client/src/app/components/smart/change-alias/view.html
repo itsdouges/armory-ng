@@ -1,0 +1,16 @@
+<form class="row">
+		<div class="input-container">
+		<input placeholder="Alias" ng-change="ctrl.checkAlias()" id="add-token" type="text" ng-model="ctrl.user.alias" required="required" />
+
+		<input-validity
+			data-busy="ctrl.busy"
+			data-valid="ctrl.token.valid">
+		</input-validity>
+	</div>
+
+	<div class="button-group">
+		<busy-button button-disabled="!ctrl.user.validAlias" busy="ctrl.user.savingAlias">
+			Save alias
+		</busy-button>
+	</div>
+</form>

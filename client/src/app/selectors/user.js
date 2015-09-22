@@ -1,11 +1,24 @@
 import { createSelector } from 'reselect';
 
-const userSelector = state => state.user;
-const canRegisterSelector = state => state.user.aliasValid && state.user.emailValid && state.user.passwordValue;
+const getUser = state => state.user;
+const getUserToken = state => state.user.token;
+const getUserLoggedIn = state => state.user.loggedIn;
+const getCanRegister = state => state.user.aliasValid && state.user.emailValid && state.user.passwordValue;
+
+export const userAuthSelector = createSelector(
+	getUserToken,
+	getUserLoggedIn,
+	(token, loggedIn) => {
+		return {
+			token,
+			loggedIn
+		};
+	}
+);
 
 export const registerSelector = createSelector(
-	userSelector,
-	canRegisterSelector,
+	getUser,
+	getCanRegister,
 	(user, canRegister) => {
 		return {
 			user,
@@ -15,7 +28,7 @@ export const registerSelector = createSelector(
 );
 
 export const userDataSelector = createSelector(
-	userSelector,
+	getUser,
 	(user) => {
 		return {
 			user

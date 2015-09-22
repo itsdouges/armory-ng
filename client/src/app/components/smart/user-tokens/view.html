@@ -1,0 +1,30 @@
+<div ng-if="!ctrl.user.gw2Tokens.length && !ctrl.user.fetchingTokens">
+	<p>
+		Need api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Head over to ArenaNet applications and create some.</strong></a>
+	</p>
+</div>
+
+<gw2-token remove-token="ctrl.removeToken(token)" ng-repeat="token in ctrl.user.gw2Tokens" token="token" mode="view"></gw2-token>
+
+<form ng-submit="ctrl.addToken()" class="row">
+	{{ ctrl.user.gw2TokenError }}
+
+	<div class="label-container">
+		<label for="add-token">Add token</label>
+	</div>
+
+	<div class="input-container">
+		<input placeholder="Add token" ng-disabled="ctrl.creating" ng-change="ctrl.validateToken()" id="add-token" type="text" ng-model="ctrl.newGw2Token" required="required" />
+
+		<input-validity
+			data-busy="ctrl.user.validatingGw2Token"
+			data-valid="ctrl.user.validGw2Token">
+		</input-validity>
+	</div>
+
+	<div class="button-group">
+		<busy-button button-disabled="!ctrl.user.validGw2Token" busy="ctrl.user.addingGw2Token">
+			Add
+		</busy-button>
+	</div>
+</form>
