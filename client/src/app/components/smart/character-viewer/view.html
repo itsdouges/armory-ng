@@ -1,17 +1,17 @@
-<div ng-if="ctrl.isLoaded()">
+<div ng-if="ctrl.selected">
 	<div class="character-top-strip">
 		<span
 			class="character-profession-icon" 
-			ng-class="ctrl.character.profession.toLowerCase()"></span>
+			ng-class="ctrl.selected.profession.toLowerCase()"></span>
 		<div class="character-title">
 			<h2 class="character-name serif">
-				{{ ctrl.character.name }}
+				{{ ctrl.selected.name }}
 			</h2>
 
 			<span class="character-level">
-				{{ ctrl.character.level }}
-				{{ ctrl.character.race }}
-				{{ ctrl.character.profession }}
+				{{ ctrl.selected.level }}
+				{{ ctrl.selected.race }}
+				{{ ctrl.selected.profession }}
 			</span>
 		</div>
 	</div>
@@ -21,59 +21,59 @@
 				<item-block 
 					slot-name="Headgear" 
 					type="head" 
-					item="ctrl.character.equipment.helm"></item-block>
+					item="ctrl.selected.equipment.helm"></item-block>
 
 				<item-block 
 					slot-name="Shoulders" 
 					type="shoulder" 
-					item="ctrl.character.equipment.shoulders"></item-block>
+					item="ctrl.selected.equipment.shoulders"></item-block>
 
 				<item-block 
 					slot-name="Chest" 
 					type="chest" 
-					item="ctrl.character.equipment.coat"></item-block>
+					item="ctrl.selected.equipment.coat"></item-block>
 
 				<item-block 
 					slot-name="Gloves" 
 					type="hand" 
-					item="ctrl.character.equipment.gloves"></item-block>
+					item="ctrl.selected.equipment.gloves"></item-block>
 
 				<item-block 
 					slot-name="Leggings" 
 					type="leg" 
-					item="ctrl.character.equipment.leggings"></item-block>
+					item="ctrl.selected.equipment.leggings"></item-block>
 
 				<item-block 
 					slot-name="Boots" 
 					type="feet" 
-					item="ctrl.character.equipment.boots"></item-block>
+					item="ctrl.selected.equipment.boots"></item-block>
 
 				<item-block 
 					slot-name="Main-Hand Weapon" 
 					type="sword" 
-					item="ctrl.character.equipment.weaponA1"></item-block>
+					item="ctrl.selected.equipment.weaponA1"></item-block>
 
 				<item-block 
 					slot-name="Off-Hand Weapon"  
 					type="shield" 
-					item="ctrl.character.equipment.weaponA2"></item-block>
+					item="ctrl.selected.equipment.weaponA2"></item-block>
 
 				<item-block 
 					slot-name="Main-Hand Weapon" 
-					ng-if="ctrl.hasWeaponSwap()" 
+					ng-if="ctrl.selected.hasWeaponSwap" 
 					type="shield" 
-					item="ctrl.character.equipment.weaponB1"></item-block>
+					item="ctrl.selected.equipment.weaponB1"></item-block>
 
 				<item-block 
 					slot-name="Off-Hand Weapon" 
-					ng-if="ctrl.hasWeaponSwap()" 
+					ng-if="ctrl.selected.hasWeaponSwap" 
 					type="sword" 
-					item="ctrl.character.equipment.weaponB2"></item-block>
+					item="ctrl.selected.equipment.weaponB2"></item-block>
 			</div>
 
 			<div class="character-content-inner">
 				<character-portrait 
-						character="ctrl.character" 
+						character="ctrl.selected" 
 						class="character-portrait-container"></character-portrait>
 
 				<div class="character-info-right">
@@ -81,76 +81,76 @@
 						<item-block 
 							slot-name="Back" 
 							type="back" 
-							item="ctrl.character.equipment.backpack"></item-block>
+							item="ctrl.selected.equipment.backpack"></item-block>
 
 						<item-block 
 							slot-name="Accessory" 
 							type="beartrinket" 
-							item="ctrl.character.equipment.accessory1"></item-block>
+							item="ctrl.selected.equipment.accessory1"></item-block>
 
 						<item-block 
 							slot-name="Accessory" 
 							type="cubetrinket" 
-							item="ctrl.character.equipment.accessory2"></item-block>
+							item="ctrl.selected.equipment.accessory2"></item-block>
 
 						<item-block 
 							slot-name="Amulet" 
 							type="amulet" 
-							item="ctrl.character.equipment.amulet"></item-block>
+							item="ctrl.selected.equipment.amulet"></item-block>
 
 						<item-block 
 							slot-name="Ring" 
 							type="rightring" 
-							item="ctrl.character.equipment.ring1"></item-block>
+							item="ctrl.selected.equipment.ring1"></item-block>
 
 						<item-block 
 							slot-name="Ring" 
 							type="leftring" 
-							item="ctrl.character.equipment.ring2"></item-block>
+							item="ctrl.selected.equipment.ring2"></item-block>
 
 						<item-block 
 							slot-name="Foraging" 
 							type="sickle" 
-							item="ctrl.character.equipment.sickle"></item-block>
+							item="ctrl.selected.equipment.sickle"></item-block>
 
 						<item-block 
 							slot-name="Logging" 
 							type="axe" 
-							item="ctrl.character.equipment.axe"></item-block>
+							item="ctrl.selected.equipment.axe"></item-block>
 
 						<item-block 
 							slot-name="Mining" 
 							type="pick" 
-							item="ctrl.character.equipment.pick"></item-block>
+							item="ctrl.selected.equipment.pick"></item-block>
 
 						<item-block 
 							slot-name="Acquatic Headgear" 
 							type="head" 
-							item="ctrl.character.equipment.helpAquatic"></item-block>
+							item="ctrl.selected.equipment.helpAquatic"></item-block>
 
 						<item-block 
 							slot-name="Acquatic Weapon" 
 							type="sword" 
-							item="ctrl.character.equipment.weaponAquaticA"></item-block>
+							item="ctrl.selected.equipment.weaponAquaticA"></item-block>
 
 						<item-block 
 						slot-name="Acquatic Weapon" 
 						ng-if="ctrl.hasWeaponSwap()" 
 						type="sword" 
-						item="ctrl.character.equipment.weaponAquaticB"></item-block>
+						item="ctrl.selected.equipment.weaponAquaticB"></item-block>
 					</div>
 					
 					<crafting-block 
-						ng-repeat="model in ctrl.character.crafting" 
+						ng-repeat="model in ctrl.selected.crafting" 
 						model="model"></crafting-block>
 				</div>
 		</div>
 	</div>
 </div>
 
-<div class="character-viewer-empty" ng-if="!ctrl.isLoaded() && !ctrl.busy"></div>
+<progress-indicator busy="ctrl.fetching"></progress-indicator>
 
-<progress-indicator busy="ctrl.busy"></progress-indicator>
+<div class="character-viewer-empty" ng-if="!ctrl.selected"></div>
 
 <div ng-if="ctrl.isError()">
 	an error occurred, could be something

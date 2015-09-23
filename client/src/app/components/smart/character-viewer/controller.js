@@ -1,77 +1,22 @@
 'use strict';
 
-/**
- * CharacterViewerController
- */
-function CharacterViewerController($stateParams, $scope) {
-	'ngInject';
+import { actionCreators } from '../../../actions/characters';
+import { characterViewerSelector } from '../../../selectors/characters';
 
-	let _error;
-	let _loaded;
-	let vm = this;
-
-	function init() {
+class CharacterViewerController {
+	constructor ($stateParams, $scope, $ngRedux) {
+		const unsubscribe = $ngRedux.connect(characterViewerSelector)(this);
+		$scope.$on('$destroy', unsubscribe);
 		$scope.$watch(() => {
 			return $stateParams.name;
 		}, (name) => {
-		if (name) {
-			loadCharacter(name);
-		} else {
-			vm.character = {};
-			_loaded = false;
-		}
+			if (name) {
+				$ngRedux.dispatch(actionCreators.fetchCharacterThunk(name));
+			}
+
+			$ngRedux.dispatch(actionCreators.selectCharacter(name));
 		});
 	}
-
-	function loadCharacter(name) {
-		_error = false;
-		_loaded = false;
-		vm.busy = true;
-
-		gw2Service
-			.readCharacter(name)
-			.then(readSuccess, readFailure);
-	}
-
-	function readSuccess(character) {
-		_loaded = true;
-
-		console.log(character);
-		
-		vm.character = character;
-
-		vm.busy = false;
-	}
-
-	function readFailure(errorMessage) {
-		_error = true;
-
-		console.log(errorMessage);
-
-		// TODO: Handle character not found error (404)
-
-		vm.character = null;
-		vm.busy = false;
-	}
-
-	function isLoaded() {
-		return _loaded;
-	}
-
-	function isError() {
-		return _error;
-	}
-    
-	function hasWeaponSwap() {
-		return !!vm.character.hasWeaponSwap;
-	}
-
-	init();
-
-	vm.loadCharacter = loadCharacter;
-	vm.isLoaded = isLoaded;
-	vm.isError = isError;
-	vm.hasWeaponSwap = hasWeaponSwap;
 }
 
 export default CharacterViewerController;

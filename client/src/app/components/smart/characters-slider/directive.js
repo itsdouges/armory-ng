@@ -23,8 +23,6 @@ function CharactersSliderDirective ($window, debounce) {
 			slider.addEventListener('webkitTransitionEnd', transitionEvent, false);
 		};
 
-		console.log('after');
-
 		scope.$on('slider:set-transition-end-event', scopeEvent);
 
 		scope.$on('$destroy', () => {

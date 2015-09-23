@@ -7,23 +7,45 @@ function fetchCharactersReducer (state, action) {
 		...state
 	};
 
-	if (action.payload.user === 'me') {
-		newState
-	}
-
-	let user = ? 
-		'me' : 
-		action.payload.user;
-
-	newState 
+	newState.data[action.payload.name] = action.payload.data;
 
 	return newState;
 };
 
-export default function reducer (state, action) {
+function fetchingCharacterReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.fetching = action.payload;
+
+	return newState;
+}
+
+function selectCharacterReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.selected = action.payload;
+
+	return newState;
+}
+
+const initalState = {
+	data: {}
+};
+
+export default function reducer (state = initalState, action) {
 	switch (action.type) {
-		case actions.FETCH_USER_CHARACTERS_RESULT:
+		case actions.FETCH_CHARACTER_RESULT:
 			return fetchCharactersReducer(state, action);
+
+		case actions.FETCHING_CHARACTER:
+			return fetchingCharacterReducer(state, action);
+
+		case actions.SELECT_CHARACTER:
+			return selectCharacterReducer(state, action);
 
 		default:
 			return state;

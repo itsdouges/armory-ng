@@ -1,7 +1,7 @@
 'use strict';
 
 import { actionCreators } from '../../../actions/user/characters';
-import { myCharactersSelector } from '../../../selectors/user';
+import { myCharactersSelector } from '../../../selectors/characters';
 
 function CharactersSliderController ($scope, $ngRedux) {
 	let scope = this;
@@ -21,14 +21,17 @@ function CharactersSliderController ($scope, $ngRedux) {
 			let state = $ngRedux.getState();
 			let my = myCharactersSelector(state);
 
-			if (my.characters !== characters) {
-				characters = my.characters;
-				scope.hasCharacters = my.hasCharacters;
+			if (!my.characters) {
+				return;
 			}
 
 			sliderItems = my.columns;
-			console.log(sliderItems);
-			sup();
+
+			if (my.characters !== characters) {
+				characters = my.characters;
+				scope.hasCharacters = my.hasCharacters;
+				sup();
+			}
 		});
 
 		$scope.$on('$destroy', unsubscribe);

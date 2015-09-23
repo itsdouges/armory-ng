@@ -1,6 +1,6 @@
 let Gw2ParseService = {};
 
-Gw2ParseService.prototype.parseCharacter = (inCharacter) => {
+Gw2ParseService.parseCharacter = (inCharacter) => {
       let parseCharacterUpgrades = (character) => {
         let characterUpgrades = {};
 
@@ -122,7 +122,7 @@ Gw2ParseService.prototype.parseCharacter = (inCharacter) => {
       parseWeaponSwap(inCharacter);
 };
 
-Gw2ParseService.prototype.parseItem = (inItem) => {
+Gw2ParseService.parseItem = (inItem) => {
 	let parseVendorValue = (item) => {
 		item.vendor_value = item.vendor_value || 0;
 		item.gold = Math.floor(item.vendor_value / 1000);
