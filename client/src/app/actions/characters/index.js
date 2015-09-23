@@ -45,7 +45,8 @@ function fetchCharacterThunk (character) {
 		return axios
 			.get(`${config.api.endpoint}characters/${character}`)
 			.then((response) => {
-				dispatch(fetchCharacterResultSuccess(character, response.data));
+				let data = gw2Parse.parseCharacter(response.data);
+				dispatch(fetchCharacterResultSuccess(character, data));
 				dispatch(fetchingCharacter(false));
 			});
 	};
@@ -56,8 +57,7 @@ function fetchUserCharactersThunk (user) {
 		return axios
 			.get(`${config.api.endpoint}users/me/characters`)
 			.then((response) => {
-				let data = gw2Parse.parseCharacter(response.data);
-				dispatch(fetchUserCharactersResult(user, data));
+				dispatch(fetchUserCharactersResult(user, response.data));
 			});
 	};
 }

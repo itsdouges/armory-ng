@@ -1,6 +1,7 @@
 let Gw2ParseService = {};
 
-Gw2ParseService.parseCharacter = (inCharacter) => {
+Gw2ParseService.parseCharacter = (hey) => {
+	let inCharacter = hey;
       let parseCharacterUpgrades = (character) => {
         let characterUpgrades = {};
 
@@ -120,6 +121,8 @@ Gw2ParseService.parseCharacter = (inCharacter) => {
       parseCharacterUpgrades(inCharacter);
       parseEquipment(inCharacter);
       parseWeaponSwap(inCharacter);
+
+    return inCharacter;
 };
 
 Gw2ParseService.parseItem = (inItem) => {
