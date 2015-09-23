@@ -12,6 +12,7 @@ function CharactersSliderDirective ($window, debounce) {
 		let transitionEvent;
 		let scopeEvent = (e, cb) => {
 			transitionEvent = (e) => {
+
 				if (e.propertyName === 'transform') {
 					cb();
 				}
@@ -22,32 +23,13 @@ function CharactersSliderDirective ($window, debounce) {
 			slider.addEventListener('webkitTransitionEnd', transitionEvent, false);
 		};
 
+		console.log('after');
+
 		scope.$on('slider:set-transition-end-event', scopeEvent);
 
-		let resizeEvent = () => {
-			let windowWidth = $window.innerWidth;
-			if (windowWidth <= TABLET_WIDTH) {
-				controller.setSliderItems(2);
-			} else if (windowWidth <= PC_WIDTH) {
-				controller.setSliderItems(3);
-			} else if (windowWidth <= BIG_PC_WIDTH) {
-				controller.setSliderItems(4);
-			} else {
-				controller.setSliderItems(5);
-			}
-		};
-
-		let debounceResize = debounce.func(resizeEvent, 200);
-
-		$window.addEventListener('resize', debounceResize, false);
-
 		scope.$on('$destroy', () => {
-			$window.removeEventListener('resize', debounceResize);
 			slider.removeEventListener('webkitTransitionEnd', transitionEvent);
-			// scope.$off('slider:set-transition-end-event', scopeEvent);
 		});
-
-		resizeEvent();
 	};
 
 	let directive = {

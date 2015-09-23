@@ -1,3 +1,0 @@
-describe('characters service', function () {
-
-});

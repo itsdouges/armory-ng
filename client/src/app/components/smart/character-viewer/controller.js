@@ -3,7 +3,7 @@
 /**
  * CharacterViewerController
  */
-function CharacterViewerController(gw2Service, $stateParams, $scope) {
+function CharacterViewerController($stateParams, $scope) {
 	'ngInject';
 
 	let _error;

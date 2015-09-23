@@ -6,6 +6,7 @@ import { registerReducer } from './register';
 import { validatorReducer } from './validators';
 import { authReducer } from './auth';
 import { dataReducer } from './data';
+import { charactersReducer } from './characters';
 
 const initialState = {
 	token: localStorage.getItem('USER_TOKEN_LOCALSTORAGE_KEY')
@@ -41,6 +42,9 @@ export default function reduce (state = initialState, action) {
 		case actions.FETCHING_GW2_TOKENS:
 		case actions.INVALIDATE_GW2_TOKEN:
 			return dataReducer(state, action);
+
+		case actions.FETCH_MY_CHARACTERS_RESULT:
+			return charactersReducer(state, action);
 
 		default:
 			return state;

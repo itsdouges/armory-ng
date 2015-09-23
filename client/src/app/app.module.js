@@ -7,6 +7,8 @@ import configuration from './app.config';
 import routerConfig from './app.routes';
 import environment from '../generated/app.env';
 
+import ColumnsCalculatorDirective from './directives/columns-calculator';
+
 import CharactersSliderController from './components/smart/characters-slider/controller';
 import CharactersSliderDirective from './components/smart/characters-slider/directive';
 
@@ -70,14 +72,10 @@ import InputValidityController from './components/dumb/input-validity/controller
 import UpgradeComponentDirective from './components/dumb/upgrade-component/directive';
 import UpgradeComponentController from './components/dumb/upgrade-component/controller';
 
-import MouseFollowDirective from './directives/mouse-follow/directive';
+import MouseFollowDirective from './directives/mouse-follow';
 
 import AuthService from './services/auth/auth';
-import Gw2ParseService from './services/gw2/gw2-parse';
-import Gw2Service from './services/gw2/gw2';
 import debounce from './services/helpers/debouncer';
-import UserService from './services/user/user';
-import CharactersService from './services/characters/characters';
 
 import 'angular';
 import ngRedux from 'ng-redux';
@@ -103,13 +101,10 @@ angular.module('gw2armory', [
 
 .run(configuration.run)
 
-.service('gw2ParseService', Gw2ParseService)
-.service('gw2Service', Gw2Service)
 .service('authService', AuthService)
 .service('debounce', debounce)
-.service('userService', UserService)
-.service('charactersService', CharactersService)
 
+.directive('columnsCalculator', ColumnsCalculatorDirective)
 .directive('mouseFollow', MouseFollowDirective)
 
 .controller('ItemBlockController', ItemController)

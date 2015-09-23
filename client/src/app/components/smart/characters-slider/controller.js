@@ -1,6 +1,9 @@
 'use strict';
 
-function CharactersSliderController (charactersService, $scope, $state) {
+import { actionCreators } from '../../../actions/user/characters';
+import { myCharactersSelector } from '../../../selectors/user';
+
+function CharactersSliderController ($scope, $ngRedux) {
 	let scope = this;
 	let characters;
 	const sliderTranslateX = 100;
@@ -9,18 +12,30 @@ function CharactersSliderController (charactersService, $scope, $state) {
 	let sliderItems;
 	let currentPosition;
 
+	let loaded = false;
+
 	function init () {
 		scope.sliderControlsDisabled = true;
-		scope.sliderEmpty = false;
 
-		let promise;
+		const unsubscribe = $ngRedux.subscribe(() => {
+			let state = $ngRedux.getState();
+			let my = myCharactersSelector(state);
+
+			if (my.characters !== characters) {
+				characters = my.characters;
+				scope.hasCharacters = my.hasCharacters;
+			}
+
+			sliderItems = my.columns;
+			console.log(sliderItems);
+			sup();
+		});
+
+		$scope.$on('$destroy', unsubscribe);
 
 		switch(scope.mode) {
-			case 'authenticated': 
-				promise = charactersService.myList();
-				break;
-
-			case 'public':
+			case 'authenticated':
+				$ngRedux.dispatch(actionCreators.fetchMyCharactersThunk());
 				break;
 
 			default:
@@ -28,37 +43,29 @@ function CharactersSliderController (charactersService, $scope, $state) {
 				break;
 		}
 
-		promise
-		.then((items) => {
-			characters = items;
+		setSliderStyle(sliderTranslateX);
+	}
 
-			console.log(items);
+	function sup () {
+		if (characters.length > sliderItems) {
+			scope.sliderControlsDisabled = false;
+		}
 
-			if (!characters || !characters.length) {
-					scope.sliderEmpty = true;
-					return;
-			} else if (characters.length > sliderItems) {
-					scope.sliderControlsDisabled = false;
-			}
-
-			// TODO: Implement some real handling of small data
-
-			setCharactersOffset(sliderItems);
-
-			if (characters.length <= sliderItems) {
-				setSliderStyle(0);
-				return;
-			}
-
+		if (!loaded) {
 			$scope.$emit('slider:set-transition-end-event', () => {
 				$scope.$apply(() => {
+					let offset;
+
 					if (transitionDirection === 'previous') {
-						setCharactersOffset(sliderItems);
+						offset = sliderItems;
 					} else if (transitionDirection === 'next') {
-						setCharactersOffset(-sliderItems);
+						offset = -sliderItems;
 					} else {
 						throw 'transition not handled';
 					}
+
+					console.log(`offsetting by ${offset}`);
+					setCharactersOffset(offset);
 				});
 
 				requestAnimationFrame(() => {
@@ -66,21 +73,18 @@ function CharactersSliderController (charactersService, $scope, $state) {
 						setSliderStyle(sliderTranslateX, true);
 					});
 				});
-			});					
-		});
+			});
 
-		setSliderStyle(sliderTranslateX);
+			loaded = true;
+		}
+
+		setCharactersOffset(sliderItems);
+
+		if (characters.length <= sliderItems) {
+			setSliderStyle(0);
+			return;
+		}
 	}
-
-	this.next = (e) => {
-		transitionDirection = 'next';
-		setSliderStyle(sliderTranslateX * 2);
-	};
-
-	this.previous = (e) => {
-		transitionDirection = 'previous';
-		setSliderStyle(0);
-	};
 
 	function setCharactersOffset(offset) {
 		var tempc,
@@ -118,8 +122,14 @@ function CharactersSliderController (charactersService, $scope, $state) {
 		scope.sliderStyle = style;
 	}
 
-	this.setSliderItems = (numberOfItems) => {
-		sliderItems = numberOfItems;
+	this.next = () => {
+		transitionDirection = 'next';
+		setSliderStyle(sliderTranslateX * 2);
+	};
+
+	this.previous = () => {
+		transitionDirection = 'previous';
+		setSliderStyle(0);
 	};
 
 	init();

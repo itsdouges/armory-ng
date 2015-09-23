@@ -5,7 +5,7 @@ import stateGo from 'redux-ui-router/lib/state-go';
 
 import config from '../../../generated/app.env';
 
-import showToast from '../toast'; 
+import showToast from '../toast';
 
 const LOCAL_USER_TOKEN_KEY = 'gw2armoryuser_TOKEN';
 
