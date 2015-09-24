@@ -22,7 +22,7 @@ function run ($ngRedux) {
 // 	
 	axios.interceptors.request.use((config) => {
 		const userAuth = userAuthSelector($ngRedux.getState());
-		if (userAuth.token) {
+		if (userAuth.token && !config.ignoreAuth) {
 			config.headers.Authorization = userAuth.token;
 		}
 

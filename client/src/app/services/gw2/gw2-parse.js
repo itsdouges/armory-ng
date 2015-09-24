@@ -1,7 +1,7 @@
-let Gw2ParseService = {};
-
-Gw2ParseService.parseCharacter = (hey) => {
-	let inCharacter = hey;
+let parseCharacter = (hey) => {
+	let inCharacter = {
+		...hey
+	};
       let parseCharacterUpgrades = (character) => {
         let characterUpgrades = {};
 
@@ -125,7 +125,11 @@ Gw2ParseService.parseCharacter = (hey) => {
     return inCharacter;
 };
 
-Gw2ParseService.parseItem = (inItem) => {
+let parseItem = (x) => {
+	let inItem = {
+		...x
+	};
+
 	let parseVendorValue = (item) => {
 		item.vendor_value = item.vendor_value || 0;
 		item.gold = Math.floor(item.vendor_value / 1000);
@@ -200,6 +204,37 @@ Gw2ParseService.parseItem = (inItem) => {
 	parseInfixDescription(inItem);
 	parseAvailableWeaponSlots(inItem);
 	parseDescription(inItem);
+
+	return inItem;
+};
+
+let mapItemsToObject = (items) => {
+	let object = {};
+
+	items.forEach((item) => {
+		let parsedItem = parseItem(item);
+
+		object[parsedItem.id] = parsedItem;
+	});
+
+	return object;
+};
+
+let mapSkinsToObject = (items) => {
+	let object = {};
+
+	items.forEach((item) => {
+		object[item.id] = item;
+	});
+
+	return object;
+};
+
+let Gw2ParseService = {
+	parseCharacter,
+	parseItem,
+	mapItemsToObject,
+	mapSkinsToObject
 };
 
 export default Gw2ParseService;

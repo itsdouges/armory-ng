@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import config from '../../../generated/app.env';
 import gw2Parse from '../../services/gw2/gw2-parse';
+import * as gw2 from '../gw2-data';
 
 export const actions = {
 	FETCH_CHARACTER_RESULT: 'FETCH_CHARACTER_RESULT',
@@ -38,8 +39,9 @@ function fetchCharacterResultSuccess (name, data) {
 	};
 };
 
+// TODO: Action is getting a bit beefy. Refactortractor needed.
 function fetchCharacterThunk (character) {
-	return (dispatch) => {
+	return (dispatch, getState) => {
 		dispatch(fetchingCharacter(true));
 
 		return axios
@@ -47,9 +49,41 @@ function fetchCharacterThunk (character) {
 			.then((response) => {
 				let data = gw2Parse.parseCharacter(response.data);
 				dispatch(fetchCharacterResultSuccess(character, data));
+				
+				let state = getState();
+				let ids = filterIdsToFetch(state.gw2.skins.data, state.gw2.skins.data, response.data.equipment);
+
+				dispatch(gw2.actionCreators.fetchItemsThunk(ids.items));
+
+				if (ids.skins.length) {
+					dispatch(gw2.actionCreators.fetchSkinsThunk(ids.skins));
+				}
+				
 				dispatch(fetchingCharacter(false));
+			})
+			.catch((hey) => {
+				console.log(hey);
 			});
 	};
+}
+
+function filterIdsToFetch (stateItems, stateSkins, equipment) {
+	let ids = {
+		items: [],
+		skins: []
+	};
+
+	equipment.forEach((item) => {
+		if (item.skin && !stateSkins.hasOwnProperty(item.skin)) {
+			ids.skins.push(item.skin);
+		}
+
+		if (item.id && !stateItems.hasOwnProperty(item.skin)) {
+			ids.items.push(item.id);
+		}
+	});
+
+	return ids;
 }
 
 function fetchUserCharactersThunk (user) {

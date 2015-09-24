@@ -1,18 +1,17 @@
 'use strict';
 
 function ItemDirective() {
-	'ngInject';
-
 	let directive = {
 		restrict: 'E',
-		templateUrl: 'app/components/smart/item-block/view.html',
+		templateUrl: 'app/components/dumb/item-block/view.html',
 		controller: 'ItemBlockController as ctrl',
 		scope: {},
 		bindToController: {
 			item: '=',
 			type: '@',
-			mode: '@',
-			slotName: '@'
+			icon: '@',
+			fetching: '=',
+			showTooltip: '&'
 		}
 	};
 

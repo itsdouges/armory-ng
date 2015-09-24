@@ -17,6 +17,10 @@ class CharacterViewerController {
 			$ngRedux.dispatch(actionCreators.selectCharacter(name));
 		});
 	}
+
+	showTooltip (show, item, skin, upgrades) {
+		console.log({ show, item, skin, upgrades });
+	}
 }
 
 export default CharacterViewerController;

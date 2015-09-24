@@ -51,8 +51,8 @@ import FooterDirective from './components/dumb/footer/directive';
 import CraftingBlockController from './components/dumb/crafting-block/controller';
 import CraftingBlockDirective from './components/dumb/crafting-block/directive';
 
-import ItemController from './components/smart/item-block/controller';
-import ItemDirective from './components/smart/item-block/directive';
+import ItemController from './components/dumb/item-block/controller';
+import ItemDirective from './components/dumb/item-block/directive';
 
 import ItemTooltipDirective from './components/smart/item-tooltip/directive';
 import ItemTooltipController from './components/smart/item-tooltip/controller';
