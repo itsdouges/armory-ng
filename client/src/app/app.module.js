@@ -77,6 +77,8 @@ import UpgradeComponentController from './components/dumb/upgrade-component/cont
 
 import MouseFollowDirective from './directives/mouse-follow';
 
+import CharacterAttributesComponent from './components/dumb/character-attributes';
+
 import AuthService from './services/auth/auth';
 import debounce from './services/helpers/debouncer';
 
@@ -109,6 +111,7 @@ angular.module('gw2armory', [
 
 .directive('columnsCalculator', ColumnsCalculatorDirective)
 .directive('mouseFollow', MouseFollowDirective)
+.directive('characterAttributes', CharacterAttributesComponent)
 
 .controller('ItemBlockController', ItemController)
 .directive('itemBlock', ItemDirective)

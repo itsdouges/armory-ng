@@ -87,8 +87,6 @@ function filterIdsToFetch (stateItems, stateSkins, equipment) {
 		}
 	});
 
-	console.log(ids.items);
-
 	return ids;
 }
 

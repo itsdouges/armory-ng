@@ -1,8 +1,6 @@
 'use strict';
 
 function CharacterViewerDirective() {
-	'ngInject';
-
 	let directive = {
 		restrict: 'E',
 		scope: {},

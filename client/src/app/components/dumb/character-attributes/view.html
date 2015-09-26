@@ -1,0 +1,83 @@
+<h3>Attributes</h3>
+
+<div class="attribute-container">
+	<div title="Attack power" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-attack-power"></i>
+		<span>{{ attributes.power }}</span>
+	</div>
+	
+	<div title="Precision" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-precision"></i>
+		<span>{{ attributes.precision }}</span>
+	</div>
+
+	<div title="Toughness" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-toughness"></i>
+		<span>{{ attributes.toughness }}</span>
+	</div>
+
+	<div title="Vitality" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-vitality"></i>
+		<span>{{ attributes.vitality }}</span>
+	</div>
+
+	<div title="Boon Duration" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-boon"></i>
+		<span>{{ attributes.boon || 0  }}</span>
+	</div>
+
+	<div title="Condition Duration" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-condition-duration"></i>
+		<span>{{ attributes.condition_duration || 0 }}</span>
+	</div>
+
+	<div title="Condition Damage" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-condition-damage"></i>
+		<span>{{ attributes.condition_damage || 0 }}</span>
+	</div>
+
+	<div title="Ferocity" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-ferocity"></i>
+		<span>{{ attributes.ferocity || 0 }}</span>
+	</div>
+
+	<div title="Healing Power" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-healing"></i>
+		<span>{{ attributes.healing || 0 }}</span>
+	</div>
+
+	<div title="Armor" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-armor"></i>
+		<span>{{ attributes.armor || 0 }}</span>
+	</div>
+
+	<div title="Health" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-health"></i>
+		<span>{{ attributes.health || 0 }}</span>
+	</div>
+
+	<div title="Critical Damage" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-critical-damage"></i>
+		<span>{{ attributes.critical_damage || 0 }}%</span>
+	</div>
+
+	<div title="Critical Chance" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-critical-chance"></i>
+		<span>{{ attributes.critical_chance || 0 }}%</span>
+	</div>
+
+	<div title="Magic Find" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-magic"></i>
+		<span>{{ attributes.magic || 0 }}%</span>
+	</div>
+
+	<div title="Agony Resistance" class="attribute">
+		<i class="icon icon-micro ic-attribute ic-agony"></i>
+		<span>{{ attributes.agony || 0 }}%</span>
+	</div>
+
+	<div title="{{ attributes.profession.attribute }}" class="attribute">
+		<i class="icon icon-micro ic-attribute" ng-class="attributes.profession.name"></i>
+		<span>{{ attributes.profession.value || 0 }}%</span>
+	</div>
+</div>
