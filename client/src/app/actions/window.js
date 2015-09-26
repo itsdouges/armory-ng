@@ -1,5 +1,6 @@
 export const actions = {
-	SET_WINDOW_COLUMN_SIZE: 'SET_WINDOW_COLUMN_SIZE'
+	SET_WINDOW_COLUMN_SIZE: 'SET_WINDOW_COLUMN_SIZE',
+	SET_BOTTOM_SPACER: 'SET_BOTTOM_SPACER'
 };
 
 function setColumnSize (size) {
@@ -9,6 +10,14 @@ function setColumnSize (size) {
 	};
 }
 
+function setBottomSpacer (pixels) {
+	return {
+		type: actions.SET_BOTTOM_SPACER,
+		payload: `${pixels}px`
+	};
+};
+
 export const actionCreators = {
-	setColumnSize
+	setColumnSize,
+	setBottomSpacer
 };

@@ -21,6 +21,9 @@ import CharacterViewerDirective from './components/smart/character-viewer/direct
 import Gw2TokenController from './components/dumb/gw2-token/controller';
 import Gw2TokenDirective from './components/dumb/gw2-token/directive';
 
+import SpacerController from './components/smart/spacer/controller';
+import SpacerDirective from './components/smart/spacer/directive';
+
 import UserLinksController from './components/dumb/user-links/controller';
 import UserLinksDirective from './components/dumb/user-links/directive';
 
@@ -45,8 +48,8 @@ import GuildBlockDirective from './components/dumb/guild-block/directive';
 import HeaderBlockController from './components/smart/header/controller';
 import HeaderBlockDirective from './components/smart/header/directive';
 
-import FooterController from './components/dumb/footer/controller';
-import FooterDirective from './components/dumb/footer/directive';
+import FooterController from './components/smart/footer/controller';
+import FooterDirective from './components/smart/footer/directive';
 
 import CraftingBlockController from './components/dumb/crafting-block/controller';
 import CraftingBlockDirective from './components/dumb/crafting-block/directive';
@@ -109,6 +112,9 @@ angular.module('gw2armory', [
 
 .controller('ItemBlockController', ItemController)
 .directive('itemBlock', ItemDirective)
+
+.controller('SpacerController', SpacerController)
+.directive('spacer', SpacerDirective)
 
 .controller('BusyButtonController', BusyButtonController)
 .directive('busyButton', BusyButtonDirective)
