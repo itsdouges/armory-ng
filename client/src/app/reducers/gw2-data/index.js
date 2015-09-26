@@ -48,6 +48,29 @@ function fetchSkinsResultReducer (state, action) {
 	return newState;
 }
 
+function showTooltipReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	if (!action.payload.show) {
+		newState.tooltip = {
+			open: action.payload.show
+		};
+	} else {
+		newState.tooltip = {
+			open: action.payload.show,
+			item: action.payload.item,
+			skin: action.payload.skin,
+			upgrades: action.payload.upgrades,
+			type: action.payload.type,
+			upgrade_combo_count: action.payload.upgrade_combo_count
+		};
+	}
+
+	return newState;
+}
+
 // TODO: Persist data to.. somewhere.
 const initalState = {
 	items: {
@@ -55,6 +78,9 @@ const initalState = {
 	},
 	skins: {
 		data: {}
+	},
+	tooltip: {
+		open: false
 	}
 };
 
@@ -71,6 +97,9 @@ export default function reducer (state = initalState, action) {
 
 		case actions.FETCH_SKINS_RESULT:
 			return fetchSkinsResultReducer(state, action);
+
+		case actions.SHOW_TOOLTIP:
+			return showTooltipReducer(state, action);
 
 		default:
 			return state;

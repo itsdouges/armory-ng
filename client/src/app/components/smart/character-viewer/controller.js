@@ -1,10 +1,13 @@
 'use strict';
 
 import { actionCreators } from '../../../actions/characters';
+import * as gw2 from '../../../actions/gw2-data';
 import { characterViewerSelector } from '../../../selectors/characters';
 
 class CharacterViewerController {
 	constructor ($stateParams, $scope, $ngRedux) {
+		this.$ngRedux = $ngRedux;
+
 		const unsubscribe = $ngRedux.connect(characterViewerSelector)(this);
 		$scope.$on('$destroy', unsubscribe);
 		$scope.$watch(() => {
@@ -18,8 +21,8 @@ class CharacterViewerController {
 		});
 	}
 
-	showTooltip (show, item, skin, upgrades) {
-		console.log({ show, item, skin, upgrades });
+	showTooltip (show, item, skin, upgrades, type, totalUpgrades) {
+		this.$ngRedux.dispatch(gw2.actionCreators.showTooltip(show, item, skin, upgrades, type, totalUpgrades));
 	}
 }
 

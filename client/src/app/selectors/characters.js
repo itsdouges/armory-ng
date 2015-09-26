@@ -6,6 +6,7 @@ const fetchingCharacter = state => state.characters.fetching;
 const getGw2ItemsData = state => state.gw2.items.data;
 const getGw2SkinsData = state => state.gw2.skins.data;
 const getFetchingGw2Data = state => state.gw2.items.fetching || state.gw2.skins.fetching; 
+const getTooltipOpen = state => state.gw2.tooltip.open;
 
 const getSelectedCharacter = state => {
 	return state.characters.data[state.characters.selected];
@@ -43,17 +44,6 @@ export const characterViewerSelector = createSelector(
 			items,
 			skins,
 			fetchingGw2Data
-		};
-	}
-);
-
-export const gw2DataSelector = createSelector(
-
-	(items, skins, fetching) => {
-		return {
-			items,
-			skins,
-			fetching
 		};
 	}
 );

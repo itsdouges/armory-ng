@@ -81,7 +81,13 @@ function filterIdsToFetch (stateItems, stateSkins, equipment) {
 		if (item.id && !stateItems.hasOwnProperty(item.skin)) {
 			ids.items.push(item.id);
 		}
+
+		if (item.upgrades) {
+			ids.items = ids.items.concat(item.upgrades);
+		}
 	});
+
+	console.log(ids.items);
 
 	return ids;
 }

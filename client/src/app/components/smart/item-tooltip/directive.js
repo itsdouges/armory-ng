@@ -7,11 +7,7 @@ function ItemTooltipDirective() {
 		restrict: 'E',
 		templateUrl: 'app/components/smart/item-tooltip/view.html',
 		controller: 'ItemTooltipController as ctrl',
-		scope: {},
-		bindToController: {
-			item: '=',
-			slotName: '@'
-		}
+		scope: {}
 	};
 
 	return directive;

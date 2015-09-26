@@ -10,6 +10,7 @@ export const actions = {
 	FETCHING_SKINS: 'FETCHING_SKINS',
 	FETCH_ITEMS_RESULT: 'FETCH_ITEMS_RESULT',
 	FETCH_SKINS_RESULT: 'FETCH_SKINS_RESULT',
+	SHOW_TOOLTIP: 'SHOW_TOOLTIP'
 };
 
 // 1. FETCH ALL ITEMS+SKINS FOR CHARACTER THAT ARENT IN STORE
@@ -67,7 +68,23 @@ function fetchItemsThunk (items) {
 	};
 }
 
+// TODO: Change input to object, getting a bit big.
+function showTooltip (show, item, skin, upgrades, type, totalUpgrades) {
+	return {
+		type: actions.SHOW_TOOLTIP,
+		payload: {
+			show,
+			item,
+			skin,
+			upgrades,
+			type,
+			upgrade_combo_count: totalUpgrades
+		}
+	};
+}
+
 export const actionCreators = {
 	fetchItemsThunk,
-	fetchSkinsThunk
+	fetchSkinsThunk,
+	showTooltip
 };

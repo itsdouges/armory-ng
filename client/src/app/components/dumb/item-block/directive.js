@@ -8,6 +8,7 @@ function ItemDirective() {
 		scope: {},
 		bindToController: {
 			item: '=',
+			slotName: '@',
 			type: '@',
 			icon: '@',
 			fetching: '=',
