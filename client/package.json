@@ -1,9 +1,20 @@
 {
   "name": "gw2armory",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "angular": "^1.5.0-beta.0",
+    "angular-ui-router": "^0.2.15",
+    "axios": "^0.5.4",
+    "es6-promise": "^3.0.2",
+    "ng-redux": "^3.0.0",
+    "redux": "^3.0.0",
+    "redux-thunk": "^1.0.0",
+    "redux-ui-router": "^0.2.0",
+    "reselect": "^1.1.0"
+  },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "gulp serve"
   },
   "devDependencies": {
     "babel-core": "~5.5.8",
@@ -50,6 +61,7 @@
     "lodash": "~3.9.3",
     "main-bower-files": "~2.8.0",
     "merge-stream": "~0.1.7",
+    "redux-logger": "^1.0.8",
     "require-dir": "~0.3.0",
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.2",

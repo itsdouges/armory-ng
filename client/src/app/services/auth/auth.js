@@ -1,108 +1,54 @@
 'use strict';
 
-let USER_TOKEN_KEY = 'gw2armoryuser_TOKEN';
+import axios from 'axios';
 
-function AuthService($http, $state, $q, env) {
+import { actionCreators } from '../../actions/user/auth'
+import { userAuthSelector } from '../../selectors/user';
+
+import stateGo from 'redux-ui-router/lib/state-go';
+
+// TODO: Figure out the best way to hook this into redux.
+function AuthService ($state, env, $ngRedux) {
 	let scope = this;
-	let user = {};
-
-	function resetUser() {
-		console.log('clearing local data');
-
-		user = {
-			authenticated: false
-		};
-
-		// TODO: Test setting of header. Bit lazy today..
-
-		$http.defaults.headers.common.Authorization = undefined;
-		localStorage.setItem(USER_TOKEN_KEY, '');
-	}
-
-	function loginSuccess(response) {
-		user.authenticated = true;
-
-		localStorage.setItem(USER_TOKEN_KEY, `${response.data.token_type} ${response.data.access_token}`);
-
-		$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
-		console.log('success login');
-
-		// todo: redirect to settings if no tokens are available
-		$state.go('main.with-auth.characters');
-	}
 
 	this.checkAuthentication = function () {
-		console.log('check auth');
+		console.log('checking auth');
 
-		if (scope.isAuthenticated()) {
-			console.log('ur auth');
+		let userAuthStatus = userAuthSelector($ngRedux.getState());
+		if (userAuthStatus.loggedIn) {
+			console.log('ur auth! whalecome!');
 
-			return $q.resolve();
+			return Promise.resolve();
 		}
 
-		let token = localStorage.getItem(USER_TOKEN_KEY);
-		if (token) {
-			console.log('u have a token saved, lets check it');
+		if (userAuthStatus.token) {
+			console.log('u have a token saved, lets check it..');
 
-			return $http.
-				get(`${env.api.endpoint}token`, {
+			return axios.
+				get(`${env.api.endpoint}/users/me`, {
 					headers: { 
-						Authorization: token
+						Authorization: userAuthStatus.token
 					}
-				}).then(function () {
-				user.authenticated = true;
-				$http.defaults.headers.common.Authorization = localStorage.getItem(USER_TOKEN_KEY);
-			}, function () {
-				resetUser();
+				}).then(function (response) {
+					console.log('yeah ur legit');
 
-				return $q.reject();
+					$ngRedux.dispatch(actionCreators.authenticateUser(response.data));
+
+					return Promise.resolve();
+			}, function () {
+				console.log('bad token, get outta here!');
+
+				$ngRedux.dispatch(actionCreators.clearUserData());
+
+				return Promise.reject();
 			});
 		} else {
-			console.log('ur not auth, lets redirect u to login');
-			// reject, change state to login
-			// TODO: Is there a better way to do this ?
-			// 
-			var defer = $q.defer();
-			defer.promise.then(null, function() {
-				resetUser();
-				
-			});
+			console.log('not auth, get outta here!');
 
-			defer.reject();
+			$ngRedux.dispatch(actionCreators.clearUserData());
 
-			return defer.promise;
+			return Promise.reject();
 		}
-	};
-
-	this.isAuthenticated = function () {
-		return user.authenticated;
-	};
-
-	this.login = function (email, password) {
-		// TEST PROMISE RETURN
-		return $http
-			.post(`${env.api.endpoint}token`, {
-				username: email,
-				password: password,
-				grant_type: 'password'
-			}, {
-				headers: {
-					Authorization: 'Basic ' + env.api.token
-				}
-			})
-			.then(loginSuccess, function (response) {
-				resetUser();
-
-				// TODO: TEST !
-
-				return $q.reject(response.data.error_description);
-			});
-	};
-
-	this.logout = function () {
-		// TODO: Test this.
-		resetUser();
-		$state.go('main.no-auth.with-container.login');
 	};
 }
 

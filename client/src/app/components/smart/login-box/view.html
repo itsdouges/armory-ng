@@ -1,0 +1,27 @@
+<form ng-submit="ctrl.login()">
+	<div class="message-box error">{{ ctrl.error }}</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label class="label" for="email">Email</label>
+		</div>
+
+		<div class="input-container">
+			<input placeholder="Email" class="control" id="email" type="text" ng-model="ctrl.email" required="required" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="password">Password</label>
+		</div>
+
+		<div class="input-container">
+			<input placeholder="Password" id="password" type="password" ng-model="ctrl.password" required="required" />
+		</div>
+	</div>
+
+	<div class="button-group">
+		<busy-button busy="ctrl.fetchingToken">Login</busy-button>
+	</div>
+</form>

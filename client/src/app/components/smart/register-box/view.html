@@ -1,0 +1,73 @@
+<form ng-submit="ctrl.register()">
+	<div class="message-box error">{{ ctrl.user.registerErrors }}</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label class="label" for="register-email">Email</label>
+		</div>
+
+		{{ ctrl.user.emailErrors }}
+
+		<div class="input-container">
+			<input placeholder="Email" ng-model="ctrl.inputs.email" ng-change="ctrl.checkEmail()" class="control" id="register-email" type="email" required="required" />
+			
+			<input-validity 
+				data-busy="ctrl.user.emailValidating"
+				data-valid="ctrl.user.emailValid">
+			</input-validity>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-alias">Alias</label>
+		</div>
+
+		{{ ctrl.user.aliasErrors }}
+
+		<div class="input-container">
+			<input placeholder="Alias" ng-change="ctrl.checkAlias()" id="register-alias" type="text" ng-model="ctrl.inputs.alias" required="required" />
+
+			<input-validity 
+				data-busy="ctrl.user.aliasValidating"
+				data-valid="ctrl.user.aliasValid">
+			</input-validity>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-password">Password</label>
+		</div>
+
+		{{ ctrl.user.passwordErrors }}
+
+		<div class="input-container">
+			<input placeholder="Password" ng-change="ctrl.checkPasswords()" id="register-password" type="password" ng-model="ctrl.inputs.password1" required="required" />
+
+			<input-validity
+				data-valid="ctrl.user.passwordValue">
+			</input-validity>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="label-container">
+			<label for="register-confirm-password">Confirm Password</label>
+		</div>
+
+		<div class="input-container">
+			<input placeholder="Confirm Password" id="register-confirm-password" type="password" ng-change="ctrl.checkPasswords()" ng-model="ctrl.inputs.password2" required="required" />
+
+			<input-validity
+				data-valid="ctrl.user.passwordValue">
+			</input-validity>
+		</div>
+	</div>
+
+	<div class="button-group">
+		<busy-button button-disabled="!ctrl.canRegister" busy="ctrl.user.registering">
+			Register
+		</busy-button>
+	</div>
+</form>

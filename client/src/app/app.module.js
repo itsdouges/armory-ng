@@ -1,105 +1,110 @@
 'use strict';
 
-// TODO: Split this up into angular modules. This file is getting too big !
+import { polyfill } from 'es6-promise';
+polyfill();
 
 import configuration from './app.config';
 import routerConfig from './app.routes';
 import environment from '../generated/app.env';
-import httpAuthInterceptor from './interceptors/http-auth-interceptor';
 
-import CharactersSliderController from './components/characters-slider/controller';
-import CharactersSliderDirective from './components/characters-slider/directive';
+import ColumnsCalculatorDirective from './directives/columns-calculator';
 
-import ProgressIndicatorController from './components/progress-indicator/controller';
-import ProgressIndicatorDirective from './components/progress-indicator/directive';
+import CharactersSliderController from './components/smart/characters-slider/controller';
+import CharactersSliderDirective from './components/smart/characters-slider/directive';
 
-import CharacterViewerController from './components/character-viewer/controller';
-import CharacterViewerDirective from './components/character-viewer/directive';
+import ProgressIndicatorController from './components/dumb/progress-indicator/controller';
+import ProgressIndicatorDirective from './components/dumb/progress-indicator/directive';
 
-import Gw2TokenController from './components/gw2-token/controller';
-import Gw2TokenDirective from './components/gw2-token/directive';
+import CharacterViewerController from './components/smart/character-viewer/controller';
+import CharacterViewerDirective from './components/smart/character-viewer/directive';
 
-import UserStatusController from './components/user-status/controller';
-import UserStatusDirective from './components/user-status/directive';
+import Gw2TokenController from './components/dumb/gw2-token/controller';
+import Gw2TokenDirective from './components/dumb/gw2-token/directive';
 
-import UserTokensController from './components/user-tokens/controller';
-import UserTokensDirective from './components/user-tokens/directive';
+import UserLinksController from './components/dumb/user-links/controller';
+import UserLinksDirective from './components/dumb/user-links/directive';
 
-import ChangeAliasController from './components/change-alias/controller';
-import ChangeAliasDirective from './components/change-alias/directive';
+import UserTokensController from './components/smart/user-tokens/controller';
+import UserTokensDirective from './components/smart/user-tokens/directive';
 
-import ChangePasswordController from './components/change-password/controller';
-import ChangePasswordDirective from './components/change-password/directive';
+import ChangeAliasController from './components/smart/change-alias/controller';
+import ChangeAliasDirective from './components/smart/change-alias/directive';
 
-import CharacterPortraitController from './components/character-portrait/controller';
-import CharacterPortraitDirective from './components/character-portrait/directive';
+import ChangePasswordController from './components/smart/change-password/controller';
+import ChangePasswordDirective from './components/smart/change-password/directive';
 
-import CharacterHeadshotController from './components/character-headshot/controller';
-import CharacterHeadshotDirective from './components/character-headshot/directive';
+import CharacterPortraitController from './components/dumb/character-portrait/controller';
+import CharacterPortraitDirective from './components/dumb/character-portrait/directive';
 
-import GuildBlockController from './components/guild-block/controller';
-import GuildBlockDirective from './components/guild-block/directive';
+import CharacterHeadshotController from './components/dumb/character-headshot/controller';
+import CharacterHeadshotDirective from './components/dumb/character-headshot/directive';
 
-import HeaderBlockController from './components/header/controller';
-import HeaderBlockDirective from './components/header/directive';
+import GuildBlockController from './components/dumb/guild-block/controller';
+import GuildBlockDirective from './components/dumb/guild-block/directive';
 
-import FooterController from './components/footer/controller';
-import FooterDirective from './components/footer/directive';
+import HeaderBlockController from './components/smart/header/controller';
+import HeaderBlockDirective from './components/smart/header/directive';
 
-import CraftingBlockController from './components/crafting-block/controller';
-import CraftingBlockDirective from './components/crafting-block/directive';
+import FooterController from './components/dumb/footer/controller';
+import FooterDirective from './components/dumb/footer/directive';
 
-import ItemController from './components/item-block/controller';
-import ItemDirective from './components/item-block/directive';
+import CraftingBlockController from './components/dumb/crafting-block/controller';
+import CraftingBlockDirective from './components/dumb/crafting-block/directive';
 
-import ItemTooltipDirective from './components/item-tooltip/directive';
-import ItemTooltipController from './components/item-tooltip/controller';
+import ItemController from './components/dumb/item-block/controller';
+import ItemDirective from './components/dumb/item-block/directive';
 
-import LoginDirective from './components/login-box/directive';
-import LoginController from './components/login-box/controller';
+import ItemTooltipDirective from './components/smart/item-tooltip/directive';
+import ItemTooltipController from './components/smart/item-tooltip/controller';
 
-import BusyButtonDirective from './components/busy-button/directive';
-import BusyButtonController from './components/busy-button/controller';
+import LoginDirective from './components/smart/login-box/directive';
+import LoginController from './components/smart/login-box/controller';
 
-import RegisterDirective from './components/register-box/directive';
-import RegisterController from './components/register-box/controller';
+import BusyButtonDirective from './components/dumb/busy-button/directive';
+import BusyButtonController from './components/dumb/busy-button/controller';
 
-import InputValidityDirective from './components/input-validity/directive';
-import InputValidityController from './components/input-validity/controller';
+import RegisterDirective from './components/smart/register-box/directive';
+import RegisterController from './components/smart/register-box/controller';
 
-import UpgradeComponentDirective from './components/upgrade-component/directive';
-import UpgradeComponentController from './components/upgrade-component/controller';
+import InputValidityDirective from './components/dumb/input-validity/directive';
+import InputValidityController from './components/dumb/input-validity/controller';
 
-import MouseFollowDirective from './components/mouse-follow/directive';
+import UpgradeComponentDirective from './components/dumb/upgrade-component/directive';
+import UpgradeComponentController from './components/dumb/upgrade-component/controller';
+
+import MouseFollowDirective from './directives/mouse-follow';
 
 import AuthService from './services/auth/auth';
-import Gw2ParseService from './services/gw2/gw2-parse';
-import Gw2Service from './services/gw2/gw2';
 import debounce from './services/helpers/debouncer';
-import UserService from './services/user/user';
-import CharactersService from './services/characters/characters';
+
+import 'angular';
+import ngRedux from 'ng-redux';
+import uiRouter from 'angular-ui-router';
+import ngReduxRouter from 'redux-ui-router';
+
+import reducers from './reducers';
+import { combineReducers } from 'redux';
+import store from './app.redux-store';
 
 angular.module('gw2armory', [
-  'ui.router',
-  'ngSanitize',
-  'ngAnimate'
+	ngRedux,
+  uiRouter,
+  ngReduxRouter
+  // 'ngAnimate' // TODO: This is affecting a few ng-if/off that I don't want to. Find a work around.
 ])
 
 .config(configuration.config)
 .config(routerConfig)
+.config(store)
+
 .constant('env', environment)
 
 .run(configuration.run)
 
-.factory('httpAuthInterceptor', httpAuthInterceptor)
-
-.service('gw2ParseService', Gw2ParseService)
-.service('gw2Service', Gw2Service)
 .service('authService', AuthService)
 .service('debounce', debounce)
-.service('userService', UserService)
-.service('charactersService', CharactersService)
 
+.directive('columnsCalculator', ColumnsCalculatorDirective)
 .directive('mouseFollow', MouseFollowDirective)
 
 .controller('ItemBlockController', ItemController)
@@ -126,8 +131,8 @@ angular.module('gw2armory', [
 .controller('UserTokensController', UserTokensController)
 .directive('userTokens', UserTokensDirective)
 
-.controller('UserStatusController', UserStatusController)
-.directive('userStatus', UserStatusDirective)
+.controller('UserLinksController', UserLinksController)
+.directive('userLinks', UserLinksDirective)
 
 .controller('ChangeAliasController', ChangeAliasController)
 .directive('changeAlias', ChangeAliasDirective)
