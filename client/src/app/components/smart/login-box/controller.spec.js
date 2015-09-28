@@ -1,144 +1,144 @@
-'use strict';
+// 'use strict';
 
-describe('login box', function () {
-	var mockauthService;
-	var rootScope;
-	var mockState;
-	var q;
+// describe('login box', function () {
+// 	var mockauthService;
+// 	var rootScope;
+// 	var mockState;
+// 	var q;
 
-	beforeEach(module('gw2armory'));
-	beforeEach(function() {
-		mockauthService = {};
-		mockState = {};
-	});
+// 	beforeEach(module('gw2armory'));
+// 	beforeEach(function() {
+// 		mockauthService = {};
+// 		mockState = {};
+// 	});
 
-	var systemUnderTest = function (mockControllerBinds) {
-		var ctrl;
+// 	var systemUnderTest = function (mockControllerBinds) {
+// 		var ctrl;
 
-		inject(function($controller, $rootScope, $q) {
-			rootScope = $rootScope;
-			q = $q;
+// 		inject(function($controller, $rootScope, $q) {
+// 			rootScope = $rootScope;
+// 			q = $q;
 
-			ctrl = $controller('LoginController', {
-				authService: mockauthService,
-				$state: mockState
-			});
-		});
+// 			ctrl = $controller('LoginController', {
+// 				authService: mockauthService,
+// 				$state: mockState
+// 			});
+// 		});
 
-		return ctrl;
-	};
+// 		return ctrl;
+// 	};
 
-	it ('should not call user service if email and pass arent defined', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
+// 	it ('should not call user service if email and pass arent defined', function () {
+// 		var ctrl = systemUnderTest();
+// 		var loginDefer;
 
-		mockauthService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
+// 		mockauthService.login = function () {
+// 			loginDefer = q.defer();
+// 			return loginDefer.promise;
+// 		};
 
-		spyOn(mockauthService, 'login').and.callThrough();
+// 		spyOn(mockauthService, 'login').and.callThrough();
 
-		ctrl.login();
+// 		ctrl.login();
 
-		rootScope.$apply();
+// 		rootScope.$apply();
 
-		expect(mockauthService.login).not.toHaveBeenCalled();
-	});
+// 		expect(mockauthService.login).not.toHaveBeenCalled();
+// 	});
 
-	it ('should call user service if valid', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
+// 	it ('should call user service if valid', function () {
+// 		var ctrl = systemUnderTest();
+// 		var loginDefer;
 
-		mockauthService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
+// 		mockauthService.login = function () {
+// 			loginDefer = q.defer();
+// 			return loginDefer.promise;
+// 		};
 
-		spyOn(mockauthService, 'login').and.callThrough();
+// 		spyOn(mockauthService, 'login').and.callThrough();
 
-		ctrl.user = {
-			email: 'ayy',
-			password: 'nahh'
-		};
+// 		ctrl.user = {
+// 			email: 'ayy',
+// 			password: 'nahh'
+// 		};
 
-		ctrl.login();
+// 		ctrl.login();
 
-		rootScope.$apply();
+// 		rootScope.$apply();
 
-		expect(mockauthService.login).toHaveBeenCalled();
-	});
+// 		expect(mockauthService.login).toHaveBeenCalled();
+// 	});
 
-	it ('should set loading when calling login service', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
+// 	it ('should set loading when calling login service', function () {
+// 		var ctrl = systemUnderTest();
+// 		var loginDefer;
 
-		mockauthService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
+// 		mockauthService.login = function () {
+// 			loginDefer = q.defer();
+// 			return loginDefer.promise;
+// 		};
 
-		spyOn(mockauthService, 'login').and.callThrough();
+// 		spyOn(mockauthService, 'login').and.callThrough();
 
-		ctrl.user = {
-			email: 'ayy',
-			password: 'nahh'
-		};
+// 		ctrl.user = {
+// 			email: 'ayy',
+// 			password: 'nahh'
+// 		};
 
-		ctrl.login();
+// 		ctrl.login();
 
-		expect(ctrl.loading).toBe(true);
-	});
+// 		expect(ctrl.loading).toBe(true);
+// 	});
 
-	it ('should show error message if an error occurred', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
+// 	it ('should show error message if an error occurred', function () {
+// 		var ctrl = systemUnderTest();
+// 		var loginDefer;
 
-		mockauthService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
+// 		mockauthService.login = function () {
+// 			loginDefer = q.defer();
+// 			return loginDefer.promise;
+// 		};
 
-		spyOn(mockauthService, 'login').and.callThrough();
+// 		spyOn(mockauthService, 'login').and.callThrough();
 
-		ctrl.user = {
-			email: 'ayy',
-			password: 'nahh'
-		};
+// 		ctrl.user = {
+// 			email: 'ayy',
+// 			password: 'nahh'
+// 		};
 
-		ctrl.login();
+// 		ctrl.login();
 
-		var error = 'ahh something bad happened';
-		loginDefer.reject(error);
+// 		var error = 'ahh something bad happened';
+// 		loginDefer.reject(error);
 
-		rootScope.$apply();
+// 		rootScope.$apply();
 
-		expect(ctrl.error).toBe(error);
-	});
+// 		expect(ctrl.error).toBe(error);
+// 	});
 
-	it ('should set loading to false if error occurred', function () {
-		var ctrl = systemUnderTest();
-		var loginDefer;
+// 	it ('should set loading to false if error occurred', function () {
+// 		var ctrl = systemUnderTest();
+// 		var loginDefer;
 
-		mockauthService.login = function () {
-			loginDefer = q.defer();
-			return loginDefer.promise;
-		};
+// 		mockauthService.login = function () {
+// 			loginDefer = q.defer();
+// 			return loginDefer.promise;
+// 		};
 
-		spyOn(mockauthService, 'login').and.callThrough();
+// 		spyOn(mockauthService, 'login').and.callThrough();
 
-		ctrl.user = {
-			email: 'ayy',
-			password: 'nahh'
-		};
+// 		ctrl.user = {
+// 			email: 'ayy',
+// 			password: 'nahh'
+// 		};
 
-		ctrl.login();
+// 		ctrl.login();
 
-		var error = 'ahh something bad happened';
-		loginDefer.reject(error);
+// 		var error = 'ahh something bad happened';
+// 		loginDefer.reject(error);
 
-		rootScope.$apply();
+// 		rootScope.$apply();
 
-		expect(ctrl.loading).toBe(false);
-	});
-});
+// 		expect(ctrl.loading).toBe(false);
+// 	});
+// });

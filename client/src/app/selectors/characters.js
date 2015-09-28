@@ -83,23 +83,60 @@ function calculateBaseAttribute (level) {
 const getBonusAttributes = (state) => {
 	let selectedCharacter = getSelectedCharacter(state);
 
-	let attributes;
+	let bonusAttributes = {
+		Power: 0
+	};
 
 	for (let equip in selectedCharacter.equipment) {
 		if (!selectedCharacter.equipment.hasOwnProperty(equip)) {
-			break;
+			continue;
 		}
 
 		let equipObject = selectedCharacter.equipment[equip];
 		if (!equipObject) {
-			return;
+			continue;
 		}
 
-		// console.log(state.gw2.items.data[equipObject.id]);
+		if (!state.gw2.items.data[equipObject.id] ||
+				!state.gw2.items.data[equipObject.id].details ||
+				!state.gw2.items.data[equipObject.id].details.infix_upgrade) {
+			continue;
+		}
+
+		// exclude water weapons/helms
+		if (state.gw2.items.data[equipObject.id].details.type === 'Trident' || 
+				state.gw2.items.data[equipObject.id].details.type === 'HelmAcquatic') {
+			continue;
+		}
+
+		let itemAttributes = state.gw2.items.data[equipObject.id].details.infix_upgrade.attributes
+		itemAttributes.forEach((attribute) => {
+			if (!bonusAttributes[attribute.attribute]) {
+				bonusAttributes[attribute.attribute] = attribute.modifier;
+			} else {
+				bonusAttributes[attribute.attribute] += attribute.modifier;
+			}
+		});
+
+		if (!equipObject.upgrades) {
+			continue;
+		}
+
+		equipObject.upgrades.forEach((upgrade) => {
+
+		});
 	}
+
+	console.log(bonusAttributes);
+
+	return bonusAttributes;
 };
 
 const getAttributes = (state) => {
+	if (getFetchingGw2Data(state)) {
+		return;
+	}
+
 	let selectedCharacter = getSelectedCharacter(state);
 	if (!selectedCharacter) {
 		return;
@@ -108,11 +145,11 @@ const getAttributes = (state) => {
 	let baseStat = calculateBaseAttribute(selectedCharacter.level);
 	let bonusAttributes = getBonusAttributes(state);
 
-	// console.log(bonusAttributes);
+	console.log(bonusAttributes);
 
 	return {
-		power: baseStat,
-		precision: baseStat,
+		power: baseStat + bonusAttributes.Power,
+		precision: baseStat + bonusAttributes.Precision,
 		toughness: baseStat,
 		vitality: baseStat,
 		armor: baseStat // + equiparmordefence

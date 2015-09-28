@@ -1,314 +1,314 @@
-'use strict';
+// 'use strict';
 
-describe('characterviewer controller', function () {
-  var mockCharacterService;
-  var mockStateParams;
-  // var mockMessageService;
-  // var mockBusyService;
+// describe('characterviewer controller', function () {
+//   var mockCharacterService;
+//   var mockStateParams;
+//   // var mockMessageService;
+//   // var mockBusyService;
 
-  var rootScope;
+//   var rootScope;
 
-  beforeEach(module('gw2armory'));
-  beforeEach(function() {
-    mockCharacterService = {};
-    mockStateParams = {};
-    // mockBusyService = {
-    //   setBusy: function() {}
-    // };
-    // mockMessageService = {
-    //   clear: function() {},
-    //   setError: function() {}
-    // };
-  });
+//   beforeEach(module('gw2armory'));
+//   beforeEach(function() {
+//     mockCharacterService = {};
+//     mockStateParams = {};
+//     // mockBusyService = {
+//     //   setBusy: function() {}
+//     // };
+//     // mockMessageService = {
+//     //   clear: function() {},
+//     //   setError: function() {}
+//     // };
+//   });
 
-  var systemUnderTest = function () {
-    var ctrl;
+//   var systemUnderTest = function () {
+//     var ctrl;
 
-    inject(function($controller, $rootScope) {
-      rootScope = $rootScope;
+//     inject(function($controller, $rootScope) {
+//       rootScope = $rootScope;
 
-      ctrl = $controller('CharacterViewerController', { 
-        gw2Service: mockCharacterService,
-        $stateParams: mockStateParams,
-        // messageService: mockMessageService,
-        // busyService: mockBusyService
-      });
-    });
+//       ctrl = $controller('CharacterViewerController', { 
+//         gw2Service: mockCharacterService,
+//         $stateParams: mockStateParams,
+//         // messageService: mockMessageService,
+//         // busyService: mockBusyService
+//       });
+//     });
 
-    return ctrl;
-  };
+//     return ctrl;
+//   };
 
-  // it('should set isBusy to true while a loadingCharacter', function () {
-  //   inject(function($q) { 
-  //     mockCharacterService.readCharacter = function () { 
-  //       var deferred = $q.defer();
-  //       return deferred.promise; 
-  //     };
-  //   });
+//   // it('should set isBusy to true while a loadingCharacter', function () {
+//   //   inject(function($q) { 
+//   //     mockCharacterService.readCharacter = function () { 
+//   //       var deferred = $q.defer();
+//   //       return deferred.promise; 
+//   //     };
+//   //   });
 
-  //   spyOn(mockBusyService, 'setBusy');
+//   //   spyOn(mockBusyService, 'setBusy');
     
-  //   var ctrl = systemUnderTest();
+//   //   var ctrl = systemUnderTest();
 
-  //   expect(mockBusyService.setBusy).toHaveBeenCalledWith(true);
-  // });
+//   //   expect(mockBusyService.setBusy).toHaveBeenCalledWith(true);
+//   // });
 
-  it('should call readCharacter with stateParams input when loading a character', function () {
-    var deferred;
+//   it('should call readCharacter with stateParams input when loading a character', function () {
+//     var deferred;
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    spyOn(mockCharacterService, 'readCharacter').and.callThrough();
+//     spyOn(mockCharacterService, 'readCharacter').and.callThrough();
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    expect(mockCharacterService.readCharacter).toHaveBeenCalledWith('charname');
-  });
+//     expect(mockCharacterService.readCharacter).toHaveBeenCalledWith('charname');
+//   });
 
-  // it('should call messageService clear when loading a character', function () {
-  //   var deferred;
+//   // it('should call messageService clear when loading a character', function () {
+//   //   var deferred;
 
-  //   inject(function($q)  { 
-  //     deferred = $q.defer();
+//   //   inject(function($q)  { 
+//   //     deferred = $q.defer();
 
-  //     mockCharacterService.readCharacter = function () { 
-  //       return deferred.promise; 
-  //     };
-  //   });
+//   //     mockCharacterService.readCharacter = function () { 
+//   //       return deferred.promise; 
+//   //     };
+//   //   });
 
-  //   spyOn(mockMessageService, 'clear');
+//   //   spyOn(mockMessageService, 'clear');
 
-  //   var ctrl = systemUnderTest();
+//   //   var ctrl = systemUnderTest();
 
-  //   expect(mockMessageService.clear).toHaveBeenCalledWith();
-  // });
+//   //   expect(mockMessageService.clear).toHaveBeenCalledWith();
+//   // });
 
-  // it('should set isBusy to false when loading was a success', function () {
-  //   var deferred;
+//   // it('should set isBusy to false when loading was a success', function () {
+//   //   var deferred;
 
-  //   inject(function($q)  { 
-  //     deferred = $q.defer();
+//   //   inject(function($q)  { 
+//   //     deferred = $q.defer();
 
-  //     mockCharacterService.readCharacter = function () { 
-  //       return deferred.promise; 
-  //     };
-  //   });
+//   //     mockCharacterService.readCharacter = function () { 
+//   //       return deferred.promise; 
+//   //     };
+//   //   });
 
-  //   spyOn(mockBusyService, 'setBusy');
+//   //   spyOn(mockBusyService, 'setBusy');
 
-  //   var ctrl = systemUnderTest();
+//   //   var ctrl = systemUnderTest();
 
-  //   deferred.resolve({});
-  //   rootScope.$apply();
+//   //   deferred.resolve({});
+//   //   rootScope.$apply();
 
-  //   expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
-  // });
+//   //   expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
+//   // });
 
-  // it('should set isBusy to false when loading was a failure', function () {
-  //   var deferred;
+//   // it('should set isBusy to false when loading was a failure', function () {
+//   //   var deferred;
 
-  //   inject(function($q)  { 
-  //     deferred = $q.defer();
+//   //   inject(function($q)  { 
+//   //     deferred = $q.defer();
 
-  //     mockCharacterService.readCharacter = function () { 
-  //       return deferred.promise; 
-  //     };
-  //   });
+//   //     mockCharacterService.readCharacter = function () { 
+//   //       return deferred.promise; 
+//   //     };
+//   //   });
 
-  //   spyOn(mockBusyService, 'setBusy');
+//   //   spyOn(mockBusyService, 'setBusy');
 
-  //   var ctrl = systemUnderTest();
+//   //   var ctrl = systemUnderTest();
 
-  //   deferred.reject();
-  //   rootScope.$apply();
+//   //   deferred.reject();
+//   //   rootScope.$apply();
 
-  //   expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
-  // });
+//   //   expect(mockBusyService.setBusy).toHaveBeenCalledWith(false);
+//   // });
 
-  it('should set error if error occurred while loading a character', function () {
-    var deferred;
+//   it('should set error if error occurred while loading a character', function () {
+//     var deferred;
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    deferred.reject();
-    rootScope.$apply();
+//     deferred.reject();
+//     rootScope.$apply();
 
-    expect(ctrl.isError()).toBe(true);
-  });
+//     expect(ctrl.isError()).toBe(true);
+//   });
 
-  // it('should not call setError if no message is returned on failure', function () {
-  //   var deferred;
+//   // it('should not call setError if no message is returned on failure', function () {
+//   //   var deferred;
 
-  //   inject(function($q)  { 
-  //     deferred = $q.defer();
+//   //   inject(function($q)  { 
+//   //     deferred = $q.defer();
 
-  //     mockCharacterService.readCharacter = function () { 
-  //       return deferred.promise; 
-  //     };
-  //   });
+//   //     mockCharacterService.readCharacter = function () { 
+//   //       return deferred.promise; 
+//   //     };
+//   //   });
 
-  //   spyOn(mockMessageService, 'setError');
+//   //   spyOn(mockMessageService, 'setError');
 
-  //   var ctrl = systemUnderTest();
+//   //   var ctrl = systemUnderTest();
 
-  //   deferred.reject();
-  //   rootScope.$apply();
+//   //   deferred.reject();
+//   //   rootScope.$apply();
 
-  //   expect(mockMessageService.setError).not.toHaveBeenCalledWith();
-  // });
+//   //   expect(mockMessageService.setError).not.toHaveBeenCalledWith();
+//   // });
 
-  // it('should call setError if a message is returned on failure', function () {
-  //   var deferred;
+//   // it('should call setError if a message is returned on failure', function () {
+//   //   var deferred;
 
-  //   inject(function($q)  { 
-  //     deferred = $q.defer();
+//   //   inject(function($q)  { 
+//   //     deferred = $q.defer();
 
-  //     mockCharacterService.readCharacter = function () { 
-  //       return deferred.promise; 
-  //     };
-  //   });
+//   //     mockCharacterService.readCharacter = function () { 
+//   //       return deferred.promise; 
+//   //     };
+//   //   });
 
-  //   spyOn(mockMessageService, 'setError');
+//   //   spyOn(mockMessageService, 'setError');
 
-  //   var message = 'An error occurred bro';
-  //   var ctrl = systemUnderTest();
+//   //   var message = 'An error occurred bro';
+//   //   var ctrl = systemUnderTest();
 
-  //   deferred.reject(message);
-  //   rootScope.$apply();
+//   //   deferred.reject(message);
+//   //   rootScope.$apply();
 
-  //   expect(mockMessageService.setError).toHaveBeenCalledWith(message);
-  // });
+//   //   expect(mockMessageService.setError).toHaveBeenCalledWith(message);
+//   // });
 
-  it('should null character on failure', function () {
-    var deferred;
+//   it('should null character on failure', function () {
+//     var deferred;
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    deferred.reject();
-    rootScope.$apply();
+//     deferred.reject();
+//     rootScope.$apply();
 
-    expect(ctrl.character).toBeNull();
-  });
+//     expect(ctrl.character).toBeNull();
+//   });
 
-  it('should set character on success', function () {
-    var deferred;
+//   it('should set character on success', function () {
+//     var deferred;
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    var character = {
-      name: 'hey'
-    };
+//     var character = {
+//       name: 'hey'
+//     };
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    deferred.resolve(character);
-    rootScope.$apply();
+//     deferred.resolve(character);
+//     rootScope.$apply();
 
-    expect(ctrl.character).toBe(character);
-  });
+//     expect(ctrl.character).toBe(character);
+//   });
 
-  it('should set loaded on success', function () {
-    var deferred;
+//   it('should set loaded on success', function () {
+//     var deferred;
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    deferred.resolve({});
-    rootScope.$apply();
+//     deferred.resolve({});
+//     rootScope.$apply();
 
-    expect(ctrl.isLoaded()).toBe(true);
-  });
+//     expect(ctrl.isLoaded()).toBe(true);
+//   });
 
-  it('should return true if has weapon slot', function () {
-    var deferred;
+//   it('should return true if has weapon slot', function () {
+//     var deferred;
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    deferred.resolve({
-      hasWeaponSwap: true
-    });
+//     deferred.resolve({
+//       hasWeaponSwap: true
+//     });
 
-    rootScope.$apply();
+//     rootScope.$apply();
 
-    expect(ctrl.hasWeaponSwap()).toBe(true);
-  });
+//     expect(ctrl.hasWeaponSwap()).toBe(true);
+//   });
 
-  it('should return false if has no weapon slot', function () {
-    var deferred;
+//   it('should return false if has no weapon slot', function () {
+//     var deferred;
 
-    mockStateParams.name = 'charname';
+//     mockStateParams.name = 'charname';
 
-    inject(function($q)  { 
-      deferred = $q.defer();
+//     inject(function($q)  { 
+//       deferred = $q.defer();
 
-      mockCharacterService.readCharacter = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockCharacterService.readCharacter = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-    var ctrl = systemUnderTest();
+//     var ctrl = systemUnderTest();
 
-    deferred.resolve({
-      hasWeaponSwap: false
-    });
+//     deferred.resolve({
+//       hasWeaponSwap: false
+//     });
     
-    rootScope.$apply();
+//     rootScope.$apply();
 
-    expect(ctrl.hasWeaponSwap()).toBe(false);
-  });
-});
+//     expect(ctrl.hasWeaponSwap()).toBe(false);
+//   });
+// });

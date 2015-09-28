@@ -1,482 +1,482 @@
-'use strict';
+// 'use strict';
 
-describe('item tooltip controller', function () {
-	var mockGw2ApiService;
-	var rootScope;
+// describe('item tooltip controller', function () {
+// 	var mockGw2ApiService;
+// 	var rootScope;
 
-	beforeEach(module('gw2armory'));
-  beforeEach(function() {
-    mockGw2ApiService = {};
-  });
+// 	beforeEach(module('gw2armory'));
+//   beforeEach(function() {
+//     mockGw2ApiService = {};
+//   });
 
-  var systemUnderTest = function (mockControllerBinds) {
-    var ctrl;
+//   var systemUnderTest = function (mockControllerBinds) {
+//     var ctrl;
 
-    inject(function($controller, $rootScope, $q) {
-      rootScope = $rootScope;
+//     inject(function($controller, $rootScope, $q) {
+//       rootScope = $rootScope;
 
-      ctrl = $controller('ItemTooltipController', {
-      	$q: $q,
-      	gw2Service: mockGw2ApiService
-      }, {
-        slotName: mockControllerBinds.slotName,
-        item: mockControllerBinds.item
-      });
-    });
+//       ctrl = $controller('ItemTooltipController', {
+//       	$q: $q,
+//       	gw2Service: mockGw2ApiService
+//       }, {
+//         slotName: mockControllerBinds.slotName,
+//         item: mockControllerBinds.item
+//       });
+//     });
 
-    return ctrl;
-  };
+//     return ctrl;
+//   };
 
-  it('should set typeName to currently equipped if item is equip', function () {
-    var deferred;
+//   it('should set typeName to currently equipped if item is equip', function () {
+//     var deferred;
 
-    inject(function($q) { 
-      deferred = $q.defer();
+//     inject(function($q) { 
+//       deferred = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockGw2ApiService.readItems = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-  	var ctrl = systemUnderTest({
-  		item: {
-				id: 1234
-  		},
-  		slotName: 'cool name'
-  	});
+//   	var ctrl = systemUnderTest({
+//   		item: {
+// 				id: 1234
+//   		},
+//   		slotName: 'cool name'
+//   	});
 
-  	expect(ctrl.typeName).toBe('Currently Equipped');
-  });
+//   	expect(ctrl.typeName).toBe('Currently Equipped');
+//   });
 
-  it('should set slotName to typename if itemid isnt passed in', function () {
-    var deferred;
+//   it('should set slotName to typename if itemid isnt passed in', function () {
+//     var deferred;
 
-    inject(function($q) { 
-      deferred = $q.defer();
+//     inject(function($q) { 
+//       deferred = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockGw2ApiService.readItems = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-  	var ctrl = systemUnderTest({
-  		slotName: 'cool name'
-  	});
+//   	var ctrl = systemUnderTest({
+//   		slotName: 'cool name'
+//   	});
 
-  	expect(ctrl.typeName).toBe('cool name');
-  });
+//   	expect(ctrl.typeName).toBe('cool name');
+//   });
 
-  it('should set slotName to undefined if itemid isnt passed in', function () {
-    var deferred;
+//   it('should set slotName to undefined if itemid isnt passed in', function () {
+//     var deferred;
 
-    inject(function($q) { 
-      deferred = $q.defer();
+//     inject(function($q) { 
+//       deferred = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockGw2ApiService.readItems = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-  	var ctrl = systemUnderTest({
-  	});
+//   	var ctrl = systemUnderTest({
+//   	});
 
-  	expect(ctrl.typeName).toBe(undefined);
-  });
+//   	expect(ctrl.typeName).toBe(undefined);
+//   });
 
-  it('should set loading to falsy on instantiation', function () {
-    var deferred;
+//   it('should set loading to falsy on instantiation', function () {
+//     var deferred;
 
-    inject(function($q) { 
-      deferred = $q.defer();
+//     inject(function($q) { 
+//       deferred = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockGw2ApiService.readItems = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-  	var ctrl = systemUnderTest({
-  	});
+//   	var ctrl = systemUnderTest({
+//   	});
 
-  	expect(ctrl.isLoaded()).toBeFalsy();
-  });
+//   	expect(ctrl.isLoaded()).toBeFalsy();
+//   });
 
-  it('should set busy to be falsy on instantiation', function () {
-    var deferred;
+//   it('should set busy to be falsy on instantiation', function () {
+//     var deferred;
 
-    inject(function($q) { 
-      deferred = $q.defer();
+//     inject(function($q) { 
+//       deferred = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return deferred.promise; 
-      };
-    });
+//       mockGw2ApiService.readItems = function () { 
+//         return deferred.promise; 
+//       };
+//     });
 
-  	var ctrl = systemUnderTest({
-  	});
+//   	var ctrl = systemUnderTest({
+//   	});
 
-  	expect(ctrl.isBusy()).toBeFalsy();
-  });
+//   	expect(ctrl.isBusy()).toBeFalsy();
+//   });
 
-  it('should only fetch item data if only item id is passed in', function (){
-    var readItemsDefer;
-    var readSkinDefer;
+//   it('should only fetch item data if only item id is passed in', function (){
+//     var readItemsDefer;
+//     var readSkinDefer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
-			readSkinDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
+// 			readSkinDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return readItemsDefer.promise; 
-      };
+//       mockGw2ApiService.readItems = function () { 
+//         return readItemsDefer.promise; 
+//       };
 
-      mockGw2ApiService.readSkin = function () { 
-        return readSkinDefer.promise; 
-      };
-    });
+//       mockGw2ApiService.readSkin = function () { 
+//         return readSkinDefer.promise; 
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
-		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+// 		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
 
-  	var ctrl = systemUnderTest({
-  		item: {
-  			id: 1234
-  		}
-  	});
+//   	var ctrl = systemUnderTest({
+//   		item: {
+//   			id: 1234
+//   		}
+//   	});
 
-  	var item = {
-      id: 1234
-    };
+//   	var item = {
+//       id: 1234
+//     };
 
-  	readItemsDefer.resolve([item]);
+//   	readItemsDefer.resolve([item]);
 
-  	rootScope.$apply();
+//   	rootScope.$apply();
 
-  	expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234]);
-  	expect(mockGw2ApiService.readSkin).not.toHaveBeenCalled();
-  	expect(ctrl.model).toBe(item);
-  });
+//   	expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234]);
+//   	expect(mockGw2ApiService.readSkin).not.toHaveBeenCalled();
+//   	expect(ctrl.model).toBe(item);
+//   });
 
-  it('should fetch item and skin if both ids passed in', function (){
-    var readItemsDefer;
-    var readSkinDefer;
+//   it('should fetch item and skin if both ids passed in', function (){
+//     var readItemsDefer;
+//     var readSkinDefer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
-			readSkinDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
+// 			readSkinDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return readItemsDefer.promise; 
-      };
+//       mockGw2ApiService.readItems = function () { 
+//         return readItemsDefer.promise; 
+//       };
 
-      mockGw2ApiService.readSkin = function () { 
-        return readSkinDefer.promise; 
-      };
-    });
+//       mockGw2ApiService.readSkin = function () { 
+//         return readSkinDefer.promise; 
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
-		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+// 		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
 
-  	var ctrl = systemUnderTest({
-  		item: {
-	  		id: 1234,
-	  		skin: 4321
-  		}
-  	});
+//   	var ctrl = systemUnderTest({
+//   		item: {
+// 	  		id: 1234,
+// 	  		skin: 4321
+//   		}
+//   	});
 
-  	var item = {
-      id: 1234
-    };
+//   	var item = {
+//       id: 1234
+//     };
 
-  	var skin = {};
+//   	var skin = {};
 
-  	readItemsDefer.resolve([item]);
-		readSkinDefer.resolve(skin);
+//   	readItemsDefer.resolve([item]);
+// 		readSkinDefer.resolve(skin);
 
-  	rootScope.$apply();
+//   	rootScope.$apply();
 
-  	expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234]);
-  	expect(mockGw2ApiService.readSkin).toHaveBeenCalledWith(4321);
-  	expect(ctrl.model).toBe(item);
-  });
+//   	expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234]);
+//   	expect(mockGw2ApiService.readSkin).toHaveBeenCalledWith(4321);
+//   	expect(ctrl.model).toBe(item);
+//   });
 
-  it('should fetch item and upgrades if both id and upgrades passed in', function (){
-    var readItemsDefer;
+//   it('should fetch item and upgrades if both id and upgrades passed in', function (){
+//     var readItemsDefer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function (e) {
-        return readItemsDefer.promise;
-      };
-    });
+//       mockGw2ApiService.readItems = function (e) {
+//         return readItemsDefer.promise;
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
 
-    var ctrl = systemUnderTest({
-      item: {
-        id: 1234,
-        upgrades: [
-          333,
-          444
-        ]
-      }
-    });
+//     var ctrl = systemUnderTest({
+//       item: {
+//         id: 1234,
+//         upgrades: [
+//           333,
+//           444
+//         ]
+//       }
+//     });
 
-    var item = {
-      id: 1234
-    };
+//     var item = {
+//       id: 1234
+//     };
     
-    var upgrade1 = {
-      id: 333
-    };
+//     var upgrade1 = {
+//       id: 333
+//     };
 
-    var upgrade2 = {
-      id: 444
-    };
+//     var upgrade2 = {
+//       id: 444
+//     };
 
-    readItemsDefer.resolve([upgrade1, upgrade2, item]);
+//     readItemsDefer.resolve([upgrade1, upgrade2, item]);
 
-    expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234, 333, 444]);
-  });
+//     expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234, 333, 444]);
+//   });
 
-  it('should assign upgrade one and two to base item model', function () {
-    var readItemsDefer;
-    var readItemUpgrade1Defer;
-    var readItemUpgrade2Defer;
+//   it('should assign upgrade one and two to base item model', function () {
+//     var readItemsDefer;
+//     var readItemUpgrade1Defer;
+//     var readItemUpgrade2Defer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function (e) {
-          return readItemsDefer.promise;
-      };
-    });
+//       mockGw2ApiService.readItems = function (e) {
+//           return readItemsDefer.promise;
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
 
-    var ctrl = systemUnderTest({
-      item: {
-        id: 1234,
-        upgrades: [
-          333,
-          444
-        ],
-        upgrade_count: {
-          count: 1
-        }
-      }
-    });
+//     var ctrl = systemUnderTest({
+//       item: {
+//         id: 1234,
+//         upgrades: [
+//           333,
+//           444
+//         ],
+//         upgrade_count: {
+//           count: 1
+//         }
+//       }
+//     });
 
-    var item = {
-      id: 1234,
-      name: 'swagyswag',
-      details: {}
-    };
+//     var item = {
+//       id: 1234,
+//       name: 'swagyswag',
+//       details: {}
+//     };
 
-    var upgrade1 = {
-      id: 333,
-      details: {
-        suffix: 'of cool suffix'
-      }
-    };
+//     var upgrade1 = {
+//       id: 333,
+//       details: {
+//         suffix: 'of cool suffix'
+//       }
+//     };
     
-    var upgrade2 = {
-      id: 444,
-      details: {
-        suffix: 'of bad suffix'
-      }
-    };
+//     var upgrade2 = {
+//       id: 444,
+//       details: {
+//         suffix: 'of bad suffix'
+//       }
+//     };
 
-    readItemsDefer.resolve([upgrade1, item, upgrade2]);
+//     readItemsDefer.resolve([upgrade1, item, upgrade2]);
 
-    rootScope.$apply();
+//     rootScope.$apply();
 
-    expect(ctrl.model.details.upgrade_one).toBe(upgrade1);
-    expect(ctrl.model.details.upgrade_two).toBe(upgrade2);
-  });
+//     expect(ctrl.model.details.upgrade_one).toBe(upgrade1);
+//     expect(ctrl.model.details.upgrade_two).toBe(upgrade2);
+//   });
 
-  it('should assign first upgrades\' suffix to gear', function (){
-    var readItemsDefer;
-    var readItemUpgrade1Defer;
-    var readItemUpgrade2Defer;
+//   it('should assign first upgrades\' suffix to gear', function (){
+//     var readItemsDefer;
+//     var readItemUpgrade1Defer;
+//     var readItemUpgrade2Defer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function (e) {
-          return readItemsDefer.promise;
-      };
-    });
+//       mockGw2ApiService.readItems = function (e) {
+//           return readItemsDefer.promise;
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
 
-    var ctrl = systemUnderTest({
-      item: {
-        id: 1234,
-        upgrades: [
-          333,
-          444
-        ],
-        upgrade_count: {
-          count: 2
-        }
-      }
-    });
+//     var ctrl = systemUnderTest({
+//       item: {
+//         id: 1234,
+//         upgrades: [
+//           333,
+//           444
+//         ],
+//         upgrade_count: {
+//           count: 2
+//         }
+//       }
+//     });
 
-    var item = {
-      id: 1234,
-      name: 'swagyswag',
-      details: {}
-    };
+//     var item = {
+//       id: 1234,
+//       name: 'swagyswag',
+//       details: {}
+//     };
 
-    var upgrade1 = {
-      id: 333,
-      details: {
-        suffix: 'of cool suffix'
-      }
-    };
+//     var upgrade1 = {
+//       id: 333,
+//       details: {
+//         suffix: 'of cool suffix'
+//       }
+//     };
     
-    var upgrade2 = {
-      id: 444,
-      details: {
-        suffix: 'of bad suffix'
-      }
-    };
+//     var upgrade2 = {
+//       id: 444,
+//       details: {
+//         suffix: 'of bad suffix'
+//       }
+//     };
 
-    readItemsDefer.resolve([upgrade1, item, upgrade2]);
+//     readItemsDefer.resolve([upgrade1, item, upgrade2]);
 
-    rootScope.$apply();
+//     rootScope.$apply();
 
-    expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234,333,444]);
+//     expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234,333,444]);
 
-    expect(ctrl.model.name).toBe('swagyswag of cool suffix');
-  });
+//     expect(ctrl.model.name).toBe('swagyswag of cool suffix');
+//   });
 
-  it('should set skin properties to item properties if both ids passed in and is a success and set original name', function (){
-    var readItemsDefer;
-    var readSkinDefer;
+//   it('should set skin properties to item properties if both ids passed in and is a success and set original name', function (){
+//     var readItemsDefer;
+//     var readSkinDefer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
-			readSkinDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
+// 			readSkinDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return readItemsDefer.promise; 
-      };
+//       mockGw2ApiService.readItems = function () { 
+//         return readItemsDefer.promise; 
+//       };
 
-      mockGw2ApiService.readSkin = function () { 
-        return readSkinDefer.promise; 
-      };
-    });
+//       mockGw2ApiService.readSkin = function () { 
+//         return readSkinDefer.promise; 
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
-		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+// 		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
 
-  	var ctrl = systemUnderTest({
-  		item: {
-	  		id: 1234,
-	  		skin: 4321
-  		}
-  	});
+//   	var ctrl = systemUnderTest({
+//   		item: {
+// 	  		id: 1234,
+// 	  		skin: 4321
+//   		}
+//   	});
 
-  	var item = {
-      id: 1234,
-  		icon: 'itemicon',
-  		name: 'Rampager\'s Exalted Masque'
-  	};
+//   	var item = {
+//       id: 1234,
+//   		icon: 'itemicon',
+//   		name: 'Rampager\'s Exalted Masque'
+//   	};
 
-  	var skin = {
-  		icon: 'skinicon',
-  		name: 'Demon Masque'
-  	};
+//   	var skin = {
+//   		icon: 'skinicon',
+//   		name: 'Demon Masque'
+//   	};
 
-  	readItemsDefer.resolve([item]);
-		readSkinDefer.resolve(skin);
+//   	readItemsDefer.resolve([item]);
+// 		readSkinDefer.resolve(skin);
 
-  	rootScope.$apply();
+//   	rootScope.$apply();
 
-  	expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234]);
-  	expect(mockGw2ApiService.readSkin).toHaveBeenCalledWith(4321);
-  	expect(ctrl.model.icon).toBe(skin.icon);
-    expect(ctrl.model.original_name).toBe('Rampager\'s Exalted Masque');
-  	expect(ctrl.model.name).toBe('Rampager\'s Demon Masque');
-  });
+//   	expect(mockGw2ApiService.readItems).toHaveBeenCalledWith([1234]);
+//   	expect(mockGw2ApiService.readSkin).toHaveBeenCalledWith(4321);
+//   	expect(ctrl.model.icon).toBe(skin.icon);
+//     expect(ctrl.model.original_name).toBe('Rampager\'s Exalted Masque');
+//   	expect(ctrl.model.name).toBe('Rampager\'s Demon Masque');
+//   });
 
-  it('should set busy to false and loaded to true on success', function (){
-    var readItemsDefer;
-    var readSkinDefer;
+//   it('should set busy to false and loaded to true on success', function (){
+//     var readItemsDefer;
+//     var readSkinDefer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
-			readSkinDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
+// 			readSkinDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return readItemsDefer.promise; 
-      };
+//       mockGw2ApiService.readItems = function () { 
+//         return readItemsDefer.promise; 
+//       };
 
-      mockGw2ApiService.readSkin = function () { 
-        return readSkinDefer.promise; 
-      };
-    });
+//       mockGw2ApiService.readSkin = function () { 
+//         return readSkinDefer.promise; 
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
-		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+// 		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
 
-  	var ctrl = systemUnderTest({
-  		item: {
-	  		id: 1234
-  		}
-  	});
+//   	var ctrl = systemUnderTest({
+//   		item: {
+// 	  		id: 1234
+//   		}
+//   	});
 
-		expect(ctrl.isLoaded()).toBe(false);
-  	expect(ctrl.isBusy()).toBe(true);
+// 		expect(ctrl.isLoaded()).toBe(false);
+//   	expect(ctrl.isBusy()).toBe(true);
 
-  	var item = [{
-      id: 1234
-    }];
+//   	var item = [{
+//       id: 1234
+//     }];
 
-  	readItemsDefer.resolve(item);
+//   	readItemsDefer.resolve(item);
 
-  	rootScope.$apply();
+//   	rootScope.$apply();
 
-		expect(ctrl.isLoaded()).toBe(true);
-  	expect(ctrl.isBusy()).toBe(false);
-  });
+// 		expect(ctrl.isLoaded()).toBe(true);
+//   	expect(ctrl.isBusy()).toBe(false);
+//   });
 
-  it('should set busy to false on failure', function (){
-    var readItemsDefer;
-    var readSkinDefer;
+//   it('should set busy to false on failure', function (){
+//     var readItemsDefer;
+//     var readSkinDefer;
 
-    inject(function($q) { 
-      readItemsDefer = $q.defer();
-			readSkinDefer = $q.defer();
+//     inject(function($q) { 
+//       readItemsDefer = $q.defer();
+// 			readSkinDefer = $q.defer();
 
-      mockGw2ApiService.readItems = function () { 
-        return readItemsDefer.promise; 
-      };
+//       mockGw2ApiService.readItems = function () { 
+//         return readItemsDefer.promise; 
+//       };
 
-      mockGw2ApiService.readSkin = function () { 
-        return readSkinDefer.promise; 
-      };
-    });
+//       mockGw2ApiService.readSkin = function () { 
+//         return readSkinDefer.promise; 
+//       };
+//     });
 
-    spyOn(mockGw2ApiService, 'readItems').and.callThrough();
-		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
+//     spyOn(mockGw2ApiService, 'readItems').and.callThrough();
+// 		spyOn(mockGw2ApiService, 'readSkin').and.callThrough();
 
-  	var ctrl = systemUnderTest({
-  		item: {
-	  		id: 1234
-  		}
-  	});
+//   	var ctrl = systemUnderTest({
+//   		item: {
+// 	  		id: 1234
+//   		}
+//   	});
 
-  	expect(ctrl.isBusy()).toBe(true);
+//   	expect(ctrl.isBusy()).toBe(true);
 
-  	var item = {};
+//   	var item = {};
 
-  	readItemsDefer.reject();
+//   	readItemsDefer.reject();
 
-  	rootScope.$apply();
+//   	rootScope.$apply();
 
-  	expect(ctrl.isBusy()).toBe(false);
-  });
-});
+//   	expect(ctrl.isBusy()).toBe(false);
+//   });
+// });

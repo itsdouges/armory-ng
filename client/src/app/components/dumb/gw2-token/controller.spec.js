@@ -1,5 +1,5 @@
-'use strict';
+// 'use strict';
 
-describe('Gw2TokenController', function () {
+// describe('Gw2TokenController', function () {
 
-});
+// });
