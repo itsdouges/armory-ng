@@ -1,3 +1,9 @@
+describe('BusyButton', () => {
+	it('should be true', () => {
+		expect(true).toBe(true);
+	});
+});
+
 // 'use strict';
 
 // describe('busy button', function () {
