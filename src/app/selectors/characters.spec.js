@@ -1,0 +1,3 @@
+describe('characters selector', function () {
+	
+});

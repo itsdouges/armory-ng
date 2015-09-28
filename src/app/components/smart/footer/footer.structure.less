@@ -1,0 +1,28 @@
+footer {
+	display: block;
+	text-align: center;
+	padding: 1em;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-size: 0.85em;
+}
+
+.footer-links {
+	> li {
+		display: block;
+	}
+}
+
+@media only screen and (min-width: @mobile) {
+	.footer-links {
+		> li {
+			display: inline-block;
+		}
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+
+}
