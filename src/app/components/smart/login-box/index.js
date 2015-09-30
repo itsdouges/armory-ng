@@ -2,7 +2,7 @@
 
 import { actionCreators } from '../../../actions/user';
 
-function LoginDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: LoginBox,
@@ -31,4 +31,4 @@ function LoginBox ($ngRedux, $scope) {
 	};
 }
 
-export default LoginDirective;
+export default component;

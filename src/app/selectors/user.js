@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 const getUser = state => state.user;
 const getUserToken = state => state.user.token;
 const getUserLoggedIn = state => state.user.loggedIn;
-const getCanRegister = state => state.user.aliasValid && state.user.emailValid && state.user.passwordValue;
+const getCanRegister = state => !!state.user.aliasValid && !!state.user.emailValid && !!state.user.passwordValue;
 
 export const userAuthSelector = createSelector(
 	getUserToken,

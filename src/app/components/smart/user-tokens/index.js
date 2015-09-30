@@ -3,7 +3,7 @@
 import { actionCreators } from '../../../actions/user/data';
 import { userDataSelector } from '../../../selectors/user';
 
-function UserTokensDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: UserTokens,
@@ -44,4 +44,4 @@ function UserTokens ($ngRedux, $scope, debounce) {
 	}
 }
 
-export default UserTokensDirective;
+export default component;

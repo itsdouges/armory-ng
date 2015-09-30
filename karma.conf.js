@@ -29,8 +29,8 @@ module.exports = function (config) {
       conf.paths.src + '/**/*.spec.js',
       // conf.paths.src + '/**/*.html',
     ],
-    singleRun: true,
-    autoWatch: false,
+    // singleRun: true,
+    // autoWatch: false,
     frameworks: ['jasmine'],
     // ngHtml2JsPreprocessor: {
     //   stripPrefix: 'src/',
@@ -53,7 +53,10 @@ module.exports = function (config) {
           {
             test: /\.js/,
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            query: {
+              stage: 0
+            }
           }
         ]
       },

@@ -1,6 +1,6 @@
 'use strict';
 
-function InputValidityDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: InputValidity,
@@ -22,4 +22,4 @@ class InputValidity {
 	}
 }
 
-export default InputValidityDirective;
+export default component;

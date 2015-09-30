@@ -1,6 +1,6 @@
 'use strict';
 
-function BusyButtonDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		bindToController: {
@@ -18,12 +18,7 @@ function BusyButtonDirective() {
 }
 
 export class BusyButton {
-	constructor () {
-		this.isEnabled = function () {
-			let enabled = !this.busy && !this.buttonDisabled;
-			return enabled;
-		}.bind(this);
-	}
+
 }
 
-export default BusyButtonDirective;
+export default component;

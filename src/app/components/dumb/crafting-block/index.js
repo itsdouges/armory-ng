@@ -1,8 +1,6 @@
 'use strict';
 
-function CraftingBlockDirective() {
-	'ngInject';
-
+function component () {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/dumb/crafting-block/view.html',
@@ -17,6 +15,7 @@ function CraftingBlockDirective() {
 	return directive;
 }
 
+// TODO: Move logic into higher component
 class CraftingBlock {
 	constructor () {
 		if (this.model.discipline === 'Chef' || 
@@ -40,4 +39,4 @@ class CraftingBlock {
 	}
 }
 
-export default CraftingBlockDirective;
+export default component;

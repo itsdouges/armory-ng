@@ -1,6 +1,6 @@
 'use strict';
 
-function CharacterHeadshotDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		scope: {},
@@ -19,4 +19,4 @@ export class CharacterHeadshot {
 
 }
 
-export default CharacterHeadshotDirective;
+export default component;

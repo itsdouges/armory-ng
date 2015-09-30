@@ -1,6 +1,6 @@
 'use strict';
 
-function directive () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/dumb/item-upgrade/view.html',
@@ -15,6 +15,7 @@ function directive () {
 	return directive;
 }
 
+// TODO: Move logic into higher component
 class ItemUpgrade {
 	constructor () {
 		this.hasUpgrade = !!this.upgrade;
@@ -26,4 +27,4 @@ class ItemUpgrade {
 	}
 }
 
-export default directive;
+export default component;

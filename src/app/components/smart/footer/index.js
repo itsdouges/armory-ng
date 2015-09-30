@@ -2,7 +2,7 @@
 
 import { actionCreators } from '../../../actions/window';
 
-function directive ($window, debounce) {
+function component ($window, debounce) {
 	let link = (scope, element, attributes, controller) => {
 		let ele = element[0];
 
@@ -38,4 +38,4 @@ function Footer ($ngRedux) {
 	};
 }
 
-export default directive;
+export default component;

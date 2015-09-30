@@ -1,6 +1,6 @@
 'use strict';
 
-function RegisterDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: RegisterBox,
@@ -66,4 +66,4 @@ function RegisterBox (debounce, $ngRedux, $scope) {
 	init();
 }
 
-export default RegisterDirective;
+export default component;

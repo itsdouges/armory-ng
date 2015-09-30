@@ -1,4 +1,4 @@
-function directive () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		scope: {},
@@ -18,4 +18,4 @@ class CharacterAttributes {
 	
 }
 
-export default directive;
+export default component;

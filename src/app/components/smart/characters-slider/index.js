@@ -5,7 +5,7 @@ const BIG_PC_WIDTH = 1300;
 const PC_WIDTH = 1024;
 const TABLET_WIDTH = 700;
 
-function CharactersSliderDirective ($window, debounce) {
+function component ($window, debounce) {
 	let link = (scope, element, attrs, controller) => {
 		let slider = element.find('ul')[0];
 
@@ -183,4 +183,4 @@ function CharactersSlider ($scope, $ngRedux) {
 	init();
 }
 
-export default CharactersSliderDirective;
+export default component;

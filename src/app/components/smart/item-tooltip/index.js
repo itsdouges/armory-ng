@@ -1,8 +1,6 @@
 'use strict';
 
-function ItemTooltipDirective () {
-	'ngInject';
-
+function component () {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/smart/item-tooltip/view.html',
@@ -23,4 +21,4 @@ class ItemTooltip {
 	}
 }
 
-export default ItemTooltipDirective;
+export default component;

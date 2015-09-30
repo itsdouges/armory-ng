@@ -1,6 +1,6 @@
 'use strict';
 
-function GuildBlockDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: GuildBlock,
@@ -15,6 +15,7 @@ function GuildBlockDirective() {
 	return directive;
 }
 
+// TODO: Move logic into higher component
 class GuildBlock {
 	constructor (gw2Service) {
 		this.busy = true;
@@ -56,4 +57,4 @@ class GuildBlock {
 	}
 }
 
-export default GuildBlockDirective;
+export default component;

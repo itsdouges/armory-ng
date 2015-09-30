@@ -1,6 +1,6 @@
 'use strict';
 
-function ProgressIndicatorDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: ProgressIndicator,
@@ -22,4 +22,4 @@ class ProgressIndicator {
 	}
 }
 
-export default ProgressIndicatorDirective;
+export default component;

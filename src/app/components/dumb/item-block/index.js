@@ -1,6 +1,6 @@
 'use strict';
 
-function ItemDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		templateUrl: 'app/components/dumb/item-block/view.html',
@@ -20,6 +20,7 @@ function ItemDirective() {
 	return directive;
 }
 
+// TODO: Move logic into higher component
 class ItemBlock {
 	constructor () {
 		this.typeBackground = this.buildTypeBackgroundUrl(this.type);
@@ -34,4 +35,4 @@ class ItemBlock {
 	}
 }
 
-export default ItemDirective;
+export default component;

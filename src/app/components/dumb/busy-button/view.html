@@ -1,4 +1,4 @@
-<button class="primary positive" ng-class="ctrl.busy ? 'busy' : ''" ng-disabled="!ctrl.isEnabled()">
+<button class="primary positive" ng-class="ctrl.busy ? 'busy' : ''" ng-disabled="ctrl.buttonDisabled">
 	<span ng-show="!ctrl.busy" ng-transclude></span>
 	
 	<span ng-if="ctrl.busy" class="icon icon-mini icon-progress">

@@ -1,3 +1,4 @@
+import { calculateBaseAttribute, parseRuneBonuses, parseUpgradeBuffs } from '../services/gw2';
 import { createSelector } from 'reselect';
 
 const getMyCharacters = state => state.user.characters;
@@ -31,59 +32,14 @@ export const myCharactersSelector = createSelector(
 	}
 );
 
-const BEGINNING_STAT = 37;
-function calculateBaseAttribute (level) {
-	let stat = BEGINNING_STAT;
+// TODO: Figure out what to do for bonus count. Probably 
+// can just total amount of runes, since there will be multiples.. !
 
-	if (level === 80) {
-		return 1000;
-	}
 
-	// TODO: Figure out base forumla. Wiki is incorrect?
-
-	for (let i = 2; i <= level; i += 2) {
-		if (i <= 10) {
-			stat += 7;
-		} else if (i < 21) {
-			stat += 10;
-		} else if (i < 25) {
-			stat += 14;
-		} else if (i < 27) {
-			stat += 15;
-		} else if (i < 31) {
-			stat += 16;
-		} else if (i < 41) {
-			stat += 20;
-		} else if (i < 45) {
-			stat += 24;
-		} else if (i < 47) {
-			stat += 25;
-		} else if (i < 51) {
-			stat += 26;
-		} else if (i < 61) {
-			stat += 30;
-		} else if (i < 65) {
-			stat += 34;
-		} else if (i < 67) {
-			stat += 35;
-		} else if (i < 71) {
-			stat += 36;
-		} else if (i < 75) {
-			stat += 44;
-		} else if (i < 77) {
-			stat += 45;
-		} else {
-			stat += 46;
-		}
-	}
-
-	return stat;
-}
-
-const getBonusAttributes = (state) => {
+const getItemAttributes = (state) => {
 	let selectedCharacter = getSelectedCharacter(state);
 
-	let bonusAttributes = {
+	let attributes = {
 		Power: 0
 	};
 
@@ -111,10 +67,10 @@ const getBonusAttributes = (state) => {
 
 		let itemAttributes = state.gw2.items.data[equipObject.id].details.infix_upgrade.attributes
 		itemAttributes.forEach((attribute) => {
-			if (!bonusAttributes[attribute.attribute]) {
-				bonusAttributes[attribute.attribute] = attribute.modifier;
+			if (!attributes[attribute.attribute]) {
+				attributes[attribute.attribute] = attribute.modifier;
 			} else {
-				bonusAttributes[attribute.attribute] += attribute.modifier;
+				attributes[attribute.attribute] += attribute.modifier;
 			}
 		});
 
@@ -123,15 +79,21 @@ const getBonusAttributes = (state) => {
 		}
 
 		equipObject.upgrades.forEach((upgrade) => {
-
+			let item = state.gw2.items.data[upgrade];
+			if (item.details.type === 'Rune') {
+				let bonuses = parseRuneBonuses(item.details.bonuses);
+				console.log(bonuses);
+			} else {
+				let bonuses = parseUpgradeBuffs(item.details.infix_upgrade.buff.description);
+				console.log(bonuses);
+			}
 		});
 	}
 
-	console.log(bonusAttributes);
-
-	return bonusAttributes;
+	return attributes;
 };
 
+const BASE_CRITICAL_DAMAGE = 150;
 const getAttributes = (state) => {
 	if (getFetchingGw2Data(state)) {
 		return;
@@ -142,17 +104,37 @@ const getAttributes = (state) => {
 		return;
 	}
 
-	let baseStat = calculateBaseAttribute(selectedCharacter.level);
-	let bonusAttributes = getBonusAttributes(state);
+	let base = calculateBaseAttribute(selectedCharacter.level);
+	let itemBonus = getItemAttributes(state);
 
-	console.log(bonusAttributes);
+	console.log(itemBonus);
 
 	return {
-		power: baseStat + bonusAttributes.Power,
-		precision: baseStat + bonusAttributes.Precision,
-		toughness: baseStat,
-		vitality: baseStat,
-		armor: baseStat // + equiparmordefence
+		// Primary
+		power: base + itemBonus.Power,
+		precision: base + itemBonus.Precision,
+		toughness: base,
+		vitality: base,
+
+		// Secondary
+		boon: itemBonus.Boon,
+		conditionDamage: itemBonus.ConditionDamage,
+		conditionDuration: itemBonus.ConditionDuration,
+		ferocity: itemBonus.Ferocity,
+		healing: itemBonus.HealingPower,
+
+		// Derived
+		armor: base + itemBonus.Armor,
+		criticalChance: '?????',
+		criticalDamage: BASE_CRITICAL_DAMAGE + Math.floor(itemBonus.Ferocity / 15),
+		health: (base * 10),
+
+		// Special
+		agony: '???',
+		magicFind: '???',
+
+		// Profession
+		profession: '???'
 	};
 };
 

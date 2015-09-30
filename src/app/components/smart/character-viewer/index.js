@@ -4,7 +4,7 @@ import { actionCreators } from '../../../actions/characters';
 import * as gw2 from '../../../actions/gw2-data';
 import { characterViewerSelector } from '../../../selectors/characters';
 
-function CharacterViewerDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		scope: {},
@@ -41,4 +41,4 @@ class CharacterViewer {
 	}
 }
 
-export default CharacterViewerDirective;
+export default component;

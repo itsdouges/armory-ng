@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { userAuthSelector } from './selectors/user';
 
-function config ($logProvider, $httpProvider, env) {
+function config ($logProvider, env) {
   $logProvider.debugEnabled(env.verbose);
 }
 

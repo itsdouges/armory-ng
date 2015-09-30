@@ -3,7 +3,7 @@
 import { actionCreators } from '../../../actions/user';
 import { userDataSelector } from '../../../selectors/user';
 
-function ChangePasswordDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: ChangePassword,
@@ -31,4 +31,4 @@ function ChangePassword ($ngRedux, $scope, debounce) {
 	};
 }
 
-export default ChangePasswordDirective;
+export default component;

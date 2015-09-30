@@ -1,6 +1,6 @@
 'use strict';
 
-function UserLinksDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: UserLinks,
@@ -20,4 +20,4 @@ class UserLinks {
 
 }
 
-export default UserLinksDirective;
+export default component;

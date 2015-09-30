@@ -1,6 +1,6 @@
 'use strict';
 
-function directive () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		scope: {},
@@ -19,4 +19,4 @@ function Spacer ($ngRedux, $scope) {
 	$scope.$on('$destroy', unsubscribe);
 }
 
-export default directive;
+export default component;

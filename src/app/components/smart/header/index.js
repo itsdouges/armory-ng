@@ -4,7 +4,7 @@ import { actionCreators } from '../../../actions/user/auth';
 import { userDataSelector } from '../../../selectors/user';
 import stateGo from 'redux-ui-router/lib/state-go';
 
-function HeaderDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: Header,
@@ -30,4 +30,4 @@ class Header {
 	};
 }
 
-export default HeaderDirective;
+export default component;

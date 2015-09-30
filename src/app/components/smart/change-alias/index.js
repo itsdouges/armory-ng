@@ -3,7 +3,7 @@
 import { actionCreators } from '../../../actions/user';
 import { userDataSelector } from '../../../selectors/user';
 
-function ChangeAliasDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: ChangeAlias,
@@ -39,4 +39,4 @@ function ChangeAlias ($ngRedux, $scope, debounce) {
 	};
 }
 
-export default ChangeAliasDirective;
+export default component;

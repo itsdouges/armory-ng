@@ -1,6 +1,6 @@
 'use strict';
 
-function CharacterPortraitDirective() {
+function component () {
 	let directive = {
 		restrict: 'E',
 		scope: {},
@@ -19,4 +19,4 @@ class CharacterPortrait {
 	
 }
 
-export default CharacterPortraitDirective;
+export default component;

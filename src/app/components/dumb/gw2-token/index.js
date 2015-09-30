@@ -1,6 +1,6 @@
 'use strict';
 
-function Gw2TokenDirective () {
+function component () {
 	let directive = {
 		restrict: 'E',
 		controller: Gw2Token,
@@ -23,4 +23,4 @@ class Gw2Token {
 	}
 }
 
-export default Gw2TokenDirective;
+export default component;
