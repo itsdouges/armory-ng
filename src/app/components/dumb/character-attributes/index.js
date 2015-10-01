@@ -4,7 +4,7 @@ function component () {
 		scope: {},
 		bindToController: {
 			attributes: '=',
-			proffession: '@'
+			profession: '@'
 		},
 		controller: CharacterAttributes,
 		controllerAs: 'ctrl',

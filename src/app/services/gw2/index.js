@@ -28,7 +28,7 @@ export const readItems = (ids) => {
 
 			return Promise.resolve(items);
 		});
-}
+};
 
 export const readSkins = (ids) => {
 	let id_query = ids.join(',');
@@ -43,7 +43,7 @@ export const readSkins = (ids) => {
 
 			return Promise.resolve(skins);
 		});
-}
+};
 
 export const readGuild = (guid) => {
 	let promise = axios
@@ -56,7 +56,7 @@ export const readGuild = (guid) => {
 		});
 
 	return promise;
-}
+};
 
 export const readCharacter = (name) => {
     let promise = axios
@@ -112,15 +112,15 @@ export const calculateBaseAttribute = (level) => {
 	}
 
 	return stat;
-}
+};
 
-export const parseRuneBonuses = (bonuses, count) => {
-	let splitBonuses = bonuses.splice(0, count);
+export const parseRuneBonuses = (bonuses, activeCount) => {
+	let bonusesCopy = Object.assign([], bonuses);
+	let activeBonuses = bonusesCopy.splice(0, activeCount);
 
-	let bonus = parseUpgradeBuffs(splitBonuses);
-
+	let bonus = parseUpgradeBuffs(activeBonuses);
 	return bonus;
-}
+};
 
 export const parseUpgradeBuffs = (buffs) => {
 	let bonus = {};
@@ -139,7 +139,99 @@ export const parseUpgradeBuffs = (buffs) => {
 	});
 
 	return bonus;
+};
+
+function calculateHealthBracket (profession) {
+	switch (profession) {
+		case 'Warrior':
+		case 'Necromancer':
+			return 'high';
+
+		case 'Engineer':
+		case 'Ranger':
+		case 'Mesmer':
+		case 'Revenant':
+			return 'medium';
+
+		case 'Guardian':
+		case 'Thief':
+		case 'Elementalist':
+			return 'low';
+	}
+
+	throw 'Profession not handled';
 }
+
+export const calculateBonusHealth = (level, profession) => {
+	let bonusHealth = 0;
+	let bracket = calculateHealthBracket(profession);
+
+	for (var i = 1; i <= level; i++) {
+		if (i <= 19) {
+			switch (bracket) {
+				case 'high':
+					bonusHealth += 28;
+					break;
+				case 'medium':
+					bonusHealth += 18;
+					break;
+				case 'low':
+					bonusHealth += 5;
+					break;
+			}
+		} else if (i <= 39) {
+			switch (bracket) {
+				case 'high':
+					bonusHealth += 70;
+					break;
+				case 'medium':
+					bonusHealth += 45;
+					break;
+				case 'low':
+					bonusHealth += 12.5;
+					break;
+			}
+		} else if (i <= 59) {
+			switch (bracket) {
+				case 'high':
+					bonusHealth += 140;
+					break;
+				case 'medium':
+					bonusHealth += 90;
+					break;
+				case 'low':
+					bonusHealth += 25;
+					break;
+			}
+		} else if (i <= 79) {
+			switch (bracket) {
+				case 'high':
+					bonusHealth += 210;
+					break;
+				case 'medium':
+					bonusHealth += 135;
+					break;
+				case 'low':
+					bonusHealth += 37.5;
+					break;
+			}
+		} else {
+			switch (bracket) {
+				case 'high':
+					bonusHealth += 280;
+					break;
+				case 'medium':
+					bonusHealth += 180;
+					break;
+				case 'low':
+					bonusHealth += 50;
+					break;
+			}
+		}
+	}
+
+	return bonusHealth;
+};
 
 export default {
 	calculateBaseAttribute,
@@ -149,5 +241,6 @@ export default {
 	readItems,
 	readAllItemIds,
 	parseUpgradeBuffs,
-	parseRuneBonuses
+	parseRuneBonuses,
+	calculateBonusHealth
 };

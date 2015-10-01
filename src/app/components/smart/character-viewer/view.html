@@ -108,7 +108,9 @@
 						class="character-portrait-container"></character-portrait>
 
 				<div class="character-info-right">
-					<character-attributes attributes="ctrl.attributes"></character-attributes>
+					<character-attributes 
+						attributes="ctrl.attributes"
+						profession="{{ ctrl.selected.profession.toLowerCase() }}"></character-attributes>
 
 					<div class="character-equipment-cluster">
 						<item-block 
@@ -208,8 +210,6 @@
 							icon="{{ ctrl.selected.equipment.weaponAquaticB.skin ? ctrl.skins[ctrl.selected.equipment.weaponAquaticB.skin].icon : ctrl.items[ctrl.selected.equipment.weaponAquaticB.id].icon }}"
 						item="ctrl.selected.equipment.weaponAquaticB"></item-block>
 					</div>
-
-					<h3>Crafting</h3>
 					
 					<crafting-block 
 						ng-repeat="model in ctrl.selected.crafting" 

@@ -1,65 +1,97 @@
 .ic-attribute {
-	margin: 0.5em;
+	margin: 0.6em;
 }
 
 .ic-attack-power {
-	background: url('https://wiki.guildwars2.com/images/2/23/Power.png');
+	background: url('../assets/images/power.png');
 }
 
 .ic-precision {
-	background: url('https://wiki.guildwars2.com/images/e/ee/Precision.png');
+	background: url('../assets/images/precision.png');
 }
 
 .ic-toughness {
-	background: url('https://wiki.guildwars2.com/images/1/12/Toughness.png');
+	background: url('../assets/images/toughness.png');
 }
 
 .ic-vitality {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/vitality.png');
 }
 
 .ic-condition-duration {
-	background: url('https://wiki.guildwars2.com/images/2/23/Power.png');
+	background: url('../assets/images/condition-duration.png');
 }
 
 .ic-boon {
-	background: url('https://wiki.guildwars2.com/images/e/ee/Precision.png');
+	background: url('../assets/images/boon-duration.png');
 }
 
 .ic-condition-damage {
-	background: url('https://wiki.guildwars2.com/images/1/12/Toughness.png');
+	background: url('../assets/images/condition-damage.png');
 }
 
 .ic-ferocity {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/ferocity.png');
 }
 
 .ic-healing {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/healing-power.png');
 }
 
 .ic-armor {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/armor-attribute.png');
 }
 
 .ic-health {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/health.png');
 }
 
 .ic-critical-damage {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/critical-damage.png');
 }
 
 .ic-critical-chance {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/critical-chance.png');
 }
 
 .ic-magic {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/magic-find.png');
 }
 
 .ic-agony {
-	background: url('https://wiki.guildwars2.com/images/b/be/Vitality.png');
+	background: url('../assets/images/agony-resistance.png');
+}
+
+.ic-elementalist-attribute {
+	background: url('../assets/images/elementalist-attribute.png');
+}
+
+.ic-necromancer-attribute {
+	background: url('../assets/images/necromancer-attribute.png');
+}
+
+.ic-mesmer-attribute {
+	background: url('../assets/images/mesmer-attribute.png');
+}
+
+.ic-thief-attribute {
+	background: url('../assets/images/thief-attribute.png');
+}
+
+.ic-hunter-attribute {
+	background: url('../assets/images/hunter-attribute.png');
+}
+
+.ic-engineer-attribute {
+	background: url('../assets/images/engineer-attribute.png');
+}
+
+.ic-warrior-attribute {
+	background: url('../assets/images/warrior-attribute.png');
+}
+
+.ic-guardian-attribute {
+	background: url('../assets/images/guardian-attribute.png');
 }
 
 character-attributes {
@@ -69,15 +101,33 @@ character-attributes {
 .attribute-container {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .attribute {
 	display: flex;
-	width: 50%;
+	width:	33%;
 	align-items: center;
-	// justify-content: center;
 
 	> span {
 
 	}
+}
+
+@media only screen and (min-width: @mobile) {
+	.attribute {
+		width:	50%;
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+
+}
+
+@media only screen and (min-width: @pc) {
+
+}
+
+@media only screen and (min-width: @big-pc) {
+
 }

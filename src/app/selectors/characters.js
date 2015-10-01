@@ -1,4 +1,4 @@
-import { calculateBaseAttribute, parseRuneBonuses, parseUpgradeBuffs } from '../services/gw2';
+import { calculateBaseAttribute, parseRuneBonuses, parseUpgradeBuffs, calculateBonusHealth } from '../services/gw2';
 import { createSelector } from 'reselect';
 
 const getMyCharacters = state => state.user.characters;
@@ -35,12 +35,27 @@ export const myCharactersSelector = createSelector(
 // TODO: Figure out what to do for bonus count. Probably 
 // can just total amount of runes, since there will be multiples.. !
 
+const AQUATIC_EXCLUSION_LIST = [
+	'Trident',
+	'HelmAcquatic'
+];
 
 const getItemAttributes = (state) => {
 	let selectedCharacter = getSelectedCharacter(state);
 
 	let attributes = {
-		Power: 0
+		Power: 0,
+		Precision: 0,
+		Toughness: 0,
+		Vitality: 0,
+		BoonDuration: 0,
+		ConditionDamage: 0,
+		ConditionDuration: 0,
+		Ferocity: 0,
+		HealingPower: 0,
+		CriticalChance: 0,
+		Health: 0,
+		Armor: 0
 	};
 
 	for (let equip in selectedCharacter.equipment) {
@@ -53,25 +68,21 @@ const getItemAttributes = (state) => {
 			continue;
 		}
 
-		if (!state.gw2.items.data[equipObject.id] ||
-				!state.gw2.items.data[equipObject.id].details ||
-				!state.gw2.items.data[equipObject.id].details.infix_upgrade) {
+		let equipObjectItem = state.gw2.items.data[equipObject.id];
+		if (!equipObjectItem ||
+				!equipObjectItem.details ||
+				!equipObjectItem.details.infix_upgrade) {
 			continue;
 		}
 
-		// exclude water weapons/helms
-		if (state.gw2.items.data[equipObject.id].details.type === 'Trident' || 
-				state.gw2.items.data[equipObject.id].details.type === 'HelmAcquatic') {
+		attributes.Armor += equipObjectItem.details.defense || 0;
+
+		if (AQUATIC_EXCLUSION_LIST.indexOf(equipObjectItem.details.type) >= 0) {
 			continue;
 		}
 
-		let itemAttributes = state.gw2.items.data[equipObject.id].details.infix_upgrade.attributes
-		itemAttributes.forEach((attribute) => {
-			if (!attributes[attribute.attribute]) {
-				attributes[attribute.attribute] = attribute.modifier;
-			} else {
-				attributes[attribute.attribute] += attribute.modifier;
-			}
+		equipObjectItem.details.infix_upgrade.attributes.forEach((attribute) => {
+			attributes[attribute.attribute] += attribute.modifier;
 		});
 
 		if (!equipObject.upgrades) {
@@ -80,18 +91,36 @@ const getItemAttributes = (state) => {
 
 		equipObject.upgrades.forEach((upgrade) => {
 			let item = state.gw2.items.data[upgrade];
+
 			if (item.details.type === 'Rune') {
-				let bonuses = parseRuneBonuses(item.details.bonuses);
-				console.log(bonuses);
+				// TODO: Calculate total amount of runes available
+				let bonuses = parseRuneBonuses(item.details.bonuses, 1);
+				combineAttributes(attributes, bonuses);
 			} else {
 				let bonuses = parseUpgradeBuffs(item.details.infix_upgrade.buff.description);
-				console.log(bonuses);
+				combineAttributes(attributes, bonuses);
 			}
 		});
+
+		// TODO: Calculate infusion upgrades
 	}
 
 	return attributes;
 };
+
+function combineAttributes (attr1, attr2) {
+	attr1.Power += attr2.Power || 0;
+	attr1.Precision += attr2.Precision || 0;
+	attr1.Toughness += attr2.Toughness || 0;
+	attr1.Vitality += attr2.Vitality || 0;
+	attr1.BoonDuration += attr2.BoonDuration || 0;
+	attr1.ConditionDamage += attr2.ConditionDamage || 0;
+	attr1.ConditionDuration += attr2.ConditionDuration || 0;
+	attr1.Ferocity += attr2.Ferocity || 0;
+	attr1.HealingPower += attr2.HealingPower || 0;
+	attr1.CriticalChance += attr2.CriticalChance || 0;
+	attr1.Health += attr2.Health || 0;
+}
 
 const BASE_CRITICAL_DAMAGE = 150;
 const getAttributes = (state) => {
@@ -105,36 +134,39 @@ const getAttributes = (state) => {
 	}
 
 	let base = calculateBaseAttribute(selectedCharacter.level);
+	let bonusHealth = calculateBonusHealth(selectedCharacter.level, selectedCharacter.profession);
 	let itemBonus = getItemAttributes(state);
 
-	console.log(itemBonus);
+	let precision = base + itemBonus.Precision;
+	let toughness = base + itemBonus.Toughness;
 
 	return {
 		// Primary
 		power: base + itemBonus.Power,
-		precision: base + itemBonus.Precision,
-		toughness: base,
-		vitality: base,
+		precision: precision,
+		toughness: base + itemBonus.Toughness,
+		vitality: base + itemBonus.Vitality,
 
 		// Secondary
-		boon: itemBonus.Boon,
+		boon: itemBonus.BoonDuration,
 		conditionDamage: itemBonus.ConditionDamage,
-		conditionDuration: itemBonus.ConditionDuration,
+		conditionDuration: itemBonus.ConditionDuration.toFixed(1),
 		ferocity: itemBonus.Ferocity,
 		healing: itemBonus.HealingPower,
 
 		// Derived
-		armor: base + itemBonus.Armor,
-		criticalChance: '?????',
-		criticalDamage: BASE_CRITICAL_DAMAGE + Math.floor(itemBonus.Ferocity / 15),
-		health: (base * 10),
+		armor: toughness + itemBonus.Armor,
+		// TODO: Critical chance is currently rounding up. Fix it.
+		criticalChance: ((precision - 916) / 21).toFixed(2),
+		criticalDamage: (BASE_CRITICAL_DAMAGE + (itemBonus.Ferocity / 15)).toFixed(1),
+		health: (base * 10) + bonusHealth,
 
 		// Special
-		agony: '???',
-		magicFind: '???',
+		agony: 0,
+		magic: 0,
 
 		// Profession
-		profession: '???'
+		profession: 0
 	};
 };
 

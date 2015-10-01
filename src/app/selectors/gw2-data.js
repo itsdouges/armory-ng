@@ -47,6 +47,8 @@ const getMappedItem = (state) => {
 		let upgrade1 = state.gw2.items.data[state.gw2.tooltip.upgrades[0]];
 		let upgrade2 = state.gw2.items.data[state.gw2.tooltip.upgrades[1]];
 
+		console.log(upgrade1);
+
 		upgrade1.upgrade_combo_count = state.gw2.tooltip.upgrade_combo_count;
 
 		if (mappedItem.name.indexOf(upgrade1.details.suffix) < 0) {
