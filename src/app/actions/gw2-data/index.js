@@ -16,35 +16,35 @@ export const actions = {
 // 1. FETCH ALL ITEMS+SKINS FOR CHARACTER THAT ARENT IN STORE
 // 2. SAVE TO STORE. PERSIST TO DISK 5EVER. KILL CACHE 1NCE/W? (month?)
 
-function fetchSkinsSuccessResult (items) {
+export function fetchSkinsSuccessResult (items) {
 	return {
 		type: actions.FETCH_SKINS_RESULT,
 		payload: items
 	};
 }
 
-function fetchItemsSuccessResult (items) {
+export function fetchItemsSuccessResult (items) {
 	return {
 		type: actions.FETCH_ITEMS_RESULT,
 		payload: items
 	};
 }
 
-function fetchingSkins (fetching) {
+export function fetchingSkins (fetching) {
 	return {
 		type: actions.FETCHING_SKINS,
 		payload: fetching
 	};
 }
 
-function fetchingItems (fetching) {
+export function fetchingItems (fetching) {
 	return {
 		type: actions.FETCHING_ITEMS,
 		payload: fetching
 	};
 };
 
-function fetchSkinsThunk (skins) {
+export function fetchSkinsThunk (skins) {
 	return (dispatch) => {
 		dispatch(fetchingSkins(true));
 
@@ -56,7 +56,7 @@ function fetchSkinsThunk (skins) {
 	};
 }
 
-function fetchItemsThunk (items) {
+export function fetchItemsThunk (items) {
 	return (dispatch) => {
 		dispatch(fetchingItems(true));
 
@@ -69,16 +69,16 @@ function fetchItemsThunk (items) {
 }
 
 // TODO: Change input to object, getting a bit big.
-function showTooltip (show, item, skin, upgrades, type, totalUpgrades) {
+export function showTooltip (show, config = {}) {
 	return {
 		type: actions.SHOW_TOOLTIP,
 		payload: {
 			show,
-			item,
-			skin,
-			upgrades,
-			type,
-			upgrade_combo_count: totalUpgrades
+			item: config.item,
+			skin: config.skin,
+			upgrades: config.upgrades,
+			type: config.type,
+			upgrade_combo_count: config.totalUpgrades
 		}
 	};
 }

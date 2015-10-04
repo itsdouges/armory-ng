@@ -12,24 +12,14 @@ export const actions = {
 	SELECT_CHARACTER: 'SELECT_CHARACTER'
 };
 
-function fetchUserCharactersResult (user, characters) {
-	return {
-		type: FETCH_USER_CHARACTERS_RESULT,
-		payload: {
-			user,
-			characters
-		}
-	};
-}
-
-function fetchingCharacter (fetching) {
+export function fetchingCharacter (fetching) {
 	return {
 		type: actions.FETCHING_CHARACTER,
 		payload: fetching
 	};
 }
 
-function fetchCharacterResultSuccess (name, data) {
+export function fetchCharacterResultSuccess (name, data) {
 	return {
 		type: actions.FETCH_CHARACTER_RESULT,
 		payload: {
@@ -40,7 +30,7 @@ function fetchCharacterResultSuccess (name, data) {
 };
 
 // TODO: Action is getting a bit beefy. Refactortractor needed.
-function fetchCharacterThunk (character) {
+export function fetchCharacterThunk (character) {
 	return (dispatch, getState) => {
 		dispatch(fetchingCharacter(true));
 
@@ -67,7 +57,7 @@ function fetchCharacterThunk (character) {
 	};
 }
 
-function filterIdsToFetch (stateItems, stateSkins, equipment) {
+export function filterIdsToFetch (stateItems, stateSkins, equipment) {
 	let ids = {
 		items: [],
 		skins: []
@@ -90,7 +80,7 @@ function filterIdsToFetch (stateItems, stateSkins, equipment) {
 	return ids;
 }
 
-function fetchUserCharactersThunk (user) {
+export function fetchUserCharactersThunk (user) {
 	return (dispatch) => {
 		return axios
 			.get(`${config.api.endpoint}users/me/characters`)
@@ -100,7 +90,7 @@ function fetchUserCharactersThunk (user) {
 	};
 }
 
-function selectCharacter (name) {
+export function selectCharacter (name) {
 	return {
 		type: actions.SELECT_CHARACTER,
 		payload: name

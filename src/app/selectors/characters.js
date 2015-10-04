@@ -128,17 +128,20 @@ const getAttributes = (state) => {
 		return;
 	}
 
-	let selectedCharacter = getSelectedCharacter(state);
+	const selectedCharacter = getSelectedCharacter(state);
 	if (!selectedCharacter) {
 		return;
 	}
 
-	let base = calculateBaseAttribute(selectedCharacter.level);
-	let bonusHealth = calculateBonusHealth(selectedCharacter.level, selectedCharacter.profession);
-	let itemBonus = getItemAttributes(state);
+	const base = calculateBaseAttribute(selectedCharacter.level);
+	const bonusHealth = calculateBonusHealth(selectedCharacter.level, selectedCharacter.profession);
+	const itemBonus = getItemAttributes(state);
 
-	let precision = base + itemBonus.Precision;
-	let toughness = base + itemBonus.Toughness;
+	const precision = base + itemBonus.Precision;
+	const toughness = base + itemBonus.Toughness;
+	
+	let criticalChance = (precision - 916) / 21;
+	criticalChance = criticalChance < 0 ? 0 : criticalChance;
 
 	return {
 		// Primary
@@ -157,7 +160,7 @@ const getAttributes = (state) => {
 		// Derived
 		armor: toughness + itemBonus.Armor,
 		// TODO: Critical chance is currently rounding up. Fix it.
-		criticalChance: ((precision - 916) / 21).toFixed(2),
+		criticalChance: criticalChance.toFixed(2),
 		criticalDamage: (BASE_CRITICAL_DAMAGE + (itemBonus.Ferocity / 15)).toFixed(1),
 		health: (base * 10) + bonusHealth,
 

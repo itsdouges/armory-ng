@@ -1,20 +1,22 @@
 'use strict';
 
 import axios from 'axios';
+import stateGo from 'redux-ui-router/lib/state-go';
 
+import config from '../../../generated/app.env'
 import { actionCreators } from '../../actions/user/auth'
 import { userAuthSelector } from '../../selectors/user';
 
-import stateGo from 'redux-ui-router/lib/state-go';
-
 // TODO: Figure out the best way to hook this into redux.
-function AuthService ($state, env, $ngRedux) {
-	let scope = this;
+class Authentication {
+	constructor ($ngRedux) {
+		this.$ngRedux = $ngRedux;
+	}
 
-	this.checkAuthentication = function () {
+	checkAuthentication () {
 		console.log('checking auth');
 
-		let userAuthStatus = userAuthSelector($ngRedux.getState());
+		let userAuthStatus = userAuthSelector(this.$ngRedux.getState());
 		if (userAuthStatus.loggedIn) {
 			console.log('ur auth! whalecome!');
 
@@ -25,31 +27,31 @@ function AuthService ($state, env, $ngRedux) {
 			console.log('u have a token saved, lets check it..');
 
 			return axios.
-				get(`${env.api.endpoint}/users/me`, {
+				get(`${config.api.endpoint}/users/me`, {
 					headers: { 
 						Authorization: userAuthStatus.token
 					}
-				}).then(function (response) {
+				}).then((response) => {
 					console.log('yeah ur legit');
 
-					$ngRedux.dispatch(actionCreators.authenticateUser(response.data));
+					this.$ngRedux.dispatch(actionCreators.authenticateUser(response.data));
 
 					return Promise.resolve();
-			}, function () {
+			}.bind(this), (response) => {
 				console.log('bad token, get outta here!');
 
-				$ngRedux.dispatch(actionCreators.clearUserData());
+				this.$ngRedux.dispatch(actionCreators.clearUserData());
 
 				return Promise.reject();
-			});
+			}.bind(this));
 		} else {
 			console.log('not auth, get outta here!');
 
-			$ngRedux.dispatch(actionCreators.clearUserData());
+			this.$ngRedux.dispatch(actionCreators.clearUserData());
 
 			return Promise.reject();
 		}
-	};
+	}
 }
 
-export default AuthService;
+export default Authentication;

@@ -115,7 +115,10 @@ export const calculateBaseAttribute = (level) => {
 };
 
 export const parseRuneBonuses = (bonuses, activeCount) => {
-	let bonusesCopy = Object.assign([], bonuses);
+	let bonusesCopy = [
+		...bonuses
+	];
+	
 	let activeBonuses = bonusesCopy.splice(0, activeCount);
 
 	let bonus = parseUpgradeBuffs(activeBonuses);

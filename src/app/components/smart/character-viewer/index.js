@@ -37,7 +37,15 @@ class CharacterViewer {
 	}
 
 	showTooltip (show, item, skin, upgrades, type, totalUpgrades) {
-		this.$ngRedux.dispatch(gw2.actionCreators.showTooltip(show, item, skin, upgrades, type, totalUpgrades));
+		const options = {
+			item,
+			skin,
+			upgrades,
+			type,
+			totalUpgrades
+		};
+
+		this.$ngRedux.dispatch(gw2.actionCreators.showTooltip(show, options));
 	}
 }
 
