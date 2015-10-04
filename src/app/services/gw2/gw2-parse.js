@@ -105,22 +105,24 @@ let parseCharacter = (hey) => {
 		};
       };
 
-      let parseWeaponSwap = (character) => {
-      	switch(character.profession) {
-      		case 'Warrior':
-      		case 'Guardian':
-      		// TODO: Get the other cases.
-      			character.hasWeaponSwap = true;
-      			return;
-  			default:
-  				character.hasWeaponSwap = false;
-  				return;
-      	}
-      };
+    let parseWeaponSwap = (character) => {
+    	switch(character.profession) {
+    		case 'Warrior':
+    		case 'Guardian':
+    		// TODO: Get the other cases.
+    			character.hasWeaponSwap = true;
+    			return;
+			default:
+				character.hasWeaponSwap = false;
+				return;
+    	}
+    };
 
-      parseCharacterUpgrades(inCharacter);
-      parseEquipment(inCharacter);
-      parseWeaponSwap(inCharacter);
+    parseCharacterUpgrades(inCharacter);
+    parseEquipment(inCharacter);
+    parseWeaponSwap(inCharacter);
+
+    console.log(inCharacter);
 
     return inCharacter;
 };

@@ -45,8 +45,34 @@ export const readSkins = (ids) => {
 		});
 };
 
+export const readSpecializations = (specializations) => {
+	let specializations_query = specializations.join(',');
+
+	return axios
+		.get(`${config.gw2.endpoint}v2/specializations?ids=${specializations_query}`, { 
+			ignoreAuth: true,
+			cache: true 
+		})
+		.then((data) => {
+			return data.data;
+		});
+}
+
+export const readTraits = (traits) => {
+	let traits_query = traits.join(',');
+
+	return axios
+		.get(`${config.gw2.endpoint}v2/traits?ids=${traits_query}`, { 
+			ignoreAuth: true,
+			cache: true 
+		})
+		.then((data) => {
+			return data.data;
+		});
+};
+
 export const readGuild = (guid) => {
-	let promise = axios
+	return axios
 		.get(`${config.gw2.endpoint}v1/guild_details.json?guild_id=${guid}`, { 
 			ignoreAuth: true,
 			cache: true 
@@ -54,19 +80,15 @@ export const readGuild = (guid) => {
 		.then((data) => {
 			return data.data;
 		});
-
-	return promise;
 };
 
 export const readCharacter = (name) => {
-    let promise = axios
-      .get(`${config.api.endpoint}characters/${name}`)
-      .then((response) => {
-     		gw2Parse.parseCharacter(response.data);
-        return response.data;
-      });
-
-    return promise;
+  return axios
+    .get(`${config.api.endpoint}characters/${name}`)
+    .then((response) => {
+   		gw2Parse.parseCharacter(response.data);
+      return response.data;
+    });
 };
 
 const BEGINNING_STAT = 37;
@@ -242,8 +264,11 @@ export default {
 	readGuild,
 	readSkins,
 	readItems,
+	readTraits,
+	readSpecializations,
 	readAllItemIds,
 	parseUpgradeBuffs,
 	parseRuneBonuses,
-	calculateBonusHealth
+	calculateBonusHealth,
+	readSpecializations
 };

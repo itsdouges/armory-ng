@@ -79,6 +79,12 @@ const initalState = {
 	skins: {
 		data: {}
 	},
+	traits: {
+		data: {}
+	},
+	specializations: {
+		data: {}
+	},
 	tooltip: {
 		open: false
 	}

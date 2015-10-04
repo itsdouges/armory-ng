@@ -218,7 +218,11 @@
 		</div>
 	</div>
 
-	<character-traits></character-traits>
+	<h3>Specializations</h3>
+
+	<character-traits 
+		ng-repeat="spec in ctrl.selected.specializations.pve"
+		spec="spec"></character-traits>
 </div>
 
 <progress-indicator busy="ctrl.fetching"></progress-indicator>

@@ -41,14 +41,17 @@ export function fetchCharacterThunk (character) {
 				dispatch(fetchCharacterResultSuccess(character, data));
 				
 				let state = getState();
-				let ids = filterIdsToFetch(state.gw2.skins.data, state.gw2.skins.data, response.data.equipment);
+				let ids = filterIdsToFetch(state, response.data);
 
 				dispatch(gw2.actionCreators.fetchItemsThunk(ids.items));
 
 				if (ids.skins.length) {
 					dispatch(gw2.actionCreators.fetchSkinsThunk(ids.skins));
 				}
-				
+
+				dispatch(gw2.actionCreators.fetchTraitsThunk(ids.traits));
+				dispatch(gw2.actionCreators.fetchSpecializationsThunk(ids.specializations));
+
 				dispatch(fetchingCharacter(false));
 			})
 			.catch((hey) => {
@@ -57,18 +60,43 @@ export function fetchCharacterThunk (character) {
 	};
 }
 
-export function filterIdsToFetch (stateItems, stateSkins, equipment) {
+export function filterIdsToFetch (state, character) {
 	let ids = {
 		items: [],
-		skins: []
+		skins: [],
+		traits: [],
+		specializations: []
 	};
 
-	equipment.forEach((item) => {
-		if (item.skin && !stateSkins.hasOwnProperty(item.skin)) {
+	let currentItems = state.gw2.items.data;
+	let currentSkins = state.gw2.skins.data;
+	let currentSpecializations = state.gw2.specializations.data;
+	let currentTraits = state.gw2.traits.data;
+
+	for (let gameMode in character.specializations) {
+		if (!character.specializations.hasOwnProperty(gameMode)) {
+			continue;
+		}
+
+		character.specializations[gameMode].forEach((specialization) => {
+			if (!currentSpecializations.hasOwnProperty(specialization.id) && ids.specializations.indexOf(specialization.id) === -1) {
+				ids.specializations.push(specialization.id);
+			}
+
+			specialization.traits.forEach((trait) => {
+				if (!currentTraits.hasOwnProperty(trait) && ids.traits.indexOf(trait) === -1) {
+					ids.traits.push(trait);
+				}
+			});
+		});
+	}
+
+	character.equipment.forEach((item) => {
+		if (item.skin && !currentSkins.hasOwnProperty(item.skin)) {
 			ids.skins.push(item.skin);
 		}
 
-		if (item.id && !stateItems.hasOwnProperty(item.skin)) {
+		if (!currentItems.hasOwnProperty(item.skin)) {
 			ids.items.push(item.id);
 		}
 

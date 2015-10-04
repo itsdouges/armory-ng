@@ -3,7 +3,7 @@ function component () {
 		restrict: 'E',
 		scope: {},
 		bindToController: {
-			traits: '='
+			spec: '='
 		},
 		controller: CharacterTraits,
 		controllerAs: 'ctrl',

@@ -10,7 +10,11 @@ export const actions = {
 	FETCHING_SKINS: 'FETCHING_SKINS',
 	FETCH_ITEMS_RESULT: 'FETCH_ITEMS_RESULT',
 	FETCH_SKINS_RESULT: 'FETCH_SKINS_RESULT',
-	SHOW_TOOLTIP: 'SHOW_TOOLTIP'
+	SHOW_TOOLTIP: 'SHOW_TOOLTIP',
+	FETCHING_TRAITS: 'FETCHING_TRAITS',
+	FETCHING_SPECIALIZATIONS: 'FETCHING_SPECIALIZATIONS',
+	FETCH_TRAITS_RESULT: 'FETCH_TRAITS_RESULT',
+	FETCH_SPECIALIZATIONS_RESULT: 'FETCH_SPECIALIZATIONS_RESULT'
 };
 
 // 1. FETCH ALL ITEMS+SKINS FOR CHARACTER THAT ARENT IN STORE
@@ -27,6 +31,34 @@ export function fetchItemsSuccessResult (items) {
 	return {
 		type: actions.FETCH_ITEMS_RESULT,
 		payload: items
+	};
+}
+
+export function fetchTraitsResultSuccess (traits) {
+	return {
+		type: actions.FETCH_TRAITS_RESULT,
+		payload: traits
+	};
+}
+
+export function fetchSpecializationsResultSuccess (specializations) {
+	return {
+		type: actions.FETCH_SPECIALIZATIONS_RESULT,
+		payload: specializations
+	};
+}
+
+export function fetchingTraits (fetching) {
+	return {
+		type: actions.FETCHING_TRAITS,
+		payload: fetching
+	};
+}
+
+export function fetchingSpecializations (fetching) {
+	return {
+		type: actions.FETCHING_SPECIALIZATIONS,
+		payload: fetching
 	};
 }
 
@@ -68,6 +100,30 @@ export function fetchItemsThunk (items) {
 	};
 }
 
+export function fetchTraitsThunk (traits) {
+	return (dispatch) => {
+		dispatch(fetchingTraits(true));
+
+		return gw2Api.readTraits(traits)
+			.then((response) => {
+				dispatch(fetchTraitsResultSuccess(response));
+				dispatch(fetchingTraits(false));
+			});
+	};
+}
+
+export function fetchSpecializationsThunk (specializations) {
+	return (dispatch) => {
+		dispatch(fetchingSpecializations(true));
+
+		return gw2Api.readSpecializations(specializations)
+			.then((response) => {
+				dispatch(fetchSpecializationsResultSuccess(response));
+				dispatch(fetchingSpecializations(false));
+			});
+	};
+}
+
 // TODO: Change input to object, getting a bit big.
 export function showTooltip (show, config = {}) {
 	return {
@@ -86,5 +142,7 @@ export function showTooltip (show, config = {}) {
 export const actionCreators = {
 	fetchItemsThunk,
 	fetchSkinsThunk,
+	fetchTraitsThunk,
+	fetchSpecializationsThunk,
 	showTooltip
 };
