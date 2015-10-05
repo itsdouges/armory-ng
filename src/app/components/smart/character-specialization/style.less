@@ -1,0 +1,138 @@
+character-specialization {
+	display: block;
+	height: 140px;
+	max-width: 650px;
+	display: flex;
+	margin: 0 auto;
+	align-items: center;
+	padding-left: 8.5%;
+	background-color: black;
+	position: relative;
+	border: 1px solid black;
+	.box-shadow-medium;
+}
+
+.character-specialization {
+	position: absolute;
+	background-position: bottom left;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.4;
+}
+
+.character-trait {
+	width: 40px;
+	height: 40px;
+	background-position: center;
+	background-size: cover;
+	clip-path: inset(2px 2px 2px 2px);
+	opacity: 0.4;
+}
+
+.character-trait:hover {
+	opacity: 1;
+}
+
+.active {
+	opacity: 1;
+}
+
+.major-trait-column {
+	display: flex;
+	flex-flow: column;
+}
+
+.minor-trait-column {
+	margin: 5.3%;
+	clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}
+
+@hex-size: 100;
+
+.specialization-icon {
+  position: relative;
+  width: 100px; 
+  height: 58px;
+  margin: 29px 0;
+  background-position: -102.5% 78%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+  border-left: solid 3px #0d0d0d;
+  border-right: solid 3px #0d0d0d;
+  margin-left: -8em;
+}
+
+
+@media only screen and (min-width: 420px) {
+	.specialization-icon {
+		margin-left: -6em;
+	}
+}
+
+@media only screen and (min-width: @mobile) {
+	.specialization-icon {
+		margin-left: -1.5em;
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+	.specialization-icon {
+		margin-left: 0;
+	}
+}
+
+.specialization-icon-top,
+.specialization-icon-bottom {
+  position: absolute;
+  z-index: 1;
+  width: 71px;
+  height: 71px;
+  overflow: hidden;
+  transform: scaleY(0.6) rotate(-45deg);
+  background: inherit;
+  left: 11.64px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+}
+
+.specialization-icon-top:after,
+.specialization-icon-bottom:after {
+  content: "";
+  position: absolute;
+  width: 94px;
+  height: 54px;
+  transform: rotate(45deg) scaleY(1.8) translateY(-27px);
+  transform-origin: 0 0;
+  background: inherit;
+}
+
+.specialization-icon-top {
+  top: -35.5px;
+  border-top: solid 4px #0d0d0d;
+  border-right: solid 4px #0d0d0d;
+}
+
+.specialization-icon-top:after {
+  background-position: -102.5% 64.7%;
+}
+
+.specialization-icon-bottom {
+  bottom: -35.5px;
+  border-bottom: solid 4.5px #0d0d0d;
+  border-left: solid 4.5px #0d0d0d;
+}
+
+.specialization-icon-bottom:after {
+  background-position: -102.5% 91.5%;
+}
+
+.specialization-icon:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 94px;
+  height: 54px;
+  z-index: 2;
+  background: inherit;
+}

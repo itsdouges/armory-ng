@@ -39,6 +39,7 @@ export function fetchCharacterThunk (character) {
 			.then((response) => {
 				let data = gw2Parse.parseCharacter(response.data);
 				dispatch(fetchCharacterResultSuccess(character, data));
+				dispatch(fetchingCharacter(false));
 				
 				let state = getState();
 				let ids = filterIdsToFetch(state, response.data);
@@ -49,10 +50,9 @@ export function fetchCharacterThunk (character) {
 					dispatch(gw2.actionCreators.fetchSkinsThunk(ids.skins));
 				}
 
-				dispatch(gw2.actionCreators.fetchTraitsThunk(ids.traits));
-				dispatch(gw2.actionCreators.fetchSpecializationsThunk(ids.specializations));
-
-				dispatch(fetchingCharacter(false));
+				if (ids.specializations.length) {
+					dispatch(gw2.actionCreators.fetchSpecializationsThunk(ids.specializations));
+				}
 			})
 			.catch((hey) => {
 				console.log(hey);
@@ -64,7 +64,7 @@ export function filterIdsToFetch (state, character) {
 	let ids = {
 		items: [],
 		skins: [],
-		traits: [],
+		// traits: [],
 		specializations: []
 	};
 
@@ -79,15 +79,13 @@ export function filterIdsToFetch (state, character) {
 		}
 
 		character.specializations[gameMode].forEach((specialization) => {
+			if (!specialization) {
+				return;
+			}
+
 			if (!currentSpecializations.hasOwnProperty(specialization.id) && ids.specializations.indexOf(specialization.id) === -1) {
 				ids.specializations.push(specialization.id);
 			}
-
-			specialization.traits.forEach((trait) => {
-				if (!currentTraits.hasOwnProperty(trait) && ids.traits.indexOf(trait) === -1) {
-					ids.traits.push(trait);
-				}
-			});
 		});
 	}
 

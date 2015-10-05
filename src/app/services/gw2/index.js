@@ -53,8 +53,9 @@ export const readSpecializations = (specializations) => {
 			ignoreAuth: true,
 			cache: true 
 		})
-		.then((data) => {
-			return data.data;
+		.then((response) => {
+			let specs = gw2Parse.mapSkinsToObject(response.data);
+			return Promise.resolve(specs);
 		});
 }
 
@@ -66,8 +67,9 @@ export const readTraits = (traits) => {
 			ignoreAuth: true,
 			cache: true 
 		})
-		.then((data) => {
-			return data.data;
+		.then((response) => {
+			let mappedTraits = gw2Parse.mapSkinsToObject(response.data);
+			return Promise.resolve(mappedTraits);
 		});
 };
 

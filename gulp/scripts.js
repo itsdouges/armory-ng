@@ -24,6 +24,10 @@ function webpack(watch, callback) {
         query: {
           stage: 0
         }
+      }, {
+        test: /\.html$/, 
+        exclude: /node_modules/, 
+        loader: 'html',
       }]
     },
     output: { filename: 'app.module.js' }

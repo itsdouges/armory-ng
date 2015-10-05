@@ -28,6 +28,7 @@ function selectCharacterReducer (state, action) {
 	};
 
 	newState.selected = action.payload;
+	newState.mode = 'pve'; // TODO: Add functionality to switch between pve/pvp/wvw.
 
 	return newState;
 }

@@ -120,6 +120,18 @@ export function fetchSpecializationsThunk (specializations) {
 			.then((response) => {
 				dispatch(fetchSpecializationsResultSuccess(response));
 				dispatch(fetchingSpecializations(false));
+
+				let traitsToAdd = [];
+
+				for (let specialization in response) {
+					if (!response.hasOwnProperty(specialization)) {
+						continue;
+					}
+
+					traitsToAdd = traitsToAdd.concat(response[specialization].major_traits, response[specialization].minor_traits);
+				}
+
+				dispatch(fetchTraitsThunk(traitsToAdd));
 			});
 	};
 }

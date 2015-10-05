@@ -22,6 +22,26 @@ function fetchingSkinsReducer (state, action) {
 	return newState;
 }
 
+function fetchingSpecializationsReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.specializations.fetching = action.payload;
+
+	return newState;
+}
+
+function fetchingTraitsReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.traits.fetching = action.payload;
+
+	return newState;
+}
+
 function fetchItemsResultReducer (state, action) {
 	let newState = {
 		...state
@@ -42,6 +62,32 @@ function fetchSkinsResultReducer (state, action) {
 
 	newState.skins.data = {
 		...newState.skins.data,
+		...action.payload
+	};
+
+	return newState;
+}
+
+function fetchTraitsResultReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.traits.data = {
+		...newState.traits.data,
+		...action.payload
+	};
+
+	return newState;
+}
+
+function fetchSpecializationsResultReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.specializations.data = {
+		...newState.specializations.data,
 		...action.payload
 	};
 
@@ -98,11 +144,23 @@ export default function reducer (state = initalState, action) {
 		case actions.FETCHING_SKINS:
 			return fetchingSkinsReducer(state, action);
 
+		case actions.FETCHING_TRAITS:
+			return fetchingTraitsReducer(state, action);
+
+		case actions.FETCHING_SPECIALIZATIONS:
+			return fetchingSpecializationsReducer(state, action);
+
 		case actions.FETCH_ITEMS_RESULT:
 			return fetchItemsResultReducer(state, action);
 
 		case actions.FETCH_SKINS_RESULT:
 			return fetchSkinsResultReducer(state, action);
+
+		case actions.FETCH_TRAITS_RESULT:
+			return fetchTraitsResultReducer(state, action);
+
+		case actions.FETCH_SPECIALIZATIONS_RESULT:
+			return fetchSpecializationsResultReducer(state, action);
 
 		case actions.SHOW_TOOLTIP:
 			return showTooltipReducer(state, action);

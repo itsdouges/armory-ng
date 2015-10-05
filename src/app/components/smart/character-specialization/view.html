@@ -1,0 +1,78 @@
+<!-- TODO: Move traits into separate dumb component -->
+<!-- Calculate minor trait based on character level -->
+<!-- Contemplate making this component into a dumb component -->
+
+<div 
+	class="character-specialization" 
+	style="background-image: url('{{ ctrl.gw2Specializations[ctrl.specialization].background }}');">
+</div>
+
+<div 
+	class="specialization-icon" 
+	style="background-image: url('{{ ctrl.gw2Specializations[ctrl.specialization].background }}');">
+	<div class="specialization-icon-top"></div>
+	<div class="specialization-icon-bottom"></div>
+</div>
+
+<div 
+	class="character-trait minor-trait-column active" 
+	style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[0]].icon }}');"></div>
+
+<div class="major-trait-column">
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[0]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[0]].id))"></div>
+
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[1]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[1]].id))"></div>
+
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[2]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[2]].id))"></div>
+</div>
+
+<div 
+	class="character-trait minor-trait-column active" 
+	style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[1]].icon }}');"></div>
+
+<div class="major-trait-column">
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[3]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[3]].id))"></div>
+
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[4]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[4]].id))"></div>
+
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[5]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[5]].id))"></div>
+</div>
+
+<div
+	class="character-trait minor-trait-column active" 
+	style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[2]].icon }}');"></div>
+
+<div class="major-trait-column">
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[6]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[6]].id))"></div>
+
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[7]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[7]].id))"></div>
+
+	<div 
+		class="character-trait" 
+		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[8]].icon }}');"
+		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[8]].id))"></div>
+</div>

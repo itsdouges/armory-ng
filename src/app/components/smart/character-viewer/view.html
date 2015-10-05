@@ -202,11 +202,11 @@
 							item="ctrl.selected.equipment.weaponAquaticA"></item-block>
 
 						<item-block 
-						slot-name="Acquatic Weapon" 
-						ng-if="ctrl.hasWeaponSwap" 
-						type="sword"
-						show-tooltip="ctrl.showTooltip(show, item, skin, upgrades, type, upgradeCount)"
-						fetching="ctrl.fetchingGw2Data"
+							slot-name="Acquatic Weapon" 
+							ng-if="ctrl.hasWeaponSwap" 
+							type="sword"
+							show-tooltip="ctrl.showTooltip(show, item, skin, upgrades, type, upgradeCount)"
+							fetching="ctrl.fetchingGw2Data"
 							icon="{{ ctrl.selected.equipment.weaponAquaticB.skin ? ctrl.skins[ctrl.selected.equipment.weaponAquaticB.skin].icon : ctrl.items[ctrl.selected.equipment.weaponAquaticB.id].icon }}"
 						item="ctrl.selected.equipment.weaponAquaticB"></item-block>
 					</div>
@@ -218,11 +218,12 @@
 		</div>
 	</div>
 
-	<h3>Specializations</h3>
-
-	<character-traits 
-		ng-repeat="spec in ctrl.selected.specializations.pve"
-		spec="spec"></character-traits>
+	<div ng-if="ctrl.specializations[0]">
+		<character-specialization 
+			ng-repeat="spec in ctrl.specializations"
+			specialization="spec.id"
+			traits="spec.traits"></character-specialization>
+	</div>
 </div>
 
 <progress-indicator busy="ctrl.fetching"></progress-indicator>

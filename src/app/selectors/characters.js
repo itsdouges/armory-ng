@@ -6,7 +6,7 @@ const getColumns = state => state.window.columns;
 const fetchingCharacter = state => state.characters.fetching;
 const getGw2ItemsData = state => state.gw2.items.data;
 const getGw2SkinsData = state => state.gw2.skins.data;
-const getFetchingGw2Data = state => state.gw2.items.fetching || state.gw2.skins.fetching; 
+const getFetchingGw2Data = state => state.gw2.items.fetching || state.gw2.skins.fetching || state.gw2.traits.fetching || state.gw2.specializations.fetching; 
 const getTooltipOpen = state => state.gw2.tooltip.open;
 
 const getSelectedCharacter = state => {
@@ -173,6 +173,34 @@ const getAttributes = (state) => {
 	};
 };
 
+function getCurrentSpecializations (state) {
+	const current = getSelectedCharacter(state);
+	if (!current || (state.gw2.specializations.fetching && state.gw2.traits.fetching)) {
+		return;
+	}
+
+	if (!current.specializations) {
+		return;
+	}
+
+	const specializations = current.specializations[state.characters.mode];
+	return specializations;
+}
+
+const getGw2TraitsData = state => state.gw2.traits.data;
+const getGw2SpecializationsData = state => state.gw2.specializations.data;
+
+export const traitsSelector = createSelector(
+	getGw2TraitsData,
+	getGw2SpecializationsData,
+	(gw2Traits, gw2Specializations) => {
+		return {
+			gw2Traits,
+			gw2Specializations
+		};
+	}
+);
+
 export const characterViewerSelector = createSelector(
 	fetchingCharacter,
 	getSelectedCharacter,
@@ -180,14 +208,16 @@ export const characterViewerSelector = createSelector(
 	getGw2SkinsData,
 	getFetchingGw2Data,
 	getAttributes,
-	(fetching, selected, items, skins, fetchingGw2Data, attributes) => {
+	getCurrentSpecializations,
+	(fetching, selected, items, skins, fetchingGw2Data, attributes, specializations) => {
 		return {
 			fetching,
 			selected,
 			items,
 			skins,
 			fetchingGw2Data,
-			attributes
+			attributes,
+			specializations
 		};
 	}
 );
