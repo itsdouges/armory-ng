@@ -33,6 +33,7 @@ import ItemUpgrade from './components/dumb/item-upgrade';
 import MouseFollow from './directives/mouse-follow';
 import CharacterAttributes from './components/dumb/character-attributes';
 import CharacterSpecialization from './components/smart/character-specialization';
+import SpecializationTrait from './components/dumb/specialization-trait';
 
 import AuthService from './services/auth/auth';
 import debounce from './services/helpers/debouncer';
@@ -88,4 +89,5 @@ const App = angular.module('gw2armory', [
 .directive('registerBox', RegisterBox)
 .directive('characterHeadshot', CharacterHeadshot)
 .directive('characterPortrait', CharacterPortrait)
+.directive('specializationTrait', SpecializationTrait)
 .directive('characterSpecialization', CharacterSpecialization);

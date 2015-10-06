@@ -142,7 +142,7 @@
 							type="amulet"
 							show-tooltip="ctrl.showTooltip(show, item, skin, upgrades, type, upgradeCount)"
 							fetching="ctrl.fetchingGw2Data"
-							icon="{{ ctrl.items[ctrl.selected.equipment.ring1.id].icon }}"
+							icon="{{ ctrl.items[ctrl.selected.equipment.amulet.id].icon }}"
 							item="ctrl.selected.equipment.amulet"></item-block>
 
 						<item-block 
@@ -226,8 +226,6 @@
 	</div>
 </div>
 
-<progress-indicator busy="ctrl.fetching"></progress-indicator>
-
-<div class="character-viewer-empty" ng-if="!ctrl.selected"></div>
+<progress-indicator	busy="ctrl.fetching"></progress-indicator>
 
 <item-tooltip></item-tooltip>

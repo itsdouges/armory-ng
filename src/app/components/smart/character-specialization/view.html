@@ -14,65 +14,59 @@
 	<div class="specialization-icon-bottom"></div>
 </div>
 
-<div 
-	class="character-trait minor-trait-column active" 
-	style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[0]].icon }}');"></div>
+<specialization-trait
+	active="true"
+	class="minor-trait-column" 
+	trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[0]]"></specialization-trait>
 
 <div class="major-trait-column">
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[0]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[0]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[0]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[0]]"></specialization-trait>
 
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[1]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[1]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[1]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[1]]"></specialization-trait>
 
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[2]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[2]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[2]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[2]]"></specialization-trait>
 </div>
 
-<div 
-	class="character-trait minor-trait-column active" 
-	style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[1]].icon }}');"></div>
+<specialization-trait
+	active="true"
+	class="minor-trait-column" 
+	trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[1]]"></specialization-trait>
 
 <div class="major-trait-column">
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[3]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[3]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[3]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[3]]"></specialization-trait>
 
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[4]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[4]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[4]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[4]]"></specialization-trait>
 
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[5]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[5]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[5]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[5]]"></specialization-trait>
 </div>
 
-<div
-	class="character-trait minor-trait-column active" 
-	style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[2]].icon }}');"></div>
+<specialization-trait
+	active="true"
+	class="minor-trait-column" 
+	trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].minor_traits[2]]"></specialization-trait>
 
 <div class="major-trait-column">
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[6]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[6]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[6]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[6]]"></specialization-trait>
 
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[7]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[7]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[7]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[7]]"></specialization-trait>
 
-	<div 
-		class="character-trait" 
-		style="background-image: url('{{ ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[8]].icon }}');"
-		ng-class="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[8]].id))"></div>
+	<specialization-trait
+		active="ctrl.isActive(ctrl.traits.indexOf(ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[8]].id))"
+		trait="ctrl.gw2Traits[ctrl.gw2Specializations[ctrl.specialization].major_traits[8]]"></specialization-trait>
 </div>
