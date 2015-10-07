@@ -36,10 +36,32 @@
 	}
 }
 
-.character-name {
-	
-}
-
 .character-equipment-cluster {
 	text-align: center;
+}
+
+.brush-stroke-container {
+	position: relative;
+	max-width: 650px;
+	margin: 0 auto;
+	overflow: visible;
+}
+
+.brush-stroke-container:before,
+.brush-stroke-container:after {
+	content: "";
+	position: absolute;
+	width: 125px;
+	height: 337px;
+	bottom: -2px;
+	background-image: url('../assets/images/brush-stroke-1.png');
+}
+
+.brush-stroke-container:before {
+	left: -125px;
+}
+
+.brush-stroke-container:after {
+	transform: scaleX(-1);
+	right: -125px;
 }

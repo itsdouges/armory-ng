@@ -1,6 +1,25 @@
 .user-status {
+	display: flex;
+	align-items: center;
+	font-size: 1em;
+
 	li {
-		padding: 0.5em 0.25em;
+		margin: 0.5em 0.75em;
 		display: inline-block;
+
+		> a {
+			font-weight: bold;
+			color: black;
+		}
+
+		i {
+			font-size: 1.8em;
+		}
 	}
+}
+
+user-links {
+	display: block;
+	z-index: 10;
+	margin: 0.5em;
 }

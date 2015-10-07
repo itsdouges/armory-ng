@@ -10,6 +10,7 @@ character-headshot,
 character-headshot {
 	padding: 5px;
 	transition: background 0.3s;
+	
 
 	a > {
 		width: 100%;
@@ -17,8 +18,14 @@ character-headshot {
 }
 
 character-headshot:hover {
+	opacity: 1;
+
 	.character-headshot {
 		color: white;
+
+		.character-headshot-image {
+			opacity: 1;
+		}
 	}
 
 	background: rgba(0, 0, 0, 0.7);
@@ -50,6 +57,7 @@ character-headshot:hover {
 }
 
 .character-headshot-image {
+	opacity: 0.7;
 	width: 4rem;
 	height: 4rem;
 	flex-shrink: 0;

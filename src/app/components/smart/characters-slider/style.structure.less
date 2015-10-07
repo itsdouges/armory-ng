@@ -96,11 +96,21 @@ characters-slider {
 	display: flex;
 	align-items: center;
 	z-index: 10;
-	transition: background 0.3s;
+	transition: opacity 0.3s;
 	
 	background-repeat: no-repeat;
 	background-position: center;
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgb(0, 0, 0);
+	opacity: 0.2;
+
+	font-size: 3.5em;
+
+	> i {
+		transition: opacity 0.3s;
+		margin: 0 auto;
+		opacity: 0.5;
+		color: white;
+	}
 
 	> span {
 		display: none;
@@ -116,7 +126,12 @@ characters-slider {
 }
 
 .slider-control:hover {
-	background-color: rgba(0, 0, 0, 0.7);
+	opacity: 0.7;
+
+	> i {
+		opacity: 1;
+		color: white;
+	}
 }
 
 @media only screen and (min-width: @mobile) {

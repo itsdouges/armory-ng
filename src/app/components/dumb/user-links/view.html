@@ -1,10 +1,10 @@
 <ul class="user-status" ng-if="!ctrl.loggedIn">
-	<li><a href="/login">Login</a></li>
-	<li><a href="/signup">Signup</a></li>
+	<li><a title="Login" href="/login">Login</a></li>
+	<li><a title="Signup" href="/signup">Signup</a></li>
 </ul>
 
 <ul class="user-status" ng-if="ctrl.loggedIn">
-	<li><a href="/me/characters">My Characters</a></li>
-	<li><a href="/settings">Settings</a></li>
-	<li><a ng-click="ctrl.logout()" href="">Logout</a></li>
+	<li><a title="Me" href="/me/characters">{{ ctrl.username }}</i></a></li>
+	<li><a title="Settings" href="/settings"><i class="fa fa-cog"></i></a></li>
+	<li><a title="Logout" ng-click="ctrl.logout()" href=""><i class="fa fa-sign-out"></i></a></li>
 </ul>

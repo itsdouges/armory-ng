@@ -8,7 +8,8 @@ function component () {
 		scope: {},
 		bindToController: {
 			logout: '&',
-			loggedIn: '='
+			loggedIn: '=',
+			username: '@'
 		},
 		templateUrl: 'app/components/dumb/user-links/view.html',
 	};

@@ -3,24 +3,32 @@
 	background-position: top center;
 	position: relative;
 	padding: 1em;
-	min-height: 3.5em;
-	text-align: center;
+	min-height: 147px;
+
+	a {
+		color: white;
+	}
+}
+
+.header-badge {
+	width: 170px;
+}
+
+.header-brush-stroke {
+	background-image: url('../assets/images/brush-stroke-2-1.png');
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 147px;
+	width: 698px;
+	z-index: -1;
 }
 
 header-block {
 	display: flex;
 }
 
-.site-title {
-	font-family: Open Sans;
-	margin: 0;
-	margin-bottom: -10px;
-	font-size: 1.5rem;
-	font-weight: bold;
-}
-
-@media only screen and (min-width: @mobile) {
-	.header {
-		text-align: left;
-	}
+.header-title {
+	font-size: 0;
+	z-index: 5;
 }
