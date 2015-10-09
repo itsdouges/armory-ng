@@ -1,7 +1,3 @@
-.ic-attribute {
-	margin: 0.6em;
-}
-
 .ic-attack-power {
 	background: url('../assets/images/power.png');
 }
@@ -94,6 +90,11 @@
 	background: url('../assets/images/guardian-attribute.png');
 }
 
+.ic-attribute {
+	margin: 0.4em 0.8em;
+	background-size: cover;
+}
+
 character-attributes {
 	display: block;
 }
@@ -110,7 +111,6 @@ character-attributes {
 
 .attribute {
 	display: flex;
-	width:	33%;
 	align-items: center;
 
 	> span {
@@ -119,6 +119,10 @@ character-attributes {
 }
 
 @media only screen and (min-width: @mobile) {
+	.attribute {
+		flex-flow: column;
+	}
+
 	.attribute {
 		width:	50%;
 	}

@@ -145,24 +145,24 @@ const getAttributes = (state) => {
 
 	return {
 		// Primary
-		power: base + itemBonus.Power,
-		precision: precision,
-		toughness: base + itemBonus.Toughness,
-		vitality: base + itemBonus.Vitality,
+		power: (base + itemBonus.Power).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+		precision: precision.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+		toughness: (base + itemBonus.Toughness).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+		vitality: (base + itemBonus.Vitality).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
 
 		// Secondary
 		boon: itemBonus.BoonDuration,
-		conditionDamage: itemBonus.ConditionDamage,
+		conditionDamage: itemBonus.ConditionDamage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
 		conditionDuration: itemBonus.ConditionDuration.toFixed(1),
-		ferocity: itemBonus.Ferocity,
+		ferocity: itemBonus.Ferocity.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
 		healing: itemBonus.HealingPower,
 
 		// Derived
-		armor: toughness + itemBonus.Armor,
+		armor: (toughness + itemBonus.Armor).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
 		// TODO: Critical chance is currently rounding up. Fix it.
 		criticalChance: criticalChance.toFixed(2),
 		criticalDamage: (BASE_CRITICAL_DAMAGE + (itemBonus.Ferocity / 15)).toFixed(1),
-		health: (base * 10) + bonusHealth,
+		health: ((base * 10) + bonusHealth).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
 
 		// Special
 		agony: 0,

@@ -2,10 +2,9 @@
 	ng-mouseenter="ctrl.showTooltip({ show: true, item: ctrl.item.id, skin: ctrl.item.skin, upgrades: ctrl.item.upgrades, type: ctrl.slotName, upgradeCount: ctrl.item.counts.total })"
 	ng-mouseleave="ctrl.showTooltip({ show: false })"
 	class="item-container item-default"
+	ng-class="ctrl.fetching ? 'fetching' : ''"
 	style="background-image: url('{{ ctrl.typeBackground }}')">
 
 	<div class="item" style="background-image: url('{{ ctrl.icon }}')">
-		<div ng-if="ctrl.fetching" class="progress-indicator animating"></div>
 	</div>
-	
 </div>

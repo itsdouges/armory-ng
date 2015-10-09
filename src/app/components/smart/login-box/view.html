@@ -1,4 +1,6 @@
 <form ng-submit="ctrl.login()">
+	<div class="message">Don't have an account? <strong><a title="Signup" href="/signup">Go signup!</a></strong></div>
+
 	<div class="message-box error">{{ ctrl.error }}</div>
 
 	<div class="row">
@@ -22,6 +24,8 @@
 	</div>
 
 	<div class="button-group">
-		<busy-button busy="ctrl.fetchingToken">Login</busy-button>
+		<busy-button busy="ctrl.fetchingToken">
+			<i class="fa fa-sign-in"></i>
+		</busy-button>
 	</div>
 </form>

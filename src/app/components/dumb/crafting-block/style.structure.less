@@ -1,8 +1,17 @@
 .craft-container {
 	position: relative;
-	margin: 0.25em 0.6em;
-	border: 1px solid @junk;
-	height: 23px;
+	margin: 0.15em 0.6em;
+	height: 24px;
+	overflow: hidden;
+	.box-shadow-low;
+
+	&.active {
+		font-weight: bold;
+
+		.craft-icon {
+			opacity: 1;
+		}
+	}
 }
 
 .craft-rating {
@@ -15,11 +24,12 @@
 }
 
 .craft-icon {
-	margin: 0.1em;
+	margin: 2px;
 	width: 20px;
 	height: 20px;
 	display: inline-block;
 	z-index: @top-z;
+	opacity: 0.5;
 }
 
 .craft-rating-block {

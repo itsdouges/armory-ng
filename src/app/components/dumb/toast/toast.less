@@ -1,0 +1,46 @@
+@toast-spacer: 2em;
+
+toast {
+	display: block;
+	position: fixed;
+	left: @toast-spacer;
+	right: @toast-spacer;
+	margin: 0 auto;
+	background: @secondary;
+	.box-shadow-high;
+	z-index: 20;
+	padding: @toast-spacer / 2;
+	text-align: center;
+	border-radius: 1px;
+	opacity: 0.9;
+	color: white;
+	pointer-events: none;
+
+	&.top {
+		top: @toast-spacer * 2;
+	}
+
+	&.bottom {
+		bottom: @toast-spacer * 2;
+	}
+}
+
+@media only screen and (min-width: @mobile) {
+	toast {
+		// width: 1px;
+		// min-width: 200px;
+		max-width: 400px;
+
+		&.top {
+
+		}
+
+		&.bottom {
+			
+		}
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+
+}

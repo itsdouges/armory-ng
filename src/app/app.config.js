@@ -3,8 +3,10 @@
 import axios from 'axios';
 import { userAuthSelector } from './selectors/user';
 
-function config ($logProvider, env) {
-  $logProvider.debugEnabled(env.verbose);
+import conf from '../generated/app.env';
+
+function config ($logProvider) {
+  $logProvider.debugEnabled(conf.verbose);
 }
 
 function run ($ngRedux) {

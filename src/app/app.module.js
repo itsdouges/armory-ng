@@ -35,10 +35,14 @@ import CharacterAttributes from './components/dumb/character-attributes';
 import CharacterSpecialization from './components/smart/character-specialization';
 import SpecializationTrait from './components/dumb/specialization-trait';
 
+import Toast from './components/dumb/toast';
+import ToastCreator from './directives/toast-creator';
+
 import AuthService from './services/auth/auth';
 import debounce from './services/helpers/debouncer';
 
 import angular from 'angular';
+import ngAnimate from 'angular-animate';
 import ngRedux from 'ng-redux';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
@@ -50,14 +54,13 @@ import store from './app.redux-store';
 const App = angular.module('gw2armory', [
 	ngRedux,
   uiRouter,
-  ngReduxRouter
+  ngReduxRouter,
+  // ngAnimate
 ])
 
 .config(configuration.config)
 .config(routerConfig)
 .config(store)
-
-.constant('env', environment)
 
 .run(configuration.run)
 
@@ -90,4 +93,6 @@ const App = angular.module('gw2armory', [
 .directive('characterHeadshot', CharacterHeadshot)
 .directive('characterPortrait', CharacterPortrait)
 .directive('specializationTrait', SpecializationTrait)
+.directive('toast', Toast)
+.directive('toastsEnabled', ToastCreator)
 .directive('characterSpecialization', CharacterSpecialization);

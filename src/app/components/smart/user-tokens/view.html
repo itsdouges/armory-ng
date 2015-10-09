@@ -5,8 +5,6 @@
 <gw2-token remove-token="ctrl.removeToken(token)" ng-repeat="token in ctrl.user.gw2Tokens" token="token" mode="view"></gw2-token>
 
 <form ng-submit="ctrl.addToken()" class="row">
-	{{ ctrl.user.gw2TokenError }}
-
 	<div class="label-container">
 		<label for="add-token">Add token</label>
 	</div>
@@ -22,7 +20,7 @@
 
 	<div class="button-group">
 		<busy-button button-disabled="!ctrl.user.validGw2Token" busy="ctrl.user.addingGw2Token">
-			Add
+			<i class="fa fa-plus"></i>
 		</busy-button>
 	</div>
 </form>

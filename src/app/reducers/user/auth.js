@@ -11,7 +11,7 @@ function fetchTokenResultReducer (state, action) {
 
 	newState.token = action.payload;
 	localStorage.setItem(USER_TOKEN_LOCALSTORAGE_KEY, action.payload);
-	newState.loggedIn = true;
+	// newState.loggedIn = true;
 
 	return newState;
 }

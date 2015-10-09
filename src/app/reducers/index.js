@@ -3,16 +3,18 @@
 import { combineReducers } from 'redux';
 import { router } from 'redux-ui-router';
 import user from './user/';
-import wndow from './window';
+import _window from './window';
 import characters from './characters';
 import gw2 from './gw2-data';
+import toast from './toast';
 
 const rootReducer = combineReducers({
 	user,
 	router,
-	window: wndow,
+	window: _window,
 	characters,
-	gw2
+	gw2,
+	toast
 });
 
 export default rootReducer;

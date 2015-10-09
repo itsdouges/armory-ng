@@ -1,23 +1,21 @@
+input {
+	border: none;
+	border-bottom: 1px solid @text-secondary;
+}
+
 input[type=button].negative,
 button.negative {
 
 }
 
 button[disabled] {
-	background: gray!important;
+	opacity: 0.7;
 }
 	
 input[type=button].primary,
 button.primary {
-	border: 1px solid @blue;
-	background-color: @fine;
-}
-
-input[type=button].positive:hover,
-input[type=button].positive:focus,
-button.positive:hover,
-button.positive:focus {
-	background-color: @masterwork;
+	border: none;
+	background-color: @accent;
 }
 
 .button-group {
@@ -27,9 +25,20 @@ button.positive:focus {
 
 input[type=button],
 button {
-	transition: background-color 0.2s;
-	font-size: 1.2em;
+	transition: background-color 0.3s, opacity 0.3;
+	font-size: 1.1em;
 	border-radius: 1px;
+	.box-shadow-low;
+	opacity: 1;
+	transition: 0.3s box-shadow;
+	font-weight: bold;
+}
+
+input[type=button]:focus,
+input[type=button]:hover,
+button:hover,
+button:focus {
+	.box-shadow-medium;
 }
 
 input[type=text],

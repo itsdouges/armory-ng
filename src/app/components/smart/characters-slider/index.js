@@ -1,10 +1,5 @@
 'use strict';
 
-// NB: THESE SIZES ARE DUPLICATED FROM SIZES.LESS, MAKE SURE THEYRE IN SYNC!
-const BIG_PC_WIDTH = 1300;
-const PC_WIDTH = 1024;
-const TABLET_WIDTH = 700;
-
 function component ($window, debounce) {
 	let link = (scope, element, attrs, controller) => {
 		let slider = element.find('ul')[0];

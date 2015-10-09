@@ -4,6 +4,7 @@
 const BIG_PC_WIDTH = 1300;
 const PC_WIDTH = 1024;
 const TABLET_WIDTH = 700;
+const PHONE_WIDTH = 480;
 
 import { actionCreators } from '../../actions/window';
 
@@ -14,8 +15,10 @@ function ColumnsCalculatorDirective ($window, debounce, $ngRedux) {
 		let resizeEvent = () => {
 			let windowWidth = $window.innerWidth;
 			let columnSize;
-
-			if (windowWidth <= TABLET_WIDTH) {
+			
+			if (windowWidth <= PHONE_WIDTH) {
+				columnSize = 1;
+			} else if (windowWidth <= TABLET_WIDTH) {
 				columnSize = 2;
 			} else if (windowWidth <= PC_WIDTH) {
 				columnSize = 3;

@@ -3,6 +3,7 @@
 		<span
 			class="character-profession-icon" 
 			ng-class="ctrl.selected.profession.toLowerCase()"></span>
+
 		<div class="character-title">
 			<h2 class="character-name serif">
 				{{ ctrl.selected.name }}
@@ -17,6 +18,11 @@
 			<div class="character-subtitle">
 				<i>stress level zero.4907</i>
 			</div>
+		</div>
+
+		<div>
+			<span>Mode:</span>
+			<strong><a href="">PvE</a></strong>
 		</div>
 	</div>
 
@@ -222,8 +228,6 @@
 		</div>
 	</div>
 
-	<br />
-
 	<div class="brush-stroke-container" ng-if="ctrl.specializations[0]">
 		<character-specialization 
 			ng-repeat="spec in ctrl.specializations"
@@ -232,6 +236,6 @@
 	</div>
 </div>
 
-<progress-indicator	busy="ctrl.fetching"></progress-indicator>
+<progress-indicator class="centered"	busy="ctrl.fetching"></progress-indicator>
 
 <item-tooltip></item-tooltip>

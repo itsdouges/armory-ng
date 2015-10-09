@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "1.4.x",
+    "angular-animate": "1.4.x",
     "angular-ui-router": "^0.2.15",
     "axios": "^0.5.4",
     "es6-promise": "^3.0.2",
