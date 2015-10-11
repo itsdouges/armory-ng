@@ -1,13 +1,15 @@
 'use strict';
 
+import { actionCreators } from '../../../actions/user/characters';
+import { myCharactersSelector } from '../../../selectors/characters';
+
 function component ($window, debounce) {
 	let link = (scope, element, attrs, controller) => {
-		let slider = element.find('ul')[0];
+		let inlineCharacters = element.find('inline-characters')[0],
+			transitionEvent;
 
-		let transitionEvent;
 		let scopeEvent = (e, cb) => {
 			transitionEvent = (e) => {
-
 				if (e.propertyName === 'transform') {
 					cb();
 				}
@@ -15,13 +17,12 @@ function component ($window, debounce) {
 				return true;
 			};
 
-			slider.addEventListener('webkitTransitionEnd', transitionEvent, false);
+			inlineCharacters.addEventListener('webkitTransitionEnd', transitionEvent, false);
 		};
 
 		scope.$on('slider:set-transition-end-event', scopeEvent);
-
 		scope.$on('$destroy', () => {
-			slider.removeEventListener('webkitTransitionEnd', transitionEvent);
+			inlineCharacters.removeEventListener('webkitTransitionEnd', transitionEvent);
 		});
 	};
 
@@ -34,47 +35,43 @@ function component ($window, debounce) {
 			mode: '@'
 		},
 		link: link,
-		templateUrl: 'app/components/smart/characters-slider/view.html',
+		template: require('./view.html')
 	};
 
 	return directive;
 }
 
-import { actionCreators } from '../../../actions/user/characters';
-import { myCharactersSelector } from '../../../selectors/characters';
-
 function CharactersSlider ($scope, $ngRedux) {
-	let scope = this;
-	let characters;
-	const sliderTranslateX = 100;
-	let transitionDirection;
+	const SLIDER_TRANSLATE_PERCENTAGE = 100;
 
-	let sliderItems;
-	let currentPosition;
-
-	let loaded = false;
+	let scope = this,
+		characters,
+		transitionDirection,
+		sliderItems,
+		currentPosition,
+		loaded = false;
 
 	function init () {
 		scope.sliderControlsDisabled = true;
 
-		const unsubscribe = $ngRedux.subscribe(() => {
-			let state = $ngRedux.getState();
-			let my = myCharactersSelector(state);
+		const UNSUBSCRIBE = $ngRedux.subscribe(() => {
+			const state = $ngRedux.getState();
+			const selector = myCharactersSelector(state);
 
-			if (!my.characters) {
+			if (!selector.characters) {
 				return;
 			}
 
-			sliderItems = my.columns;
+			sliderItems = selector.columns;
 
-			if (my.characters !== characters) {
-				characters = my.characters;
-				scope.hasCharacters = my.hasCharacters;
-				sup();
+			if (selector.characters !== characters) {
+				characters = selector.characters;
+				scope.hasCharacters = selector.hasCharacters;
+				initializeSlider();
 			}
 		});
 
-		$scope.$on('$destroy', unsubscribe);
+		$scope.$on('$destroy', UNSUBSCRIBE);
 
 		switch(scope.mode) {
 			case 'authenticated':
@@ -86,10 +83,10 @@ function CharactersSlider ($scope, $ngRedux) {
 				break;
 		}
 
-		setSliderStyle(sliderTranslateX);
+		setSliderStyle(SLIDER_TRANSLATE_PERCENTAGE);
 	}
 
-	function sup () {
+	function initializeSlider () {
 		if (characters.length > sliderItems) {
 			scope.sliderControlsDisabled = false;
 		}
@@ -113,7 +110,7 @@ function CharactersSlider ($scope, $ngRedux) {
 
 				requestAnimationFrame(() => {
 					$scope.$apply(() => {
-						setSliderStyle(sliderTranslateX, true);
+						setSliderStyle(SLIDER_TRANSLATE_PERCENTAGE, true);
 					});
 				});
 			});
@@ -167,7 +164,7 @@ function CharactersSlider ($scope, $ngRedux) {
 
 	this.next = () => {
 		transitionDirection = 'next';
-		setSliderStyle(sliderTranslateX * 2);
+		setSliderStyle(SLIDER_TRANSLATE_PERCENTAGE * 2);
 	};
 
 	this.previous = () => {

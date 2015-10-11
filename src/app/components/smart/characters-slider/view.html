@@ -4,35 +4,25 @@
 </div>
 
 <div class="characters-slider-container">
-	<a ng-if="!ctrl.sliderControlsDisabled" 
-		href="" 
-		class="slider-control left" 
-		ng-click="ctrl.previous()">
-		<span>Next</span>
-		<i class="fa fa-angle-left"></i>
-	</a>
+	<slider-control
+		mode="left"
+		ng-if="!ctrl.sliderControlsDisabled"
+		ng-click="ctrl.previous()"></slider-control>
 
 	<div class="slider-message" 
 		ng-if="!ctrl.hasCharacters">
 		Oh, you have no characters.. why not <a href="/settings"><strong>add a few api tokens</strong></a> to your account?
 	</div>
 
-	<ul ng-show="ctrl.hasCharacters" 
-		class="characters-slider" 
-		ng-style="ctrl.sliderStyle">
-		<li class="characters-slider-item" 
-			ng-repeat="c in ctrl.characters track by $index">
-			<character-headshot character="c"></character-headshot>
-		</li>
-	</ul>
+	<inline-characters
+		ng-show="ctrl.hasCharacters" 
+		ng-style="ctrl.sliderStyle"
+		characters="ctrl.characters"></inline-characters>
 
-	<a ng-if="!ctrl.sliderControlsDisabled" 
-		href="" 
-		class="slider-control right" 
-		ng-click="ctrl.next()">
-		<span>Previous</span>
-		<i class="fa fa-angle-right"></i>
-	</a>
+	<slider-control
+		mode="right"
+		ng-if="!ctrl.sliderControlsDisabled"
+		ng-click="ctrl.next()"></slider-control>
 </div>
 
 <div class="characters-slider-border-container bottom">
