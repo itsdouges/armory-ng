@@ -3,9 +3,11 @@
 import { actionCreators } from '../../../actions/user/characters';
 import { myCharactersSelector } from '../../../selectors/characters';
 
+// TODO: Clean this up and do some unit tests. Shit is nasty!
+
 function component ($window, debounce) {
 	let link = (scope, element, attrs, controller) => {
-		let inlineCharacters = element.find('inline-characters')[0],
+		let inlineCharactersElement = element.find('inline-characters')[0],
 			transitionEvent;
 
 		let scopeEvent = (e, cb) => {
@@ -17,12 +19,12 @@ function component ($window, debounce) {
 				return true;
 			};
 
-			inlineCharacters.addEventListener('webkitTransitionEnd', transitionEvent, false);
+			inlineCharactersElement.addEventListener('webkitTransitionEnd', transitionEvent, false);
 		};
 
 		scope.$on('slider:set-transition-end-event', scopeEvent);
 		scope.$on('$destroy', () => {
-			inlineCharacters.removeEventListener('webkitTransitionEnd', transitionEvent);
+			inlineCharactersElement.removeEventListener('webkitTransitionEnd', transitionEvent);
 		});
 	};
 
@@ -41,15 +43,16 @@ function component ($window, debounce) {
 	return directive;
 }
 
-function CharactersSlider ($scope, $ngRedux) {
+export function CharactersSlider ($scope, $ngRedux) {
 	const SLIDER_TRANSLATE_PERCENTAGE = 100;
 
 	let scope = this,
 		characters,
 		transitionDirection,
-		sliderItems,
+		sliderItemsPerPage,
 		currentPosition,
-		loaded = false;
+		loaded = false,
+		SLIDER_ITEMS_TOTAL;
 
 	function init () {
 		scope.sliderControlsDisabled = true;
@@ -58,17 +61,16 @@ function CharactersSlider ($scope, $ngRedux) {
 			const state = $ngRedux.getState();
 			const selector = myCharactersSelector(state);
 
-			if (!selector.characters) {
+			if (!selector.characters || !selector.characters.length) {
 				return;
 			}
 
-			sliderItems = selector.columns;
-
-			if (selector.characters !== characters) {
+			if (!loaded) {
 				characters = selector.characters;
 				scope.hasCharacters = selector.hasCharacters;
-				initializeSlider();
 			}
+
+			initializeSlider(selector.columns);
 		});
 
 		$scope.$on('$destroy', UNSUBSCRIBE);
@@ -86,9 +88,27 @@ function CharactersSlider ($scope, $ngRedux) {
 		setSliderStyle(SLIDER_TRANSLATE_PERCENTAGE);
 	}
 
-	function initializeSlider () {
-		if (characters.length > sliderItems) {
+	function initializeSlider (newSliderItemsPerPage) {
+		if (!loaded && characters.length > newSliderItemsPerPage) {
 			scope.sliderControlsDisabled = false;
+		}
+
+		if (!loaded && characters.length <= newSliderItemsPerPage) {
+			setSliderStyle(0);
+			scope.characters = characters;
+		} else if (!loaded || sliderItemsPerPage !== newSliderItemsPerPage && !scope.sliderControlsDisabled) {
+			sliderItemsPerPage = newSliderItemsPerPage;
+			SLIDER_ITEMS_TOTAL = sliderItemsPerPage * 3;
+
+			console.log('Restructuring characters array');
+			console.log('before:', characters.length, SLIDER_ITEMS_TOTAL);
+
+			while (characters.length < SLIDER_ITEMS_TOTAL) {
+				characters = characters.concat(characters);
+			}
+
+			setCharactersOffset(sliderItemsPerPage, SLIDER_ITEMS_TOTAL);
+			console.log('result:', characters.length, SLIDER_ITEMS_TOTAL);
 		}
 
 		if (!loaded) {
@@ -97,9 +117,9 @@ function CharactersSlider ($scope, $ngRedux) {
 					let offset;
 
 					if (transitionDirection === 'previous') {
-						offset = sliderItems;
+						offset = sliderItemsPerPage;
 					} else if (transitionDirection === 'next') {
-						offset = -sliderItems;
+						offset = -sliderItemsPerPage;
 					} else {
 						throw 'transition not handled';
 					}
@@ -117,19 +137,11 @@ function CharactersSlider ($scope, $ngRedux) {
 
 			loaded = true;
 		}
-
-		setCharactersOffset(sliderItems);
-
-		if (characters.length <= sliderItems) {
-			setSliderStyle(0);
-			return;
-		}
 	}
 
-	function setCharactersOffset(offset) {
+	function setCharactersOffset (offset, maxItems) {
 		var tempc,
-			i,
-			maxItems = sliderItems * 3 + 2;
+			i;
 
 		if (offset >= 0) {
 			tempc = characters;
@@ -149,7 +161,7 @@ function CharactersSlider ($scope, $ngRedux) {
 		scope.characters = tempc.slice(0, maxItems);
 	}
 
-	function setSliderStyle(translateX, noTransition) {
+	function setSliderStyle (translateX, noTransition) {
 		let style = {
 			transform: `translate3d(-${translateX}%, 0, 0)`,
 			'webkit-transform': `translate3d(-${translateX}%, 0, 0)`

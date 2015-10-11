@@ -14,9 +14,7 @@ const getSelectedCharacter = state => {
 };
 
 const getIHaveCharacters = state => {
-	let has = !state.user.characters || !state.user.characters.length;
-
-	return !has;
+	return state.user.characters && state.user.characters.length;
 };
 
 export const myCharactersSelector = createSelector(

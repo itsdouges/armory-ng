@@ -1,7 +1,5 @@
-{{ ctrl.message }}
-
 <form class="row">
-	{{ ctrl.user.passwordErrors }}
+	<div class="message">{{ ctrl.user.passwordErrors[0] }}</div>
 
 	<div class="input-container">
 		<input placeholder="Current password" ng-disabled="ctrl.busy" id="add-token" type="text" ng-model="ctrl.user.currentPassword" required="required" />
@@ -13,7 +11,7 @@
 	</div>
 
 	<div class="input-container">
-		<input placeholder="New password" ng-change="ctrl.checkPasswords()" ng-disabled="ctrl.busy" id="add-token" type="text" ng-model="ctrl.inputs.password1" required="required" />
+		<input placeholder="New password" ng-change="ctrl.checkPasswords()" ng-disabled="ctrl.busy" id="add-token" type="password" ng-model="ctrl.inputs.password1" required="required" />
 
 		<input-validity
 			data-busy="ctrl.busy"
@@ -22,7 +20,7 @@
 	</div>
 
 	<div class="input-container">
-		<input placeholder="Confirm new password" ng-change="ctrl.checkPasswords()" ng-disabled="ctrl.busy" id="add-token" type="text" ng-model="ctrl.inputs.password2" required="required" />
+		<input placeholder="Confirm new password" ng-change="ctrl.checkPasswords()" ng-disabled="ctrl.busy" id="add-token" type="password" ng-model="ctrl.inputs.password2" required="required" />
 
 		<input-validity
 			data-busy="ctrl.busy"
