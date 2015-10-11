@@ -7,15 +7,12 @@ input[type=button].negative,
 button.negative {
 
 }
-
-button[disabled] {
-	opacity: 0.7;
-}
 	
 input[type=button].primary,
 button.primary {
 	border: none;
 	background-color: @accent;
+	color: white;
 }
 
 .button-group {
@@ -25,13 +22,20 @@ button.primary {
 
 input[type=button],
 button {
-	transition: background-color 0.3s, opacity 0.3;
-	font-size: 1.1em;
-	border-radius: 1px;
+	width: 3em;
+	height: 3em;
+	transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+	font-size: 1.3em;
 	.box-shadow-low;
 	opacity: 1;
-	transition: 0.3s box-shadow;
 	font-weight: bold;
+	border-radius: 50%;
+}
+
+button[disabled] {
+	// opacity: 0.7;
+	background-color: gray;
+	color: black;
 }
 
 input[type=button]:focus,

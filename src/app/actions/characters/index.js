@@ -44,7 +44,9 @@ export function fetchCharacterThunk (character) {
 				let state = getState();
 				let ids = filterIdsToFetch(state, response.data);
 
-				dispatch(gw2.actionCreators.fetchItemsThunk(ids.items));
+				if (ids.items.length) {
+					dispatch(gw2.actionCreators.fetchItemsThunk(ids.items));
+				}
 
 				if (ids.skins.length) {
 					dispatch(gw2.actionCreators.fetchSkinsThunk(ids.skins));

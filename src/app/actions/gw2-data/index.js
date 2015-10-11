@@ -92,6 +92,8 @@ export function fetchItemsThunk (items) {
 	return (dispatch) => {
 		dispatch(fetchingItems(true));
 
+		console.log('loading items', items);
+
 		return gw2Api.readItems(items)
 			.then((response) => {
 				dispatch(fetchItemsSuccessResult(response));

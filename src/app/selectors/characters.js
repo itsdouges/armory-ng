@@ -184,7 +184,12 @@ function getCurrentSpecializations (state) {
 	}
 
 	const specializations = current.specializations[state.characters.mode];
-	return specializations;
+
+	let specializationsWithoutEmpties = specializations.filter(spec => {
+			return spec !== null;
+	});
+
+	return specializationsWithoutEmpties;
 }
 
 const getGw2TraitsData = state => state.gw2.traits.data;
