@@ -16,32 +16,30 @@ function component () {
 }
 
 function UserTokens ($ngRedux, $scope, debounce) {
-	let scope = this;
-
-	const unsubscribe = $ngRedux.connect(userDataSelector)(scope);
+	const unsubscribe = $ngRedux.connect(userDataSelector)(this);
 	$scope.$on('$destroy', unsubscribe);
 	$ngRedux.dispatch(actionCreators.fetchGw2TokensThunk());
 
-	scope.addToken = () => {
-		$ngRedux.dispatch(actionCreators.addGw2TokenThunk(scope.newGw2Token));
-	}
+	this.addToken = () => {
+		$ngRedux.dispatch(actionCreators.addGw2TokenThunk(this.newGw2Token));
+	}.bind(this);
 
-	scope.removeToken = (token) => {
+	this.removeToken = (token) => {
 		$ngRedux.dispatch(actionCreators.removeGw2TokenThunk(token));
 	};
 
 	let tokenDebounce;
-	scope.validateToken = () => {
-		if (scope.user.validGw2Token) {
+	this.validateToken = () => {
+		if (this.user.validGw2Token) {
 			$ngRedux.dispatch(actionCreators.invalidateGw2Token());
 		}
 
 		tokenDebounce = tokenDebounce || debounce.func(() => {
-			$ngRedux.dispatch(actionCreators.validateGw2TokenThunk(scope.newGw2Token));
-		});
+			$ngRedux.dispatch(actionCreators.validateGw2TokenThunk(this.newGw2Token));
+		}.bind(this));
 
 		tokenDebounce();
-	}
+	}.bind(this);
 }
 
 export default component;

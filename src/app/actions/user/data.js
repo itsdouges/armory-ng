@@ -14,6 +14,7 @@ export const actions = {
 
 	REMOVE_GW2_TOKEN: 'REMOVE_GW2_TOKEN',
 
+	INVALIDATE_GW2_TOKEN: 'INVALIDATE_GW2_TOKEN',
 	VALIDATING_GW2_TOKEN: 'VALIDATING_GW2_TOKEN',
 	VALIDATE_GW2_TOKEN_RESULT: 'VALIDATE_GW2_TOKEN_RESULT'
 };
@@ -93,9 +94,9 @@ function addGw2TokenThunk (token) {
 				token: token
 			})
 			.then((response) => {
-				// TODO: Update backend to return token data.
-				dispatch(showToast('Added token!'));
+				dispatch(showToast('Nice! You\'ve added a token.'));
 				dispatch(addGw2TokenResultSuccess(response.data));
+				dispatch(invalidateGw2Token());
 				dispatch(addingGw2Token(false));
 			});
 	};
@@ -121,6 +122,12 @@ function removeGw2Token (token) {
 	};
 }
 
+function invalidateGw2Token () {
+	return {
+		type: actions.INVALIDATE_GW2_TOKEN
+	};
+}
+
 function removeGw2TokenThunk (token) {
 	return (dispatch) => {
 		dispatch(removeGw2Token(token));
@@ -128,7 +135,7 @@ function removeGw2TokenThunk (token) {
 		return axios
 			.delete(`${config.api.endpoint}users/me/gw2-tokens/${token}`)
 			.then((response) => {
-				dispatch(showToast('Removed token!'));
+				dispatch(showToast('Your token has been removed!'));
 			});
 	};
 }
@@ -137,5 +144,6 @@ export const actionCreators = {
 	fetchGw2TokensThunk,
 	addGw2TokenThunk,
 	validateGw2TokenThunk,
-	removeGw2TokenThunk
+	removeGw2TokenThunk,
+	invalidateGw2Token
 };
