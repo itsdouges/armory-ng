@@ -1,7 +1,6 @@
 'use strict';
 
 import axios from 'axios';
-import stateGo from 'redux-ui-router/lib/state-go';
 
 import config from '../../../generated/app.env'
 import { actionCreators } from '../../actions/user/auth'
