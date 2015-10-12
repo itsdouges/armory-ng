@@ -271,6 +271,5 @@ export default {
 	readAllItemIds,
 	parseUpgradeBuffs,
 	parseRuneBonuses,
-	calculateBonusHealth,
-	readSpecializations
+	calculateBonusHealth
 };

@@ -3,12 +3,14 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
-
+var webpackk = require('webpack');
 var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
-function webpack(watch, callback) {
+var dedupe = new webpackk.optimize.DedupePlugin();
+
+function webpack (watch, callback) {
   var webpackOptions = {
     watch: watch,
     module: {
@@ -30,7 +32,12 @@ function webpack(watch, callback) {
         loader: 'html',
       }]
     },
-    output: { filename: 'app.module.js' }
+    plugins: [
+      dedupe
+    ],
+    output: { 
+      filename: 'app.module.js' 
+    }
   };
 
   if(watch) {
