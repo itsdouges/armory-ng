@@ -9,6 +9,7 @@ let DEFAULTS = {
  * Unfortunately we need to flush the scope
  * so this has to be an angular service.
  */
+// @ngInject
 function DebounceService($rootScope) {
 	function debounce(func, delay) {
 		let timeout;

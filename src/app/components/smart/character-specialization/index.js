@@ -17,6 +17,7 @@ function component () {
 }
 
 class CharacterSpecialization {
+	// @ngInject
 	constructor ($ngRedux, $scope) {
 		const unsubscribe = $ngRedux.connect(traitsSelector)(this);
 		$scope.$on('$destroy', unsubscribe);

@@ -5,7 +5,7 @@ function component () {
 		restrict: 'E',
 		controller: ProgressIndicator,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/dumb/progress-indicator/view.html',
+		template: require('./view.html'),
 		scope: {},
 		bindToController: {
 			'busy': '=',

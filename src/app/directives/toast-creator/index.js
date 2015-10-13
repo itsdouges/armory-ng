@@ -15,6 +15,7 @@ function component () {
 }
 
 class ToastCreator {
+	// @ngInject
 	constructor ($ngRedux, $scope, $element, $compile) {
 		const unsubscribe = $ngRedux.connect(toastSelector)(this);
 		$scope.$on('$destroy', unsubscribe);

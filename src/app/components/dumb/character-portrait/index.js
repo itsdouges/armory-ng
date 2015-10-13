@@ -6,7 +6,7 @@ function component () {
 		scope: {},
 		controller: CharacterPortrait,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/dumb/character-portrait/view.html',
+		template: require('./view.html'),
 		bindToController: {
 			character: '='
 		}

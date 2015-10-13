@@ -5,6 +5,7 @@ import { myCharactersSelector } from '../../../selectors/characters';
 
 // TODO: Clean this up and do some unit tests. Shit is nasty!
 
+// @ngInject
 function component ($window, debounce) {
 	let link = (scope, element, attrs, controller) => {
 		let inlineCharactersElement = element.find('inline-characters')[0],
@@ -43,6 +44,7 @@ function component ($window, debounce) {
 	return directive;
 }
 
+// @ngInject
 export function CharactersSlider ($scope, $ngRedux) {
 	const SLIDER_TRANSLATE_PERCENTAGE = 100;
 

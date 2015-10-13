@@ -6,7 +6,7 @@ function component () {
 		scope: {},
 		controller: Spacer,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/smart/spacer/view.html'
+		template: require('./view.html'),
 	};
 
 	return directive;
@@ -14,6 +14,7 @@ function component () {
 
 import { spacerSelector } from '../../../selectors/window';
 
+// @ngInject
 function Spacer ($ngRedux, $scope) {
 	const unsubscribe = $ngRedux.connect(spacerSelector)(this);
 	$scope.$on('$destroy', unsubscribe);

@@ -4,6 +4,7 @@
 // todo: add in edge cases to handle mouse location in the browser.
 // todo: disable for touch screens
 
+// @ngInject
 function MouseFollowDirective ($window) {
 	let state = {};
 	let domEle;

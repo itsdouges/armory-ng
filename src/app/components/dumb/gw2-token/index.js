@@ -10,8 +10,7 @@ function component () {
 			token: '=',
 			removeToken: '&'
 		},
-		require: '^userTokens',
-		templateUrl: 'app/components/dumb/gw2-token/view.html',
+		template: require('./view.html'),
 	};
 
 	return directive;

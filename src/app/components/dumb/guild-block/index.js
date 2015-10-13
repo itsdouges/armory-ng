@@ -5,7 +5,7 @@ function component () {
 		restrict: 'E',
 		controller: GuildBlock,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/dumb/guild-block/view.html',
+		template: require('./view.html'),
 		scope: {},
 		bindToController: {
 			guid: '@'
@@ -17,6 +17,7 @@ function component () {
 
 // TODO: Move logic into higher component
 class GuildBlock {
+	/*@ngInject*/
 	constructor (gw2Service) {
 		this.busy = true;
 		this.loadGuild();

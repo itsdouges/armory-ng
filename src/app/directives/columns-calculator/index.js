@@ -8,6 +8,7 @@ const PHONE_WIDTH = 480;
 
 import { actionCreators } from '../../actions/window';
 
+// @ngInject
 function ColumnsCalculatorDirective ($window, debounce, $ngRedux) {
 	let currentSize;
 

@@ -6,6 +6,7 @@ const logger = createLogger({
 	collapsed: true
 });
 
+// @ngInject
 export default ($ngReduxProvider) => {
 	$ngReduxProvider.createStoreWith(rootReducer, ['ngUiRouterMiddleware', thunk, logger]);
 };

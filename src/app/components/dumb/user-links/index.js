@@ -11,7 +11,7 @@ function component () {
 			loggedIn: '=',
 			username: '@'
 		},
-		templateUrl: 'app/components/dumb/user-links/view.html',
+		template: require('./view.html')
 	};
 
 	return directive;

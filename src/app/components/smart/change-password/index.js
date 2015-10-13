@@ -9,12 +9,13 @@ function component () {
 		controller: ChangePassword,
 		controllerAs: 'ctrl',
 		scope: {},
-		templateUrl: 'app/components/smart/change-password/view.html',
+		template: require('./view.html')
 	};
 
 	return directive;
 }
 
+// @ngInject
 function ChangePassword ($ngRedux, $scope, debounce) {
 	let scope = this;
 

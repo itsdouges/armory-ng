@@ -7,13 +7,14 @@ function component () {
 		restrict: 'E',
 		controller: LoginBox,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/smart/login-box/view.html',
+		template: require('./view.html'),
 		scope: {}
 	};
 
 	return directive;
 }
 
+// @ngInject
 function LoginBox ($ngRedux, $scope) {
 	const unsubscribe = $ngRedux.connect(selector)(this);
 	$scope.$on('$destroy', unsubscribe);

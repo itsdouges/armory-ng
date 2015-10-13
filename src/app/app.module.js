@@ -45,7 +45,6 @@ import AuthService from './services/auth/auth';
 import debounce from './services/helpers/debouncer';
 
 import angular from 'angular';
-import ngAnimate from 'angular-animate';
 import ngRedux from 'ng-redux';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
@@ -57,8 +56,7 @@ import store from './app.redux-store';
 const App = angular.module('gw2armory', [
 	ngRedux,
   uiRouter,
-  ngReduxRouter,
-  // ngAnimate
+  ngReduxRouter
 ])
 
 .config(configuration.config)

@@ -1,16 +1,17 @@
 'use strict';
 
+// @ngInject
 function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('main', {
-      templateUrl: 'app/routes/main.html',
+      template: require('./routes/main.html'),
       abstract: true
     })
     .state('main.no-auth', {
       abstract: true,
       template: '<ui-view></ui-view>',
       resolve: {
-        authenticated: function (authService, $q) {
+        authenticated: /*@ngInject*/ function (authService, $q) {
           return authService.checkAuthentication()
             .then(null, () => {
               return $q.resolve();
@@ -24,25 +25,25 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.with-container.home', {
       url: '/',
-      templateUrl: 'app/routes/home/home.html',
+      template: require('./routes/home/home.html')
     })
     .state('main.no-auth.with-container.login', {
       url: '/login',
-      templateUrl: 'app/routes/login/login.html'
+      template: require('./routes/login/login.html')
     })
     .state('main.no-auth.with-container.signup', {
       url: '/signup',
-      templateUrl: 'app/routes/signup/signup.html'
+      template: require('./routes/signup/signup.html')
     })
     .state('main.no-auth.not-found', {
       url: '/404',
-      templateUrl: 'app/routes/404/404.html'
+      template: require('./routes/404/404.html')
     })
     .state('main.with-auth', {
       abstract: true,
       template: '<ui-view></ui-view>',
       resolve: {
-        authenticated: function (authService, $state) {
+        authenticated: /*@ngInject*/ function (authService, $state) {
           return authService.checkAuthentication()
             .then(null, () => {
               $state.go('main.no-auth.with-container.login');
@@ -56,11 +57,11 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.with-auth.with-container.settings', {
       url: '/settings',
-      templateUrl: 'app/routes/settings/settings.html'
+      template: require('./routes/settings/settings.html')
     })
     .state('main.with-auth.characters', {
       url: '/me/characters',
-      templateUrl: 'app/routes/me/characters/characters.html'
+      template: require('./routes/me/characters/characters.html')
     })
     .state('main.with-auth.characters.character', {
       url: '/:name'

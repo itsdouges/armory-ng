@@ -8,6 +8,7 @@ import { userAuthSelector } from '../../selectors/user';
 
 // TODO: Figure out the best way to hook this into redux.
 class Authentication {
+	// @ngInject
 	constructor ($ngRedux) {
 		this.$ngRedux = $ngRedux;
 	}

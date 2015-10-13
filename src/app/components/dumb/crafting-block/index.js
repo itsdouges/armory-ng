@@ -3,7 +3,7 @@
 function component () {
 	let directive = {
 		restrict: 'E',
-		templateUrl: 'app/components/dumb/crafting-block/view.html',
+		template: require('./view.html'),
 		controller: CraftingBlock,
 		controllerAs: 'ctrl',
 		scope: {},

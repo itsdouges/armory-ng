@@ -9,12 +9,13 @@ function component () {
 		controller: UserTokens,
 		controllerAs: 'ctrl',
 		scope: {},
-		templateUrl: 'app/components/smart/user-tokens/view.html',
+		template: require('./view.html')
 	};
 
 	return directive;
 }
 
+// @ngInject
 function UserTokens ($ngRedux, $scope, debounce) {
 	const unsubscribe = $ngRedux.connect(userDataSelector)(this);
 	$scope.$on('$destroy', unsubscribe);

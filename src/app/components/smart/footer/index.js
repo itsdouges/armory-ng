@@ -2,6 +2,7 @@
 
 import { actionCreators } from '../../../actions/window';
 
+// @ngInject
 function component ($window, debounce) {
 	let link = (scope, element, attributes, controller) => {
 		let ele = element[0];
@@ -26,12 +27,13 @@ function component ($window, debounce) {
 		scope: {},
 		controller: Footer,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/smart/footer/view.html'
+		template: require('./view.html')
 	};
 
 	return directive;
 }
 
+/*@ngInject*/
 function Footer ($ngRedux) {
 	this.setSpacerHeight = (height) => {
 		$ngRedux.dispatch(actionCreators.setBottomSpacer(height));

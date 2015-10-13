@@ -5,7 +5,7 @@ function component () {
 		restrict: 'E',
 		controller: RegisterBox,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/smart/register-box/view.html',
+		template: require('./view.html'),
 		bindToController: {
 			state: '@'
 		}, 
@@ -18,6 +18,7 @@ function component () {
 import { actionCreators } from '../../../actions/user';
 import { registerSelector } from '../../../selectors/user';
 
+// @ngInject
 function RegisterBox (debounce, $ngRedux, $scope) {
 	let scope = this;
 

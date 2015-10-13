@@ -3,7 +3,7 @@
 function component () {
 	let directive = {
 		restrict: 'E',
-		templateUrl: 'app/components/smart/item-tooltip/view.html',
+		template: require('./view.html'),
 		controller: ItemTooltip,
 		controllerAs: 'ctrl',
 		scope: {}
@@ -15,6 +15,7 @@ function component () {
 import { tooltipSelector } from '../../../selectors/gw2-data';
 
 class ItemTooltip {
+	// @ngInject
 	constructor ($ngRedux, $scope) {
 		const unsubscribe = $ngRedux.connect(tooltipSelector)(this);
 		$scope.$on('$destroy', unsubscribe);

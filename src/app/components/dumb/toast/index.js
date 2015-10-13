@@ -15,6 +15,7 @@ function component () {
 }
 
 class Toast {
+	/*@ngInject*/
 	constructor ($timeout, $scope, $element) {
 		$timeout(() => {
 			console.log('Killing toast!');

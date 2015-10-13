@@ -10,13 +10,14 @@ function component () {
 		controller: Header,
 		controllerAs: 'ctrl',
 		scope: {},
-		templateUrl: 'app/components/smart/header/view.html'
+		template: require('./view.html')
 	};
 
 	return directive;
 }
 
 class Header {
+	// @ngInject
 	constructor ($ngRedux, $scope) {
 		this.$ngRedux = $ngRedux;
 

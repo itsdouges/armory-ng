@@ -10,7 +10,7 @@ function component () {
 			busy: '='
 		},
 		scope: {},
-		templateUrl: 'app/components/dumb/input-validity/view.html',
+		template: require('./view.html')
 	};
 
 	return directive;

@@ -11,7 +11,7 @@ function component () {
 		bindToController: {
 			mode: '@'
 		},
-		templateUrl: 'app/components/smart/character-viewer/view.html',
+		template: require('./view.html'),
 		controller: CharacterViewer,
 		controllerAs: 'ctrl'
 	};
@@ -20,6 +20,7 @@ function component () {
 }
 
 class CharacterViewer {
+	// @ngInject
 	constructor ($stateParams, $scope, $ngRedux) {
 		this.$ngRedux = $ngRedux;
 

@@ -9,12 +9,13 @@ function component () {
 		controller: ChangeAlias,
 		controllerAs: 'ctrl',
 		scope: {},
-		templateUrl: 'app/components/smart/change-alias/view.html',
+		template: require('./view.html')
 	};
 
 	return directive;
 }
 
+// @ngInject
 function ChangeAlias ($ngRedux, $scope, debounce) {
 	let scope = this;
 

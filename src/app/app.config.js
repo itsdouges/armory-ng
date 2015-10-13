@@ -8,10 +8,13 @@ import { userAuthSelector } from './selectors/user';
 import conf from '../generated/app.env';
 import stateGo from 'redux-ui-router/lib/state-go';
 
+// @ngInject
 function config ($logProvider) {
+    "ngInject"
   $logProvider.debugEnabled(conf.verbose);
 }
 
+// @ngInject
 function run ($ngRedux) {
 	axios.interceptors.request.use((config) => {
 		const userAuth = userAuthSelector($ngRedux.getState());

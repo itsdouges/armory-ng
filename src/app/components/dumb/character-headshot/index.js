@@ -9,7 +9,7 @@ function component () {
 		},
 		controller: CharacterHeadshot,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/dumb/character-headshot/view.html',
+		template: require('./view.html'),
 	};
 
 	return directive;

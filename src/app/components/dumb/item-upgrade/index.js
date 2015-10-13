@@ -3,7 +3,7 @@
 function component () {
 	let directive = {
 		restrict: 'E',
-		templateUrl: 'app/components/dumb/item-upgrade/view.html',
+		template: require('./view.html'),
 		controller: ItemUpgrade,
 		controllerAs: 'ctrl',
 		scope: {},

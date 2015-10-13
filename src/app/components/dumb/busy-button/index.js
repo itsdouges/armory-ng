@@ -9,7 +9,7 @@ function component () {
 		},
 		controller: BusyButton,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/dumb/busy-button/view.html',
+		template: require('./view.html'),
 		scope: {},
 		transclude: true
 	};

@@ -8,7 +8,7 @@ function component () {
 		},
 		controller: CharacterAttributes,
 		controllerAs: 'ctrl',
-		templateUrl: 'app/components/dumb/character-attributes/view.html',
+		template: require('./view.html'),
 	};
 
 	return directive;
