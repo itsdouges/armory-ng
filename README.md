@@ -24,7 +24,7 @@ npm run start:prod
 ### Run tests
 ```
 npm test
-npm test:auto
+npm run test:auto
 ```
 
 ### Build dev
