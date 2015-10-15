@@ -1,7 +1,7 @@
 'use strict';
 
 import axios from 'axios';
-import config from '../../../generated/app.env';
+import config from '../../app.env';
 import gw2Parse from './gw2-parse';
 
 export const readAllItemIds = () => {

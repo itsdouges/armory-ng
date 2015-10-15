@@ -1,0 +1,77 @@
+@import '../variables/colours.less';
+@import '../variables/sizes.less';
+@import '../box-shadow/box-shadow.less';
+
+input[type=button],
+button {
+	margin: 0;
+}
+
+.inputContainer {
+	position: relative;	
+	margin-bottom: 1em;
+}
+
+.labelContainer {
+	display: none;
+}
+
+input {
+	border: none;
+	border-bottom: 1px solid @text-secondary;
+}
+
+input[type=button].negative,
+button.negative {
+
+}
+	
+input[type=button].primary,
+button.primary {
+	border: none;
+	background-color: @accent;
+	color: white;
+}
+
+.buttonGroup {
+	display: flex;
+	justify-content: flex-end;
+}
+
+input[type=button],
+button {
+	width: 3em;
+	height: 3em;
+	transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+	font-size: 1.3em;
+	opacity: 1;
+	font-weight: bold;
+	border-radius: 50%;
+	.low;
+}
+
+button[disabled] {
+	background-color: gray;
+	color: black;
+}
+
+button[disabled]:hover,
+button[disabled]:focus {
+	.low;
+}
+
+input[type=button]:focus,
+input[type=button]:hover,
+button:hover,
+button:focus {
+	.high;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+	padding: 0.4em;
+	width: 100%;
+	margin: 0;
+	font-size: 1.5em;
+}

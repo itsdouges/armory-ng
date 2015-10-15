@@ -1,7 +1,7 @@
 'use strict';
 
 import axios from 'axios';
-import config from '../../../generated/app.env';
+import config from '../../app.env';
 
 export const actions = {
 	FETCH_MY_CHARACTERS_RESULT: 'FETCH_MY_CHARACTERS_RESULT',

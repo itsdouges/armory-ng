@@ -31,8 +31,6 @@ function clearUserDataReducer (state) {
 		...state
 	};
 
-	console.log('totes called');
-
 	newState = {};
 	localStorage.clear();
 

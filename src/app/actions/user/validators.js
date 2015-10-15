@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 
-import config from '../../../generated/app.env';
+import config from '../../app.env';
 
 export const actions = {
 	INVALIDATE_EMAIL: 'INVALIDATE_EMAIL',
@@ -57,7 +57,7 @@ function validateEmailThunk (email) {
 	}; 
 }
 
-function invalidateAlias() {
+function invalidateAlias () {
 	return {
 		type: actions.INVALIDATE_ALIAS
 	};

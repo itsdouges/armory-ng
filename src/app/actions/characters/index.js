@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-import config from '../../../generated/app.env';
+import config from '../../app.env';
 import gw2Parse from '../../services/gw2/gw2-parse';
 import * as gw2 from '../gw2-data';
 

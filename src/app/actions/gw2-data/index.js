@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 import gw2Api from '../../services/gw2';
-import config from '../../../generated/app.env';
+import config from '../../app.env';
 
 export const actions = {
 	FETCHING_ITEMS: 'FETCHING_ITEMS',
@@ -91,8 +91,6 @@ export function fetchSkinsThunk (skins) {
 export function fetchItemsThunk (items) {
 	return (dispatch) => {
 		dispatch(fetchingItems(true));
-
-		console.log('loading items', items);
 
 		return gw2Api.readItems(items)
 			.then((response) => {

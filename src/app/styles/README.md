@@ -1,4 +1,4 @@
-README.md
+# Example media queries in use.
 
 @media only screen and (min-width: @mobile) {
 

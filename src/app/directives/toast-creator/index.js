@@ -24,8 +24,6 @@ class ToastCreator {
 			return this.toast;
 		}.bind(this), (current, previous) => {
 			if (current !== previous) {
-				console.log('Toast added!');
-
         const toast = $compile(`<toast class="top" message="${current.message}"></toast>`)($scope);
         $element.parent().append(toast);
 			}

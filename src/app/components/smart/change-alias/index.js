@@ -3,13 +3,33 @@
 import { actionCreators } from '../../../actions/user';
 import { userDataSelector } from '../../../selectors/user';
 
+import styles from './change-alias.less';
+import inputStyles from '../../../styles/forms/forms.less';
+
 function component () {
 	let directive = {
 		restrict: 'E',
 		controller: ChangeAlias,
 		controllerAs: 'ctrl',
 		scope: {},
-		template: require('./view.html')
+		template: `
+			<form>
+					<div class="${inputStyles.inputContainer}">
+					<input placeholder="Alias" ng-change="ctrl.checkAlias()" id="add-token" type="text" ng-model="ctrl.user.alias" required="required" />
+
+					<input-validity
+						data-busy="ctrl.busy"
+						data-valid="ctrl.token.valid">
+					</input-validity>
+				</div>
+
+				<div class="${inputStyles.buttonGroup}">
+					<busy-button button-disabled="!ctrl.user.validAlias" busy="ctrl.user.savingAlias">
+						<i class="fa fa-floppy-o"></i>
+					</busy-button>
+				</div>
+			</form>
+		`
 	};
 
 	return directive;

@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 import * as authActions from './auth';
-import config from '../../../generated/app.env';
+import config from '../../app.env';
 
 import showToast from '../toast'; 
 

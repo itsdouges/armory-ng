@@ -1,10 +1,20 @@
 'use strict';
 
+import containerStyles from './styles/container/container.less';
+import cardStyles from './styles/cards/cards.less';
+
 // @ngInject
 function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('main', {
-      template: require('./routes/main.html'),
+      template: `
+        <header></header>
+
+        <ui-view columns-calculator toasts-enabled></ui-view>
+
+        <spacer></spacer>
+        <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>
+      `,
       abstract: true
     })
     .state('main.no-auth', {
@@ -21,23 +31,41 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.with-container', {
       abstract: true,
-      template: '<div class="container with-columns center-items"><ui-view></ui-view></div>'
+      template: `<div class="${containerStyles.container} ${containerStyles.withColumns} ${containerStyles.container} ${containerStyles.centerItems}"><ui-view></ui-view></div>`
     })
     .state('main.no-auth.with-container.home', {
       url: '/',
-      template: require('./routes/home/home.html')
+      template: `
+        <news-block>
+          <h2>News</h2>
+
+          <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
+            <h3>Flipping the switch</h3>
+
+            <p>Oh hi there. You're one of the first to visit gw2armory.com! Currently things are quite bare bones, but will be refined and extended over time. Feel free to register/login, add some api tokens, and check out your characters.</p>
+          </div>
+        </news-block>
+      `
     })
     .state('main.no-auth.with-container.login', {
       url: '/login',
-      template: require('./routes/login/login.html')
+      template: `
+        <h2>Login</h2>
+
+        <login-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></login-box>
+      `
     })
     .state('main.no-auth.with-container.signup', {
       url: '/signup',
-      template: require('./routes/signup/signup.html')
+      template: `
+        <h2>Signup</h2>
+
+        <register-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></register-box>
+      `
     })
     .state('main.no-auth.not-found', {
       url: '/404',
-      template: require('./routes/404/404.html')
+      template: '<img src="https://static.staticwars.com/quaggans/404.jpg" />'
     })
     .state('main.with-auth', {
       abstract: true,
@@ -53,15 +81,34 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.with-auth.with-container', {
       abstract: true,
-      template: '<div class="container"><ui-view></ui-view></div>'
+      template: `
+        <div class="${containerStyles.container}">
+          <ui-view></ui-view>
+        </div>
+      `
     })
     .state('main.with-auth.with-container.settings', {
       url: '/settings',
-      template: require('./routes/settings/settings.html')
+      template: `
+        <h2>Api tokens</h2>
+        <user-tokens class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></user-tokens>
+
+        <h2>Alias (disabled)</h2>
+        <change-alias class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></change-alias>
+
+        <h2>Password (disabled)</h2>
+        <change-password class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></change-password>
+      `
     })
     .state('main.with-auth.characters', {
       url: '/me/characters',
-      template: require('./routes/me/characters/characters.html')
+      template: `
+        <characters-slider mode="authenticated"></characters-slider>
+
+        <div class="${containerStyles.container}">
+          <character-viewer mode="public"></character-viewer>
+        </div>
+      `
     })
     .state('main.with-auth.characters.character', {
       url: '/:name'

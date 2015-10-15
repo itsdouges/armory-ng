@@ -122,8 +122,6 @@ let parseCharacter = (hey) => {
     parseEquipment(inCharacter);
     parseWeaponSwap(inCharacter);
 
-    console.log(inCharacter);
-
     return inCharacter;
 };
 

@@ -2,12 +2,46 @@
 
 import { actionCreators } from '../../../actions/user';
 
+import styles from './login-box.less';
+import message from '../../../styles/message/message.less';
+import forms from '../../../styles/forms/forms.less';
+
 function component () {
 	let directive = {
 		restrict: 'E',
 		controller: LoginBox,
 		controllerAs: 'ctrl',
-		template: require('./view.html'),
+		template: `
+			<form ng-submit="ctrl.login()">
+				<div class="${message.message}">Don't have an account? <strong><a title="Signup" href="/signup">Go signup!</a></strong></div>
+
+				<div>
+					<div class="${forms.labelContainer}">
+						<label for="email">Email</label>
+					</div>
+
+					<div class="${forms.inputContainer}">
+						<input placeholder="Email" id="email" type="text" ng-model="ctrl.email" required="required" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="${forms.labelContainer}">
+						<label for="password">Password</label>
+					</div>
+
+					<div class="${forms.inputContainer}">
+						<input placeholder="Password" id="password" type="password" ng-model="ctrl.password" required="required" />
+					</div>
+				</div>
+
+				<div class="${forms.buttonGroup}">
+					<busy-button busy="ctrl.fetchingToken">
+						<i class="fa fa-sign-in"></i>
+					</busy-button>
+				</div>
+			</form>
+		`,
 		scope: {}
 	};
 

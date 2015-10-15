@@ -3,6 +3,8 @@
 import { actionCreators } from '../../../actions/user/characters';
 import { myCharactersSelector } from '../../../selectors/characters';
 
+import styles from './characters-slider.less';
+
 // TODO: Clean this up and do some unit tests. Shit is nasty!
 
 // @ngInject
@@ -38,7 +40,39 @@ function component ($window, debounce) {
 			mode: '@'
 		},
 		link: link,
-		template: require('./view.html')
+		template: `
+			<div class="${styles.borderContainer} ${styles.borderContainerTop}">
+				<div class="${styles.border} ${styles.borderTopLeft}"></div>
+				<div class="${styles.border} ${styles.borderTopRight}"></div>
+			</div>
+
+			<div class="${styles.container}">
+				<slider-control
+					mode="left"
+					ng-if="!ctrl.sliderControlsDisabled"
+					ng-click="ctrl.previous()"></slider-control>
+
+				<div class="${styles.sliderMessage}" 
+					ng-if="!ctrl.hasCharacters">
+					Oh, you have no characters.. why not <a href="/settings"><strong>add a few api tokens</strong></a> to your account?
+				</div>
+
+				<inline-characters
+					ng-show="ctrl.hasCharacters" 
+					ng-style="ctrl.sliderStyle"
+					characters="ctrl.characters"></inline-characters>
+
+				<slider-control
+					mode="right"
+					ng-if="!ctrl.sliderControlsDisabled"
+					ng-click="ctrl.next()"></slider-control>
+			</div>
+
+			<div class="${styles.borderContainer} ${styles.borderContainerBottom}">
+				<div class="${styles.border} ${styles.borderBottomLeft}"></div>
+				<div class="${styles.border} ${styles.borderBottomRight}"></div>
+			</div>
+		`
 	};
 
 	return directive;
@@ -102,15 +136,11 @@ export function CharactersSlider ($scope, $ngRedux) {
 			sliderItemsPerPage = newSliderItemsPerPage;
 			SLIDER_ITEMS_TOTAL = sliderItemsPerPage * 3;
 
-			console.log('Restructuring characters array');
-			console.log('before:', characters.length, SLIDER_ITEMS_TOTAL);
-
 			while (characters.length < SLIDER_ITEMS_TOTAL) {
 				characters = characters.concat(characters);
 			}
 
 			setCharactersOffset(sliderItemsPerPage, SLIDER_ITEMS_TOTAL);
-			console.log('result:', characters.length, SLIDER_ITEMS_TOTAL);
 		}
 
 		if (!loaded) {
@@ -126,7 +156,6 @@ export function CharactersSlider ($scope, $ngRedux) {
 						throw 'transition not handled';
 					}
 
-					console.log(`offsetting by ${offset}`);
 					setCharactersOffset(offset);
 				});
 

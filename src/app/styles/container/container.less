@@ -1,0 +1,27 @@
+@import '../variables/sizes.less';
+
+.container {
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+.withColumns {
+	flex-direction: column;
+}
+
+.centerItems {
+	align-items: center;
+}
+
+@media only screen and (min-width: @tablet) {
+	.container {
+	  max-width: @tablet * 1.2;
+	}
+}
+
+@media only screen and (min-width: @pc) {
+	.container {
+	  max-width: @pc;
+	}
+}

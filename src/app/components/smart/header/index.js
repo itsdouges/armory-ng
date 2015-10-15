@@ -4,13 +4,32 @@ import { actionCreators } from '../../../actions/user/auth';
 import { userDataSelector } from '../../../selectors/user';
 import stateGo from 'redux-ui-router/lib/state-go';
 
+import styles from './header.less';
+import positionStyles from  '../../../styles/positioning/positioning.less';
+import logoSrc from '../../../../assets/images/gw2-hot-1.png';
+
 function component () {
 	let directive = {
 		restrict: 'E',
 		controller: Header,
 		controllerAs: 'ctrl',
 		scope: {},
-		template: require('./view.html')
+		template:`
+			<div class="${styles.brushStroke}"></div>
+
+			<h1 class="${styles.title}">
+				<a title="Guild Wars 2 Armory" href="/">
+					<img class="${styles.logo}" src="${logoSrc}" />
+					<span>Guild Wars 2 Armory</span>
+				</a>
+			</h1>
+
+			<user-links
+				class="${positionStyles.sticky} ${positionStyles.top} ${positionStyles.right}"
+				logged-in="ctrl.user.loggedIn"
+				logout="ctrl.logout()"
+				username="{{ ctrl.user.alias }}"></user-links>
+		`
 	};
 
 	return directive;

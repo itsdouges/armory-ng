@@ -1,3 +1,7 @@
+@import '../../../styles/box-shadow/box-shadow.less';
+@import '../../../styles/variables/colours.less';
+@import '../../../styles/variables/sizes.less';
+
 @toast-spacer: 2em;
 
 toast {
@@ -7,7 +11,7 @@ toast {
 	right: @toast-spacer;
 	margin: 0 auto;
 	background: @secondary;
-	.box-shadow-high;
+	.high;
 	z-index: 20;
 	padding: @toast-spacer / 2;
 	text-align: center;
@@ -27,20 +31,6 @@ toast {
 
 @media only screen and (min-width: @mobile) {
 	toast {
-		// width: 1px;
-		// min-width: 200px;
 		max-width: 400px;
-
-		&.top {
-
-		}
-
-		&.bottom {
-			
-		}
 	}
-}
-
-@media only screen and (min-width: @tablet) {
-
 }

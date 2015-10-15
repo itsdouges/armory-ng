@@ -1,3 +1,5 @@
+// https://github.com/petehunt/webpack-howto
+
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var path = require('path');
@@ -6,13 +8,20 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var DedupePlugin = webpack.optimize.DedupePlugin;
 var NoErrorsPlugin = webpack.NoErrorsPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-// TODO: Get env variables working. Turns out argv doesn't work ;)
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENVIRONMENT = process.env.WEBPACK_ENV;
+
+var environmentPlugin = new webpack.DefinePlugin({
+  __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
+  __PROD__: ENVIRONMENT === 'PROD'
+});
 
 var appName = 'bundle';
 var localHost = '0.0.0.0';
 var localPort = '3030';
+
+var cssLoaderSettings = '';
+var imageLoaderSettings = '';
 
 var plugins = [], 
   outputFile;
@@ -28,23 +37,37 @@ var htmlConfig = {
 switch (ENVIRONMENT) {
   case 'START:PROD':
   case 'PROD':
+    console.log('BUILDING PROD');
     plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new DedupePlugin());
     plugins.push(new NoErrorsPlugin());
     outputFile = appName + '.min.js';
+    htmlConfig.minify = {
+      removeComments: true,
+      collapseWhitespace: true
+    };
     htmlConfig.hash = true;
+    cssLoaderSettings = 'css?modules&minimize!autoprefixer';
+    imageLoaderSettings = 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}';
     break;
 
+  case 'START:DEV':
   case 'DEV':
   default:
+    console.log('BUILDING DEV');
     outputFile = appName + '.js';
     htmlConfig.minify = false;
+    cssLoaderSettings = 'css?modules!autoprefixer';
+    imageLoaderSettings = 'image-webpack';
     break;
 }
 
+plugins.push(new ExtractTextPlugin('styles.css'));
 plugins.push(new HtmlWebpackPlugin(htmlConfig));
+plugins.push(environmentPlugin);
 
 var config = {
+  cache: true,
   entry: './src/app/app.module.js',
   devtool: 'source-map',
   output: {
@@ -64,17 +87,33 @@ var config = {
         ]
       },
       {
-        test: /\.html$/, 
+        // https://github.com/webpack/less-loader
+        // https://github.com/webpack/css-loader
+        // https://github.com/webpack/style-loader
+        test: /\.less$/,
         exclude: /node_modules/, 
-        loader: 'html',
-      }, 
+        loader: ExtractTextPlugin.extract('style', cssLoaderSettings + '!less')
+      },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', cssLoaderSettings)
+      },
+      {
+        // https://github.com/tcoopman/image-webpack-loader
         test: /.*\.(gif|png|jpe?g|svg)$/i,
+        exclude: /node_modules/, 
         loaders: [
           'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          // https://github.com/tcoopman/image-webpack-loader
-          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+          imageLoaderSettings
         ]
+      },
+      { 
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+        loader: "url?limit=10000&minetype=application/font-woff" 
+      },
+      { 
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+        loader: "file" 
       }
     ]
   },
@@ -85,11 +124,16 @@ var config = {
   plugins: plugins
 };
 
-if (ENVIRONMENT === 'DEV' || ENVIRONMENT === 'START:PROD') {
+if (ENVIRONMENT.indexOf('START') >= 0) {
   new WebpackDevServer(webpack(config), {
     contentBase: './dist',
     hot: true,
-    debug: true
+    debug: true,
+    historyApiFallback: true,
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: true
+    },
   }).listen(localPort, localHost, function (err, result) {
     if (err) {
       console.log(err);

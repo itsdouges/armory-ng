@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-import config from '../../../generated/app.env'
+import config from '../../app.env'
 import { actionCreators } from '../../actions/user/auth'
 import { userAuthSelector } from '../../selectors/user';
 
@@ -14,41 +14,26 @@ class Authentication {
 	}
 
 	checkAuthentication () {
-		console.log('checking auth');
-
 		let userAuthStatus = userAuthSelector(this.$ngRedux.getState());
 		if (userAuthStatus.loggedIn) {
-			console.log('ur auth! whalecome!');
-
 			return Promise.resolve();
 		}
 
 		if (userAuthStatus.token) {
-			console.log('u have a token saved, lets check it..');
-
 			return axios.
 				get(`${config.api.endpoint}/users/me`, {
 					headers: { 
 						Authorization: userAuthStatus.token
 					}
 				}).then((response) => {
-					console.log('yeah ur legit');
-
 					this.$ngRedux.dispatch(actionCreators.authenticateUser(response.data));
-
 					return Promise.resolve();
 			}.bind(this), (response) => {
-				console.log('bad token, get outta here!');
-
 				this.$ngRedux.dispatch(actionCreators.clearUserData());
-
 				return Promise.reject();
 			}.bind(this));
 		} else {
-			console.log('not auth, get outta here!');
-
 			this.$ngRedux.dispatch(actionCreators.clearUserData());
-
 			return Promise.reject();
 		}
 	}

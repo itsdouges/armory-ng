@@ -6,7 +6,9 @@ function component () {
 		scope: {},
 		controller: Spacer,
 		controllerAs: 'ctrl',
-		template: require('./view.html'),
+		template: `
+			<div style="height: {{ ctrl.spacerHeight }};"></div>
+		`
 	};
 
 	return directive;

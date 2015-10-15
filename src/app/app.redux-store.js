@@ -2,11 +2,20 @@ import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-const logger = createLogger({
-	collapsed: true
-});
+var middleWare = [
+	'ngUiRouterMiddleware', 
+	thunk
+];
 
 // @ngInject
 export default ($ngReduxProvider) => {
-	$ngReduxProvider.createStoreWith(rootReducer, ['ngUiRouterMiddleware', thunk, logger]);
+	if (__DEV__) {
+		const logger = createLogger({
+			collapsed: true
+		});
+
+		middleWare.push(logger);
+	}
+
+	$ngReduxProvider.createStoreWith(rootReducer, middleWare);
 };

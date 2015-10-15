@@ -1,9 +1,19 @@
 'use strict';
 
+import styles from './crafting-block.less';
+
 function component () {
 	let directive = {
 		restrict: 'E',
-		template: require('./view.html'),
+		template: `
+			<div title="{{ ctrl.model.discipline }} {{ ctrl.isActive() ? '(active)' : '' }}" class="${styles.container}" ng-class="ctrl.mode.active ? '${styles.active}' : ''">
+				<span class="${styles.icon}" ng-class="ctrl.getDisciplineCssClass(ctrl.model.discipline)"></span>
+				<span class="${styles.ratingBlock}" style="width: {{ ctrl.current }}"></span>
+				<span class="${styles.rating}">
+					{{ ctrl.model.rating }}/{{ ctrl.total }}
+				</span>	
+			</div>
+			`,
 		controller: CraftingBlock,
 		controllerAs: 'ctrl',
 		scope: {},
@@ -15,7 +25,6 @@ function component () {
 	return directive;
 }
 
-// TODO: Move logic into higher component
 class CraftingBlock {
 	constructor () {
 		if (this.model.discipline === 'Chef' || 
@@ -28,14 +37,13 @@ class CraftingBlock {
 		this.current = this.calcWidthPercent(this.model.rating, this.total);
 	}
 
-	calcWidthPercent (rating, total) {
-		let percent = Math.ceil((rating / total || 0) * 100);
-
-		return `${percent}%`;
+	getDisciplineCssClass (discipline) {
+		return styles[discipline.toLowerCase()];
 	}
 
-	isActive () {
-		return !!this.model.active;
+	calcWidthPercent (rating, total) {
+		let percent = Math.ceil((rating / total || 0) * 100);
+		return `${percent}%`;
 	}
 }
 

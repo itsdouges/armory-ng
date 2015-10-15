@@ -1,0 +1,37 @@
+@import '../../../styles/variables/sizes.less';
+
+.NumberOfSliderItems(@items) {
+	width: (100 / @items) * 1%;
+}
+
+.item {
+	.NumberOfSliderItems(1);
+	overflow: auto;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+
+@media only screen and (min-width: @mobile) {
+	.item {
+		.NumberOfSliderItems(2);
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+	.item {
+		.NumberOfSliderItems(3);
+	}
+}
+
+@media only screen and (min-width: @pc) {
+	.item {
+		.NumberOfSliderItems(4);
+	}
+}
+
+@media only screen and (min-width: @big-pc) {
+	.item {
+		.NumberOfSliderItems(5);
+	}
+}

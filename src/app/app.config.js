@@ -5,13 +5,16 @@ import axios from 'axios';
 import showToast from './actions/toast';
 import { actionCreators } from './actions/user/auth';
 import { userAuthSelector } from './selectors/user';
-import conf from '../generated/app.env';
+import conf from './app.env';
 import stateGo from 'redux-ui-router/lib/state-go';
 
 // @ngInject
-function config ($logProvider) {
-    "ngInject"
+function config ($logProvider, $compileProvider) {
   $logProvider.debugEnabled(conf.verbose);
+
+  if (__PROD__) {
+    $compileProvider.debugInfoEnabled(false);
+  }
 }
 
 // @ngInject
@@ -45,7 +48,7 @@ function run ($ngRedux) {
         	$ngRedux.dispatch(showToast('Sorry.. Some wierd stuff is happening on the server, wait a bit and try again!'));
         }
 
-        return Promise.reject(error);
+        return Promise.reject(response);
 	});
 }
 

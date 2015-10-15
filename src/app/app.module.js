@@ -1,11 +1,17 @@
 'use strict';
 
+import 'normalize-css';
+import 'font-awesome-webpack';
+
+import './app.less';
+import '../assets/fonts/menomonia.css';
+
 import { polyfill } from 'es6-promise';
 polyfill();
 
 import configuration from './app.config';
 import routerConfig from './app.routes';
-import environment from '../generated/app.env';
+import environment from './app.env';
 
 import CharacterSpecialization from './components/smart/character-specialization';
 import CharactersSlider from './components/smart/characters-slider';

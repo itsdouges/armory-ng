@@ -5,7 +5,18 @@ function component () {
 		restrict: 'E',
 		controller: GuildBlock,
 		controllerAs: 'ctrl',
-		template: require('./view.html'),
+		template: `
+			<div class="guild-block">
+				<a ng-if="ctrl.isLoaded()" title="Guild pages coming soon" href="#" class="guild-link">
+					<span class="guild-icon">
+						<img ng-src="http://guilds.gw2w2w.com/guilds/{{ ctrl.guild.guild_name }}/100.svg" />
+					</span>
+					<span class="guild-name">{{ ctrl.guild.guild_name }} [{{ ctrl.guild.tag }}]</span>
+				</a>
+
+				<span ng-if="ctrl.isBusy()" class="progress-indicator animating"></span>
+			</div>
+		`,
 		scope: {},
 		bindToController: {
 			guid: '@'

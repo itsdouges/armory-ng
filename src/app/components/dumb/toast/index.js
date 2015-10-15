@@ -1,3 +1,5 @@
+import styles from './toast.less';
+
 function component () {
 	return {
 		restrict: 'E',
@@ -8,7 +10,9 @@ function component () {
 			location: '@',
 			timeout: '@'
 		},
-		template: require('./toast.html'),
+		template: `
+			<strong>{{ ctrl.message }}</strong>
+		`,
 		controller: Toast,
 		controllerAs: 'ctrl'
 	};
@@ -18,7 +22,6 @@ class Toast {
 	/*@ngInject*/
 	constructor ($timeout, $scope, $element) {
 		$timeout(() => {
-			console.log('Killing toast!');
 			$element.remove();
 			$scope.$destroy();
 		}, this.timeout || 3000);

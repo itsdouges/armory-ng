@@ -1,9 +1,5 @@
-/* Do not remove this comments bellow. It's the markers used by wiredep to inject
-   less dependencies when defined in the bower.json of your dependencies */
-// bower:less
-// endbower
-// 
-// todo: refactor styles into proper structure/presentation/helpers
+@import './styles/variables/colours.less';
+@import './styles/titles/titles.less';
 
 body {
   margin: 0;
@@ -19,23 +15,12 @@ html {
   height: 100%;
 }
 
-.match-height {
+// Make this not global, its required in the index.html :(
+:global(.match-height) {
   display: block;
   min-height: 100%;
   position: relative;
   overflow: hidden;
-}
-
-a {
-  text-decoration: none;
-}
-
-.serif {
-  font-family: 'Menomonia';
-}
-
-.medium { 
-  font-size: 1.25em;
 }
 
 * {
@@ -47,29 +32,9 @@ ul {
   margin: 0;
 }
 
-.text-top {
-  vertical-align: top;
-}
-
-.text-middle {
-  vertical-align: middle;
-}
-
-.text-bottom {
-  vertical-align: bottom;
-}
-
-.ng-hide {
-  transition: 2s all;
-}
-
-.message {
-  text-align: center;
-  padding: 1em;
-}
-
 a {
   color: @text;
+  text-decoration: none;
   transition: color 0.2s
 }
 
@@ -77,8 +42,3 @@ a:hover,
 a:focus {
   color: @secondary;
 }
-
-/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
-   all your less files automatically */
-// injector
-// endinjector
