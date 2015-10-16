@@ -114,7 +114,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/:name'
     });
 
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/404');
 }
 

@@ -10,8 +10,10 @@ import stateGo from 'redux-ui-router/lib/state-go';
 
 // @ngInject
 function config ($logProvider, $compileProvider) {
-  $logProvider.debugEnabled(conf.verbose);
-
+  if (__DEV__) {
+    $logProvider.debugEnabled(conf.verbose);
+  }
+  
   if (__PROD__) {
     $compileProvider.debugInfoEnabled(false);
   }
