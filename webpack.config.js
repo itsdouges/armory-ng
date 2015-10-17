@@ -11,6 +11,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENVIRONMENT = process.env.WEBPACK_ENV;
 
+if (!ENVIRONMENT) {
+  throw 'WEBPACK_ENV not defined!';
+}
+
 var environmentPlugin = new webpack.DefinePlugin({
   __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
   __PROD__: ENVIRONMENT === 'PROD'
@@ -34,10 +38,11 @@ var htmlConfig = {
   inject: 'body'
 };
 
+console.log('Getting ' + ENVIRONMENT + 'ready!');
+
 switch (ENVIRONMENT) {
   case 'START:PROD':
   case 'PROD':
-    console.log('BUILDING PROD');
     plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new DedupePlugin());
     plugins.push(new NoErrorsPlugin());
@@ -54,7 +59,6 @@ switch (ENVIRONMENT) {
   case 'START:DEV':
   case 'DEV':
   default:
-    console.log('BUILDING DEV');
     outputFile = appName + '.js';
     htmlConfig.minify = false;
     cssLoaderSettings = 'css?modules!autoprefixer';
