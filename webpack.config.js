@@ -38,7 +38,7 @@ var htmlConfig = {
   inject: 'body'
 };
 
-console.log('Getting ' + ENVIRONMENT + 'ready!');
+console.log('Gonna get ' + ENVIRONMENT + ' up in here!');
 
 switch (ENVIRONMENT) {
   case 'START:PROD':

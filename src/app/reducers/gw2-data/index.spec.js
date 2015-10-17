@@ -18,6 +18,12 @@ describe('gw2 reducer', () => {
 			skins: {
 				data: {}
 			},
+			traits: {
+				data: {}
+			},
+			specializations: {
+				data: {}
+			},
 			tooltip: {
 				open: true,
 				item: 'item',

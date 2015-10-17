@@ -67,7 +67,8 @@ describe('character reducers', () => {
 		const state = reducer({}, selectCharacter('heyhey'));
 
 		expect(state).toEqual({
-			selected: 'heyhey'
+			selected: 'heyhey',
+			mode: 'pve'
 		});
 	});
 });
