@@ -2,13 +2,13 @@ language: node_js
 node_js:
   - "0.12"
 install:
-	- npm install
+  - npm install
 script:
   - npm test
   - npm run build:prod
 deploy:
-	skip_cleanup: true
-	script:
-		- if [ "$TRAVIS_BRANCH" == "master" ]; then
-    		npm deploy:beta;
-  		fi
+  skip_cleanup: true
+  script:
+    - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      npm deploy:beta;
+    fi
