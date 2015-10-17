@@ -41,7 +41,7 @@ function deployBeta () {
 
 	var s3 = getS3Client();
 	
-	upload(s3, 'beta.gw2armory.com', './dist/');
+	sync(s3, 'beta.gw2armory.com', './dist/');
 }
 
 function calculateDaysToSeconds (days) {
@@ -66,7 +66,7 @@ function hasShortCache (file) {
 	return result;
 }
 
-function upload (s3Client, bucket, folder) {
+function sync (s3Client, bucket, folder) {
 	console.log('Syncing s3 bucket ' + bucket);
 
 	var DEFAULT_DAYS_TO_CACHE = 365;
