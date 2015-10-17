@@ -10,5 +10,5 @@ deploy:
   skip_cleanup: true
   script:
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      npm deploy:beta;
-    fi
+        npm deploy:beta;
+      fi
