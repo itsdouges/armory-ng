@@ -31,19 +31,19 @@ function component ($window, debounce) {
 		template: `
 		<ul class="${styles.links}">
 			<li>
-				<a title="Come join in the discussion!" href="https://www.reddit.com/r/gw2armory">
+				<a target="_blank" title="Come join in the discussion!" href="https://www.reddit.com/r/gw2armory">
 					<i class="fa fa-reddit"></i>
 				</a>
 			</li>
 
 			<li>
-				<a title="Vote for your favourite new feature!" href="https://trello.com/b/qGvDe622/gw2armory">
+				<a target="_blank" title="Vote for your favourite new feature!" href="https://trello.com/b/qGvDe622">
 					<i class="fa fa-trello"></i>
 				</a>
 			</li>
 
 			<li>
-				<a title="Check out the code!" href="https://github.com/madou/armory-ng">
+				<a target="_blank" title="Check out the code!" href="https://github.com/madou/gw2armory.com">
 					<i class="fa fa-github"></i>
 				</a>
 			</li>
