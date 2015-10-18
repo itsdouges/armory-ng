@@ -11,5 +11,5 @@ deploy:
   provider: script
   script: bash deploy/deploy.sh
 cache:
-	directories:
-		- node_modules
+  directories:
+    - node_modules
