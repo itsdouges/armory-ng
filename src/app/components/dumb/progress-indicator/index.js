@@ -15,7 +15,7 @@ function component () {
 			'size': '@'
 		},
 		template: `
-			<i ng-if="ctrl.busy" class="${iconStyles.icon} ${styles.progress} ${styles.small}">
+			<i ng-if="ctrl.busy" class="${iconStyles.icon} {{ ctrl.getIconSize(ctrl.size) }} ${styles.progress}">
 				<span class="${accessibilityStyles.hideText}">Loading..</span>
 			</i>
 		`
@@ -27,6 +27,11 @@ function component () {
 class ProgressIndicator {
 	constructor () {
 
+	}
+
+	getIconSize (size) {
+		console.log(size);
+		return styles[size || 'small'];
 	}
 }
 

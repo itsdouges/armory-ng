@@ -21,6 +21,8 @@ function component () {
 class Toast {
 	/*@ngInject*/
 	constructor ($timeout, $scope, $element) {
+		$element.addClass(styles[this.location || 'top'])
+
 		$timeout(() => {
 			$element.remove();
 			$scope.$destroy();

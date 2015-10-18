@@ -54,7 +54,7 @@ function component ($window, debounce) {
 
 				<div class="${styles.sliderMessage}" 
 					ng-if="!ctrl.hasCharacters">
-					Oh, you have no characters.. why not <a href="/settings"><strong>add a few api tokens</strong></a> to your account?
+					Oh, you have no characters.. why not <a ui-sref="main.with-auth.with-container.settings"><strong>add a few api tokens</strong></a> to your account?
 				</div>
 
 				<inline-characters

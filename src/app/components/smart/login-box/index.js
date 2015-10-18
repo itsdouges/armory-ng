@@ -13,7 +13,7 @@ function component () {
 		controllerAs: 'ctrl',
 		template: `
 			<form ng-submit="ctrl.login()">
-				<div class="${message.message}">Don't have an account? <strong><a title="Signup" href="/signup">Go signup!</a></strong></div>
+				<div class="${message.message}">Don't have an account? <strong><a title="Signup" ui-sref="main.no-auth.with-container.signup">Go signup!</a></strong></div>
 
 				<div>
 					<div class="${forms.labelContainer}">

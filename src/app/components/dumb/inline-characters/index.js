@@ -17,7 +17,7 @@ function component () {
 					class="${styles.item}" 
 					ng-repeat="character in ctrl.characters track by $index">
 					<a
-						ng-href="/me/characters/{{ character.name }}"
+						ng-href="#!/me/characters/{{ character.name }}"
 						ng-class="character.profession.toLowerCase()">
 						<character-headshot character="character"></character-headshot>
 					</a>

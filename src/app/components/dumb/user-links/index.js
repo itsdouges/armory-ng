@@ -15,13 +15,13 @@ function component () {
 		},
 		template: `
 			<ul class="${styles.userLinks}" ng-if="!ctrl.loggedIn">
-				<li><a title="Signup" href="/signup">signup</a></li>
-				<li><a title="Signin" href="/login">signin</a></li>
+				<li><a title="Signup" ui-sref="main.no-auth.with-container.signup">signup</a></li>
+				<li><a title="Signin" ui-sref="main.no-auth.with-container.login">signin</a></li>
 			</ul>
 
 			<ul class="${styles.userLinks}" ng-if="ctrl.loggedIn">
-				<li><a title="Me" href="/me/characters">{{ ctrl.username }}</i></a></li>
-				<li><a title="Settings" href="/settings">settings</a></li>
+				<li><a title="Me" ui-sref="main.with-auth.characters">{{ ctrl.username }}</i></a></li>
+				<li><a title="Settings" ui-sref="main.with-auth.with-container.settings">settings</a></li>
 				<li><a title="Signout" ng-click="ctrl.logout()" href="">signout</a></li>
 			</ul>
 		`

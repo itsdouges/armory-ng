@@ -18,7 +18,7 @@ function component () {
 			<div class="${styles.brushStroke}"></div>
 
 			<h1 class="${styles.title}">
-				<a title="Guild Wars 2 Armory" href="/">
+				<a title="Guild Wars 2 Armory" ui-sref="main.no-auth.with-container.home">
 					<img class="${styles.logo}" src="${logoSrc}" />
 					<span>Guild Wars 2 Armory</span>
 				</a>

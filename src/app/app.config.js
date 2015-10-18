@@ -34,11 +34,11 @@ function run ($ngRedux) {
     	if (response instanceof Error || response.status === 0) {
           console.log('Error', response);
           $ngRedux.dispatch(showToast('We\'re having trouble talking to the server. It might be down! But check your connection just incase.'));
-        } else if (response.status === 401 && response.config.url.indexOf(conf.api.endpoint) >= 0) {
+        } else if (response.status === 401 && response.config.url.indexOf(conf.api.endpoint) >= 0 && response.config.url.indexOf('token') === -1) {
         	// unauthorized
         	$ngRedux.dispatch(actionCreators.clearUserData());
-            $ngRedux.dispatch(showToast('Sorry I\'ve lost you! Can you please login again?'));
-            $ngRedux.dispatch(stateGo('main.no-auth.with-container.login'));
+          $ngRedux.dispatch(showToast('Sorry I\'ve lost you! Can you please login again?'));
+          $ngRedux.dispatch(stateGo('main.no-auth.with-container.login'));
         } else if (response.status === 403) {
         	// forbidden
         	$ngRedux.dispatch(stateGo('main.with-auth.forbidden'));

@@ -5,6 +5,8 @@ import cardStyles from './styles/cards/cards.less';
 
 // @ngInject
 function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
+  $locationProvider.html5Mode(false).hashPrefix('!');
+    
   $stateProvider
     .state('main', {
       template: `
@@ -34,7 +36,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       template: `<div class="${containerStyles.container} ${containerStyles.withColumns} ${containerStyles.container} ${containerStyles.centerItems}"><ui-view></ui-view></div>`
     })
     .state('main.no-auth.with-container.home', {
-      url: '/',
+      url: '',
       template: `
         <news-block>
           <h2>News</h2>
@@ -114,7 +116,6 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/:name'
     });
 
-	$locationProvider.html5Mode(false).hashPrefix('!');
   $urlRouterProvider.otherwise('/404');
 }
 

@@ -17,9 +17,7 @@ function component () {
 			<button class="${formStyles.primary}" ng-class="ctrl.busy ? '${accessibilityStyles.busy}' : ''" ng-disabled="ctrl.buttonDisabled || ctrl.busy">
 				<span ng-show="!ctrl.busy" ng-transclude></span>
 				
-				<span ng-if="ctrl.busy" class="icon icon-mini icon-progress">
-					<span class="${accessibilityStyles.hideText}">Loading..</span>
-				</span>
+				<progress-indicator size="mini" busy="ctrl.busy"></progress-indicator>
 			</button>
 		`,
 		scope: {},

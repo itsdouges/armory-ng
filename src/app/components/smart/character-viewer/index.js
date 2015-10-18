@@ -254,7 +254,7 @@ function component () {
 			</div>
 
 			<progress-indicator 
-				class="centered"	
+				class="${styles.characterProgressIndicator}"
 				busy="ctrl.fetching"></progress-indicator>
 
 			<item-tooltip></item-tooltip>
