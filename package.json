@@ -23,7 +23,6 @@
     "deploy:beta": "ENV=BETA node ./deploy",
     "test": "WEBPACK_ENV=TEST:SINGLE karma start --single-run",
     "test:auto": "WEBPACK_ENV=TEST:AUTO karma start",
-
     "build:prod:win": "set WEBPACK_ENV=PROD&& webpack",
     "build:dev:win": "set WEBPACK_ENV=DEV&& webpack",
     "start:win": "set WEBPACK_ENV=START:DEV&& webpack --watch --inline --hot",
@@ -54,6 +53,7 @@
     "less-loader": "^2.2.1",
     "ng-annotate-loader": "0.0.10",
     "redux-logger": "^1.0.8",
+    "s3": "^4.4.0",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.2",
