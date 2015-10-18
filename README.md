@@ -1,10 +1,12 @@
 # gw2armory.com ![Build Status](https://travis-ci.org/madou/gw2armory.com.svg)
 
-> Because we all like pretty things.
+> Bringing you `that shit you do like`, one commit at a time.
 
 If you feel like contributing give me a message and we can talk.
 
 ## Usage
+
+If you're playing on windows, add `:win` after each step, for example: `npm run start:win`.
 
 ### Install dependencies
 ```
@@ -13,7 +15,7 @@ npm install
 
 ### Run dev build
 ```
-npm start
+npm run start
 ```
 
 ### Run prod build
@@ -23,7 +25,7 @@ npm run start:prod
 
 ### Run tests
 ```
-npm test
+npm run test
 npm run test:auto
 ```
 
