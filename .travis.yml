@@ -9,5 +9,5 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: deploy/deploy.sh
+  script: bash deploy/deploy.sh
 cache: npm
