@@ -7,7 +7,7 @@ var environment = {
 
 if (__DEV__) {
 	environment.api = {
-		endpoint: 'http://192.168.59.103:8082/',
+		endpoint: 'http://192.168.59.103/',
 		secret: 'bacon'
 	};
 }
