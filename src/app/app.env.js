@@ -15,7 +15,7 @@ if (__DEV__) {
 if (__PROD__) {
 	if (window && window.location.origin.indexOf('beta') >= -1) {
 		environment.api = {
-			endpoint: 'https://api.beta.gw2armory.com/',
+			endpoint: 'http://gw2armorybeta-env.elasticbeanstalk.com/',
 			secret: 'sekritsauce'
 		};
 	} else {
