@@ -30,7 +30,6 @@ class ProgressIndicator {
 	}
 
 	getIconSize (size) {
-		console.log(size);
 		return styles[size || 'small'];
 	}
 }
