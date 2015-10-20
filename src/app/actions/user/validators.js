@@ -87,6 +87,12 @@ function checkAliasError (error) {
 
 function checkAliasThunk (alias) {
 	return (dispatch) => {
+		if (!alias) {
+			dispatch(invalidateAlias());
+
+			return;
+		}
+
 		dispatch(validatingAlias(true));
 
 		return axios.get(`${config.api.endpoint}users/check/alias/${alias}`)
