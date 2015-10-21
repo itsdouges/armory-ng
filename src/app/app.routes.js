@@ -65,9 +65,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <register-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></register-box>
       `
     })
-    .state('main.no-auth.not-found', {
+    .state('main.no-auth.with-container.not-found', {
       url: '/404',
-      template: '<img src="https://static.staticwars.com/quaggans/404.jpg" />'
+      template: '<h2>404!</h2><p>Oh no this page doesn\'t exist :(. <a href="/"><strong>Let\'s get out of here!</strong></a></p>'
     })
     .state('main.with-auth', {
       abstract: true,
