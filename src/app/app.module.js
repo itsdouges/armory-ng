@@ -15,6 +15,7 @@ import environment from './app.env';
 
 import CharacterSpecialization from './components/smart/character-specialization';
 import CharactersSlider from './components/smart/characters-slider';
+import CharactersGrid from './components/smart/characters-grid';
 import CharacterViewer from './components/smart/character-viewer';
 import UserTokens from './components/smart/user-tokens';
 import ChangeAlias from './components/smart/change-alias';
@@ -83,6 +84,7 @@ const App = angular.module('gw2armory', [
 .directive('itemTooltip', ItemTooltip)
 .directive('progressIndicator', ProgressIndicator)
 .directive('charactersSlider', CharactersSlider)
+.directive('charactersGrid', CharactersGrid)
 .directive('sliderControl', SliderControl)
 .directive('inlineCharacters', InlineCharacters)
 .directive('characterViewer', CharacterViewer)

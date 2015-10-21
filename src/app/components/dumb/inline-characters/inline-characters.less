@@ -1,5 +1,14 @@
 @import '../../../styles/variables/sizes.less';
 
+inline-characters {
+	color: white;
+	display: block;
+	padding: 0;
+	margin: 0;
+	transition: transform 0.4s;
+	overflow: visible;
+}
+
 .NumberOfSliderItems(@items) {
 	width: (100 / @items) * 1%;
 }
@@ -10,7 +19,6 @@
 	display: inline-block;
 	vertical-align: bottom;
 }
-
 
 @media only screen and (min-width: @mobile) {
 	.item {

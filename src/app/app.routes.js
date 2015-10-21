@@ -102,6 +102,12 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <change-password class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></change-password>
       `
     })
+    .state('main.with-auth.me', {
+      url: '/me',
+      template: `
+        <characters-grid></characters-grid>
+      `
+    })
     .state('main.with-auth.characters', {
       url: '/me/characters',
       template: `

@@ -102,6 +102,7 @@ export function CharactersSlider ($scope, $ngRedux) {
 	function init () {
 		scope.sliderControlsDisabled = true;
 
+		// TODO: This can be put behind a selector! (() => {}) instead of (this)
 		const UNSUBSCRIBE = $ngRedux.subscribe(() => {
 			const state = $ngRedux.getState();
 			const selector = myCharactersSelector(state);

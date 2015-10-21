@@ -1,0 +1,19 @@
+@import '../../../styles/variables/colours.less';
+
+characters-grid {
+	display: block;
+	position: relative;
+	padding: 26px 0;
+	overflow: hidden;
+}
+
+.grid {
+	white-space: inherit;
+}
+
+.container {
+	background: @card-bg;
+	composes: low from '../../../styles/box-shadow/box-shadow.less';
+	position: relative;
+	min-height: 4rem;
+}
