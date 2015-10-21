@@ -107,7 +107,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       template: `
         <characters-slider mode="authenticated"></characters-slider>
 
-        <div class="${containerStyles.container}">
+        <div class="${containerStyles.flexContainer}">
           <character-viewer mode="public"></character-viewer>
         </div>
       `

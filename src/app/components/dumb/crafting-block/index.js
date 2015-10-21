@@ -8,7 +8,7 @@ function component () {
 		template: `
 			<div title="{{ ctrl.model.discipline }} {{ ctrl.isActive() ? '(active)' : '' }}" class="${styles.container}" ng-class="ctrl.mode.active ? '${styles.active}' : ''">
 				<span class="${styles.icon}" ng-class="ctrl.getDisciplineCssClass(ctrl.model.discipline)"></span>
-				<span class="${styles.ratingBlock}" style="width: {{ ctrl.current }}"></span>
+				<span class="${styles.ratingBlock}" ng-style="ctrl.style"></span>
 				<span class="${styles.rating}">
 					{{ ctrl.model.rating }}/{{ ctrl.total }}
 				</span>	
@@ -34,7 +34,9 @@ class CraftingBlock {
 			this.total = 500;
 		}
 
-		this.current = this.calcWidthPercent(this.model.rating, this.total);
+		this.style = {
+			width: this.calcWidthPercent(this.model.rating, this.total)
+		};
 	}
 
 	getDisciplineCssClass (discipline) {

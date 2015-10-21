@@ -16,7 +16,6 @@ import environment from './app.env';
 import CharacterSpecialization from './components/smart/character-specialization';
 import CharactersSlider from './components/smart/characters-slider';
 import CharacterViewer from './components/smart/character-viewer';
-import Spacer from './components/smart/spacer';
 import UserTokens from './components/smart/user-tokens';
 import ChangeAlias from './components/smart/change-alias';
 import ChangePassword from './components/smart/change-password';
@@ -43,6 +42,7 @@ import CharacterAttributes from './components/dumb/character-attributes';
 import SpecializationTrait from './components/dumb/specialization-trait';
 import Toast from './components/dumb/toast';
 
+import FooterSpacer from './directives/footer-spacer';
 import MouseFollow from './directives/mouse-follow';
 import ColumnsCalculator from './directives/columns-calculator';
 import ToastCreator from './directives/toast-creator';
@@ -78,7 +78,7 @@ const App = angular.module('gw2armory', [
 .directive('mouseFollow', MouseFollow)
 .directive('characterAttributes', CharacterAttributes)
 .directive('itemBlock', ItemBlock)
-.directive('spacer', Spacer)
+.directive('footerSpacer', FooterSpacer)
 .directive('busyButton', BusyButton)
 .directive('itemTooltip', ItemTooltip)
 .directive('progressIndicator', ProgressIndicator)

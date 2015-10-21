@@ -16,18 +16,20 @@ function component ($window, debounce) {
 		let scopeEvent = (e, cb) => {
 			transitionEvent = (e) => {
 				if (e.propertyName === 'transform') {
+					console.log('i was called');
 					cb();
 				}
 				
 				return true;
 			};
 
-			inlineCharactersElement.addEventListener('webkitTransitionEnd', transitionEvent, false);
+			
+			inlineCharactersElement.addEventListener('transitionend', transitionEvent, false);
 		};
 
 		scope.$on('slider:set-transition-end-event', scopeEvent);
 		scope.$on('$destroy', () => {
-			inlineCharactersElement.removeEventListener('webkitTransitionEnd', transitionEvent);
+			inlineCharactersElement.removeEventListener('transitionend', transitionEvent);
 		});
 	};
 
