@@ -1,12 +1,17 @@
+@import '../../../styles/variables/colours.less';
+@import '../../../styles/variables/sizes.less';
+
 .userLinks {
 	display: flex;
-	align-items: center;
 	font-size: 1em;
-	justify-content: flex-end;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
 
 	li {
 		padding: 0.5em 0.75em;
 		display: inline-block;
+		background: @background;
 
 		> a {
 			font-weight: bold;
@@ -22,4 +27,18 @@ user-links {
 	display: block;
 	padding: 0.2em;
 	width: 100%;
+	padding: 0.5em;
+}
+
+@media only screen and (min-width: @mobile) {
+	.userLinks {
+		justify-content: flex-end;
+	}
+
+	user-links {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0;
+	}
 }

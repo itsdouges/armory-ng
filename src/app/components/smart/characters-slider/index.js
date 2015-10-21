@@ -23,13 +23,20 @@ function component ($window, debounce) {
 				return true;
 			};
 
-			
+			// TODO: Minimize anti-dry.
 			inlineCharactersElement.addEventListener('transitionend', transitionEvent, false);
+			inlineCharactersElement.addEventListener('otransitionend', transitionEvent, false);
+			inlineCharactersElement.addEventListener('oTransitionEnd', transitionEvent, false);
+			inlineCharactersElement.addEventListener('webkitTransitionEnd', transitionEvent, false);
 		};
 
 		scope.$on('slider:set-transition-end-event', scopeEvent);
 		scope.$on('$destroy', () => {
+			// TODO: Minimize anti-dry.
 			inlineCharactersElement.removeEventListener('transitionend', transitionEvent);
+			inlineCharactersElement.removeEventListener('otransitionend', transitionEvent);
+			inlineCharactersElement.removeEventListener('oTransitionEnd', transitionEvent);
+			inlineCharactersElement.removeEventListener('webkitTransitionEnd', transitionEvent);
 		});
 	};
 

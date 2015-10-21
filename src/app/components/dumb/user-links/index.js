@@ -20,7 +20,7 @@ function component () {
 			</ul>
 
 			<ul class="${styles.userLinks}" ng-if="ctrl.loggedIn">
-				<li><a title="Me" ui-sref="main.with-auth.characters">{{ ctrl.username }}</i></a></li>
+				<li><a title="Me" ui-sref="main.with-auth.characters">my characters</i></a></li>
 				<li><a title="Settings" ui-sref="main.with-auth.with-container.settings">settings</a></li>
 				<li><a title="Signout" ng-click="ctrl.logout()" href="">signout</a></li>
 			</ul>

@@ -6,7 +6,7 @@ import stateGo from 'redux-ui-router/lib/state-go';
 
 import styles from './header.less';
 import positionStyles from  '../../../styles/positioning/positioning.less';
-import logoSrc from '../../../../assets/images/gw2-hot-1.png';
+import logoSrc from '../../../../assets/images/gw2-hot-3.png';
 
 function component () {
 	let directive = {
@@ -25,7 +25,6 @@ function component () {
 			</h1>
 
 			<user-links
-				class="${positionStyles.sticky} ${positionStyles.top} ${positionStyles.right}"
 				logged-in="ctrl.user.loggedIn"
 				logout="ctrl.logout()"
 				username="{{ ctrl.user.alias }}"></user-links>
