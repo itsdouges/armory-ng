@@ -18,6 +18,11 @@ function component () {
 			</div>
 
 			<div class="${styles.container} ${styles.grid}">
+				<div class="${sliderStyles.sliderMessage}" 
+					ng-if="!ctrl.hasCharacters">
+					Oh, you have no characters.. why not <a ui-sref="main.with-auth.with-container.settings"><strong>add a few api tokens</strong></a> to your account?
+				</div>
+			
 				<inline-characters characters="ctrl.characters"></inline-characters>
 			</div>
 

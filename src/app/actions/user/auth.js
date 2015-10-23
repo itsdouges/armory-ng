@@ -60,7 +60,7 @@ function fetchTokenThunk (email, password) {
 				let combinedToken = `${response.data.token_type} ${response.data.access_token}`;
 
 				dispatch(fetchTokenSuccess(combinedToken));
-				dispatch(stateGo('main.with-auth.characters'));
+				dispatch(stateGo('main.with-auth.me'));
 				dispatch(fetchingToken(false));
 			}, (response) => {
 				dispatch(showToast(response.data.error_description));
