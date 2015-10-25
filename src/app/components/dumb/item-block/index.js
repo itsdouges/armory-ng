@@ -33,6 +33,12 @@ function component () {
 }
 
 class ItemBlock {
+	constructor () {
+		// Passing down functions never was so hard:
+		// http://stackoverflow.com/questions/19889615/can-an-angular-directive-pass-arguments-to-functions-in-expressions-specified-in
+		this.showTooltip = this.showTooltip();
+	}
+
 	typeBackground (type) {
 		return styles[`${type}Icon`];
 	}

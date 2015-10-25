@@ -41,6 +41,8 @@ export default function reduce (state = initialState, action) {
 		case actions.FETCH_GW2_TOKEN_RESULT:
 		case actions.FETCHING_GW2_TOKENS:
 		case actions.INVALIDATE_GW2_TOKEN:
+		case actions.FETCHING_ME_RESULT:
+		case actions.FETCHING_ME:
 			return dataReducer(state, action);
 
 		case actions.FETCH_MY_CHARACTERS_RESULT:

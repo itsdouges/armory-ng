@@ -7,6 +7,7 @@ import _window from './window';
 import characters from './characters';
 import gw2 from './gw2-data';
 import toast from './toast';
+import users from './users';
 
 const rootReducer = combineReducers({
 	user,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	window: _window,
 	characters,
 	gw2,
-	toast
+	toast,
+	users
 });
 
 export default rootReducer;

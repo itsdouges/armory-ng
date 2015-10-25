@@ -30,12 +30,14 @@ export function fetchCharacterResultSuccess (name, data) {
 };
 
 // TODO: Action is getting a bit beefy. Refactortractor needed.
-export function fetchCharacterThunk (character) {
+export function fetchCharacterThunk (character, authenticated) {
 	return (dispatch, getState) => {
 		dispatch(fetchingCharacter(true));
 
+		let url = authenticated ? `${config.api.endpoint}users/me/characters/${character}` : `${config.api.endpoint}characters/${character}`;
+
 		return axios
-			.get(`${config.api.endpoint}characters/${character}`)
+			.get(url)
 			.then((response) => {
 				let data = gw2Parse.parseCharacter(response.data);
 				dispatch(fetchCharacterResultSuccess(character, data));
@@ -130,3 +132,5 @@ export const actionCreators = {
 	fetchCharacterThunk,
 	selectCharacter
 };
+
+export default actionCreators;

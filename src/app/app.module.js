@@ -13,10 +13,9 @@ import configuration from './app.config';
 import routerConfig from './app.routes';
 import environment from './app.env';
 
+import CharacterPage from './components/smart/character-page';
 import CharacterSpecialization from './components/smart/character-specialization';
 import CharactersSlider from './components/smart/characters-slider';
-import CharactersGrid from './components/smart/characters-grid';
-import CharacterViewer from './components/smart/character-viewer';
 import UserTokens from './components/smart/user-tokens';
 import ChangeAlias from './components/smart/change-alias';
 import ChangePassword from './components/smart/change-password';
@@ -26,6 +25,8 @@ import ItemTooltip from './components/smart/item-tooltip';
 import LoginBox from './components/smart/login-box';
 import RegisterBox from './components/smart/register-box';
 
+import CharacterViewer from './components/dumb/character-viewer';
+import CharactersGrid from './components/dumb/characters-grid';
 import SliderControl from './components/dumb/slider-control';
 import InlineCharacters from './components/dumb/inline-characters';
 import ProgressIndicator from './components/dumb/progress-indicator';
@@ -42,6 +43,8 @@ import ItemUpgrade from './components/dumb/item-upgrade';
 import CharacterAttributes from './components/dumb/character-attributes';
 import SpecializationTrait from './components/dumb/specialization-trait';
 import Toast from './components/dumb/toast';
+
+import UserDetails from './components/smart/user-details';
 
 import FooterSpacer from './directives/footer-spacer';
 import MouseFollow from './directives/mouse-follow';
@@ -75,6 +78,8 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('characterPage', CharacterPage)
+.directive('userDetails', UserDetails)
 .directive('columnsCalculator', ColumnsCalculator)
 .directive('mouseFollow', MouseFollow)
 .directive('characterAttributes', CharacterAttributes)

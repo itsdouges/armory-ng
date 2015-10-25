@@ -212,10 +212,10 @@ export const characterViewerSelector = createSelector(
 	getFetchingGw2Data,
 	getAttributes,
 	getCurrentSpecializations,
-	(fetching, selected, items, skins, fetchingGw2Data, attributes, specializations) => {
+	(fetching, character, items, skins, fetchingGw2Data, attributes, specializations) => {
 		return {
 			fetching,
-			selected,
+			character,
 			items,
 			skins,
 			fetchingGw2Data,

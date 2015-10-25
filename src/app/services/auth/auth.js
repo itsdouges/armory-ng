@@ -13,6 +13,15 @@ class Authentication {
 		this.$ngRedux = $ngRedux;
 	}
 
+	getUser (user) {
+    return axios.get(`${config.api.endpoint}/users/${user}`, {
+	    	cache: true
+	    })
+      .then(function (response) {
+        return response.data
+      });
+	}
+
 	checkAuthentication () {
 		let userAuthStatus = userAuthSelector(this.$ngRedux.getState());
 		if (userAuthStatus.loggedIn) {

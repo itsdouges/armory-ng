@@ -1,11 +1,12 @@
 'use strict';
 
+import usersActions from '../../../actions/users';
 import { actionCreators } from '../../../actions/user/characters';
 import { myCharactersSelector } from '../../../selectors/characters';
 
 import styles from './characters-slider.less';
 
-// TODO: Clean this up and do some unit tests. Shit is nasty!
+// TODO: Clean this up and do some unit tests. Shit is nasty! Probably remake it.
 
 // @ngInject
 function component ($window, debounce) {
@@ -61,9 +62,11 @@ function component ($window, debounce) {
 					ng-if="!ctrl.sliderControlsDisabled"
 					ng-click="ctrl.previous()"></slider-control>
 
-				<div class="${styles.sliderMessage}" 
-					ng-if="!ctrl.hasCharacters">
-					Oh, you have no characters.. why not <a ui-sref="main.with-auth.with-container.settings"><strong>add a few api tokens</strong></a> to your account?
+				<div 
+					class="${styles.sliderMessage}" 
+					ng-if="!ctrl.hasCharacters()">
+					<span ng-if="ctrl.mode === 'public'">Oh, he has no characters.. :(</span>
+					<span ng-if="ctrl.mode === 'authenticated'">Oh, you have no characters.. why not <a ui-sref="main.with-auth.with-container.settings"><strong>add a few api tokens</strong></a> to your account?</span>
 				</div>
 
 				<inline-characters
@@ -88,7 +91,7 @@ function component ($window, debounce) {
 }
 
 // @ngInject
-export function CharactersSlider ($scope, $ngRedux) {
+export function CharactersSlider ($scope, $ngRedux, $stateParams) {
 	const SLIDER_TRANSLATE_PERCENTAGE = 100;
 
 	let scope = this,
@@ -99,11 +102,15 @@ export function CharactersSlider ($scope, $ngRedux) {
 		loaded = false,
 		SLIDER_ITEMS_TOTAL;
 
+	this.hasCharacters = function () {
+		return this.characters && this.characters.length;
+	}
+
 	function init () {
 		scope.sliderControlsDisabled = true;
 
 		// TODO: This can be put behind a selector! (() => {}) instead of (this)
-		const UNSUBSCRIBE = $ngRedux.subscribe(() => {
+		const unsubscribe = $ngRedux.subscribe(() => {
 			const state = $ngRedux.getState();
 			const selector = myCharactersSelector(state);
 
@@ -119,15 +126,19 @@ export function CharactersSlider ($scope, $ngRedux) {
 			initializeSlider(selector.columns);
 		});
 
-		$scope.$on('$destroy', UNSUBSCRIBE);
+		$scope.$on('$destroy', unsubscribe);
 
 		switch(scope.mode) {
 			case 'authenticated':
 				$ngRedux.dispatch(actionCreators.fetchMyCharactersThunk());
 				break;
 
+			case 'public':
+				$ngRedux.dispatch(usersActions.fetchUserCharactersThunk($stateParams.alias));
+				break;
+
 			default:
-				throw 'Mode not supported';
+				throw 'Mode not supported for slider';
 				break;
 		}
 

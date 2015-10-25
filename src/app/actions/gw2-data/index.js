@@ -146,7 +146,7 @@ export function showTooltip (show, config = {}) {
 			skin: config.skin,
 			upgrades: config.upgrades,
 			type: config.type,
-			upgrade_combo_count: config.totalUpgrades
+			upgrade_combo_count: config.upgradeCount
 		}
 	};
 }
@@ -158,3 +158,5 @@ export const actionCreators = {
 	fetchSpecializationsThunk,
 	showTooltip
 };
+
+export default actionCreators;

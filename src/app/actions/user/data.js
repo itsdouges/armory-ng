@@ -1,7 +1,6 @@
 'use strict';
 
 import axios from 'axios';
-
 import config from '../../app.env';
 import showToast from '../toast';
 
@@ -16,7 +15,10 @@ export const actions = {
 
 	INVALIDATE_GW2_TOKEN: 'INVALIDATE_GW2_TOKEN',
 	VALIDATING_GW2_TOKEN: 'VALIDATING_GW2_TOKEN',
-	VALIDATE_GW2_TOKEN_RESULT: 'VALIDATE_GW2_TOKEN_RESULT'
+	VALIDATE_GW2_TOKEN_RESULT: 'VALIDATE_GW2_TOKEN_RESULT',
+
+	FETCHING_ME: 'FETCHING_ME',
+	FETCHING_ME_RESULT: 'FETCHING_ME_RESULT'
 };
 
 function fetchingGw2Tokens (fetching) {
@@ -140,10 +142,40 @@ function removeGw2TokenThunk (token) {
 	};
 }
 
+function fetchingMe (fetching) {
+	return {
+		type: actions.FETCHING_ME,
+		payload: fetching
+	};
+}
+
+function fetchMeResult (user) {
+	return {
+		type: actions.FETCHING_ME_RESULT,
+		payload: user
+	};
+};
+
+function fetchMeThunk () {
+	return (dispatch) => {
+		dispatch(fetchingMe(true));
+
+		return axios
+			.get(`${config.api.endpoint}users/me`)
+			.then((response) => {
+				dispatch(fetchMeResult(response.data));
+				dispatch(fetchingMe(false));
+			});
+	};
+}
+
 export const actionCreators = {
 	fetchGw2TokensThunk,
 	addGw2TokenThunk,
 	validateGw2TokenThunk,
 	removeGw2TokenThunk,
-	invalidateGw2Token
+	invalidateGw2Token,
+	fetchMeThunk
 };
+
+export default actionCreators;

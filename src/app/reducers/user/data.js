@@ -2,6 +2,26 @@
 
 import { actions } from '../../actions/user/data';
 
+function fetchingMeReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.fetching = action.payload;
+
+	return newState;
+}
+
+// TODO: Fix this reduce it isn't working as expected :)
+function fetchingMeResultReducer (state, action) {
+	let newState = {
+		...state,
+		...action.payload
+	};
+
+	return newState;
+}
+
 function fetchingGw2TokensReducer (state, action) {
 	let newState = {
 		...state
@@ -115,6 +135,12 @@ export function dataReducer (state, action) {
 
 		case actions.REMOVE_GW2_TOKEN:
 			return removeGw2Token(state, action);
+
+		case actions.FETCHING_ME_RESULT:
+			return fetchingMeResultReducer(state, action);
+
+		case actions.FETCHING_ME:
+			return fetchingMeReducer(state, action);
 
 		default:
 			return state;

@@ -1,5 +1,8 @@
 'use strict';
 
+import { actionCreators } from '../../../actions/user';
+import { registerSelector } from '../../../selectors/user';
+
 import styles from './register-box.less';
 import forms from '../../../styles/forms/forms.less';
 import message from '../../../styles/message/message.less';
@@ -130,9 +133,6 @@ function component () {
 
 	return directive;
 }
-
-import { actionCreators } from '../../../actions/user';
-import { registerSelector } from '../../../selectors/user';
 
 // @ngInject
 function RegisterBox (debounce, $ngRedux, $scope) {

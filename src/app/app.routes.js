@@ -23,7 +23,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       abstract: true,
       template: '<ui-view></ui-view>',
       resolve: {
-        authenticated: /*@ngInject*/ function (authService, $q) {
+        authenticated: /*@ngInject*/ (authService, $q) => {
           return authService.checkAuthentication()
             .then(null, () => {
               return $q.resolve();
@@ -39,12 +39,21 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '',
       template: `
         <news-block>
-          <h2>News</h2>
+          <!--<h2>25/10 update</h2>
 
+          <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
+            <h3>Let's be social!</h3>
+            <p>At the heart of an armory all we want to do is show off our gear, and our sweet outfits. Well now you can! You'll find the social buttons floating near the middle of the screen, click and follow the prompts!</p>
+
+            ~ madou
+          </div>-->
+
+          <h2>gw2armory start</h2>
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
             <h3>Flipping the switch</h3>
 
-            <p>Oh hi there. You're one of the first to visit gw2armory.com! Currently things are quite bare bones, but will be refined and extended over time. Feel free to register/login, add some api tokens, and check out your characters.</p>
+            <p>Hey! You're one of the first to visit gw2armory.com! Currently things are quite bare bones, but will be refined and extended over time. Feel free to register/login, add some api tokens, and check out your characters.</p>
+            ~ madou
           </div>
         </news-block>
       `
@@ -73,7 +82,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       abstract: true,
       template: '<ui-view></ui-view>',
       resolve: {
-        authenticated: /*@ngInject*/ function (authService, $state) {
+        authenticated: /*@ngInject*/ (authService, $state) => {
           return authService.checkAuthentication()
             .then(null, () => {
               $state.go('main.no-auth.with-container.login');
@@ -105,20 +114,51 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('main.with-auth.me', {
       url: '/me',
       template: `
-        <characters-grid></characters-grid>
+        <user-details mode="authenticated"></user-details>
       `
     })
     .state('main.with-auth.characters', {
       url: '/me/characters',
       template: `
-        <characters-slider mode="authenticated"></characters-slider>
-
-        <div class="${containerStyles.flexContainer}">
-          <character-viewer mode="public"></character-viewer>
-        </div>
+        <character-page mode="authenticated"></character-page>
       `
     })
     .state('main.with-auth.characters.character', {
+      url: '/:name'
+    })
+    //TODO Make abstract public user route
+    .state('main.no-auth.user', {
+      url: '/:alias',
+      template: `
+        <user-details mode="public"></user-details>
+      `,
+      resolve: {
+        findingUser: /*@ngInject*/ (authService, $stateParams) => {
+          return authService.getUser($stateParams.alias)
+            .then(null, () => {
+              console.log('lmao not found 1');
+              $state.go('main.no-auth.with-container.not-found');
+            });
+        }
+      }
+    })
+    //TODO Make abstract public user route
+    .state('main.no-auth.usercharacter', {
+      url: '/:alias/characters',
+      template: `
+        <character-page mode="public"></character-page>
+      `,
+      resolve: {
+        findingUser: /*@ngInject*/ (authService, $stateParams, $state, $q) => {
+          return authService.getUser($stateParams.alias)
+            .then(null, () => {
+              console.log('lmao not found 2');
+              $state.go('main.no-auth.with-container.not-found');
+            });
+        }
+      }
+    })
+    .state('main.no-auth.usercharacter.character', {
       url: '/:name'
     });
 

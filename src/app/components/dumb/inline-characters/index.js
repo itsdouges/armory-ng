@@ -17,7 +17,7 @@ function component () {
 					class="${styles.item}" 
 					ng-repeat="character in ctrl.characters track by $index">
 					<a
-						ng-href="#!/me/characters/{{ character.name }}"
+						ng-href="#!/{{ ctrl.user }}/characters/{{ character.name }}"
 						ng-class="character.profession.toLowerCase()">
 						<character-headshot character="character"></character-headshot>
 					</a>
@@ -29,8 +29,11 @@ function component () {
 	return directive;
 }
 
-function InlineCharacters () {
-
+class InlineCharacters {
+	// @ngInject
+	constructor ($stateParams) {
+		this.user = $stateParams.alias ? $stateParams.alias : 'me';
+	}
 }
 
 export default component;
