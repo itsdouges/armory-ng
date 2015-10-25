@@ -8,7 +8,7 @@ describe('gw2 reducer', () => {
 			skin: 'skin',
 			upgrades: 'upgrades',
 			type: 'type',
-			totalUpgrades: 'total'
+			upgradeCount: 'total'
 		}));
 
 		expect(state).toEqual({
