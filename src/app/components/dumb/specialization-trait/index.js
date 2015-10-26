@@ -6,10 +6,13 @@ function component () {
 		scope: {},
 		bindToController: {
 			trait: '=',
-			active: '='
+			active: '=',
+			showTooltip: '&'
 		},
 		template: `
 			<div
+				ng-mouseenter="ctrl.showTooltip({ show: true, type: ctrl.trait.name })"
+				ng-mouseleave="ctrl.showTooltip({ show: false })"
 				class="${styles.traitIcon} {{ ctrl.active ? '${styles.active}' : '' }}"
 				style="background-image: url('{{ ctrl.trait.icon }}');"></div>
 		`,
@@ -19,7 +22,9 @@ function component () {
 }
 
 class SpecializationTrait {
-
+	constructor () {
+		this.showTooltip = this.showTooltip();
+	}
 }
 
 export default component;

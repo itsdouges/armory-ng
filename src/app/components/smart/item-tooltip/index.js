@@ -4,6 +4,7 @@ import styles from './item-tooltip.less';
 import colours from '../../../styles/variables/colours.less';
 import iconStyles from '../../../styles/icons/icons.less';
 import position from '../../../styles/positioning/positioning.less';
+import { tooltipSelector } from '../../../selectors/gw2-data';
 
 function component () {
 	let directive = {
@@ -109,8 +110,6 @@ function component () {
 
 	return directive;
 }
-
-import { tooltipSelector } from '../../../selectors/gw2-data';
 
 class ItemTooltip {
 	// @ngInject
