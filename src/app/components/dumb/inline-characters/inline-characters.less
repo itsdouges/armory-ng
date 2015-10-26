@@ -7,6 +7,7 @@ inline-characters {
 	margin: 0;
 	transition: transform 0.4s;
 	overflow: visible;
+	text-align: center;
 }
 
 .NumberOfSliderItems(@items) {
@@ -14,13 +15,18 @@ inline-characters {
 }
 
 .item {
-	.NumberOfSliderItems(1);
+	text-align: left;
+	width: 80%;
 	overflow: auto;
 	display: inline-block;
 	vertical-align: bottom;
 }
 
 @media only screen and (min-width: @mobile) {
+	inline-characters {
+		text-align: left;
+	}
+
 	.item {
 		.NumberOfSliderItems(2);
 	}
