@@ -17,6 +17,9 @@ const getIHaveCharacters = state => {
 	return state.user.characters && state.user.characters.length;
 };
 
+const getUser = state => state.user;
+const getUsers = state => state.users;
+
 export const myCharactersSelector = createSelector(
 	getMyCharacters,
 	getIHaveCharacters,
@@ -212,7 +215,9 @@ export const characterViewerSelector = createSelector(
 	getFetchingGw2Data,
 	getAttributes,
 	getCurrentSpecializations,
-	(fetching, character, items, skins, fetchingGw2Data, attributes, specializations) => {
+	getUser,
+	getUsers,
+	(fetching, character, items, skins, fetchingGw2Data, attributes, specializations, user, users) => {
 		return {
 			fetching,
 			character,
@@ -220,7 +225,9 @@ export const characterViewerSelector = createSelector(
 			skins,
 			fetchingGw2Data,
 			attributes,
-			specializations
+			specializations,
+			user,
+			users
 		};
 	}
 );

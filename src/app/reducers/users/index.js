@@ -22,6 +22,20 @@ function fetchingUserResult (state, action) {
 	return newState;
 }
 
+function fetchingUserCharactersResult (state, action) {
+	let newState = {
+		...state
+	};
+
+	if (!newState.data[action.payload.alias]) {
+		newState.data[action.payload.alias] = {};
+	}
+
+	newState.data[action.payload.alias].characters = action.payload.characters;
+
+	return newState;
+}
+
 let initialState = {
 	data: {}
 };
@@ -33,6 +47,9 @@ export default function reducer (state = initialState, action) {
 
 		case actions.FETCHING_USER_RESULT:
 			return fetchingUserResult(state, action);
+
+		case actions.FETCHING_USER_CHARACTERS_RESULT:
+			return fetchingUserCharactersResult(state, action);
 
 		default:
 			return state;

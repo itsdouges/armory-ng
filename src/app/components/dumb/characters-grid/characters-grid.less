@@ -1,4 +1,6 @@
 @import '../../../styles/variables/colours.less';
+@import '../../../styles/variables/sizes.less';
+@import '../../dumb/slider-control/slider-control.less';
 
 characters-grid {
 	display: block;
@@ -16,4 +18,9 @@ characters-grid {
 	composes: low from '../../../styles/box-shadow/box-shadow.less';
 	position: relative;
 	min-height: 4rem;
+	overflow-x: auto;
+}
+
+.slider {
+	white-space: nowrap;
 }

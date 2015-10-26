@@ -21,10 +21,13 @@ function fetchUserResult (user) {
 	};
 };
 
-function fetchUserCharactersResult (user) {
+function fetchUserCharactersResult (alias, characters) {
 	return {
-		type: actions.FETCHING_USER_RESULT,
-		payload: user
+		type: actions.FETCHING_USER_CHARACTERS_RESULT,
+		payload: {
+			alias,
+			characters
+		}
 	};
 };
 
@@ -33,7 +36,7 @@ function fetchUserCharactersThunk (alias) {
 		return axios
 			.get(`${config.api.endpoint}users/${alias}/characters`)
 			.then((response) => {
-				dispatch(fetchUserCharactersResult(response.data));
+				dispatch(fetchUserCharactersResult(alias, response.data));
 			});
 	};
 }

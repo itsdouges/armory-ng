@@ -14,7 +14,6 @@ import routerConfig from './app.routes';
 import environment from './app.env';
 
 import CharacterSpecialization from './components/smart/character-specialization';
-import CharactersSlider from './components/smart/characters-slider';
 import UserTokens from './components/smart/user-tokens';
 import ChangeAlias from './components/smart/change-alias';
 import ChangePassword from './components/smart/change-password';
@@ -92,7 +91,6 @@ const App = angular.module('gw2armory', [
 .directive('busyButton', BusyButton)
 .directive('itemTooltip', ItemTooltip)
 .directive('progressIndicator', ProgressIndicator)
-.directive('charactersSlider', CharactersSlider)
 .directive('charactersGrid', CharactersGrid)
 .directive('sliderControl', SliderControl)
 .directive('inlineCharacters', InlineCharacters)

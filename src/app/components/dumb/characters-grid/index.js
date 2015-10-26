@@ -9,7 +9,9 @@ function component () {
 		scope: {},
 		bindToController: {
 			characters: '=',
-			mode: '@'
+			columns: '=',
+			mode: '@',
+			displayMode: '@'
 		},
 		template: `
 			<div class="${sliderStyles.borderContainer} ${sliderStyles.borderContainerTop}">
@@ -17,7 +19,9 @@ function component () {
 				<div class="${sliderStyles.border} ${sliderStyles.borderTopRight}"></div>
 			</div>
 
-			<div class="${styles.container} ${styles.grid}">
+			<div 
+				class="${styles.container}" 
+				ng-class="ctrl.displayMode === 'slider' ? '${styles.slider}' : '${styles.grid}'">
 				<div 
 					class="${sliderStyles.sliderMessage}" 
 					ng-if="!ctrl.hasCharacters()">
@@ -40,9 +44,12 @@ function component () {
 	return directive;
 }
 
-class CharactersGrid {
-	hasCharacters () {
-		return this.characters && this.characters.length;
+// @ngInject
+function CharactersGrid ($element, $scope) {
+	let that = this;
+
+	that.hasCharacters = () => {
+		return that.characters && that.characters.length;
 	}
 }
 

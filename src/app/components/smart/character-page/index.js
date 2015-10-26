@@ -1,10 +1,13 @@
-import { actionCreators } from '../../../actions/users';
 import { characterViewerSelector } from '../../../selectors/characters';
 import { userDataSelector } from '../../../selectors/user';
+
+import userActions from '../../../actions/user';
+import usersActions from '../../../actions/users';
 import characterActions from '../../../actions/characters';
 import gw2Actions from '../../../actions/gw2-data';
-import containerStyles from '../../../styles/container/container.less';
 import showToast from '../../../actions/toast';
+
+import containerStyles from '../../../styles/container/container.less';
 
 function component () {
 	return {
@@ -16,9 +19,10 @@ function component () {
 			mode: '@',
 		},
 		template: `	
-			<characters-slider
+			<characters-grid
 				characters="ctrl.characters"
-				mode="{{ ctrl.mode }}"></characters-slider>
+				mode="{{ ctrl.mode }}"
+				display-mode="slider"></characters-grid>
 
 			<br/>
 
@@ -60,9 +64,26 @@ class CharacterPage {
 		this.$ngRedux = $ngRedux;
 		this.$stateParams = $stateParams;
 
-		const unsubscribe = $ngRedux.connect(characterViewerSelector)(this);
-		const unsubscribe2 = $ngRedux.connect(userDataSelector)((state) => {
-			this.user = state.user.alias;
+		const unsubscribe = $ngRedux.connect(characterViewerSelector)((state) => {
+			this.user = state.user;
+			this.fetching = state.fetching;
+			this.character = state.character;
+			this.items = state.items;
+			this.skins = state.skins;
+			this.fetchingGw2Data = state.fetchingGw2Data;
+			this.attributes = state.attributes;
+			this.specializations = state.specializations;
+
+			switch (this.mode) {
+				case 'public':
+					this.characters = state.users.data[$stateParams.alias] && state.users.data[$stateParams.alias].characters;
+					break;
+				
+				case 'authenticated':
+					this.characters = state.user.characters;
+					break;
+			}
+
 		}.bind(this));
 
 		$scope.$on('$destroy', unsubscribe);
@@ -83,13 +104,15 @@ class CharacterPage {
 	fetchCharacter (name) {
 		switch (this.mode) {
 			case 'public':
+				this.$ngRedux.dispatch(usersActions.fetchUserCharactersThunk(this.$stateParams.alias));
 				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name));
 				this.location = this.$location.$$absUrl;
 				break;
 
 			case 'authenticated':
+				this.$ngRedux.dispatch(userActions.fetchMyCharactersThunk());
 				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name, true));
-				this.location = this.$location.$$absUrl.replace('me', this.user);
+				this.location = this.$location.$$absUrl.replace('me', this.user.alias);
 				break;
 
 			default:
