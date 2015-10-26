@@ -14,7 +14,6 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
 
         <ui-view columns-calculator toasts-enabled></ui-view>
 
-        <spacer></spacer>
         <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>
       `,
       abstract: true
@@ -39,14 +38,14 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '',
       template: `
         <news-block>
-          <!--<h2>25/10 update</h2>
+          <h2>25/10 update</h2>
 
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
-            <h3>Let's be social!</h3>
-            <p>At the heart of an armory all we want to do is show off our gear, and our sweet outfits. Well now you can! You'll find the social buttons floating near the middle of the screen, click and follow the prompts!</p>
+            <h3>Gotta be social!</h3>
+            <p>At the heart of an armory all we want to do is show off our gear, and our sweet outfits. Well now you can! You'll find the social buttons at the bottom of both user and character pages, click and follow the prompts! Currently only copy to clipboard is supported. Facebook, twitter, and reddit soon to follow.</p>
 
             ~ madou
-          </div>-->
+          </div>
 
           <h2>gw2armory start</h2>
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
@@ -114,7 +113,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('main.with-auth.me', {
       url: '/me',
       template: `
-        <user-details mode="authenticated"></user-details>
+        <user-page mode="authenticated"></user-page>
       `
     })
     .state('main.with-auth.characters', {
@@ -130,7 +129,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('main.no-auth.user', {
       url: '/:alias',
       template: `
-        <user-details mode="public"></user-details>
+        <user-page mode="public"></user-page>
       `,
       resolve: {
         findingUser: /*@ngInject*/ (authService, $stateParams) => {

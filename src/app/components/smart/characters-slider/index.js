@@ -17,7 +17,6 @@ function component ($window, debounce) {
 		let scopeEvent = (e, cb) => {
 			transitionEvent = (e) => {
 				if (e.propertyName === 'transform') {
-					console.log('i was called');
 					cb();
 				}
 				
@@ -64,7 +63,7 @@ function component ($window, debounce) {
 
 				<div 
 					class="${styles.sliderMessage}" 
-					ng-if="!ctrl.hasCharacters()">
+					ng-if="!ctrl.hasCharacters">
 					<span ng-if="ctrl.mode === 'public'">Oh, he has no characters.. :(</span>
 					<span ng-if="ctrl.mode === 'authenticated'">Oh, you have no characters.. why not <a ui-sref="main.with-auth.with-container.settings"><strong>add a few api tokens</strong></a> to your account?</span>
 				</div>
@@ -102,9 +101,9 @@ export function CharactersSlider ($scope, $ngRedux, $stateParams) {
 		loaded = false,
 		SLIDER_ITEMS_TOTAL;
 
-	this.hasCharacters = function () {
-		return this.characters && this.characters.length;
-	}
+	// this.hasCharacters = function () {
+	// 	return this.characters && this.characters.length;
+	// }
 
 	function init () {
 		scope.sliderControlsDisabled = true;
@@ -138,7 +137,7 @@ export function CharactersSlider ($scope, $ngRedux, $stateParams) {
 				break;
 
 			default:
-				throw 'Mode not supported for slider';
+				console.log('Mode not supported for slider');
 				break;
 		}
 
@@ -174,7 +173,7 @@ export function CharactersSlider ($scope, $ngRedux, $stateParams) {
 					} else if (transitionDirection === 'next') {
 						offset = -sliderItemsPerPage;
 					} else {
-						throw 'transition not handled';
+						console.log('transition not handled');
 					}
 
 					setCharactersOffset(offset);

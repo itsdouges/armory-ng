@@ -4,7 +4,7 @@ import styles from './footer.less';
 import { actionCreators } from '../../../actions/window';
 
 // @ngInject
-function component ($window, debounce) {
+function component ($window, debounce, $timeout) {
 	let link = (scope, element, attributes, controller) => {
 		let ele = element[0];
 
@@ -19,7 +19,11 @@ function component ($window, debounce) {
 			$window.removeEventListener('resize', debounceResize);
 		});
 
-		onResizeEvent();
+		// TODO: Remove footer spacer when majority of "main" pages fill up one page.
+
+		$timeout(() => {
+			onResizeEvent();
+		}, 200);
 	};
 
 	let directive = {

@@ -12,7 +12,6 @@ function fetchingMeReducer (state, action) {
 	return newState;
 }
 
-// TODO: Fix this reduce it isn't working as expected :)
 function fetchingMeResultReducer (state, action) {
 	let newState = {
 		...state,

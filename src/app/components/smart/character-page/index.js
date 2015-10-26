@@ -1,8 +1,10 @@
 import { actionCreators } from '../../../actions/users';
 import { characterViewerSelector } from '../../../selectors/characters';
+import { userDataSelector } from '../../../selectors/user';
 import characterActions from '../../../actions/characters';
 import gw2Actions from '../../../actions/gw2-data';
 import containerStyles from '../../../styles/container/container.less';
+import showToast from '../../../actions/toast';
 
 function component () {
 	return {
@@ -13,7 +15,7 @@ function component () {
 		bindToController: {
 			mode: '@',
 		},
-		template: `
+		template: `	
 			<characters-slider
 				characters="ctrl.characters"
 				mode="{{ ctrl.mode }}"></characters-slider>
@@ -32,26 +34,37 @@ function component () {
 					specializations="ctrl.specializations"
 					show-tooltip="ctrl.showTooltip"></character-viewer>
 
-			
-				<progress-indicator 
-					style="display: block; text-align: center;"
-					busy="ctrl.fetching"></progress-indicator>
-
 				<item-tooltip></item-tooltip>
 			</div>
+
+			<progress-indicator 
+				style="display: block; text-align: center;"
+				busy="ctrl.fetching"></progress-indicator>
+
+			<br ng-if="ctrl.fetching" />
+
+			<social-buttons 
+				send-toast="ctrl.sendToast"
+				location="{{ ctrl.location }}"></social-buttons>
 		`
 	};
 }
 
+// TODO: Make this better. Variable outside of the class? lmao!
 let outng;
 class CharacterPage {
 	// @ngInject
-	constructor ($ngRedux, $stateParams, $scope) {
+	constructor ($ngRedux, $stateParams, $scope, $location) {
 		outng = $ngRedux;
+		this.$location = $location;
 		this.$ngRedux = $ngRedux;
 		this.$stateParams = $stateParams;
 
 		const unsubscribe = $ngRedux.connect(characterViewerSelector)(this);
+		const unsubscribe2 = $ngRedux.connect(userDataSelector)((state) => {
+			this.user = state.user.alias;
+		}.bind(this));
+
 		$scope.$on('$destroy', unsubscribe);
 		$scope.$watch(() => {
 			return $stateParams.name;
@@ -71,10 +84,12 @@ class CharacterPage {
 		switch (this.mode) {
 			case 'public':
 				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name));
+				this.location = this.$location.$$absUrl;
 				break;
 
 			case 'authenticated':
 				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name, true));
+				this.location = this.$location.$$absUrl.replace('me', this.user);
 				break;
 
 			default:
@@ -92,6 +107,10 @@ class CharacterPage {
 		};
 
 		outng.dispatch(gw2Actions.showTooltip(params.show, options));
+	}
+
+	sendToast (message) {
+		outng.dispatch(showToast(message));
 	}
 }
 

@@ -1,6 +1,7 @@
 import { actionCreators } from '../../../actions/users';
 import { usersSelector } from '../../../selectors/users';
 
+import showToast from '../../../actions/toast';
 import userActions from '../../../actions/user/data';
 
 function component () {
@@ -16,33 +17,41 @@ function component () {
 			<characters-grid 
 				mode="{{ ctrl.mode }}"
 				characters="ctrl.user.characters"></characters-grid>
+
+			<br/>
+
+			<social-buttons 
+				send-toast="ctrl.sendToast"
+				location="{{ ctrl.location }}"></social-buttons>
 		`
 	};
 }
 
-class UserDetails {
-	// @ngInject
-	constructor ($ngRedux, $stateParams, $scope) {
-		const unsubscribe = $ngRedux.connect(usersSelector)(state => {
-			console.log('i was called in user details redux state func');
-			
-			switch (this.mode) {
+// @ngInject
+function UserDetails ($ngRedux, $stateParams, $scope, $location) {
+	let that = this;
+
+	function constructor () {
+		const unsubscribe = $ngRedux.connect(usersSelector)(state => {		
+			switch (that.mode) {
 				case 'public':
-					this.user = state.users.data[$stateParams.alias];
+					that.user = state.users.data[$stateParams.alias];
+					that.location = $location.$$absUrl;
 					break;
 
 				case 'authenticated':
-					this.user = state.me;
+					that.user = state.me;
+					that.location = $location.$$absUrl.replace('me', state.me.alias);
 					break;
 
 				default:
 					throw 'Mode not handled';
 			}
-		}.bind(this));
+		});
 
 		$scope.$on('$destroy', unsubscribe);
 
-		switch (this.mode) {
+		switch (that.mode) {
 			case 'public':
 				$ngRedux.dispatch(actionCreators.fetchUserThunk($stateParams.alias));
 				break;
@@ -55,6 +64,12 @@ class UserDetails {
 				throw 'Mode not handled';
 		}
 	}
+
+	that.sendToast = (message) => {
+		$ngRedux.dispatch(showToast(message));
+	}
+
+	constructor();
 }
 
 export default component;
