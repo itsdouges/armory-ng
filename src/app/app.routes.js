@@ -58,7 +58,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       `
     })
     .state('main.no-auth.with-container.login', {
-      url: '/login',
+      url: '/in',
       template: `
         <h2>Login</h2>
 
@@ -66,7 +66,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       `
     })
     .state('main.no-auth.with-container.signup', {
-      url: '/signup',
+      url: '/join',
       template: `
         <h2>Signup</h2>
 
@@ -98,7 +98,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       `
     })
     .state('main.with-auth.with-container.settings', {
-      url: '/settings',
+      url: '/me/settings',
       template: `
         <h2>Api tokens</h2>
         <user-tokens class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></user-tokens>
@@ -135,8 +135,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         findingUser: /*@ngInject*/ (authService, $stateParams) => {
           return authService.getUser($stateParams.alias)
             .then(null, () => {
-              console.log('lmao not found 1');
-              $state.go('main.no-auth.with-container.not-found');
+              $state.go('main.no-auth.with-container.login');
             });
         }
       }
@@ -151,7 +150,6 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         findingUser: /*@ngInject*/ (authService, $stateParams, $state, $q) => {
           return authService.getUser($stateParams.alias)
             .then(null, () => {
-              console.log('lmao not found 2');
               $state.go('main.no-auth.with-container.not-found');
             });
         }

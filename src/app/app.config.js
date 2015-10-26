@@ -20,7 +20,7 @@ function config ($logProvider, $compileProvider) {
 }
 
 // @ngInject
-function run ($ngRedux) {
+function run ($ngRedux, $state) {
 	axios.interceptors.request.use((config) => {
 		const userAuth = userAuthSelector($ngRedux.getState());
 		if (userAuth.token && !config.ignoreAuth) {
@@ -44,7 +44,11 @@ function run ($ngRedux) {
         	$ngRedux.dispatch(stateGo('main.with-auth.forbidden'));
         } else if (response.status === 404) {
         	// not found
-        	$ngRedux.dispatch(showToast('Ahh.. whatever you\'re looking for.. we can\'t find it..'));
+          if (response.config.url.indexOf(conf.api.endpoint) === -1) {
+            $ngRedux.dispatch(showToast('Ahh.. whatever you\'re looking for.. we can\'t find it..'));
+          } else {
+            $state.go('main.no-auth.with-container.not-found');
+          }
         } else if (response.status >= 500) {
         	// server error
         	$ngRedux.dispatch(showToast('Sorry.. Some wierd stuff is happening on the server, wait a bit and try again!'));
