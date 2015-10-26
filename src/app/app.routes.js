@@ -74,7 +74,6 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       `
     })
     .state('main.no-auth.with-container.not-found', {
-      url: '/404',
       template: '<h2>404!</h2><p>Oh no this page doesn\'t exist :(. <a href="/"><strong>Let\'s get out of here!</strong></a></p>'
     })
     .state('main.with-auth', {
@@ -159,7 +158,11 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/:name'
     });
 
-  $urlRouterProvider.otherwise('/404');
+  $urlRouterProvider.otherwise(() => {
+     var state = $injector.get('$state');
+     state.go('main.no-auth.with-container.not-found');
+     return $location.path();
+  });
 }
 
 export default routerConfig;
