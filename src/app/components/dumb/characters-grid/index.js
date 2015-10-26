@@ -20,7 +20,7 @@ function component () {
 			</div>
 
 			<div 
-				class="${styles.container}" 
+				class="${styles.container}"
 				ng-class="ctrl.displayMode === 'slider' ? '${styles.slider}' : '${styles.grid}'">
 				<div 
 					class="${sliderStyles.sliderMessage}" 

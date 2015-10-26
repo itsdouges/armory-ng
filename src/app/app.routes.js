@@ -42,7 +42,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
 
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
             <h3>Gotta be social!</h3>
-            <p>At the heart of an armory all we want to do is show off our gear, and our sweet outfits. Well now you can! You'll find the social buttons at the bottom of both user and character pages, click and follow the prompts! Currently only copy to clipboard is supported. Facebook, twitter, and reddit soon to follow.</p>
+            <p>At the heart of an armory all we want to do is show off what you got. Well now you can! You'll find the sharing buttons at the bottom of both user and character pages, click and follow the prompts! Currently only copy to clipboard is supported, but Facebook, and Twitter are soon to follow1</p>
 
             ~ madou
           </div>

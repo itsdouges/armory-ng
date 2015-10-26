@@ -2,8 +2,6 @@
 
 > Bringing you `that shit you do like`, one commit at a time.
 
-If you feel like contributing give me a message and we can talk.
-
 ## Usage
 
 If you're playing on windows, add `:win` after each step, for example: `npm run start:win`.
@@ -38,6 +36,8 @@ npm run build:dev
 ```
 npm run build:prod
 ```
+
+If you feel like contributing give me a message and we can talk.
 
 Images © 2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
 
