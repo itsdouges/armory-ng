@@ -20,3 +20,5 @@ export const actionCreators = {
 	...data.actionCreators,
 	...characters.actionCreators
 };
+
+export default actionCreators;
