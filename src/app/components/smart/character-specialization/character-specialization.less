@@ -1,6 +1,8 @@
 @import '../../../styles/variables/sizes.less';
 @import '../../../styles/box-shadow/box-shadow.less';
 
+@hex-size: 100;
+
 character-specialization {
 	display: block;
 	height: 140px;
@@ -28,14 +30,19 @@ character-specialization {
 .majorTraitColumn {
 	display: flex;
 	flex-flow: column;
+
+  div {
+    clip-path: inset(2px 2px 2px 2px);
+  }
+
+  z-index: 100;
 }
 
 .minorTraitColumn {
+  z-index: 100;
 	margin: 5.3%;
 	clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
 }
-
-@hex-size: 100;
 
 .specializationIcon {
   position: relative;
