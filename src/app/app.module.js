@@ -67,9 +67,7 @@ import store from './app.redux-store';
 const App = angular.module('gw2armory', [
 	ngRedux,
   uiRouter,
-  ngReduxRouter,
-  'angulartics',
-  angularticsGoogle
+  ngReduxRouter
 ])
 
 .config(configuration.config)
