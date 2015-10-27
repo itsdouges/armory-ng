@@ -20,7 +20,7 @@ function config ($logProvider, $compileProvider) {
 }
 
 // @ngInject
-function run ($ngRedux, $state) {
+function run ($ngRedux, $state, $window, $rootScope, $location) {
 	axios.interceptors.request.use((config) => {
 		const userAuth = userAuthSelector($ngRedux.getState());
 		if (userAuth.token && !config.ignoreAuth) {
@@ -56,6 +56,16 @@ function run ($ngRedux, $state) {
 
         return Promise.reject(response);
 	});
+
+  $rootScope.$on('$stateChangeSuccess', (event) => {
+    if (!$window.ga) {
+      return;
+    }
+
+    $window.ga('send', 'pageview', { 
+      page: $location.path() 
+    });
+  });
 }
 
 export default {
