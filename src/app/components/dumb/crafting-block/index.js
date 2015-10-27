@@ -6,7 +6,11 @@ function component () {
 	let directive = {
 		restrict: 'E',
 		template: `
-			<div title="{{ ctrl.model.discipline }} {{ ctrl.isActive() ? '(active)' : '' }}" class="${styles.container}" ng-class="ctrl.mode.active ? '${styles.active}' : ''">
+			<div
+				ng-mouseenter="ctrl.showTooltip({ show: true, type: ctrl.model.discipline })"
+				ng-mouseleave="ctrl.showTooltip({ show: false })"
+				class="${styles.container}" 
+				ng-class="ctrl.mode.active ? '${styles.active}' : ''">
 				<span class="${styles.icon}" ng-class="ctrl.getDisciplineCssClass(ctrl.model.discipline)"></span>
 				<span class="${styles.ratingBlock}" ng-style="ctrl.style"></span>
 				<span class="${styles.rating}">
@@ -18,7 +22,8 @@ function component () {
 		controllerAs: 'ctrl',
 		scope: {},
 		bindToController: {
-			model: '='
+			model: '=',
+			showTooltip: '&'
 		}
 	};
 
@@ -27,6 +32,8 @@ function component () {
 
 class CraftingBlock {
 	constructor () {
+		this.showTooltip = this.showTooltip();
+
 		if (this.model.discipline === 'Chef' || 
 			this.model.discipline === 'Jeweler') {
 			this.total = 400;

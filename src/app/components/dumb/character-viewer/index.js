@@ -141,7 +141,8 @@ function component () {
 								class="${portraitStyles.container}"></character-portrait>
 
 						<div class="${styles.infoRight}">
-							<character-attributes 
+							<character-attributes
+								show-tooltip="ctrl.showTooltip"
 								attributes="ctrl.attributes"
 								profession="{{ ctrl.character.profession.toLowerCase() }}"></character-attributes>
 
@@ -244,7 +245,8 @@ function component () {
 								item="ctrl.character.equipment.weaponAquaticB"></item-block>
 							</div>
 							
-							<crafting-block 
+							<crafting-block
+								show-tooltip="ctrl.showTooltip"
 								ng-repeat="model in ctrl.character.crafting" 
 								model="model"></crafting-block>
 						</div>
