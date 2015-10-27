@@ -59,6 +59,8 @@ import angular from 'angular';
 import ngRedux from 'ng-redux';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
+import 'angulartics'; // TODO: Replace with updated version when it's released (for proper module-ing setup)
+import angularticsGoogle from 'angulartics-google-analytics';
 
 import reducers from './reducers';
 import { combineReducers } from 'redux';
@@ -67,7 +69,9 @@ import store from './app.redux-store';
 const App = angular.module('gw2armory', [
 	ngRedux,
   uiRouter,
-  ngReduxRouter
+  ngReduxRouter,
+  'angulartics',
+  angularticsGoogle
 ])
 
 .config(configuration.config)

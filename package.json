@@ -4,6 +4,8 @@
   "dependencies": {
     "angular": "1.4.x",
     "angular-ui-router": "^0.2.15",
+    "angulartics": "^0.20.1",
+    "angulartics-google-analytics": "^0.1.1",
     "axios": "^0.5.4",
     "es6-promise": "^3.0.2",
     "font-awesome-webpack": "0.0.4",
