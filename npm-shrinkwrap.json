@@ -12,23 +12,6 @@
       "from": "angular-ui-router@>=0.2.15 <0.3.0",
       "resolved": "https://registry.npmjs.org/angular-ui-router/-/angular-ui-router-0.2.15.tgz"
     },
-    "angulartics": {
-      "version": "0.20.1",
-      "from": "angulartics@*",
-      "resolved": "https://registry.npmjs.org/angulartics/-/angulartics-0.20.1.tgz"
-    },
-    "angulartics-google-analytics": {
-      "version": "0.1.1",
-      "from": "angulartics-google-analytics@*",
-      "resolved": "https://registry.npmjs.org/angulartics-google-analytics/-/angulartics-google-analytics-0.1.1.tgz",
-      "dependencies": {
-        "angulartics": {
-          "version": "0.20.1",
-          "from": "angulartics@>=0.20.0 <0.21.0",
-          "resolved": "https://registry.npmjs.org/angulartics/-/angulartics-0.20.1.tgz"
-        }
-      }
-    },
     "axios": {
       "version": "0.5.4",
       "from": "axios@>=0.5.4 <0.6.0",

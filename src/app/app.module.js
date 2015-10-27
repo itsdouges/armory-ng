@@ -59,8 +59,6 @@ import angular from 'angular';
 import ngRedux from 'ng-redux';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
-import 'angulartics'; // TODO: Replace with updated version when it's released (for proper module-ing setup)
-import angularticsGoogle from 'angulartics-google-analytics';
 
 import reducers from './reducers';
 import { combineReducers } from 'redux';
