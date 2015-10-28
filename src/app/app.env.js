@@ -10,6 +10,8 @@ if (__DEV__) {
 		endpoint: 'http://192.168.59.103/',
 		secret: 'bacon'
 	};
+
+	environment.penfoldId = '12';
 }
 
 if (__PROD__) {
@@ -18,11 +20,15 @@ if (__PROD__) {
 			endpoint: 'http://api.beta.gw2armory.com/',
 			secret: 'sekritsauce'
 		};
+
+		environment.penfoldId = '10';
 	} else {
 		environment.api = {
 			endpoint: 'https://api.gw2armory.com/',
 			secret: 'sauce'
 		};
+
+		environment.penfoldId = '11';
 	}
 }
 

@@ -57,6 +57,28 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
         return Promise.reject(response);
 	});
 
+  function penfold (id, path) {
+    var er = encodeURIComponent;
+    var url =   '?ua=' + er($window.navigator.userAgent) +
+                '&an=' + er($window.navigator.appName) +
+                '&re=' + er(document.referrer) +
+                '&sh=' + er(screen.height) +
+                '&sw=' + er(screen.width) +
+                '&os=' + er(navigator.oscpu) +
+                '&pl=' + er(navigator.platform) +
+                '&hr=' + er($window.location.href) +
+                '&si=' + id;
+
+    var img = document.createElement('img');
+    img.src = '//portfold.com/track/' + url;
+    img.style.cssText = 'display:none;'
+    img.width = '1';
+    img.height = '1';
+    var src = document.getElementsByTagName('script')[0];
+    src.appendChild(img);
+    src.remove();
+  }
+
   $rootScope.$on('$stateChangeSuccess', (event) => {
     if (!$window.ga) {
       return;
@@ -65,6 +87,8 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
     $window.ga('send', 'pageview', { 
       page: $location.path() 
     });
+
+    penfold(conf.penfoldId, $location.absUrl());
   });
 }
 
