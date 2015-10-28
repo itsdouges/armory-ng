@@ -76,7 +76,7 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
     img.height = '1';
     var src = document.getElementsByTagName('script')[0];
     src.appendChild(img);
-    src.remove();
+    img.remove();
   }
 
   $rootScope.$on('$stateChangeSuccess', (event) => {
