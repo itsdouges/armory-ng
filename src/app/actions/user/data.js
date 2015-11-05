@@ -18,8 +18,37 @@ export const actions = {
 	VALIDATE_GW2_TOKEN_RESULT: 'VALIDATE_GW2_TOKEN_RESULT',
 
 	FETCHING_ME: 'FETCHING_ME',
-	FETCHING_ME_RESULT: 'FETCHING_ME_RESULT'
+	FETCHING_ME_RESULT: 'FETCHING_ME_RESULT',
+
+	CHANGE_PASSWORD_RESULT: 'CHANGE_PASSWORD_RESULT',
+	CHANGING_PASSWORD: 'CHANGING_PASSWORD'
 };
+
+function changingPassword (changing) {
+	return {
+		type: actions.CHANGING_PASSWORD,
+		payload: !!changing
+	};
+}
+
+function changePasswordThunk (currentPassword, password) {
+	return (dispatch) => {
+		dispatch(changingPassword(true));
+
+		return axios
+			.put(`${config.api.endpoint}users/me/password`, {
+				password: password,
+				currentPassword: currentPassword
+			})
+			.then(() => {
+				dispatch(showToast('Your password has been updated successfully!'));
+				dispatch(changingPassword(false));
+			}, (response) => {
+				dispatch(showToast('Sorry your current password is different!'));
+				dispatch(changingPassword(false));
+			});
+	};
+}
 
 function fetchingGw2Tokens (fetching) {
 	return {
@@ -175,7 +204,8 @@ export const actionCreators = {
 	validateGw2TokenThunk,
 	removeGw2TokenThunk,
 	invalidateGw2Token,
-	fetchMeThunk
+	fetchMeThunk,
+	changePasswordThunk
 };
 
 export default actionCreators;

@@ -21,6 +21,16 @@ function fetchingMeResultReducer (state, action) {
 	return newState;
 }
 
+function changingPasswordReducer (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.changingPassword = action.payload;
+
+	return newState;
+}
+
 function fetchingGw2TokensReducer (state, action) {
 	let newState = {
 		...state
@@ -140,6 +150,9 @@ export function dataReducer (state, action) {
 
 		case actions.FETCHING_ME:
 			return fetchingMeReducer(state, action);
+
+		case actions.CHANGING_PASSWORD:
+			return changingPasswordReducer(state, action);
 
 		default:
 			return state;

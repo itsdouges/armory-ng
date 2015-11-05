@@ -102,10 +102,10 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <h2>Api tokens</h2>
         <user-tokens class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></user-tokens>
 
-        <h2>Alias (disabled)</h2>
-        <change-alias class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></change-alias>
+        <!--<h2>Alias (disabled)</h2>
+        <change-alias class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></change-alias>-->
 
-        <h2>Password (disabled)</h2>
+        <h2>Password</h2>
         <change-password class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}"></change-password>
       `
     })

@@ -1,6 +1,7 @@
 'use strict';
 
 import { actionCreators } from '../../../actions/user';
+import userDataActions from '../../../actions/user/data';
 import { userDataSelector } from '../../../selectors/user';
 
 import styles from './change-password.less';
@@ -15,37 +16,55 @@ function component () {
 		scope: {},
 		template: `
 			<form>
-				<div class="${messageStyles.message}">{{ ctrl.user.passwordErrors[0] }}</div>
+				<div 
+					ng-if="ctrl.user.passwordErrors[0]" 
+					class="${messageStyles.message}">
+					{{ ctrl.user.passwordErrors[0] }}
+				</div>
 
 				<div class="${formStyles.inputContainer}">
-					<input placeholder="Current password" ng-disabled="ctrl.busy" id="add-token" type="text" ng-model="ctrl.user.currentPassword" required="required" />
+					<input 
+						placeholder="Current password" 
+						ng-disabled="ctrl.user.changingPassword" 
+						id="add-token" type="password"
+						ng-model="ctrl.inputs.currentPassword" 
+						required="required" />
+				</div>
+
+				<div class="${formStyles.inputContainer}">
+					<input 
+						placeholder="New password" 
+						ng-change="ctrl.checkPasswords()" 
+						ng-disabled="ctrl.user.changingPassword" 
+						id="add-token" type="password" 
+						ng-model="ctrl.inputs.password1" 
+						required="required" />
 
 					<input-validity
-						data-busy="ctrl.busy"
-						data-valid="ctrl.token.valid">
+						data-valid="ctrl.user.passwordValue">
 					</input-validity>
 				</div>
 
 				<div class="${formStyles.inputContainer}">
-					<input placeholder="New password" ng-change="ctrl.checkPasswords()" ng-disabled="ctrl.busy" id="add-token" type="password" ng-model="ctrl.inputs.password1" required="required" />
+					<input 
+						placeholder="Confirm new password" 
+						ng-change="ctrl.checkPasswords()" 
+						ng-disabled="ctrl.user.changingPassword" 
+						id="add-token" 
+						type="password" 
+						ng-model="ctrl.inputs.password2" 
+						required="required" />
 
 					<input-validity
-						data-busy="ctrl.busy"
-						data-valid="ctrl.token.valid">
-					</input-validity>
-				</div>
-
-				<div class="${formStyles.inputContainer}">
-					<input placeholder="Confirm new password" ng-change="ctrl.checkPasswords()" ng-disabled="ctrl.busy" id="add-token" type="password" ng-model="ctrl.inputs.password2" required="required" />
-
-					<input-validity
-						data-busy="ctrl.busy"
-						data-valid="ctrl.token.valid">
+						data-valid="ctrl.user.passwordValue">
 					</input-validity>
 				</div>
 
 				<div class="${formStyles.buttonGroup}">
-					<busy-button button-disabled="!ctrl.user.validPassword" busy="ctrl.user.savingPassword">
+					<busy-button
+						ng-click="ctrl.changePassword()"
+						button-disabled="!ctrl.user.passwordValue" 
+						busy="ctrl.user.changingPassword">
 						<i class="fa fa-floppy-o"></i>
 					</busy-button>
 				</div>
@@ -68,8 +87,8 @@ function ChangePassword ($ngRedux, $scope, debounce) {
 		$ngRedux.dispatch(action);
 	}, 500);
 
-	this.savePassword = () => {
-		$ngRedux.dispatch(actionCreators.savePasswordThunk(scope.inputs.password1));
+	this.changePassword = () => {
+		$ngRedux.dispatch(userDataActions.changePasswordThunk(scope.inputs.currentPassword, scope.inputs.password1));
 	};
 }
 
