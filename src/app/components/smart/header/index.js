@@ -26,7 +26,6 @@ function component () {
 
 			<user-links
 				logged-in="ctrl.user.loggedIn"
-				logout="ctrl.logout()"
 				username="{{ ctrl.user.alias }}"></user-links>
 		`
 	};
@@ -42,11 +41,6 @@ class Header {
 		const unsubscribe = $ngRedux.connect(userDataSelector)(this);
 		$scope.$on('$destroy', unsubscribe);
 	}
-
-	logout () {
-		this.$ngRedux.dispatch(actionCreators.clearUserData());
-		this.$ngRedux.dispatch(stateGo('main.no-auth.with-container.login'));
-	};
 }
 
 export default component;

@@ -14,18 +14,19 @@ import routerConfig from './app.routes';
 import environment from './app.env';
 
 import CharacterSpecialization from './components/smart/character-specialization';
-import UserTokens from './components/smart/user-tokens';
 import ChangeAlias from './components/smart/change-alias';
-import ChangePassword from './components/smart/change-password';
 import HeaderBlock from './components/smart/header';
 import Footer from './components/smart/footer';
 import ItemTooltip from './components/smart/item-tooltip';
 import LoginBox from './components/smart/login-box';
 import RegisterBox from './components/smart/register-box';
 
+import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import ChangePassword from './components/dumb/change-password';
+import UserTokens from './components/dumb/user-tokens';
 import CopyToClipboard from './components/dumb/copy-to-clipboard';
 import CharacterViewer from './components/dumb/character-viewer';
 import CharactersGrid from './components/dumb/characters-grid';
@@ -83,6 +84,7 @@ const App = angular.module('gw2armory', [
 .directive('socialButtons', SocialButtons)
 .directive('characterPage', CharacterPage)
 .directive('userPage', UserPage)
+.directive('userSettingsPage', UserSettingsPage)
 .directive('columnsCalculator', ColumnsCalculator)
 .directive('mouseFollow', MouseFollow)
 .directive('characterAttributes', CharacterAttributes)
