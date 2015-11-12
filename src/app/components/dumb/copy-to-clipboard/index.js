@@ -1,3 +1,5 @@
+import styles from './copy-to-clipboard.less';
+
 function component () {
 	return {
 		restrict: 'E',
@@ -9,8 +11,18 @@ function component () {
 		controller: CopyToClipboard,
 		controllerAs: 'ctrl',
 		template: `
-			<input title="Copy to clipboard" type="text" ng-model="ctrl.text" readonly="readonly" />
-			<a title="Copy to clipboard" href=""><i class="fa fa-clipboard"></i></a>
+			<input 
+				class="${styles.copyToClipboard}" 
+				title="Copy to clipboard" 
+				type="text" 
+				ng-model="ctrl.text" 
+				readonly="readonly" />
+
+			<a 
+				title="Copy to clipboard" 
+				href="">
+				<i class="fa fa-clipboard"></i>
+			</a>
 		`
 	};
 }

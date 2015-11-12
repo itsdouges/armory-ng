@@ -122,13 +122,13 @@ function checkPasswordsFailure (errors) {
 }
 
 function checkPasswords (password1, password2) {
-	let isStrong = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(password1);
+	let isStrong = /(?=^.{8,}$)(?=.*[A-Z])(?=.*[a-z]).*$/.test(password1);
 	let passwordsMatch = password1 === password2;
 
 	let errors = [];
 
 	if (!isStrong) {
-		errors.push('Your password should be greater than or equal to 8 characters long, and contain one or more uppercase, lowercase, numeric, and special character.')
+		errors.push('Your password should be greater than or equal to 8 characters long, contain one or more uppercase and lowercase character.')
 	}
 
 	if (!passwordsMatch) {

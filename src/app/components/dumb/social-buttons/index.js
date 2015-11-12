@@ -20,24 +20,6 @@ function component () {
 					send-toast="ctrl.sendToast"
 					class="${styles.buttonContainer}"
 					text="{{ ctrl.location }}"></copy-to-clipboard>
-
-				<!--<div class="${styles.buttonContainer}">
-					<a href="">
-						<i class="fa fa-facebook-square ${styles.facebook}"></i>
-					</a>
-				</div>
-
-				<div class="${styles.buttonContainer}">
-					<a href="">
-						<i class="fa fa-twitter-square ${styles.twitter}"></i>
-					</a>
-				</div>
-
-				<div class="${styles.buttonContainer}">
-					<a href="">
-						<i class="fa fa-reddit-square ${styles.reddit}"></i>
-					</a>
-				</div>-->
 			</div>
 		`
 	};
