@@ -14,7 +14,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var VERSION = process.env.TRAVIS_COMMIT || 'local-build';
 
-var ENVIRONMENT = process.env.WEBPACK_ENV;
+var ENVIRONMENT = argv.env;
 if (!ENVIRONMENT) {
   throw 'WEBPACK_ENV not defined!';
 }

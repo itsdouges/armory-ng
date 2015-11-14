@@ -1,7 +1,9 @@
+var argv = require('yargs').argv;
+
 var aws = require('aws-sdk');
 var s3 = require('s3');
 
-var ENVIRONMENT = process.env.ENV;
+var ENVIRONMENT = argv.env;
 var ACCESS_KEY_ID = process.env.ACCESS_KEY_ID;
 var SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY;
 

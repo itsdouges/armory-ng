@@ -16,20 +16,13 @@
     "url-loader": "^0.5.6"
   },
   "scripts": {
-    "build:prod": "WEBPACK_ENV=PROD webpack",
-    "build:dev": "WEBPACK_ENV=DEV webpack",
-    "start": "WEBPACK_ENV=START:DEV webpack --watch --inline --hot",
-    "start:prod": "WEBPACK_ENV=START:PROD webpack",
-    "deploy:beta": "ENV=BETA node ./deploy",
-    "test": "WEBPACK_ENV=TEST:SINGLE karma start --single-run",
-    "test:auto": "WEBPACK_ENV=TEST:AUTO karma start",
-    "build:prod:win": "set WEBPACK_ENV=PROD&& webpack",
-    "build:dev:win": "set WEBPACK_ENV=DEV&& webpack",
-    "start:win": "set WEBPACK_ENV=START:DEV&& webpack --watch --inline --hot",
-    "start:prod:win": "set WEBPACK_ENV=START:PROD&& webpack",
-    "deploy:beta:win": "set ENV=BETA&& node ./deploy",
-    "test:win": "set WEBPACK_ENV=TEST:SINGLE&& karma start --single-run",
-    "test:auto:win": "set WEBPACK_ENV=TEST:AUTO&& karma start"
+    "build:prod": "webpack --env PROD",
+    "build:dev": "webpack --env DEV",
+    "start": "webpack --watch --inline --hot --env START:DEV",
+    "start:prod": "webpack --env START:PROD",
+    "deploy:beta": "node ./deploy --env BETA",
+    "test": "karma start --single-run --env TEST:SINGLE",
+    "test:auto": "karma start --env TEST:AUTO"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
