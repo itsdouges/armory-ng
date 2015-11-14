@@ -34,7 +34,7 @@ function component () {
 
 				<progress-indicator
 					class="${styles.progress}"
-					busy="ctrl.fetching"></progress-indicator>
+					busy="ctrl.fetching && !ctrl.hasCharacters()"></progress-indicator>
 
 				<inline-characters
 					mode="{{ ctrl.mode }}"

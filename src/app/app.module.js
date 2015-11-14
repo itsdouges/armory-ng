@@ -120,3 +120,7 @@ const App = angular.module('gw2armory', [
 .directive('toast', Toast)
 .directive('toastsEnabled', ToastCreator)
 .directive('characterSpecialization', CharacterSpecialization);
+
+angular.bootstrap(document, ['gw2armory'], {
+  strictDi: true
+});
