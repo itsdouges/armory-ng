@@ -207,7 +207,7 @@ export const traitsSelector = createSelector(
 	}
 );
 
-const isFetchingCharacters = state => state.users.isFetchingCharacters || state.user.isFetchingCharacters;
+const isFetchingCharacters = state => state.users.fetchingCharacters || state.user.fetchingCharacters;
 
 export const characterViewerSelector = createSelector(
 	fetchingCharacter,

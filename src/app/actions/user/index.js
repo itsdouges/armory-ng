@@ -10,7 +10,8 @@ export const actions = {
 	...validator.actions,
 	...register.actions,
 	...auth.actions,
-	...data.actions
+	...data.actions,
+	...characters.actions
 };
 
 export const actionCreators = {

@@ -17,7 +17,7 @@ function fetchingUserCharacters (state, action) {
 		...state
 	};
 
-	newState.fetching = action.payload;
+	newState.fetchingCharacters = action.payload;
 
 	return newState;
 }

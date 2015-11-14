@@ -58,8 +58,8 @@ export function fetchCharacterThunk (character, authenticated) {
 					dispatch(gw2.actionCreators.fetchSpecializationsThunk(ids.specializations));
 				}
 			})
-			.catch((hey) => {
-				console.log(hey);
+			.catch((e) => {
+				console.error(e);
 			});
 	};
 }

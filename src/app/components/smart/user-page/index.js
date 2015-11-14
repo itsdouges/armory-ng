@@ -14,7 +14,8 @@ function component () {
 			mode: '@',
 		},
 		template: `
-			<characters-grid 
+			<characters-grid
+				fetching="ctrl.fetchingCharacters"
 				mode="{{ ctrl.mode }}"
 				characters="ctrl.user.characters"></characters-grid>
 
@@ -35,12 +36,14 @@ function UserDetails ($ngRedux, $stateParams, $scope, $location) {
 		const unsubscribe = $ngRedux.connect(usersSelector)(state => {		
 			switch (that.mode) {
 				case 'public':
+					that.fetchingCharacters = state.users.fetching;
 					that.user = state.users.data[$stateParams.alias];
 					that.location = $location.$$absUrl;
 					break;
 
 				case 'authenticated':
 					that.user = state.me;
+					that.fetchingCharacters = state.me.fetching;
 					that.location = $location.$$absUrl.replace('me', state.me.alias);
 					break;
 

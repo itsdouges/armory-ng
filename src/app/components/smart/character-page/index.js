@@ -65,6 +65,8 @@ class CharacterPage {
 		this.$ngRedux = $ngRedux;
 		this.$stateParams = $stateParams;
 
+		// TODO: Split into smaller selectors
+
 		const unsubscribe = $ngRedux.connect(characterViewerSelector)((state) => {
 			this.user = state.user;
 			this.fetching = state.fetching;
@@ -74,6 +76,7 @@ class CharacterPage {
 			this.fetchingGw2Data = state.fetchingGw2Data;
 			this.attributes = state.attributes;
 			this.specializations = state.specializations;
+			this.fetchingCharacters = state.fetchingCharacters;
 
 			switch (this.mode) {
 				case 'public':

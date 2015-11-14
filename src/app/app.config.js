@@ -35,7 +35,7 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
 
 	axios.interceptors.response.use(null, (response) => {
     	if (response instanceof Error || response.status === 0) {
-          console.log('Error', response);
+          console.error('Error', response);
           $ngRedux.dispatch(showToast('We\'re having trouble talking to the server. It might be down! But check your connection just incase.'));
         } else if (response.status === 401 && response.config.url.indexOf(conf.api.endpoint) >= 0 && response.config.url.indexOf('token') === -1) {
         	// unauthorized

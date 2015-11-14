@@ -137,7 +137,7 @@ export function CharactersSlider ($scope, $ngRedux, $stateParams) {
 				break;
 
 			default:
-				console.log('Mode not supported for slider');
+				console.error('Mode not supported for slider');
 				break;
 		}
 
@@ -173,7 +173,7 @@ export function CharactersSlider ($scope, $ngRedux, $stateParams) {
 					} else if (transitionDirection === 'next') {
 						offset = -sliderItemsPerPage;
 					} else {
-						console.log('transition not handled');
+						console.error('transition not handled');
 					}
 
 					setCharactersOffset(offset);
