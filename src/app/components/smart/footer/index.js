@@ -19,8 +19,6 @@ function component ($window, debounce, $timeout) {
 			$window.removeEventListener('resize', debounceResize);
 		});
 
-		// TODO: Remove footer spacer when majority of "main" pages fill up one page.
-
 		$timeout(() => {
 			onResizeEvent();
 		}, 200);
@@ -56,6 +54,8 @@ function component ($window, debounce, $timeout) {
 		<p>
 			© 2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
 		</p>
+
+		<build-stats></build-stats>
 		`
 	};
 

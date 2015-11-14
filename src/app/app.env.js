@@ -32,4 +32,9 @@ if (__PROD__) {
 	}
 }
 
+environment.build = {
+	date: __DATE__,
+	version: __VERSION__
+};
+
 export default environment;

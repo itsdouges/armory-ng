@@ -1,5 +1,7 @@
 // https://github.com/petehunt/webpack-howto
 
+var argv = require('yargs').argv;
+
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var path = require('path');
@@ -9,15 +11,19 @@ var DedupePlugin = webpack.optimize.DedupePlugin;
 var NoErrorsPlugin = webpack.NoErrorsPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var ENVIRONMENT = process.env.WEBPACK_ENV;
 
+var VERSION = process.env.VERSION || 'local-build';
+
+var ENVIRONMENT = process.env.WEBPACK_ENV;
 if (!ENVIRONMENT) {
   throw 'WEBPACK_ENV not defined!';
 }
 
 var environmentPlugin = new webpack.DefinePlugin({
   __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
-  __PROD__: ENVIRONMENT === 'PROD'
+  __PROD__: ENVIRONMENT === 'PROD',
+  __VERSION__: JSON.stringify(VERSION),
+  __DATE__: JSON.stringify(new Date().toLocaleString())
 });
 
 var appName = 'bundle';
