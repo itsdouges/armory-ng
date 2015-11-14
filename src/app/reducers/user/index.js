@@ -47,6 +47,7 @@ export default function reduce (state = initialState, action) {
 			return dataReducer(state, action);
 
 		case actions.FETCH_MY_CHARACTERS_RESULT:
+		case actions.FETCHING_MY_CHARACTERS:
 			return charactersReducer(state, action);
 
 		default:

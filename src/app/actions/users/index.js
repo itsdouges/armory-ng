@@ -3,6 +3,7 @@ import config from '../../app.env';
 
 export const actions = {
 	FETCHING_USER: 'FETCHING_USER',
+	FETCHING_USER_CHARACTERS: 'FETCHING_USER_CHARACTERS',
 	FETCHING_USER_RESULT: 'FETCHING_USER_RESULT',
 	FETCHING_USER_CHARACTERS_RESULT: 'FETCHING_USER_CHARACTERS_RESULT'
 };
@@ -31,12 +32,22 @@ function fetchUserCharactersResult (alias, characters) {
 	};
 };
 
+function fetchingUserCharacters (fetching) {
+	return {
+		type: actions.FETCHING_USER_CHARACTERS,
+		payload: fetching
+	};
+}
+
 function fetchUserCharactersThunk (alias) {
 	return (dispatch) => {
+		dispatch(fetchingUserCharacters(true));
+
 		return axios
 			.get(`${config.api.endpoint}users/${alias}/characters`)
 			.then((response) => {
 				dispatch(fetchUserCharactersResult(alias, response.data));
+				dispatch(fetchingUserCharacters(false));
 			});
 	};
 }

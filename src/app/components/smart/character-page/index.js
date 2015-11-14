@@ -18,8 +18,9 @@ function component () {
 		bindToController: {
 			mode: '@',
 		},
-		template: `	
+		template: `
 			<characters-grid
+				fetching="ctrl.fetchingCharacters"
 				characters="ctrl.characters"
 				mode="{{ ctrl.mode }}"
 				display-mode="slider"></characters-grid>
@@ -41,7 +42,7 @@ function component () {
 				<item-tooltip></item-tooltip>
 			</div>
 
-			<progress-indicator 
+			<progress-indicator
 				style="display: block; text-align: center;"
 				busy="ctrl.fetching"></progress-indicator>
 

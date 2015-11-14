@@ -207,6 +207,8 @@ export const traitsSelector = createSelector(
 	}
 );
 
+const isFetchingCharacters = state => state.users.isFetchingCharacters || state.user.isFetchingCharacters;
+
 export const characterViewerSelector = createSelector(
 	fetchingCharacter,
 	getSelectedCharacter,
@@ -217,7 +219,8 @@ export const characterViewerSelector = createSelector(
 	getCurrentSpecializations,
 	getUser,
 	getUsers,
-	(fetching, character, items, skins, fetchingGw2Data, attributes, specializations, user, users) => {
+	isFetchingCharacters,
+	(fetching, character, items, skins, fetchingGw2Data, attributes, specializations, user, users, fetchingCharacters) => {
 		return {
 			fetching,
 			character,
@@ -227,7 +230,8 @@ export const characterViewerSelector = createSelector(
 			attributes,
 			specializations,
 			user,
-			users
+			users,
+			fetchingCharacters
 		};
 	}
 );

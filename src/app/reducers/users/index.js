@@ -12,6 +12,16 @@ function fetchingUser (state, action) {
 	return newState;
 }
 
+function fetchingUserCharacters (state, action) {
+	let newState = {
+		...state
+	};
+
+	newState.fetching = action.payload;
+
+	return newState;
+}
+
 function fetchingUserResult (state, action) {
 	let newState = {
 		...state
@@ -50,6 +60,9 @@ export default function reducer (state = initialState, action) {
 
 		case actions.FETCHING_USER_CHARACTERS_RESULT:
 			return fetchingUserCharactersResult(state, action);
+
+		case actions.FETCHING_USER_CHARACTERS:
+			return fetchingUserCharacters(state, action);
 
 		default:
 			return state;
