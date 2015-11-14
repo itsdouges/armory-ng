@@ -107,17 +107,17 @@ var config = {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
         exclude: /node_modules/, 
         loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'url?limit=10000&name=images/[sha512:hash:base64:7].[ext]',
           imageLoaderSettings
         ]
       },
       { 
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-        loader: "url?limit=10000&minetype=application/font-woff" 
+        loader: "url?limit=10000&mimetype=application/font-woff&name=fonts/[sha512:hash:base64:7].[ext]" 
       },
       { 
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-        loader: "file" 
+        loader: "url?limit=10000&name=fonts/[sha512:hash:base64:7].[ext]" 
       }
     ]
   },

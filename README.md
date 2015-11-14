@@ -1,6 +1,6 @@
 # gw2armory.com ![Build Status](https://travis-ci.org/madou/gw2armory.com.svg)
 
-> Bringing you `that shit you do like`, one commit at a time.
+> Mirror mirror on the wall.. who is the prettiest of them all.
 
 ## Usage
 
