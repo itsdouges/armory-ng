@@ -12,6 +12,7 @@ function component () {
 		scope: {},
 		bindToController: {
 			validateToken: '&',
+			fetching: '=',
 			validToken: '=',
 			validatingToken: '=',
 			addingToken: '=',
@@ -23,6 +24,8 @@ function component () {
 			<div class="${messageStyles.message}">
 				Need api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Head over to ArenaNet's applications page and create some <i class="fa fa-external-link"></i></strong></a> selecting the permissions you'd like. We suggest characters, inventories, builds, wallet, and pvp.
 			</div>
+
+			<progress-indicator busy="ctrl.fetching"></progress-indicator>
 
 			<gw2-token 
 				remove-token="ctrl.removeToken({ token: token })"

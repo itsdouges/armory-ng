@@ -13,7 +13,8 @@ function component () {
 		scope: {},
 		template: `
         <h2>Api tokens</h2>
-        <user-tokens 
+        <user-tokens
+        	fetching="ctrl.user.fetchingTokens"
         	add-token="ctrl.addToken",
         	remove-token="ctrl.removeToken"
         	validate-token="ctrl.validateToken"
