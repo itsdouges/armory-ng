@@ -13,7 +13,7 @@ function component () {
 			username: '@'
 		},
 		template: `
-			<ul class="${styles.userLinks}" ng-if="ctrl.loggedIn">
+			<ul class="${styles.userLinks}">
 				<li ng-if="!ctrl.loggedIn"><a title="Signup" ui-sref="main.no-auth.with-container.signup">signup</a></li>
 				<li ng-if="!ctrl.loggedIn"><a title="Login" ui-sref="main.no-auth.with-container.login">login</a></li>
 				<li ng-if="ctrl.loggedIn"><a title="Me" ui-sref="main.with-auth.me">{{ ctrl.username }}</i></a></li>
