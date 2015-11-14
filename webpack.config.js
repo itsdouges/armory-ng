@@ -12,7 +12,7 @@ var NoErrorsPlugin = webpack.NoErrorsPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var VERSION = process.env.VERSION || 'local-build';
+var VERSION = process.env.TRAVIS_COMMIT || 'local-build';
 
 var ENVIRONMENT = process.env.WEBPACK_ENV;
 if (!ENVIRONMENT) {
