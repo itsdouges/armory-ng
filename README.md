@@ -4,8 +4,6 @@
 
 ## Usage
 
-If you're playing on windows, add `:win` after each step, for example: `npm run start:win`.
-
 ### Install dependencies
 ```
 npm install
@@ -13,7 +11,7 @@ npm install
 
 ### Run dev build
 ```
-npm run start
+npm start
 ```
 
 ### Run prod build
@@ -23,7 +21,7 @@ npm run start:prod
 
 ### Run tests
 ```
-npm run test
+npm test
 npm run test:auto
 ```
 

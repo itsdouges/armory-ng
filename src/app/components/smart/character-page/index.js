@@ -98,19 +98,32 @@ class CharacterPage {
 		}.bind(this));
 
 		$ngRedux.dispatch(characterActions.selectCharacter($stateParams.name));
-		this.fetchCharacter($stateParams.name);
-	}
 
-	fetchCharacter (name) {
+		if ($stateParams.name) {
+			this.fetchCharacter($stateParams.name);
+		}
+
 		switch (this.mode) {
 			case 'public':
 				this.$ngRedux.dispatch(usersActions.fetchUserCharactersThunk(this.$stateParams.alias));
-				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name));
 				this.location = this.$location.$$absUrl;
 				break;
 
 			case 'authenticated':
 				this.$ngRedux.dispatch(userActions.fetchMyCharactersThunk());
+				this.location = this.$location.$$absUrl.replace('me', this.user.alias);
+				break;
+		}
+	}
+
+	fetchCharacter (name) {
+		switch (this.mode) {
+			case 'public':
+				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name));
+				this.location = this.$location.$$absUrl;
+				break;
+
+			case 'authenticated':
 				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name, true));
 				this.location = this.$location.$$absUrl.replace('me', this.user.alias);
 				break;

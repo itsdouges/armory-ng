@@ -9,7 +9,10 @@ import conf from './app.env';
 import stateGo from 'redux-ui-router/lib/state-go';
 
 // @ngInject
-function config ($logProvider, $compileProvider) {
+function config ($logProvider, $compileProvider, $urlMatcherFactoryProvider) {
+  // NOTE: The following line allows route/page and route/page/ to be redirected to the same route.
+  $urlMatcherFactoryProvider.strictMode(false)
+
   if (__DEV__) {
     $logProvider.debugEnabled(conf.verbose);
   }

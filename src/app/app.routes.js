@@ -36,6 +36,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.with-container.home', {
       url: '',
+      data: {
+        title: 'News'
+      },
       template: `
         <news-block>
           <h2>25/10 update</h2>
@@ -59,6 +62,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.with-container.login', {
       url: '/in',
+      data: {
+        title: 'Login'
+      },
       template: `
         <h2>Login</h2>
 
@@ -67,6 +73,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.no-auth.with-container.signup', {
       url: '/join',
+      data: {
+        title: 'Signup'
+      },
       template: `
         <h2>Signup</h2>
 
@@ -74,6 +83,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       `
     })
     .state('main.no-auth.with-container.not-found', {
+      data: {
+        title: '404'
+      },
       template: '<h2>404!</h2><p>Oh no this page doesn\'t exist :(. <a href="/"><strong>Let\'s get out of here!</strong></a></p>'
     })
     .state('main.with-auth', {
@@ -98,28 +110,44 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('main.with-auth.with-container.settings', {
       url: '/me/settings',
+      data: {
+        title: 'Settings'
+      },
       template: `
         <user-settings-page></user-settings-page>
       `
     })
     .state('main.with-auth.me', {
       url: '/me',
+      data: {
+        title: 'Me'
+      },
       template: `
         <user-page mode="authenticated"></user-page>
       `
     })
     .state('main.with-auth.characters', {
+      data: {
+        title: 'My Characters'
+      },
       url: '/me/characters',
       template: `
         <character-page mode="authenticated"></character-page>
       `
     })
     .state('main.with-auth.characters.character', {
+      data: {
+        title: 'name',
+        fetchFromParams: true
+      },
       url: '/:name'
     })
-    //TODO Make abstract public user route
     .state('main.no-auth.user', {
       url: '/:alias',
+      data: {
+        title: 'alias',
+        fetchFromParams: true
+      },
       template: `
         <user-page mode="public"></user-page>
       `,
@@ -132,9 +160,13 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    //TODO Make abstract public user route
     .state('main.no-auth.usercharacter', {
       url: '/:alias/characters',
+      data: {
+        title: 'alias',
+        titleSuffix: '\'s characters',
+        fetchFromParams: true
+      },
       template: `
         <character-page mode="public"></character-page>
       `,
@@ -148,7 +180,12 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('main.no-auth.usercharacter.character', {
-      url: '/:name'
+      url: '/:name',
+      data: {
+        title: 'name',
+        titleSuffix: undefined,
+        fetchFromParams: true
+      },
     });
 
   $urlRouterProvider.otherwise(($injector, $location) => {

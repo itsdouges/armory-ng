@@ -49,6 +49,7 @@ import SpecializationTrait from './components/dumb/specialization-trait';
 import Toast from './components/dumb/toast';
 import SocialButtons from './components/dumb/social-buttons';
 
+import Title from './directives/title';
 import FooterSpacer from './directives/footer-spacer';
 import MouseFollow from './directives/mouse-follow';
 import ColumnsCalculator from './directives/columns-calculator';
@@ -81,6 +82,7 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('title', Title)
 .directive('buildStats', BuildStats)
 .directive('copyToClipboard', CopyToClipboard)
 .directive('socialButtons', SocialButtons)
