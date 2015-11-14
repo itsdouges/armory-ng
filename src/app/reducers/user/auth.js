@@ -31,7 +31,7 @@ function clearUserDataReducer (state) {
 	};
 
 	newState = {};
-	localStorage.clear();
+	localStorage.removeItem(USER_TOKEN_LOCALSTORAGE_KEY);
 
 	return newState;
 }

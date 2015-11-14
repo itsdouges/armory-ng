@@ -35,7 +35,7 @@ function component () {
       	</change-password>
 
 	      <div class="${messageStyles.message}">
-	      	Ready to leave? Why not <a title="Signout" ng-click="ctrl.logout()" href=""><strong>signout</strong>.</a>
+	      	Ready to leave? <a title="Signout" ng-click="ctrl.logout()" href=""><strong>Signout</strong>.</a>
       	</div>
 		`
 	};

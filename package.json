@@ -7,7 +7,6 @@
     "axios": "^0.5.4",
     "es6-promise": "^3.0.2",
     "font-awesome-webpack": "0.0.4",
-    "localforage": "^1.2.10",
     "ng-redux": "^3.0.0",
     "normalize-css": "^2.3.1",
     "redux": "^3.0.0",

@@ -68,14 +68,12 @@ export function filterIdsToFetch (state, character) {
 	let ids = {
 		items: [],
 		skins: [],
-		// traits: [],
 		specializations: []
 	};
 
 	let currentItems = state.gw2.items.data;
 	let currentSkins = state.gw2.skins.data;
 	let currentSpecializations = state.gw2.specializations.data;
-	let currentTraits = state.gw2.traits.data;
 
 	for (let gameMode in character.specializations) {
 		if (!character.specializations.hasOwnProperty(gameMode)) {
@@ -98,12 +96,12 @@ export function filterIdsToFetch (state, character) {
 			ids.skins.push(item.skin);
 		}
 
-		if (!currentItems.hasOwnProperty(item.skin)) {
+		if (!currentItems.hasOwnProperty(item.id)) {
 			ids.items.push(item.id);
-		}
 
-		if (item.upgrades) {
-			ids.items = ids.items.concat(item.upgrades);
+			if (item.upgrades) {
+				ids.items = ids.items.concat(item.upgrades);
+			}
 		}
 	});
 

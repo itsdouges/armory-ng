@@ -2,6 +2,45 @@
 
 import { actions } from '../../actions/gw2-data';
 
+const LOCAL_TRAITS_DATA = 'LOCAL_TRAITS_DATA';
+const LOCAL_SPECIALIZATIONS_DATA = 'LOCAL_TRAITS_DATA';
+const LOCAL_ITEMS_DATA = 'LOCAL_TRAITS_DATA';
+const LOCAL_SKINS_DATA = 'LOCAL_TRAITS_DATA';
+
+const LAST_STORAGE_CLEAN_DATE_KEY = 'LAST_STORAGE_CLEAN_DATE_KEY';
+const CLEAR_INTERVAL_IN_DAYS = 7;
+
+const ITEMS_KEY = 'ITEMS';
+const SKINS_KEY = 'SKINS';
+const TRAITS_KEY = 'TRAITS';
+const SPECIALIZATIONS_KEY = 'SPECIALIZATIONS';
+
+function clearStorageIfTime () {
+	const clearData = () => {
+		localStorage.removeItem(ITEMS_KEY);
+		localStorage.removeItem(SKINS_KEY);
+		localStorage.removeItem(TRAITS_KEY);
+		localStorage.removeItem(SPECIALIZATIONS_KEY);
+		localStorage.setItem(LAST_STORAGE_CLEAN_DATE_KEY, new Date().toString());
+	};
+
+	const lastCleared = localStorage.getItem(LAST_STORAGE_CLEAN_DATE_KEY);
+	if (!lastCleared) {
+		clearData();
+		return;
+	}
+
+	const today = new Date();
+	const dateToClear = new Date(lastCleared);
+	dateToClear.setDate(dateToClear.getDate() + CLEAR_INTERVAL_IN_DAYS);
+
+	if (dateToClear <= today) {
+		clearData();
+	}
+}
+
+clearStorageIfTime();
+
 function fetchingItemsReducer (state, action) {
 	let newState = {
 		...state
@@ -52,6 +91,8 @@ function fetchItemsResultReducer (state, action) {
 		...action.payload
 	};
 
+	localStorage.setItem(ITEMS_KEY, JSON.stringify(newState.items.data));
+
 	return newState;
 }
 
@@ -64,6 +105,8 @@ function fetchSkinsResultReducer (state, action) {
 		...newState.skins.data,
 		...action.payload
 	};
+
+	localStorage.setItem(SKINS_KEY, JSON.stringify(newState.skins.data));
 
 	return newState;
 }
@@ -78,6 +121,8 @@ function fetchTraitsResultReducer (state, action) {
 		...action.payload
 	};
 
+	localStorage.setItem(TRAITS_KEY, JSON.stringify(newState.traits.data));
+
 	return newState;
 }
 
@@ -90,6 +135,8 @@ function fetchSpecializationsResultReducer (state, action) {
 		...newState.specializations.data,
 		...action.payload
 	};
+
+	localStorage.setItem(SPECIALIZATIONS_KEY, JSON.stringify(newState.specializations.data));
 
 	return newState;
 }
@@ -117,19 +164,18 @@ function showTooltipReducer (state, action) {
 	return newState;
 }
 
-// TODO: Persist data to.. somewhere.
 const initalState = {
 	items: {
-		data: {}
+		data: JSON.parse(localStorage.getItem(ITEMS_KEY)) || {}
 	},
 	skins: {
-		data: {}
+		data: JSON.parse(localStorage.getItem(SKINS_KEY)) || {}
 	},
 	traits: {
-		data: {}
+		data: JSON.parse(localStorage.getItem(TRAITS_KEY)) || {}
 	},
 	specializations: {
-		data: {}
+		data: JSON.parse(localStorage.getItem(SPECIALIZATIONS_KEY)) || {}
 	},
 	tooltip: {
 		open: false
