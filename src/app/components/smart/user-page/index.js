@@ -4,6 +4,8 @@ import { usersSelector } from '../../../selectors/users';
 import showToast from '../../../actions/toast';
 import userActions from '../../../actions/user/data';
 
+import styles from './user-page.less';
+
 function component () {
 	return {
 		restrict: 'E',
@@ -14,6 +16,11 @@ function component () {
 			mode: '@',
 		},
 		template: `
+			<div class="${styles.userFlair}">
+				<img title="Custom avatars coming soon!" class="${styles.image}" ng-src="http://api.adorable.io/avatars/200/{{ ctrl.user.alias }}.png" />
+				<h2 class="${styles.name}"><strong>{{ ctrl.user.alias }}</strong></h2>
+			</div>
+
 			<characters-grid
 				fetching="ctrl.fetchingCharacters"
 				mode="{{ ctrl.mode }}"
