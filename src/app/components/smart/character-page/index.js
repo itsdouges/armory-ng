@@ -42,9 +42,9 @@ function component () {
 
 			<progress-indicator
 				style="display: block; text-align: center;"
-				busy="ctrl.fetching"></progress-indicator>
+				busy="ctrl.fetching && !ctrl.character"></progress-indicator>
 
-			<br ng-if="ctrl.fetching" />
+			<br ng-if="ctrl.fetching && !ctrl.character" />
 
 			<social-buttons 
 				send-toast="ctrl.sendToast"

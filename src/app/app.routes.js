@@ -171,7 +171,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <character-page mode="public"></character-page>
       `,
       resolve: {
-        findingUser: /*@ngInject*/ (authService, $stateParams, $state, $q) => {
+        findingUser: /*@ngInject*/ (authService, $stateParams, $state) => {
           return authService.getUser($stateParams.alias)
             .then(null, () => {
               $state.go('main.no-auth.with-container.not-found');
@@ -186,6 +186,24 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         titleSuffix: undefined,
         fetchFromParams: true
       },
+    })
+    .state('main.no-auth.guild', {
+      url: '/g/:guildName',
+      data: {
+        title: 'guildName',
+        fetchFromParams: true
+      },
+      template: `
+        <guild-page></guild-page>
+      `,
+      resolve: {
+        guild: /*@ngInject*/ (authService, $stateParams, $state) => {
+          return authService.getGuild($stateParams.guildName)
+            .then(null, () => {
+              $state.go('main.no-auth.with-container.not-found');
+            });
+        }
+      }
     });
 
   $urlRouterProvider.otherwise(($injector, $location) => {

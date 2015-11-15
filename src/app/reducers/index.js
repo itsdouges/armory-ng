@@ -8,6 +8,7 @@ import characters from './characters';
 import gw2 from './gw2-data';
 import toast from './toast';
 import users from './users';
+import guilds from './guilds';
 
 const rootReducer = combineReducers({
 	user,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
 	characters,
 	gw2,
 	toast,
-	users
+	users,
+	guilds
 });
 
 export default rootReducer;

@@ -12,10 +12,21 @@ export default function component () {
 			emblem: '='
 		},
 		template: `
-			<img 
-				class="${styles.guildImage}"
-				ng-src="https://guilds.gw2w2w.com/guilds/{{ ctrl.name }}/256.svg" />
-			<h2 class="${styles.guildName}">Representing: <strong>{{ ctrl.name }} [{{ ctrl.tag }}]</strong></h2>
+				<a 
+				title="View {{ ctrl.name }}"
+				ng-href="/#!/g/{{ ctrl.name }}">
+					<img 
+					class="${styles.guildImage}"
+					ng-src="https://guilds.gw2w2w.com/guilds/{{ ctrl.name }}/256.svg" />
+				</a>
+				
+				<h2 class="${styles.guildName}">			
+					<a 
+					title="View {{ ctrl.name }}"
+					ng-href="/#!/g/{{ ctrl.name }}">
+						<strong>{{ ctrl.name }} [{{ ctrl.tag }}]</strong>
+					</a>
+				</h2>
 		`
 	};
 }

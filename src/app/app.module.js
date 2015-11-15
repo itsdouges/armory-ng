@@ -21,6 +21,7 @@ import ItemTooltip from './components/smart/item-tooltip';
 import LoginBox from './components/smart/login-box';
 import RegisterBox from './components/smart/register-box';
 
+import GuildPage from './components/smart/guild-page';
 import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
@@ -40,7 +41,6 @@ import Gw2Token from './components/dumb/gw2-token';
 import UserLinks from './components/dumb/user-links';
 import CharacterPortrait from './components/dumb/character-portrait';
 import CharacterHeadshot from './components/dumb/character-headshot';
-import GuildBlock from './components/dumb/guild-block';
 import CraftingBlock from './components/dumb/crafting-block';
 import ItemBlock from './components/dumb/item-block';
 import BusyButton from './components/dumb/busy-button';
@@ -84,6 +84,7 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('guildPage', GuildPage)
 .directive('gw2Guild', Gw2Guild)
 .directive('searchBox', SearchBox)
 .directive('title', Title)
@@ -110,7 +111,6 @@ const App = angular.module('gw2armory', [
 .directive('userLinks', UserLinks)
 .directive('changeAlias', ChangeAlias)
 .directive('changePassword', ChangePassword)
-.directive('guildBlock', GuildBlock)
 .directive('upgradeComponent', ItemUpgrade)
 .directive('inputValidity', InputValidity)
 .directive('header', HeaderBlock)

@@ -36,7 +36,11 @@ function component () {
 
 					<div class="${styles.title}">
 						<h2 class="${styles.name}">
-							<span ng-if="ctrl.character.guild_tag">[{{ ctrl.character.guild_tag }}] </span>{{ ctrl.character.name }}
+							<a 
+								title="View {{ ctrl.character.guild_name }}"
+								ng-href="/#!/g/{{ ctrl.character.guild_name }}"
+								ng-if="ctrl.character.guild"><i>[{{ ctrl.character.guild_tag }}] </i></a>
+							{{ ctrl.character.name }}
 						</h2>
 
 						<div class="${styles.subtitle}">
@@ -260,20 +264,19 @@ function component () {
 					ng-if="!ctrl.specializations[0]"></div>
 
 				<div>
-				<div class="${styles.brushStrokeContainer}" ng-if="ctrl.specializations[0]">
-					<character-specialization 
-						ng-repeat="spec in ctrl.specializations"
-						specialization="spec.id"
-						traits="spec.traits"></character-specialization>
-				</div>
+					<div class="${styles.brushStrokeContainer}" ng-if="ctrl.specializations[0]">
+						<character-specialization 
+							ng-repeat="spec in ctrl.specializations"
+							specialization="spec.id"
+							traits="spec.traits"></character-specialization>
+					</div>
 				</div>
 			</div>
 
 			<gw2-guild
 				ng-if="ctrl.character.guild"
 				name="{{ ctrl.character.guild_name }}"
-				tag="{{ ctrl.character.guild_tag }}"
-				emblem=""></gw2-guild>
+				tag="{{ ctrl.character.guild_tag }}"></gw2-guild>
 		`
 	};
 

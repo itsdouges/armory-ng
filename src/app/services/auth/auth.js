@@ -22,6 +22,15 @@ class Authentication {
       });
 	}
 
+	getGuild (name) {
+    return axios.get(`${config.api.endpoint}/guilds/${name}`, {
+	    	cache: true
+	    })
+      .then(function (response) {
+        return response.data
+      });
+	}
+
 	checkAuthentication () {
 		let userAuthStatus = userAuthSelector(this.$ngRedux.getState());
 		if (userAuthStatus.loggedIn) {
