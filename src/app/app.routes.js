@@ -41,19 +41,23 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       },
       template: `
         <news-block>
-          <h2>25/10 update</h2>
+          <h2>guilds | 15/11</h2>
 
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
-            <h3>Gotta be social!</h3>
-            <p>At the heart of an armory all we want to do is show off what you got. Well now you can! You'll find the sharing buttons at the bottom of both user and character pages, click and follow the prompts! Currently only copy to clipboard is supported, but Facebook, and Twitter are soon to follow!</p>
+            <p>Guild pages have been implemented! (see: <a href="/#!/g/Ultra%20Lux"><strong>Ultra Lux's</strong></a> guild page). When viewing a character click on the guild tag or on the guild emblem at the bottom of the page to see what characters are representing that guild currently. Emblems supplied thanks to <a target="_blank" href="http://guilds.gw2w2w.com/"><strong>gw2w2w</strong></a>. Enjoy! More updates soon.</p>
 
             ~ madou
           </div>
 
-          <h2>gw2armory start</h2>
+          <h2>sharing | 25/10</h2>
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
-            <h3>Flipping the switch</h3>
+            <p>At the heart of an armory all we want to do is show off what you got. Well now you can! You'll find the sharing buttons at the bottom of both user and character pages, click and follow the prompts! Currently only copy to clipboard is supported, but Facebook, and Twitter are soon to follow! Check out my <a href="#!/madou"><strong>account</strong></a>, and <a href="#!/madou/characters/Cyberplus"><strong>reaper</strong></a>!</p>
 
+            ~ madou
+          </div>
+
+          <h2>start | 19/10</h2>
+          <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
             <p>Hey! You're one of the first to visit gw2armory.com! Currently things are quite bare bones, but will be refined and extended over time. Feel free to register/login, add some api tokens, and check out your characters.</p>
             ~ madou
           </div>
