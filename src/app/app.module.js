@@ -25,6 +25,7 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Gw2Guild from './components/dumb/gw2-guild';
 import SearchBox from './components/dumb/search-box';
 import BuildStats from './components/dumb/build-stats';
 import ChangePassword from './components/dumb/change-password';
@@ -83,6 +84,7 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('gw2Guild', Gw2Guild)
 .directive('searchBox', SearchBox)
 .directive('title', Title)
 .directive('buildStats', BuildStats)

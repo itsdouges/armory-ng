@@ -27,20 +27,18 @@ function component () {
 
 			<br/>
 
-			<div class="${containerStyles.flexContainer}">
-				<character-viewer
-					ng-if="ctrl.character" 
-					mode="{{ ctrl.mode }}"
-					character="ctrl.character"
-					fetching-gw2-data="ctrl.fetchingGw2Data"
-					items="ctrl.items"
-					skins="ctrl.skins",
-					attributes="ctrl.attributes"
-					specializations="ctrl.specializations"
-					show-tooltip="ctrl.showTooltip"></character-viewer>
+			<character-viewer
+				ng-if="ctrl.character" 
+				mode="{{ ctrl.mode }}"
+				character="ctrl.character"
+				fetching-gw2-data="ctrl.fetchingGw2Data"
+				items="ctrl.items"
+				skins="ctrl.skins",
+				attributes="ctrl.attributes"
+				specializations="ctrl.specializations"
+				show-tooltip="ctrl.showTooltip"></character-viewer>
 
-				<item-tooltip></item-tooltip>
-			</div>
+			<item-tooltip></item-tooltip>
 
 			<progress-indicator
 				style="display: block; text-align: center;"
