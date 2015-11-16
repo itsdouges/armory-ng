@@ -8,8 +8,9 @@ import gw2Actions from '../../../actions/gw2-data';
 import showToast from '../../../actions/toast';
 
 import containerStyles from '../../../styles/container/container.less';
+import styles from './character-page.less';
 
-function component () {
+export default function component () {
 	return {
 		restrict: 'E',
 		scope: {},
@@ -25,15 +26,14 @@ function component () {
 				mode="{{ ctrl.mode }}"
 				display-mode="slider"></characters-grid>
 
-			<br/>
-
 			<character-viewer
-				ng-if="ctrl.character" 
+				alias="{{ ctrl.alias }}"
+				ng-if="ctrl.character"
 				mode="{{ ctrl.mode }}"
 				character="ctrl.character"
 				fetching-gw2-data="ctrl.fetchingGw2Data"
 				items="ctrl.items"
-				skins="ctrl.skins",
+				skins="ctrl.skins"
 				attributes="ctrl.attributes"
 				specializations="ctrl.specializations"
 				show-tooltip="ctrl.showTooltip"></character-viewer>
@@ -41,10 +41,9 @@ function component () {
 			<item-tooltip></item-tooltip>
 
 			<progress-indicator
-				style="display: block; text-align: center;"
+				ng-if="ctrl.fetching && !ctrl.character"
+				class="${styles.progressIndicator}"
 				busy="ctrl.fetching && !ctrl.character"></progress-indicator>
-
-			<br ng-if="ctrl.fetching && !ctrl.character" />
 
 			<social-buttons 
 				send-toast="ctrl.sendToast"
@@ -53,81 +52,79 @@ function component () {
 	};
 }
 
-// TODO: Make this better. Variable outside of the class? lmao!
-let outng;
-class CharacterPage {
-	// @ngInject
-	constructor ($ngRedux, $stateParams, $scope, $location) {
-		outng = $ngRedux;
-		this.$location = $location;
-		this.$ngRedux = $ngRedux;
-		this.$stateParams = $stateParams;
+// @ngInject
+function CharacterPage ($ngRedux, $stateParams, $scope, $location) {
+	let that = this;
 
-		// TODO: Split into smaller selectors
-
+	function init () {
 		const unsubscribe = $ngRedux.connect(characterViewerSelector)((state) => {
-			this.user = state.user;
-			this.fetching = state.fetching;
-			this.character = state.character;
-			this.items = state.items;
-			this.skins = state.skins;
-			this.fetchingGw2Data = state.fetchingGw2Data;
-			this.attributes = state.attributes;
-			this.specializations = state.specializations;
-			this.fetchingCharacters = state.fetchingCharacters;
+			that.user = state.user;
+			that.fetching = state.fetching;
+			that.character = state.character;
+			that.items = state.items;
+			that.skins = state.skins;
+			that.fetchingGw2Data = state.fetchingGw2Data;
+			that.attributes = state.attributes;
+			that.specializations = state.specializations;
+			that.fetchingCharacters = state.fetchingCharacters;
 
-			switch (this.mode) {
+			switch (that.mode) {
 				case 'public':
-					this.characters = state.users.data[$stateParams.alias] && state.users.data[$stateParams.alias].characters;
+					that.characters = state.users.data[$stateParams.alias] && state.users.data[$stateParams.alias].characters;
 					break;
 				
 				case 'authenticated':
-					this.characters = state.user.characters;
+					that.characters = state.user.characters;
 					break;
 			}
 
-		}.bind(this));
+		});
 
 		$scope.$on('$destroy', unsubscribe);
+
 		$scope.$watch(() => {
 			return $stateParams.name;
 		}, (name) => {
-			this.$ngRedux.dispatch(characterActions.selectCharacter(name));
+			$ngRedux.dispatch(characterActions.selectCharacter(name));
 
 			if (name) {
-				this.fetchCharacter(this.$stateParams.name);
+				fetchCharacter(name);
 			}
-		}.bind(this));
+		});
 
 		$ngRedux.dispatch(characterActions.selectCharacter($stateParams.name));
 
 		if ($stateParams.name) {
-			this.fetchCharacter($stateParams.name);
+			fetchCharacter($stateParams.name);
 		}
 
-		switch (this.mode) {
+		fetchCharacters(that.mode);
+	}
+
+	function fetchCharacters (mode) {
+		switch (mode) {
 			case 'public':
-				this.$ngRedux.dispatch(usersActions.fetchUserCharactersThunk(this.$stateParams.alias));
-				this.location = this.$location.$$absUrl;
+				$ngRedux.dispatch(usersActions.fetchUserCharactersThunk($stateParams.alias));
+				that.location = $location.$$absUrl;
 				break;
 
 			case 'authenticated':
-				this.$ngRedux.dispatch(userActions.fetchMyCharactersThunk());
-				this.location = this.$location.$$absUrl.replace('me', this.user.alias);
+				$ngRedux.dispatch(userActions.fetchMyCharactersThunk());
+				that.location = $location.$$absUrl.replace('me', that.user.alias);
 				break;
 		}
 	}
 
-	fetchCharacter (name) {
-		switch (this.mode) {
+	function fetchCharacter (name) {
+		switch (that.mode) {
 			case 'public':
-				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name));
-				this.location = this.$location.$$absUrl;
+				$ngRedux.dispatch(characterActions.fetchCharacterThunk(name));
+				that.location = $location.$$absUrl;
 				break;
 
 			case 'authenticated':
-				this.$ngRedux.dispatch(characterActions.fetchCharacterThunk(name, true));
-				this.location = this.$location.$$absUrl.replace('me', this.user.alias);
+				$ngRedux.dispatch(characterActions.fetchCharacterThunk(name, true));
+				that.location = $location.$$absUrl.replace('me', that.user.alias);
 				break;
 
 			default:
@@ -135,7 +132,7 @@ class CharacterPage {
 		}
 	}
 
-	showTooltip (params) {
+	function showTooltip (params) {
 		const options = {
 			item: params.item,
 			skin: params.skin,
@@ -144,12 +141,16 @@ class CharacterPage {
 			upgradeCount: params.upgradeCount
 		};
 
-		outng.dispatch(gw2Actions.showTooltip(params.show, options));
+		$ngRedux.dispatch(gw2Actions.showTooltip(params.show, options));
 	}
 
-	sendToast (message) {
-		outng.dispatch(showToast(message));
+	function sendToast (message) {
+		$ngRedux.dispatch(showToast(message));
 	}
+
+	that.fetchCharacter = fetchCharacter;
+	that.showTooltip = showTooltip;
+	that.sendToast = sendToast;
+
+	init();
 }
-
-export default component;

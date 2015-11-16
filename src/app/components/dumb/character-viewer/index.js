@@ -7,14 +7,14 @@ import { characterViewerSelector } from '../../../selectors/characters';
 import styles from './character-viewer.less';
 import portraitStyles from '../../dumb/character-portrait/character-portrait.less';
 import containerStyles from '../../../styles/container/container.less';
-
-// TODO: Split this into smaller dumb components !
+import positionStyles from '../../../styles/positioning/positioning.less';
 
 function component () {
 	let directive = {
 		restrict: 'E',
 		scope: {},
 		bindToController: {
+			alias: '@',
 			mode: '@',
 			character: '=',
 			fetchingGw2Data: '=',
@@ -28,7 +28,7 @@ function component () {
 		controllerAs: 'ctrl',
 		template: `
 			<!-- TODO: Use character headshot component here! -->
-			<div class="${containerStyles.flexContainer}">
+			<div class="${containerStyles.flexContainer} ${styles.container}">
 				<div class="${styles.topStrip}">
 					<span
 						class="${styles.professionIcon}" 
@@ -50,7 +50,7 @@ function component () {
 						</div>
 
 						<div class="${styles.subtitle}">
-							<i>{{ ctrl.character.accountName }}</i>
+							<a ng-href="/#!/{{ ctrl.character.alias }}"><i>{{ ctrl.character.accountName }}</i></a>
 						</div>
 					</div>
 				</div>
@@ -273,10 +273,18 @@ function component () {
 				</div>
 			</div>
 
-			<gw2-guild
-				ng-if="ctrl.character.guild"
-				name="{{ ctrl.character.guild_name }}"
-				tag="{{ ctrl.character.guild_tag }}"></gw2-guild>
+			<div class="${positionStyles.textCenter} ${styles.avatarContainer}">
+				<avatar
+					ng-if="ctrl.character.guild"
+					name="{{ ctrl.character.guild_name + ' [' + ctrl.character.guild_tag + ']' }}"
+					link="/#!/g/{{ ctrl.character.guild_name }}"
+					image-location="https://guilds.gw2w2w.com/guilds/{{ ctrl.character.guild_name }}/256.svg"></avatar>
+
+				<avatar
+					name="{{ ctrl.character.alias }}"
+					link="/#!/{{ ctrl.character.alias }}"
+					image-location="http://api.adorable.io/avatars/200/{{ ctrl.character.alias }}.png"></avatar>
+			</div>
 		`
 	};
 

@@ -1,6 +1,8 @@
 import guildActions from '../../../actions/guilds'
 import { guildsSelector } from '../../../selectors/guilds';
+
 import styles from './guild-page.less';
+import positionStyles from '../../../styles/positioning/positioning.less';
 
 export default function component () {
 	return {
@@ -9,9 +11,12 @@ export default function component () {
 		controller: GuildPage,
 		controllerAs: 'ctrl',
 		template: `
-			<gw2-guild
-				name="{{ ctrl.guild.name }}"
-				tag="{{ ctrl.guild.tag }}"></gw2-guild>
+			<div class="${positionStyles.textCenter}">
+				<avatar
+					ng-if="ctrl.guild.name"
+					name="{{ ctrl.guild.name + ' [' + ctrl.guild.tag + ']' }}"
+					image-location="https://guilds.gw2w2w.com/guilds/{{ ctrl.guild.name }}/256.svg"></avatar>
+			</div>
 
 			<characters-grid
 				mode="public"
