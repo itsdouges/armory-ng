@@ -21,12 +21,14 @@ import ItemTooltip from './components/smart/item-tooltip';
 import LoginBox from './components/smart/login-box';
 import RegisterBox from './components/smart/register-box';
 
+import SearchResultsPage from './components/smart/search-results-page';
 import GuildPage from './components/smart/guild-page';
 import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
 import Avatar from './components/dumb/avatar';
+import SearchResult from './components/dumb/search-result';
 import SearchBox from './components/dumb/search-box';
 import BuildStats from './components/dumb/build-stats';
 import ChangePassword from './components/dumb/change-password';
@@ -84,6 +86,8 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('searchResult', SearchResult)
+.directive('searchResultsPage', SearchResultsPage)
 .directive('guildPage', GuildPage)
 .directive('avatar', Avatar)
 .directive('searchBox', SearchBox)

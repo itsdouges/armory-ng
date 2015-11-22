@@ -75,6 +75,15 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <login-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></login-box>
       `
     })
+    .state('main.no-auth.search-results', {
+      url: '/temp',
+      data: {
+        title: 'Search Results'
+      },
+      template: `
+        <search-results-page></search-results-page>
+      `
+    })
     .state('main.no-auth.with-container.signup', {
       url: '/join',
       data: {

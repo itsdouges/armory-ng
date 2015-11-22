@@ -1,0 +1,50 @@
+@import '../../../styles/variables/sizes.less';
+
+search-result {
+	display: flex;
+	padding: 1em;
+	align-items: center;
+	flex-shrink: 0;
+	width: 100%;
+	cursor: pointer;
+}
+
+search-result:hover {
+	background: white;
+}
+
+.image {
+	width: 4.5em;
+	height: 4.5em;
+	background-size: contain;
+}
+
+.description {
+	margin-left: 1.5em;
+	font-size: 0.8em;
+}
+
+.name {
+	font-size: 1.5em;
+}
+
+@media only screen and (min-width: @mobile) {
+	.description {
+		margin-left: 2em;
+	}
+
+	search-result {
+		flex-basis: 50%;
+	}
+}
+
+@media only screen and (min-width: @tablet) {
+	.description {
+		margin-left: 2em;
+	}
+
+	search-result {
+		flex-basis: 20em;
+	}
+}
+
