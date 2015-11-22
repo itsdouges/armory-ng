@@ -14,7 +14,9 @@ function component () {
 		controller: BusyButton,
 		controllerAs: 'ctrl',
 		template:`
-			<button class="${formStyles.primary}" ng-class="ctrl.busy ? '${accessibilityStyles.busy}' : ''" ng-disabled="ctrl.buttonDisabled || ctrl.busy">
+			<button 
+				class="${formStyles.button} ${formStyles.primary}" 
+				ng-class="ctrl.busy ? '${accessibilityStyles.busy}' : ''" ng-disabled="ctrl.buttonDisabled || ctrl.busy">
 				<span ng-show="!ctrl.busy" ng-transclude></span>
 				
 				<progress-indicator size="mini" busy="ctrl.busy"></progress-indicator>

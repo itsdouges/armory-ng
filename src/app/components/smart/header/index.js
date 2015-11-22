@@ -2,6 +2,7 @@
 
 import { actionCreators } from '../../../actions/user/auth';
 import { userDataSelector } from '../../../selectors/user';
+import searchActions from '../../../actions/search';
 import stateGo from 'redux-ui-router/lib/state-go';
 
 import styles from './header.less';
@@ -25,6 +26,7 @@ function component () {
 			</h1>
 
 			<user-links
+				search="ctrl.search"
 				logged-in="ctrl.user.loggedIn"
 				username="{{ ctrl.user.alias }}"></user-links>
 		`
@@ -33,14 +35,21 @@ function component () {
 	return directive;
 }
 
-class Header {
-	// @ngInject
-	constructor ($ngRedux, $scope) {
-		this.$ngRedux = $ngRedux;
+// @ngInject
+function Header ($ngRedux, $scope) {
+	let that = this;
 
-		const unsubscribe = $ngRedux.connect(userDataSelector)(this);
+	function constructor () {
+		const unsubscribe = $ngRedux.connect(userDataSelector)(that);
 		$scope.$on('$destroy', unsubscribe);
 	}
+
+	function search (term) {
+		$ngRedux.dispatch(searchActions.searchThunk(term));
+	}
+
+	this.search = search;
+	constructor();
 }
 
 export default component;

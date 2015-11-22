@@ -1,0 +1,88 @@
+@import '../../../styles/variables/sizes.less';
+
+@form-margin: 2;
+
+search-modal {
+	display: block;
+	color: #ccc;
+}
+
+.form {
+	display: block;
+	margin: @form-margin * 1em;
+}
+
+.searchTextbox {
+	background: transparent;
+	border-bottom: 2px solid #ccc;
+	color: #fff;
+}
+
+.resultsTitle {
+	display: block;
+	font-size: 2em;
+	text-align: left;
+	font-family: 'Open Sans'
+}
+
+.container {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.inner {
+	display: flex;
+	align-items: center;
+	align-content: flex-start;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-shrink: auto;
+	flex-direction: columns;
+}
+
+.item {
+	background: transparent;
+	color: #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 1em;
+
+	character-headshot {
+		color: #ccc;
+	}
+}
+
+.closeContainer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0.25em 0.5em;
+	color: #ccc;
+	font-size: 3em;
+}
+
+@media only screen and (min-width: @mobile) {
+	.form {
+		margin: @form-margin * 1.5em;
+	}
+
+	.inner {
+		flex-direction: row;
+	}
+}
+
+
+@media only screen and (min-width: @tablet) {
+	.form {
+		margin: @form-margin * 2em;
+	}
+
+	.container {
+		padding: 0 3%;
+	}
+}
+
+@media only screen and (min-width: @pc) {
+	.container {
+		padding: 0 7%;
+	}
+}

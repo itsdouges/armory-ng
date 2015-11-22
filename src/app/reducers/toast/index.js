@@ -1,6 +1,6 @@
 "use strict";
 
-import { actions } from '../actions/toast';
+import { actions } from '../../actions/toast';
 
 function setToatReducer (state, action) {
 	let newState = action.payload;

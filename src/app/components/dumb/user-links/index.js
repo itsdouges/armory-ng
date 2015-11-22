@@ -10,11 +10,13 @@ function component () {
 		scope: {},
 		bindToController: {
 			loggedIn: '=',
-			username: '@'
+			username: '@',
+			search: '&'
 		},
 		template: `
 			<ul class="${styles.userLinks}">
-				<li ng-if="!ctrl.loggedIn"><a title="Signup" ui-sref="main.no-auth.with-container.signup">signup</a></li>
+				<li><search-box search="ctrl.search"></search-box></li>
+				<li ng-if="!ctrl.loggedIn"><a title="Join" ui-sref="main.no-auth.with-container.signup">join</a></li>
 				<li ng-if="!ctrl.loggedIn"><a title="Login" ui-sref="main.no-auth.with-container.login">login</a></li>
 				<li ng-if="ctrl.loggedIn"><a title="Me" ui-sref="main.with-auth.me">{{ ctrl.username }}</i></a></li>
 				<li ng-if="ctrl.loggedIn"><a title="Settings" ui-sref="main.with-auth.with-container.settings">settings</a></li>
@@ -26,7 +28,9 @@ function component () {
 }
 
 class UserLinks {
-	
+	constructor () {
+		this.search = this.search();
+	}
 }
 
 export default component;

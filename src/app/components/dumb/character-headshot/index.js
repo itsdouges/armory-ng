@@ -39,7 +39,9 @@ function component () {
 
 class CharacterHeadshot {
 	professionToClass (profession) {
-		return styles[profession.toLowerCase()];
+		if (profession) {
+			return styles[profession.toLowerCase()];
+		}
 	}
 }
 

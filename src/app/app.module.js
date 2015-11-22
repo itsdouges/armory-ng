@@ -26,7 +26,9 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import SearchModal from './components/dumb/search-modal';
 import Avatar from './components/dumb/avatar';
+import SearchResult from './components/dumb/search-result';
 import SearchBox from './components/dumb/search-box';
 import BuildStats from './components/dumb/build-stats';
 import ChangePassword from './components/dumb/change-password';
@@ -51,6 +53,7 @@ import SpecializationTrait from './components/dumb/specialization-trait';
 import Toast from './components/dumb/toast';
 import SocialButtons from './components/dumb/social-buttons';
 
+import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
 import FooterSpacer from './directives/footer-spacer';
 import MouseFollow from './directives/mouse-follow';
@@ -84,6 +87,9 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('modalWatcher', ModalWatcher)
+.directive('searchModal', SearchModal)
+.directive('searchResult', SearchResult)
 .directive('guildPage', GuildPage)
 .directive('avatar', Avatar)
 .directive('searchBox', SearchBox)

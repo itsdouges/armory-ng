@@ -12,7 +12,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       template: `
         <header></header>
 
-        <ui-view columns-calculator toasts-enabled></ui-view>
+        <ui-view 
+          columns-calculator
+          toasts-enabled></ui-view>
 
         <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>
       `,
@@ -75,13 +77,22 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <login-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></login-box>
       `
     })
+    .state('main.no-auth.search-results', {
+      url: '/temp',
+      data: {
+        title: 'Search Results'
+      },
+      template: `
+        <search-results-page></search-results-page>
+      `
+    })
     .state('main.no-auth.with-container.signup', {
       url: '/join',
       data: {
-        title: 'Signup'
+        title: 'Join'
       },
       template: `
-        <h2>Signup</h2>
+        <h2>Join</h2>
 
         <register-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></register-box>
       `
