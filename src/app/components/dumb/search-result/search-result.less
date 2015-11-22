@@ -1,16 +1,24 @@
 @import '../../../styles/variables/sizes.less';
 
 search-result {
-	display: flex;
-	padding: 1em;
-	align-items: center;
-	flex-shrink: 0;
+	a {
+		display: flex;
+		padding: 1em;
+		align-items: center;
+		flex-shrink: 0;
+		width: 100%;
+		color: #ccc;
+	}
+
 	width: 100%;
+
+	font-weight: normal;
 	cursor: pointer;
 }
 
 search-result:hover {
 	background: white;
+	font-weight: bold;
 }
 
 .image {

@@ -12,7 +12,9 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       template: `
         <header></header>
 
-        <ui-view columns-calculator toasts-enabled></ui-view>
+        <ui-view 
+          columns-calculator
+          toasts-enabled></ui-view>
 
         <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>
       `,
@@ -87,10 +89,10 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('main.no-auth.with-container.signup', {
       url: '/join',
       data: {
-        title: 'Signup'
+        title: 'Join'
       },
       template: `
-        <h2>Signup</h2>
+        <h2>Join</h2>
 
         <register-box class="${cardStyles.card} ${cardStyles.small} ${cardStyles.primary}"></register-box>
       `

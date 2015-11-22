@@ -1,6 +1,6 @@
 "use strict";
 
-import { actions } from '../actions/window';
+import { actions } from '../../actions/window';
 
 function setColumnSizeReducer (state, action) {
 	let newState = {

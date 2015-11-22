@@ -5,14 +5,19 @@ export default function component () {
 	return {
 		restrict: 'E',
 		scope: {},
+		bindToController: {
+			search: '&'
+		},
 		controller: SearchBox,
 		controllerAs: 'ctrl',
 		template: `
-			<form>
+			<form ng-submit="ctrl.dispatchSearch()">
 				<div class="${styles.searchBoxContainer}">
-					<input	
+					<input
+						required
 						placeholder="Find characters, users, and guilds!"
-						type="text" 
+						type="text"
+						ng-model="ctrl.searchTerm"
 						class="${styles.searchBox}" />
 				</div>
 
@@ -25,5 +30,13 @@ export default function component () {
 }
 
 class SearchBox {
+	constructor () {
+		this.search = this.search();
+	}
 
+	dispatchSearch () {
+		const term = this.searchTerm;
+		this.searchTerm = '';
+		this.search(term);
+	}
 }

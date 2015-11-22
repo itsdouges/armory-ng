@@ -1,6 +1,6 @@
 "use strict";
 
-import { actions } from '../actions/guilds';
+import { actions } from '../../actions/guilds';
 
 function fetchingGuild (state, action) {
 	let newState = {

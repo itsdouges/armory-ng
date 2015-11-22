@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../app.env';
+import config from '../../app.env';
 
 export const actions = {
 	FETCHING_GUILD: 'FETCHING_GUILD',

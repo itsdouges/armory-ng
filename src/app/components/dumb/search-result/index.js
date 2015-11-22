@@ -8,44 +8,58 @@ export default function component () {
 		controllerAs: 'searchResult',
 		scope: {},
 		bindToController: {
-			resource: '@',
 			data: '='
 		},
 		template: `
-			<div
-				class="${styles.image}"
-				ng-style="searchResult.getStyle()"
-				ng-class="searchResult.professionToClass(searchResult.data.profession)"></div>
+			<a ng-href="{{ searchResult.getLink() }}">
+				<div
+					class="${styles.image}"
+					ng-style="searchResult.getStyle()"
+					ng-class="searchResult.professionToClass(searchResult.data.profession)"></div>
 
-			<div class="${styles.description}">
-				<div class="${styles.name}">
-					{{ searchResult.data.name || searchResult.data.alias }}
-				</div>
+				<div class="${styles.description}">
+					<div class="${styles.name}">
+						{{ searchResult.data.name }}
+					</div>
 
-				<div ng-if="searchResult.subtitle">
-					{{ searchResult.subtitle }}
+					<div ng-if="searchResult.subtitle">
+						{{ searchResult.subtitle }}
+					</div>
 				</div>
-			</div>
+			</a>
 		`
 	};
 }
 
 class SearchResult {
 	constructor () {
-		if (this.resource === 'character') {
+		if (this.data.resource === 'characters') {
 			this.subtitle = `${this.data.level} ${this.data.race} ${this.data.profession}`;
+		}
+	}
+
+	getLink () {
+		switch (this.data.resource) {
+			case 'characters':
+				return `/#!/${this.data.alias}/characters/${this.data.name}`;
+
+			case 'users':
+				return `/#!/${this.data.name}`;
+
+			case 'guilds':
+				return `/#!/g/${this.data.name}`;
 		}
 	}
 
 	getStyle () {
 		let url;
 
-		switch (this.resource) {
-			case 'user':
-				url = `url('http://api.adorable.io/avatars/200/${this.data.alias}.png')`;
+		switch (this.data.resource) {
+			case 'users':
+				url = `url('http://api.adorable.io/avatars/200/${this.data.name}.png')`;
 				break;
 
-			case 'guild':
+			case 'guilds':
 				url = `url('https://guilds.gw2w2w.com/guilds/${this.data.name}/256.svg')`;
 				break;
 

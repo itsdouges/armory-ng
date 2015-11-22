@@ -1,4 +1,4 @@
-import { calculateBaseAttribute, parseRuneBonuses, parseUpgradeBuffs, calculateBonusHealth } from '../services/gw2';
+import { calculateBaseAttribute, parseRuneBonuses, parseUpgradeBuffs, calculateBonusHealth } from '../../services/gw2';
 import { createSelector } from 'reselect';
 
 const getMyCharacters = state => state.user.characters;

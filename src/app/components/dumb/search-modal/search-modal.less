@@ -1,15 +1,21 @@
 @import '../../../styles/variables/sizes.less';
 
-search-results-page {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.9);
+@form-margin: 2;
+
+search-modal {
+	display: block;
 	color: #ccc;
-	overflow-y: visible;
-	z-index: 100;
+}
+
+.form {
+	display: block;
+	margin: @form-margin * 1em;
+}
+
+.searchTextbox {
+	background: transparent;
+	border-bottom: 2px solid #ccc;
+	color: #fff;
 }
 
 .resultsTitle {
@@ -32,7 +38,6 @@ search-results-page {
 	flex-wrap: wrap;
 	flex-shrink: auto;
 	flex-direction: columns;
-	min-height: 100%;
 }
 
 .item {
@@ -56,6 +61,10 @@ search-results-page {
 }
 
 @media only screen and (min-width: @mobile) {
+	.form {
+		margin: @form-margin * 1.5em;
+	}
+
 	.inner {
 		flex-direction: row;
 	}
@@ -63,6 +72,10 @@ search-results-page {
 
 
 @media only screen and (min-width: @tablet) {
+	.form {
+		margin: @form-margin * 2em;
+	}
+
 	.container {
 		padding: 0 3%;
 	}
