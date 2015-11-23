@@ -23,7 +23,7 @@ var environmentPlugin = new webpack.DefinePlugin({
   __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
   __PROD__: ENVIRONMENT === 'PROD',
   __VERSION__: JSON.stringify(VERSION),
-  __DATE__: JSON.stringify(new Date().toLocaleString())
+  __DATE__: JSON.stringify(new Date().toGMTString())
 });
 
 var appName = 'bundle';
