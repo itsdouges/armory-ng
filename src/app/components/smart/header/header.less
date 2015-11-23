@@ -1,6 +1,8 @@
+@import '../../../styles/variables/sizes.less';
+
 .logo {
-	width: 150px;
-	margin: 2rem;
+	width: 125px;
+	margin: 3rem 0 0;
 }
 
 .brushStroke {
@@ -24,4 +26,11 @@ header {
 .title {
 	font-size: 0;
 	z-index: 5;
+}
+
+@media only screen and (min-width: @tablet) {
+	.logo {
+		width: 150px;
+		margin: 2rem 2rem 0 2rem;
+	}
 }

@@ -7,15 +7,26 @@ search-modal {
 	color: #ccc;
 }
 
+.searchButton {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-size: 2em;
+	color: #ccc;
+}
+
 .form {
 	display: block;
 	margin: @form-margin * 1em;
+	position: relative;
 }
 
-.searchTextbox {
+input.searchTextbox {
 	background: transparent;
 	border-bottom: 2px solid #ccc;
 	color: #fff;
+	font-size: 2em;
 }
 
 .resultsTitle {
@@ -28,6 +39,11 @@ search-modal {
 .container {
 	height: 100%;
 	overflow-y: auto;
+}
+
+.notFound {
+	font-size: 2em;
+	text-align: center;
 }
 
 .inner {
@@ -57,10 +73,14 @@ search-modal {
 	right: 0;
 	margin: 0.25em 0.5em;
 	color: #ccc;
-	font-size: 3em;
+	font-size: 2em;
 }
 
 @media only screen and (min-width: @mobile) {
+	.closeContainer {
+		font-size: 3em;
+	}
+
 	.form {
 		margin: @form-margin * 1.5em;
 	}

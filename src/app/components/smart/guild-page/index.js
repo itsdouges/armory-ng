@@ -24,7 +24,8 @@ export default function component () {
 				characters="ctrl.guild.characters"></characters-grid>
 
 			<br/>
-
+			<br/>
+			
 			<social-buttons 
 				send-toast="ctrl.sendToast"
 				location="{{ ctrl.location }}"></social-buttons>

@@ -1,6 +1,7 @@
 import styles from './search-modal.less';
 import containerStyle from '../../../styles/container/container.less';
 import inlineStyles from '../../dumb/inline-characters/inline-characters.less';
+import formStyles from '../../../styles/forms/forms.less';
 
 export default function component () {
 	return {
@@ -33,11 +34,21 @@ export default function component () {
 					ng-model="searchModal.term"
 					class="${styles.searchTextbox}"
 					placeholder="Search characters, users, and guilds!" />
+
+				<button 
+					title="Search" 
+					class="${formStyles.clearButton} ${styles.searchButton}">
+					<i class="fa fa-search"></i>
+				</button>
 			</form>
 
 			<div class="${styles.container}">
 				<div class="${styles.inner}">
 					<progress-indicator busy="searchModal.searching"></progress-indicator>
+
+					<div 
+						ng-if="!searchModal.searching && !searchModal.results.length" 
+						class="${styles.notFound}">Nothing could be found :-(</div>
 
 					<search-result
 						ng-click="searchModal.close()"

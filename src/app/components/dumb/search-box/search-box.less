@@ -1,5 +1,15 @@
+@import '../../../styles/variables/sizes.less';
+
 search-box {
-	display: inline-block;
+	display: block;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 998;
+	background: #ccc;
+	padding: 0.25em;
 
 	i {
 		font-size: 1rem!important;
@@ -8,12 +18,38 @@ search-box {
 
 input[type=text].searchBox {
 	font-size: 1em;
-	width: 15em;
+	width: 100%;
 	font-weight: bold;
-	background-color: transparent;
+	background-color: #fff;
+	padding-right: 2em;
 }
 
 .searchBoxContainer {
-	display: inline-block;
-	transition: width 0.2s;
+	display: block;
+	position: relative;
+}
+
+.searchButton {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+@media only screen and (min-width: @tablet) {
+	search-box {
+		width: 20em;
+		display: inline-block;
+		position: inherit;
+		padding: 0;
+		background-color: transparent;
+
+		i {
+			font-size: 1rem!important;
+		}
+	}
+
+	input[type=text].searchBox {
+		background-color: transparent;
+	}
 }

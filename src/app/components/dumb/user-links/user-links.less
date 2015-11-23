@@ -13,13 +13,20 @@
 	right: 0;
 	padding: 0;
 
+	background: transparent;
+	margin-top: 3.7em;
+
 	li {
-		padding: 0.5em 0.75em;
 		display: inline-block;
-		background: @background;
 
 		> a {
+			color: white;
+			padding: 0.5em 0.75em;
 			font-weight: bold;
+		}
+
+		search-box {
+			padding: 0.5em 0.75em;
 		}
 
 		i {
@@ -37,10 +44,17 @@ user-links {
 
 @media only screen and (min-width: @mobile) {
 	.userLinks {
-		justify-content: flex-end;
+		li {
+			> a {
+				color: #212121;
+			}
+		}
 	}
+}
 
-	user-links {
-
+@media only screen and (min-width: @tablet) {
+	.userLinks {
+		background: @background;
+		margin-top: 0;
 	}
 }

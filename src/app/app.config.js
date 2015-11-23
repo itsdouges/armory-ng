@@ -61,6 +61,10 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
 	});
 
   function penfold (id, path) {
+    if (!id) {
+      return;
+    }
+
     var er = encodeURIComponent;
     var url =   '?ua=' + er($window.navigator.userAgent) +
                 '&an=' + er($window.navigator.appName) +

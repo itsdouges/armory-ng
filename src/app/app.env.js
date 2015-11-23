@@ -10,8 +10,6 @@ if (__DEV__) {
 		endpoint: 'http://192.168.59.103/',
 		secret: 'bacon'
 	};
-
-	environment.penfoldId = '12';
 }
 
 if (__PROD__) {

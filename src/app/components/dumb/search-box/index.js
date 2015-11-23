@@ -19,11 +19,13 @@ export default function component () {
 						type="text"
 						ng-model="ctrl.searchTerm"
 						class="${styles.searchBox}" />
-				</div>
 
-				<button title="Search" class="${formStyles.clearButton}">
-					<i class="fa fa-search"></i>
-				</button>
+					<button 
+						title="Search" 
+						class="${formStyles.clearButton} ${styles.searchButton}">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
 			</form>
 		`
 	};

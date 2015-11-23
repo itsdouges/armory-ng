@@ -29,6 +29,9 @@ function component () {
 				mode="{{ ctrl.mode }}"
 				characters="ctrl.user.characters"></characters-grid>
 
+			<br/>
+			<br/>
+
 			<social-buttons 
 				send-toast="ctrl.sendToast"
 				location="{{ ctrl.location }}"></social-buttons>
