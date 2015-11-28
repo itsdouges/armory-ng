@@ -263,7 +263,7 @@ function component () {
 					class="${styles.emptySpecializationSpacer}"
 					ng-if="!ctrl.specializations[0]"></div>
 
-				<div>
+				<div class="${styles.specializationContainer}">
 					<div class="${styles.brushStrokeContainer}" ng-if="ctrl.specializations[0]">
 						<character-specialization 
 							ng-repeat="spec in ctrl.specializations"

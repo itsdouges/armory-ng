@@ -5,24 +5,24 @@ export default function component () {
 		restrict: 'E',
 		scope: {},
 		controller: Avatar,
-		controllerAs: 'ctrl',
+		controllerAs: 'avatar',
 		bindToController: {
 			name: '@',
 			imageLocation: '@',
 			link: '@'
 		},
 		template: `
-				<a ng-href="{{ ctrl.link }}">
-					<img 
-						class="${styles.image}"
-						ng-src="{{ ctrl.imageLocation }}" />
-				</a>
-				
-				<h2 class="${styles.name}">			
-					<a ng-href="{{ ctrl.link }}">
-						<strong>{{ ctrl.name }}</strong>
-					</a>
+			<a 
+				title="{{ avatar.name }}"
+				ng-href="{{ avatar.link }}">
+				<img 
+					class="${styles.image}"
+					ng-src="{{ avatar.imageLocation }}" />
+
+				<h2 class="${styles.name}">	
+					<strong>{{ avatar.name }}</strong>
 				</h2>
+			</a>
 		`
 	};
 }

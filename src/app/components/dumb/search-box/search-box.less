@@ -1,14 +1,8 @@
 @import '../../../styles/variables/sizes.less';
 
 search-box {
-	display: block;
 	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 998;
-	background: #ccc;
+	display: inline-block;
 	padding: 0.25em;
 
 	i {
@@ -18,9 +12,6 @@ search-box {
 
 input[type=text].searchBox {
 	font-size: 1em;
-	width: 100%;
-	font-weight: bold;
-	background-color: #fff;
 	padding-right: 2em;
 }
 
@@ -38,18 +29,6 @@ input[type=text].searchBox {
 
 @media only screen and (min-width: @tablet) {
 	search-box {
-		width: 20em;
-		display: inline-block;
-		position: inherit;
-		padding: 0;
-		background-color: transparent;
 
-		i {
-			font-size: 1rem!important;
-		}
-	}
-
-	input[type=text].searchBox {
-		background-color: transparent;
 	}
 }

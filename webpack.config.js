@@ -28,7 +28,7 @@ var environmentPlugin = new webpack.DefinePlugin({
 
 var appName = 'bundle';
 var localHost = '0.0.0.0';
-var localPort = '3030';
+var localPort = '3040';
 
 var cssLoaderSettings = '';
 var imageLoaderSettings = '';
@@ -41,7 +41,8 @@ var plugins = [],
 // https://github.com/ampedandwired/html-webpack-plugin/pull/81
 var htmlConfig = {
   template: './src/index.html',
-  inject: 'body'
+  inject: 'body',
+  favicon: './src/assets/images/favicon.ico'
 };
 
 console.log('Gonna get ' + ENVIRONMENT + ' up in here!');
@@ -78,7 +79,7 @@ plugins.push(environmentPlugin);
 
 var config = {
   cache: true,
-  entry: './src/app/app.module.js',
+  entry: './src/app/app.js',
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',

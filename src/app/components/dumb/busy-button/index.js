@@ -12,14 +12,16 @@ function component () {
 			buttonDisabled: '='
 		},
 		controller: BusyButton,
-		controllerAs: 'ctrl',
+		controllerAs: 'busyButton',
 		template:`
 			<button 
-				class="${formStyles.button} ${formStyles.primary}" 
-				ng-class="ctrl.busy ? '${accessibilityStyles.busy}' : ''" ng-disabled="ctrl.buttonDisabled || ctrl.busy">
-				<span ng-show="!ctrl.busy" ng-transclude></span>
+				class="${formStyles.button} ${formStyles.primary} ${styles.button}" 
+				ng-class="busyButton.busy ? '${accessibilityStyles.busy}' : ''" ng-disabled="busyButton.buttonDisabled || busyButton.busy">
+				<span ng-show="!busyButton.busy" ng-transclude></span>
 				
-				<progress-indicator size="mini" busy="ctrl.busy"></progress-indicator>
+				<progress-indicator 
+					size="mini"
+					busy="busyButton.busy"></progress-indicator>
 			</button>
 		`,
 		scope: {},

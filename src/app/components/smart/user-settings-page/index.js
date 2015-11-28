@@ -35,7 +35,7 @@ function component () {
         	class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
       	</change-password>
 
-	      <div class="${messageStyles.message}">
+	      <div class="${messageStyles.message}" style="text-align: center;">
 	      	Ready to leave? <a title="Signout" ng-click="ctrl.logout()" href=""><strong>Signout</strong>.</a>
       	</div>
 		`

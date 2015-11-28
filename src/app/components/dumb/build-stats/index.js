@@ -16,7 +16,7 @@ export default function component () {
 
 class BuildStats {
 	constructor () {
-		this.date = `Built on: ${env.build.date}`;
-		this.version = `Build hash: ${env.build.version}`;
+		this.date = `Built: ${env.build.date}`;
+		this.version = `Hash: ${env.build.version}`;
 	}
 }

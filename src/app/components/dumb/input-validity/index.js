@@ -6,19 +6,20 @@ function component () {
 	let directive = {
 		restrict: 'E',
 		controller: InputValidity,
-		controllerAs: 'ctrl',
+		controllerAs: 'inputValidity',
 		bindToController: {
 			valid: '=',
 			busy: '='
 		},
 		scope: {},
 		template: `
-			<span ng-if="!ctrl.busy">
-				<i ng-if="!ctrl.valid" class="fa fa-times"></i>
-				<i ng-if="ctrl.valid" class="fa fa-check"></i>
+			<span ng-if="!inputValidity.busy">
+				<i ng-class="inputValidity.getClass()"></i>
 			</span>
 
-			<progress-indicator busy="ctrl.busy"></progress-indicator>
+			<progress-indicator
+				size="mini"
+				busy="inputValidity.busy"></progress-indicator>
 		`
 	};
 
@@ -26,8 +27,12 @@ function component () {
 }
 
 class InputValidity {
-	constructor () {
-
+	getClass () {
+		if (this.valid) {
+			return ['fa', 'fa-check', styles.valid];
+		} else {
+			return ['fa', 'fa-times', styles.invalid];
+		}
 	}
 }
 

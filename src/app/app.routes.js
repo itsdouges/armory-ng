@@ -12,8 +12,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       template: `
         <header></header>
 
-        <ui-view 
-          columns-calculator
+        <ui-view
           toasts-enabled></ui-view>
 
         <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>

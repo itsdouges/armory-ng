@@ -19,10 +19,17 @@ function component () {
 						<label for="register-email">Email</label>
 					</div>
 
-					<div 
-						ng-if="ctrl.user.emailErrors" 
-						class="${message.message}">{{ ctrl.user.emailErrors[0] }}
-					</div>
+					<div
+						ng-if="ctrl.user.emailErrors || ctrl.user.aliasErrors || ctrl.user.passwordErrors" 
+						class="${message.title}"><strong>Uh-oh, pls fix?</strong></div>
+
+					<ul 
+						ng-if="ctrl.user.emailErrors || ctrl.user.aliasErrors || ctrl.user.passwordErrors" 
+						class="${message.message} ${message.error}">
+						<li ng-if="ctrl.user.emailErrors">{{ ctrl.user.emailErrors[0] }}</li>
+						<li ng-if="ctrl.user.aliasErrors">{{ ctrl.user.aliasErrors[0] }}</li>
+						<li ng-if="ctrl.user.passwordErrors">{{ ctrl.user.passwordErrors[0] }}</li>
+					</ul>
 
 					<div class="${forms.inputContainer}">
 						<input 
@@ -45,12 +52,6 @@ function component () {
 						<label for="register-alias">Alias</label>
 					</div>
 
-					<div 
-						ng-if="ctrl.user.aliasErrors" 
-						class="${message.message}">
-						{{ ctrl.user.aliasErrors[0] }}
-					</div>
-
 					<div class="${forms.inputContainer}">
 						<input 
 							placeholder="Alias" 
@@ -70,12 +71,6 @@ function component () {
 				<div>
 					<div class="${forms.labelContainer}">
 						<label for="register-password">Password</label>
-					</div>
-
-					<div 
-						ng-if="ctrl.user.passwordErrors" 
-						class="${message.message}">
-						{{ ctrl.user.passwordErrors[0] }}
 					</div>
 
 					<div class="${forms.inputContainer}">

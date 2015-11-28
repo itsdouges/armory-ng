@@ -5,6 +5,7 @@ import 'font-awesome-webpack';
 
 import './app.less';
 import '../assets/fonts/menomonia.css';
+import 'file!../assets/images/favicons/favicon.ico';
 
 import { polyfill } from 'es6-promise';
 polyfill();
@@ -16,7 +17,6 @@ import environment from './app.env';
 import CharacterSpecialization from './components/smart/character-specialization';
 import ChangeAlias from './components/smart/change-alias';
 import HeaderBlock from './components/smart/header';
-import Footer from './components/smart/footer';
 import ItemTooltip from './components/smart/item-tooltip';
 import LoginBox from './components/smart/login-box';
 import RegisterBox from './components/smart/register-box';
@@ -26,6 +26,7 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Footer from './components/dumb/footer';
 import SearchModal from './components/dumb/search-modal';
 import Avatar from './components/dumb/avatar';
 import SearchResult from './components/dumb/search-result';
@@ -55,7 +56,6 @@ import SocialButtons from './components/dumb/social-buttons';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
-import FooterSpacer from './directives/footer-spacer';
 import MouseFollow from './directives/mouse-follow';
 import ColumnsCalculator from './directives/columns-calculator';
 import ToastCreator from './directives/toast-creator';
@@ -104,7 +104,6 @@ const App = angular.module('gw2armory', [
 .directive('mouseFollow', MouseFollow)
 .directive('characterAttributes', CharacterAttributes)
 .directive('itemBlock', ItemBlock)
-.directive('footerSpacer', FooterSpacer)
 .directive('busyButton', BusyButton)
 .directive('itemTooltip', ItemTooltip)
 .directive('progressIndicator', ProgressIndicator)

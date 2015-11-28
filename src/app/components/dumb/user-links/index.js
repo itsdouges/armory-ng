@@ -15,7 +15,7 @@ function component () {
 		},
 		template: `
 			<ul class="${styles.userLinks}">
-				<li><search-box search="ctrl.search"></search-box></li>
+				<li class=${styles.searchBox}><search-box search="ctrl.search"></search-box></li>
 				<li ng-if="!ctrl.loggedIn"><a title="Join" ui-sref="main.no-auth.with-container.signup">join</a></li>
 				<li ng-if="!ctrl.loggedIn"><a title="Login" ui-sref="main.no-auth.with-container.login">login</a></li>
 				<li ng-if="ctrl.loggedIn"><a title="Me" ui-sref="main.with-auth.me">{{ ctrl.username }}</i></a></li>

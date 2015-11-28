@@ -1,15 +1,11 @@
 @import '../../../styles/variables/sizes.less';
 
-.logo {
-	width: 125px;
-	margin: 3rem 0 0;
-}
-
 .brushStroke {
-	background-image: url('../../../../assets/images/brush-stroke-2-1.png');
+	background-image: url('../../../../assets/images/brush-stroke-2-3.png');
+	background-repeat: no-repeat;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 40px;
 	height: 147px;
 	width: 698px;
 	z-index: -1;
@@ -21,16 +17,16 @@ header {
 	background-position: top center;
 	position: relative;
 	min-height: 147px;
+	flex-shrink: 0;
+	margin-bottom: 3em;
 }
 
 .title {
-	font-size: 0;
-	z-index: 5;
+	display: none;
 }
 
-@media only screen and (min-width: @tablet) {
-	.logo {
-		width: 150px;
-		margin: 2rem 2rem 0 2rem;
-	}
+.homeLink {
+	display: inline-block;
+	height: 147px;
+	width: 150px;
 }

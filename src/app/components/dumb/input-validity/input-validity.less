@@ -1,9 +1,22 @@
 input-validity {
 	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
+	display: flex;
+	align-items: center;
+	top: 2px;
+	right: 2px;
+	bottom: 2px;
 	padding: 0.2em;
-	font-size: 2em;
+	font-size: 1.5em;
 	pointer-events: none;
+	background: white;
+}
+
+.valid {
+	color: green;
+	opacity: 0.5;
+}
+
+.invalid {
+	color: red;
+	opacity: 0.5;
 }

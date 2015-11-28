@@ -19,7 +19,7 @@
 
 .primary {
 	border: none;
-	background-color: @accent;
+	background-color: green;
 	color: white;
 }
 
@@ -32,32 +32,34 @@
 	margin: 0;
 	width: 3em;
 	height: 3em;
-	transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+	transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s;
 	font-size: 1.3em;
 	opacity: 1;
 	font-weight: bold;
 	border-radius: 50%;
+	opacity: 0.5;
 	.low;
 }
 
 .button[disabled] {
-	background-color: gray;
-	color: black;
+	background-color: red;
 }
 
 .button[disabled]:hover,
 .button[disabled]:focus {
 	.low;
+	opacity: 0.5;
 }
 
 .button:hover,
 .button:focus {
 	.high;
+	opacity: 0.8;
 }
 
 input {
 	border: none;
-	border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 input[type=text],

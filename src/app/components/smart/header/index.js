@@ -7,7 +7,7 @@ import stateGo from 'redux-ui-router/lib/state-go';
 
 import styles from './header.less';
 import positionStyles from  '../../../styles/positioning/positioning.less';
-import logoSrc from '../../../../assets/images/gw2-hot-3.png';
+import logoSrc from '../../../../assets/images/gw2-hot-4.png';
 
 function component () {
 	let directive = {
@@ -17,13 +17,13 @@ function component () {
 		scope: {},
 		template:`
 			<div class="${styles.brushStroke}"></div>
-
-			<h1 class="${styles.title}">
-				<a title="Guild Wars 2 Armory" href="/">
-					<img class="${styles.logo}" src="${logoSrc}" />
-					<span>Guild Wars 2 Armory</span>
-				</a>
-			</h1>
+			
+			<a
+			class="${styles.homeLink}"
+			href="/"
+			title="Home">
+				<h1 class="${styles.title}">Guild Wars 2 Armory</h1>
+			</a>
 
 			<user-links
 				search="ctrl.search"

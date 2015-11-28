@@ -19,11 +19,16 @@ function component () {
 		},
 		template: `
 			<form>
-				<div 
-					ng-if="ctrl.errors[0]" 
-					class="${messageStyles.message}">
-					{{ ctrl.errors[0] }}
+				<div
+					ng-if="ctrl.errors" 
+					class="${messageStyles.title}"><strong>Uh-oh, pls fix?</strong>
 				</div>
+
+				<ul 
+					ng-if="ctrl.errors[0]" 
+					class="${messageStyles.message} ${messageStyles.error}">
+					<li>{{ ctrl.errors[0] }}</li>
+				</ul>
 
 				<div class="${formStyles.inputContainer}">
 					<input 

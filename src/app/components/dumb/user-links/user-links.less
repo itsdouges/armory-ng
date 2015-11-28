@@ -1,32 +1,24 @@
 @import '../../../styles/variables/colours.less';
 @import '../../../styles/variables/sizes.less';
+@import '../../../styles/box-shadow/box-shadow.less';
 
 .userLinks {
 	display: flex;
 	font-size: 1em;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	flex-direction: row;
 
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 0;
-
-	background: transparent;
-	margin-top: 3.7em;
+	li:nth-child(2) {
+		margin-left: auto;
+	}
 
 	li {
 		display: inline-block;
+		font-weight: bold;
 
 		> a {
-			color: white;
-			padding: 0.5em 0.75em;
-			font-weight: bold;
-		}
-
-		search-box {
-			padding: 0.5em 0.75em;
+			padding: 0.5em;
 		}
 
 		i {
@@ -35,26 +27,25 @@
 	}
 }
 
-user-links {
-	display: block;
-	padding: 0.2em;
-	width: 100%;
-	padding: 0.5em;
+.searchBox {
+	width: 28em;
 }
 
-@media only screen and (min-width: @mobile) {
-	.userLinks {
-		li {
-			> a {
-				color: #212121;
-			}
-		}
-	}
+user-links {
+	padding-right: 0.2em;
+	display: block;
+	z-index: 998;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: @background;
+	.low;
 }
 
 @media only screen and (min-width: @tablet) {
 	.userLinks {
-		background: @background;
-		margin-top: 0;
+
 	}
 }

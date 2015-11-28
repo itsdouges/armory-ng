@@ -15,7 +15,7 @@ function component () {
 			'size': '@'
 		},
 		template: `
-			<i ng-if="ctrl.busy" class="${iconStyles.icon} {{ ctrl.getIconSize(ctrl.size) }} ${styles.progress}">
+			<i ng-if="ctrl.busy" ng-class="ctrl.getIconSize(ctrl.size)" class="${iconStyles.icon} ${styles.progress}">
 				<span class="${accessibilityStyles.hideText}">Loading..</span>
 			</i>
 		`

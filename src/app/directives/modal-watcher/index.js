@@ -22,10 +22,7 @@ export default function component () {
 					close="modalWatcher.closeSearchModal"></search-modal>
 			</div>
 
-			<div 
-				class="match-height"
-				ng-transclude
-				footer-spacer></div>
+			<ng-transclude></ng-transclude>
 		`
 	};
 }

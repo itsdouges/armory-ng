@@ -16,13 +16,13 @@
     "url-loader": "^0.5.6"
   },
   "scripts": {
-    "build:prod": "webpack --env PROD",
+    "build:prod": "webpack -p --env PROD",
     "build:dev": "webpack --env DEV",
     "start": "webpack --watch --inline --hot --env START:DEV",
-    "start:prod": "webpack --env START:PROD",
+    "start:prod": "webpack -p --env START:PROD",
     "deploy:beta": "node ./deploy --env BETA",
-    "test": "karma start --single-run --env TEST:SINGLE",
-    "test:auto": "karma start --env TEST:AUTO"
+    "test": "karma start --single-run --env TEST",
+    "test:auto": "karma start --env TEST"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",

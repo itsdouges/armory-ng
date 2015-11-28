@@ -38,7 +38,7 @@ export default function component () {
 				<button 
 					title="Search" 
 					class="${formStyles.clearButton} ${styles.searchButton}">
-					<i class="fa fa-search"></i>
+					<a class="${styles.searchButtonLink}"><i class="fa fa-search"></i></a>
 				</button>
 			</form>
 
