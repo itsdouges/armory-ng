@@ -36,7 +36,7 @@ function component ($window, debounce, $timeout) {
 		</p>
 
 		<p>
-			Found a bug? Thought of a kick-ass feature? <a href="https://www.reddit.com/r/gw2armory"><strong>Make a post on reddit</strong></a>. Be sure to check out the <a href="https://trello.com/b/qGvDe622"><strong>roadmap on trello first!</strong>!
+			Found a bug? Thought of a kick-ass feature? <a href="https://www.reddit.com/r/gw2armory"><strong>Make a post on reddit</strong></a>. Be sure to check out the <a href="https://trello.com/b/qGvDe622"><strong>roadmap on trello first!</strong></a>
 		</p>
 
 		<build-stats></build-stats>
