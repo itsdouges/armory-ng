@@ -42,6 +42,14 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       },
       template: `
         <news-block>
+          <h2>whoops | 30/11</h2>
+
+          <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
+            <p>Hey guys, you may notice some data loss, if you do sorry! This has now been fixed. In other news the layout of the site is slowly being tweaked and improved (see: sticky navbar, form colours, footer), and new features being implemented (see: searching). If you have any feedback feel free to pass it along to the <a href="https://www.reddit.com/r/gw2armory"><strong>gw2armory subreddit!</strong></a> As always there's more to come, stay tuned.</p>
+
+            ~ madou
+          </div>
+
           <h2>guilds | 15/11</h2>
 
           <div class="${cardStyles.card} ${cardStyles.medium} ${cardStyles.primary}">
