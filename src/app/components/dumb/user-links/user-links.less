@@ -9,6 +9,10 @@
 	justify-content: flex-start;
 	flex-direction: row;
 
+	li:nth-child(1) {
+		padding: 0;
+	}
+
 	li:nth-child(2) {
 		margin-left: auto;
 	}
@@ -16,10 +20,8 @@
 	li {
 		display: inline-block;
 		font-weight: bold;
-
-		> a {
-			padding: 0.5em;
-		}
+		flex-shrink: 0;
+		padding: 0 0.5em;
 
 		i {
 			font-size: 1.8em;
@@ -27,8 +29,18 @@
 	}
 }
 
-.searchBox {
+li.searchBox {
 	width: 28em;
+	flex-shrink: 1;
+}
+
+li.hideWhenSmall,
+.hideWhenSmall {
+	display: none;
+}
+
+i.showWhenSmall {
+	display: inline-block;
 }
 
 user-links {
@@ -45,7 +57,12 @@ user-links {
 }
 
 @media only screen and (min-width: @tablet) {
-	.userLinks {
+	li.hideWhenSmall,
+	.hideWhenSmall {
+		display: inline-block;
+	}
 
+	i.showWhenSmall {
+		display: none;
 	}
 }

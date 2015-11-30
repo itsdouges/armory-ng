@@ -9,13 +9,21 @@ function component ($window, debounce, $timeout) {
 		restrict: 'E',
 		scope: {},
 		controller: Footer,
-		controllerAs: 'ctrl',
+		controllerAs: 'footer',
 		template: `
+		<p>
+			© 2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
+		</p>
+
+		<p>
+			Found a bug? Thought of a kick-ass feature? <a href="https://www.reddit.com/r/gw2armory"><strong>Make a post on reddit</strong></a>. Be sure to check out the <a href="https://trello.com/b/qGvDe622"><strong>roadmap on trello first!</strong></a>
+		</p>
+
 		<ul class="${styles.links}">
 			<li>
 				<a
 					target="_blank" 
-					title="gw2armory roadmap" 
+					title="Planned features" 
 					href="https://trello.com/b/qGvDe622">
 					<i class="fa fa-trello"></i>
 				</a>
@@ -30,14 +38,6 @@ function component ($window, debounce, $timeout) {
 				</a>
 			</li>
 		</ul>
-
-		<p>
-			© 2010–2015 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
-		</p>
-
-		<p>
-			Found a bug? Thought of a kick-ass feature? <a href="https://www.reddit.com/r/gw2armory"><strong>Make a post on reddit</strong></a>. Be sure to check out the <a href="https://trello.com/b/qGvDe622"><strong>roadmap on trello first!</strong></a>
-		</p>
 
 		<build-stats></build-stats>
 		`
