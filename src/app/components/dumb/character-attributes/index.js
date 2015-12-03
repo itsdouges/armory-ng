@@ -112,11 +112,27 @@ function component () {
 				</div>
 
 				<div 
+					ng-mouseenter="ctrl.showTooltip({ show: true, type: 'Concentration' })"
+					ng-mouseleave="ctrl.showTooltip({ show: false })"
+					class="${styles.attribute}">
+					<i class="${iconStyles.icon} ${iconStyles.micro} ${styles.attributeIcon} ${styles.boon}"></i>
+					<span>{{ ctrl.attributes.concentration }}</span>
+				</div>
+
+				<div 
 					ng-mouseenter="ctrl.showTooltip({ show: true, type: 'Healing Power' })"
 					ng-mouseleave="ctrl.showTooltip({ show: false })"
 					class="${styles.attribute}">
 					<i class="${iconStyles.icon} ${iconStyles.micro} ${styles.attributeIcon} ${styles.healing}"></i>
 					<span>{{ ctrl.attributes.healing }}</span>
+				</div>
+
+				<div 
+					ng-mouseenter="ctrl.showTooltip({ show: true, type: 'Expertise' })"
+					ng-mouseleave="ctrl.showTooltip({ show: false })"
+					class="${styles.attribute}">
+					<i class="${iconStyles.icon} ${iconStyles.micro} ${styles.attributeIcon} ${styles.conditionDuration}"></i>
+					<span>{{ ctrl.attributes.expertise }}</span>
 				</div>
 
 				<div 
