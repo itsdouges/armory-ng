@@ -17,13 +17,6 @@ function component () {
 		scope: {},
 		template:`
 			<div class="${styles.brushStroke}"></div>
-			
-			<a
-			class="${styles.homeLink}"
-			href="/"
-			title="Home">
-				<h1 class="${styles.title}">Guild Wars 2 Armory</h1>
-			</a>
 
 			<user-links
 				search="ctrl.search"
