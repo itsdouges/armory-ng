@@ -53,7 +53,7 @@ switch (ENVIRONMENT) {
     plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new DedupePlugin());
     plugins.push(new NoErrorsPlugin());
-    outputFile = appName + '.min.js';
+    outputFile = appName + '.min';
     htmlConfig.minify = {
       removeComments: true,
       collapseWhitespace: true
@@ -66,7 +66,7 @@ switch (ENVIRONMENT) {
   case 'START:DEV':
   case 'DEV':
   default:
-    outputFile = appName + '.js';
+    outputFile = appName;
     htmlConfig.minify = false;
     cssLoaderSettings = 'css?modules!autoprefixer';
     imageLoaderSettings = 'image-webpack';
@@ -83,10 +83,17 @@ var config = {
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',
-    filename: outputFile,
+    filename: outputFile + '.js',
     publicPath: ''
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/, 
+        loader: 'eslint', 
+        exclude: /node_modules/
+      }
+    ],
     loaders: [
       { 
         test: /\.js$/, 
