@@ -2,13 +2,13 @@
   "name": "gw2armory",
   "version": "0.0.0",
   "scripts": {
-    "build:prod": "webpack -p --env PROD",
-    "build:dev": "webpack --env DEV",
-    "start": "webpack --watch --inline --hot --env START:DEV",
-    "start:prod": "webpack -p --env START:PROD",
-    "deploy:beta": "node ./deploy --env BETA",
+    "start": "webpack-dev-server --watch --inline --hot --env DEV",
+    "start:prod": "webpack-dev-server -p --env PROD",
     "test": "karma start --single-run --env TEST",
-    "test:auto": "karma start --env TEST"
+    "test:watch": "karma start --env TEST",
+    "build": "webpack --env DEV",
+    "build:prod": "webpack -p --env PROD",
+    "deploy:beta": "node ./deploy --env BETA"
   },
   "dependencies": {
     "angular": "1.4.x",
@@ -43,6 +43,7 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.0.0",
     "eslint-loader": "^1.1.1",
+    "eslint-plugin-react": "^3.11.3",
     "jasmine": "^2.3.2",
     "karma": "~0.13",
     "karma-babel-preprocessor": "^5.2.1",

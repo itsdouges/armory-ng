@@ -29,12 +29,10 @@ var environmentPlugin = new webpack.DefinePlugin({
 var appName = 'bundle';
 var localHost = '0.0.0.0';
 var localPort = '3040';
-
 var cssLoaderSettings = '';
 var imageLoaderSettings = '';
-
-var plugins = [], 
-  outputFile;
+var plugins = []; 
+var outputFile;
 
 // https://github.com/ampedandwired/html-webpack-plugin
 // minify bug:
@@ -50,6 +48,7 @@ console.log('Gonna get ' + ENVIRONMENT + ' up in here!');
 switch (ENVIRONMENT) {
   case 'START:PROD':
   case 'PROD':
+    devtool = 'source-map';
     plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new DedupePlugin());
     plugins.push(new NoErrorsPlugin());
@@ -66,6 +65,7 @@ switch (ENVIRONMENT) {
   case 'START:DEV':
   case 'DEV':
   default:
+    devtool = 'inline-source-map';
     outputFile = appName;
     htmlConfig.minify = false;
     cssLoaderSettings = 'css?modules!autoprefixer';
@@ -80,7 +80,7 @@ plugins.push(environmentPlugin);
 var config = {
   cache: true,
   entry: './src/app/app.js',
-  devtool: 'source-map',
+  devtool: devtool,
   output: {
     path: __dirname + '/dist',
     filename: outputFile + '.js',
@@ -139,30 +139,10 @@ var config = {
     root: path.resolve('./src'),
     extensions: ['', '.js']
   },
-  plugins: plugins
+  plugins: plugins,
+  devServer: {
+    historyApiFallback: true
+  }
 };
-
-if (ENVIRONMENT.indexOf('START') >= 0) {
-  new WebpackDevServer(webpack(config), {
-    contentBase: './dist',
-    hot: true,
-    debug: true,
-    historyApiFallback: true,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: true
-    },
-  }).listen(localPort, localHost, function (err, result) {
-    if (err) {
-      console.log(err);
-    }
-  });
-
-  var fqdn = 'http://' + (localHost === '0.0.0.0' ? 'localhost' : localHost) + ':' + localPort;
-
-  console.log('-------------------------');
-  console.log('Starting webpack server @ ' + fqdn);
-  console.log('-------------------------');
-}
 
 module.exports = config;
