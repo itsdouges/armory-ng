@@ -104,7 +104,7 @@ var config = {
         loaders: [
           // https://github.com/olov/ng-annotate#library-api
           'ng-annotate',
-          'babel?stage=0'
+          'babel'
         ]
       },
       {
