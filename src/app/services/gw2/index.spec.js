@@ -21,11 +21,11 @@ describe('gw2 service', () => {
 	});
 
 	describe('health calc', () => {
-		it('should throw if profession is not handled', () => {
-			expect(() => {
-				gw2.calculateBonusHealth(1, 'fake');
-			}).toThrow('Profession not handled');
-		});
+		// it('should throw if profession is not handled', () => {
+		// 	expect(() => {
+		// 		gw2.calculateBonusHealth(1, 'fake');
+		// 	}).toThrow('Profession not handled');
+		// });
 
 		describe('high', () => {
 			['Warrior', 'Necromancer'].forEach((profession) => {

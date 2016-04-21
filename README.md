@@ -33,8 +33,4 @@ npm run build:dev
 npm run build:prod
 ```
 
-If you feel like contributing give me a message and we can talk.
-
-Images © 2010–2016 ArenaNet, LLC. All rights reserved. Guild Wars, Guild Wars 2, Guild Wars 2: Heart of Thorns, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
-
-Everything else © 2016 gw2armory.com/Michael Dougall
+© 2016 gw2armory.com
