@@ -1,3 +1,19 @@
 {
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+    "space-before-function-paren": [2, "always"],
+    "comma-dangle": 0,
+    "default-case": 0
+  },
+  "globals": {
+    "__DEV__": true,
+    "__PROD__": true,
+    "__DATE__": true,
+    "__VERSION__": true
+  }
 }

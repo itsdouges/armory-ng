@@ -15,7 +15,7 @@ export default function component () {
 				<div class="${styles.searchBoxContainer}">
 					<input
 						required
-						placeholder="Search gw2armory, find characters, users, and guilds!"
+						placeholder="Find characters, users, and guilds.."
 						type="text"
 						ng-model="ctrl.searchTerm"
 						class="${styles.searchBox}" />

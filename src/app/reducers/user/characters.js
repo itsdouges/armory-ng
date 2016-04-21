@@ -1,10 +1,8 @@
-"use strict";
-
 import { actions } from '../../actions/user/characters';
 
 function fetchMyCharactersReducer (state, action) {
 	let newState = {
-		...state
+		...state,
 	};
 
 	newState.characters = action.payload;
@@ -14,7 +12,7 @@ function fetchMyCharactersReducer (state, action) {
 
 function fetchingMyCharactersReducer (state, action) {
 	let newState = {
-		...state
+		...state,
 	};
 
 	newState.fetchingCharacters = action.payload;

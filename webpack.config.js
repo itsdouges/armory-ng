@@ -22,7 +22,7 @@ if (!ENVIRONMENT) {
 var environmentPlugin = new webpack.DefinePlugin({
   __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
   __PROD__: ENVIRONMENT === 'PROD',
-  __VERSION__: JSON.stringify(VERSION),
+  __VERSION__: JSON.stringify(VERSION.slice(0, 7)),
   __DATE__: JSON.stringify(new Date().toGMTString())
 });
 
@@ -86,14 +86,17 @@ var config = {
     filename: outputFile + '.js',
     publicPath: ''
   },
+  eslint: {
+    failOnError: false,
+  },
   module: {
-    preLoaders: [
-      {
-        test: /\.js$/, 
-        loader: 'eslint', 
-        exclude: /node_modules/
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.js$/, 
+    //     loader: 'eslint', 
+    //     exclude: /node_modules/
+    //   }
+    // ],
     loaders: [
       { 
         test: /\.js$/, 
