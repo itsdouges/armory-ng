@@ -46,10 +46,10 @@ class Authentication {
 				}).then((response) => {
 					this.$ngRedux.dispatch(actionCreators.authenticateUser(response.data));
 					return Promise.resolve();
-			}.bind(this), (response) => {
+			}, (response) => {
 				this.$ngRedux.dispatch(actionCreators.clearUserData());
 				return Promise.reject();
-			}.bind(this));
+			});
 		} else {
 			this.$ngRedux.dispatch(actionCreators.clearUserData());
 			return Promise.reject();

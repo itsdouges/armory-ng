@@ -22,7 +22,7 @@ class ToastCreator {
 
 		$scope.$watch(() => {
 			return this.toast;
-		}.bind(this), (current, previous) => {
+		}, (current, previous) => {
 			if (current !== previous) {
         const toast = $compile(`<toast message="${current.message}"></toast>`)($scope);
         $element.parent().prepend(toast);

@@ -1,7 +1,7 @@
 'use strict';
 
 import 'normalize-css';
-import 'font-awesome-webpack';
+import 'font-awesome/css/font-awesome.css';
 
 import './app.less';
 import '../assets/fonts/menomonia.css';

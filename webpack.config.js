@@ -34,9 +34,6 @@ var imageLoaderSettings = '';
 var plugins = []; 
 var outputFile;
 
-// https://github.com/ampedandwired/html-webpack-plugin
-// minify bug:
-// https://github.com/ampedandwired/html-webpack-plugin/pull/81
 var htmlConfig = {
   template: './src/index.html',
   inject: 'body',
@@ -58,7 +55,7 @@ switch (ENVIRONMENT) {
       collapseWhitespace: true
     };
     htmlConfig.hash = true;
-    cssLoaderSettings = 'css?modules&minimize!autoprefixer';
+    cssLoaderSettings = 'css?modules&minimize&importLoaders=1!postcss';
     imageLoaderSettings = 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}';
     break;
 
@@ -68,7 +65,7 @@ switch (ENVIRONMENT) {
     devtool = 'inline-source-map';
     outputFile = appName;
     htmlConfig.minify = false;
-    cssLoaderSettings = 'css?modules!autoprefixer';
+    cssLoaderSettings = 'css?modules&importLoaders=1!postcss';
     imageLoaderSettings = 'image-webpack';
     break;
 }
@@ -102,25 +99,26 @@ var config = {
         test: /\.js$/, 
         exclude: /node_modules/, 
         loaders: [
-          // https://github.com/olov/ng-annotate#library-api
           'ng-annotate',
           'babel'
         ]
       },
       {
-        // https://github.com/webpack/less-loader
-        // https://github.com/webpack/css-loader
-        // https://github.com/webpack/style-loader
         test: /\.less$/,
         exclude: /node_modules/, 
         loader: ExtractTextPlugin.extract('style', cssLoaderSettings + '!less')
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         loader: ExtractTextPlugin.extract('style', cssLoaderSettings)
       },
       {
-        // https://github.com/tcoopman/image-webpack-loader
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: ExtractTextPlugin.extract('style', 'css?minimize')
+      },
+      {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
         exclude: /node_modules/, 
         loaders: [
@@ -128,13 +126,25 @@ var config = {
           imageLoaderSettings
         ]
       },
-      { 
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-        loader: "url?limit=20000&mimetype=application/font-woff&name=fonts/[sha512:hash:base64:7].[ext]" 
-      },
-      { 
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-        loader: "url?limit=20000&name=fonts/[sha512:hash:base64:7].[ext]" 
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      }, 
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      }, 
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      }, 
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      }, 
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
       }
     ]
   },
