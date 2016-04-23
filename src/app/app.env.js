@@ -19,7 +19,6 @@ if (__PROD__) {
       secret: 'sekritsauce',
     };
 
-    environment.penfoldId = '10';
   } else {
     environment.api = {
       endpoint: 'https://api.gw2armory.com/',

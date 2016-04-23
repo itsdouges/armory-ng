@@ -19,13 +19,6 @@ if (!ENVIRONMENT) {
   throw 'WEBPACK_ENV not defined!';
 }
 
-var environmentPlugin = new webpack.DefinePlugin({
-  __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
-  __PROD__: ENVIRONMENT === 'PROD',
-  __VERSION__: JSON.stringify(VERSION.slice(0, 7)),
-  __DATE__: JSON.stringify(new Date().toGMTString())
-});
-
 var appName = 'bundle';
 var localHost = '0.0.0.0';
 var localPort = '3040';
@@ -33,6 +26,7 @@ var cssLoaderSettings = '';
 var imageLoaderSettings = '';
 var plugins = []; 
 var outputFile;
+var environmentLongName;
 
 var htmlConfig = {
   template: './src/index.html',
@@ -45,6 +39,7 @@ console.log('Gonna get ' + ENVIRONMENT + ' up in here!');
 switch (ENVIRONMENT) {
   case 'START:PROD':
   case 'PROD':
+    environmentLongName = 'production';
     devtool = 'source-map';
     plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new DedupePlugin());
@@ -62,6 +57,7 @@ switch (ENVIRONMENT) {
   case 'START:DEV':
   case 'DEV':
   default:
+    environmentLongName = 'development';
     devtool = 'inline-source-map';
     outputFile = appName;
     htmlConfig.minify = false;
@@ -69,6 +65,14 @@ switch (ENVIRONMENT) {
     imageLoaderSettings = 'image-webpack';
     break;
 }
+
+var environmentPlugin = new webpack.DefinePlugin({
+  __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
+  __PROD__: ENVIRONMENT === 'PROD',
+  __VERSION__: JSON.stringify(VERSION.slice(0, 7)),
+  __DATE__: JSON.stringify(new Date().toGMTString()),
+  'process.env.NODE_ENV': JSON.stringify(environmentLongName)
+});
 
 plugins.push(new ExtractTextPlugin('styles.css'));
 plugins.push(new HtmlWebpackPlugin(htmlConfig));

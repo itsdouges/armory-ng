@@ -201,6 +201,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     });
 
+  // @ngInject
   $urlRouterProvider.otherwise(($injector, $location) => {
      var state = $injector.get('$state');
      state.go('main.no-auth.with-container.not-found');
