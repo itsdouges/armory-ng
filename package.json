@@ -52,6 +52,7 @@
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "~0.2.0",
     "karma-webpack": "^1.7.0",
+    "phantomjs": "^2.1.7",
     "redux-logger": "^1.0.8",
     "s3": "^4.4.0",
     "webpack-dev-server": "^1.12.0",
