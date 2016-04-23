@@ -20,8 +20,8 @@ switch (ENVIRONMENT) {
 		deployProd();
 		break;
 
-	case 'BETA':
-		deployBeta();
+	case 'PREVIEW':
+		deployPreview();
 		break;
 
 	default:
@@ -38,12 +38,20 @@ function getS3Client () {
 	});
 }
 
-function deployBeta () {
-	console.log('Deploying beta.gw2armory.com');
+function deployPreview () {
+	console.log('Deploying preview.gw2armory.com');
 
 	var s3 = getS3Client();
 	
-	sync(s3, 'beta.gw2armory.com', './dist/');
+	sync(s3, 'preview.gw2armory.com', './dist/');
+}
+
+function deployProd () {
+	console.log('Deploying gw2armory.com');
+
+	var s3 = getS3Client();
+	
+	sync(s3, 'gw2armory.com', './dist/');
 }
 
 function calculateDaysToSeconds (days) {
