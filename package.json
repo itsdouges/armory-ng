@@ -8,7 +8,7 @@
     "test:watch": "karma start --env TEST",
     "build": "webpack --env DEV",
     "build:prod": "webpack -p --env PROD",
-    "deploy": "node ./deploy",
+    "deploy": "node ./deploy"
   },
   "dependencies": {
     "angular": "^1.4.0",
