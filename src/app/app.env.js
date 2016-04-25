@@ -13,19 +13,17 @@ if (__DEV__) {
 }
 
 if (__PROD__) {
-  if (window && window.location.origin.indexOf('beta') >= -1) {
+  // if (window && window.location.origin.indexOf('preview') >= -1) {
     environment.api = {
       endpoint: 'http://api.beta.gw2armory.com/',
       secret: 'sekritsauce',
     };
-
-    environment.penfoldId = '10';
-  } else {
-    environment.api = {
-      endpoint: 'https://api.gw2armory.com/',
-      secret: 'sauce',
-    };
-  }
+  // } else {
+  //   environment.api = {
+  //     endpoint: 'https://api.gw2armory.com/',
+  //     secret: 'sauce',
+  //   };
+  // }
 }
 
 environment.build = {
