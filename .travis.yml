@@ -10,6 +10,8 @@ deploy:
   skip_cleanup: true
   provider: script
   script: bash deploy/deploy.sh
+  on:
+    all_branches: true
 cache:
   directories:
     - node_modules
