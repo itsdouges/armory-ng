@@ -14,7 +14,7 @@ if (__DEV__) {
 
 if (__PROD__) {
   environment.api = {
-    endpoint: 'http://api.gw2armory.com/',
+    endpoint: '//api.gw2armory.com/',
     secret: 'sekritsauce',
   };
 }
