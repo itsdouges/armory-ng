@@ -5,6 +5,7 @@ var argv = require('yargs').argv;
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var path = require('path');
+var autoprefixer = require('autoprefixer');
 
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var DedupePlugin = webpack.optimize.DedupePlugin;
@@ -152,6 +153,7 @@ var config = {
       }
     ]
   },
+  postcss: [autoprefixer],
   resolve: {
     root: path.resolve('./src'),
     extensions: ['', '.js']

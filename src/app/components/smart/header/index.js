@@ -1,5 +1,3 @@
-'use strict';
-
 import { actionCreators } from '../../../actions/user/auth';
 import { userDataSelector } from '../../../selectors/user';
 import searchActions from '../../../actions/search';

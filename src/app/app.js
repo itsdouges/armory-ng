@@ -1,11 +1,6 @@
-'use strict';
-
-import 'normalize-css';
-import 'font-awesome/css/font-awesome.css';
-
-import './app.less';
-import '../assets/fonts/menomonia.css';
 import 'file!../assets/images/favicons/favicon.ico';
+
+import 'font-awesome/css/font-awesome.css';
 
 import { polyfill } from 'es6-promise';
 polyfill();
