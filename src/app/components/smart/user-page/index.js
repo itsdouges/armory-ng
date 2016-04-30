@@ -21,7 +21,7 @@ function component () {
 				<avatar
 					ng-if="ctrl.user.alias"
 					name="{{ ctrl.user.alias }}"
-					image-location="http://api.adorable.io/avatars/200/{{ ctrl.user.alias }}.png"></avatar>
+					image-location="//api.adorable.io/avatars/200/{{ ctrl.user.alias }}.png"></avatar>
 			</div>
 			
 			<characters-grid

@@ -33,7 +33,7 @@ function component () {
 						title="Me"
 						small-mode="true"
 						link="/#!/me"
-						image-location="http://api.adorable.io/avatars/20/{{ ctrl.username }}.png"></avatar>
+						image-location="//api.adorable.io/avatars/20/{{ ctrl.username }}.png"></avatar>
 				</li>
 				<li ng-if="ctrl.loggedIn" class="${styles.hideWhenSmall}"><a title="Me" ui-sref="main.with-auth.me">{{ ctrl.username }}</i></a></li>
 				<li ng-if="ctrl.loggedIn"><a title="Settings" ui-sref="main.with-auth.with-container.settings"><span class="${styles.hideWhenSmall}">settings</span><i class="fa fa-cog ${styles.showWhenSmall}"></i></a></li>

@@ -56,7 +56,7 @@ class SearchResult {
 
 		switch (this.data.resource) {
 			case 'users':
-				url = `url('http://api.adorable.io/avatars/200/${this.data.name}.png')`;
+				url = `url('//api.adorable.io/avatars/200/${this.data.name}.png')`;
 				break;
 
 			case 'guilds':

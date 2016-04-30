@@ -283,7 +283,7 @@ function component () {
 				<avatar
 					name="{{ ctrl.character.alias }}"
 					link="/#!/{{ ctrl.character.alias }}"
-					image-location="http://api.adorable.io/avatars/200/{{ ctrl.character.alias }}.png"></avatar>
+					image-location="//api.adorable.io/avatars/200/{{ ctrl.character.alias }}.png"></avatar>
 			</div>
 		`
 	};
