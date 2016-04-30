@@ -13,19 +13,19 @@ export default function component () {
 			smallMode: '@'
 		},
 		template: `
-			<a 
-				class="${styles.inherit}"
-				title="{{ avatar.name }}"
-				ng-href="{{ avatar.link }}">
-				<img
-					ng-class="avatar.smallMode ? '${styles.smallMode}' : ''"
-					class="${styles.image} ${styles.inherit}"
-					ng-src="{{ avatar.imageLocation }}" />
+		<a 
+			class="${styles.inherit}"
+			title="{{ avatar.name }}"
+			ng-href="{{ avatar.link }}">
+			<img
+				ng-class="avatar.smallMode ? '${styles.smallMode}' : ''"
+				class="${styles.image} ${styles.inherit}"
+				ng-src="{{ avatar.imageLocation }}" />
 
-				<h2 ng-if="!avatar.smallMode" class="${styles.name}">	
-					<strong>{{ avatar.name }}</strong>
-				</h2>
-			</a>
+			<h2 ng-if="!avatar.smallMode" class="${styles.name}">	
+				<strong>{{ avatar.name }}</strong>
+			</h2>
+		</a>
 		`
 	};
 }

@@ -33,7 +33,7 @@ export default function component () {
 					type="text"
 					ng-model="searchModal.term"
 					class="${styles.searchTextbox}"
-					placeholder="Search characters, users, and guilds!" />
+					placeholder="Search Guild Wars 2 Armory" />
 
 				<button 
 					title="Search" 

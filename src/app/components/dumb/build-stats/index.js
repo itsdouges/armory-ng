@@ -8,7 +8,7 @@ export default function component () {
 		controller: BuildStats,
 		controllerAs: 'ctrl',
 		template: `
-			<div>{{ ctrl.data }}</div>
+			<div>{{ ctrl.data }} build</div>
 		`
 	};
 }

@@ -71,7 +71,7 @@ var environmentPlugin = new webpack.DefinePlugin({
   __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
   __PROD__: ENVIRONMENT === 'PROD',
   __VERSION__: JSON.stringify(VERSION.slice(0, 7)),
-  __DATE__: JSON.stringify(new Date().toGMTString()),
+  __DATE__: JSON.stringify(new Date().toLocaleDateString()),
   'process.env.NODE_ENV': JSON.stringify(environmentLongName)
 });
 

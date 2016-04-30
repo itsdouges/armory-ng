@@ -15,15 +15,15 @@ export default function component () {
 				<div class="${styles.searchBoxContainer}">
 					<input
 						required
-						placeholder="Find characters, users, and guilds.."
+						placeholder="Search Guild Wars 2 Armory"
 						type="text"
 						ng-model="ctrl.searchTerm"
 						class="${styles.searchBox}" />
 
 					<button 
-						title="Search" 
+						title="Search"
 						class="${formStyles.clearButton} ${styles.searchButton}">
-						<a class="fa fa-search"></a>
+						<i class="fa fa-search"></i>
 					</button>
 				</div>
 			</form>
