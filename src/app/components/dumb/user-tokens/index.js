@@ -22,12 +22,12 @@ function component () {
 		},
 		template: `
 			<div class="${messageStyles.message}">
-				Need more api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>You should create one! <i class="fa fa-external-link"></i></strong></a>. Ensure you select characters, builds, and pvp permissions.
+				Need ArenaNet api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Go generate one <i class="fa fa-external-link"></i></strong></a>. Make sure you select characters, builds, and pvp permissions :-).
 			</div>
 
 			<progress-indicator busy="ctrl.fetching && !ctrl.tokens"></progress-indicator>
 
-			<gw2-token 
+			<gw2-token
 				remove-token="ctrl.removeToken({ token: token })"
 				ng-repeat="token in ctrl.tokens"
 				token="token"

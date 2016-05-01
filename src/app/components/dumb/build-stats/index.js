@@ -8,13 +8,13 @@ export default function component () {
 		controller: BuildStats,
 		controllerAs: 'ctrl',
 		template: `
-			<div>{{ ctrl.data }} build</div>
+			<div>{{ ctrl.data }}</div>
 		`
 	};
 }
 
 class BuildStats {
 	constructor () {
-		this.data = `${env.build.version} | ${env.build.date}`;
+		this.data = `${env.build.version} ${env.build.date}`;
 	}
 }

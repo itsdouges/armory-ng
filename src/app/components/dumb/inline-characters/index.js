@@ -1,5 +1,3 @@
-'use strict';
-
 import styles from './inline-characters.less';
 
 function component () {
