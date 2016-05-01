@@ -22,7 +22,7 @@ function component () {
 		},
 		template: `
 			<div class="${messageStyles.message}">
-				Need api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Create one at ArenaNet's applications page <i class="fa fa-external-link"></i></strong></a>. Ensure you select characters, builds, and pvp permissions.
+				Need more api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>You should create one! <i class="fa fa-external-link"></i></strong></a>. Ensure you select characters, builds, and pvp permissions.
 			</div>
 
 			<progress-indicator busy="ctrl.fetching && !ctrl.tokens"></progress-indicator>

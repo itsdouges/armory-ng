@@ -13,7 +13,7 @@ export default function component () {
 			smallMode: '@'
 		},
 		template: `
-		<a 
+		<a
 			class="${styles.inherit}"
 			title="{{ avatar.name }}"
 			ng-href="{{ avatar.link }}">
@@ -22,7 +22,7 @@ export default function component () {
 				class="${styles.image} ${styles.inherit}"
 				ng-src="{{ avatar.imageLocation }}" />
 
-			<h2 ng-if="!avatar.smallMode" class="${styles.name}">	
+			<h2 ng-if="!avatar.smallMode" class="${styles.name}">
 				<strong>{{ avatar.name }}</strong>
 			</h2>
 		</a>

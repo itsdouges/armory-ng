@@ -1,14 +1,14 @@
 {
   "name": "gw2armory",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --watch --inline --hot --env DEV",
     "start:prod": "webpack-dev-server -p --env PROD",
-    "test": "karma start --single-run --env TEST",
-    "test:watch": "karma start --env TEST",
+    "test": "karma start --single-run",
+    "test:watch": "karma start",
     "build": "webpack --env DEV",
     "build:prod": "webpack -p --env PROD",
-    "deploy": "node ./deploy"
+    "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
     "angular": "^1.4.0",
