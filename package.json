@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --watch --inline --hot --env DEV",
-    "start:prod": "webpack-dev-server -p --env PROD",
+    "start:min": "webpack-dev-server -p --env PROD",
     "test": "karma start --single-run",
-    "test:watch": "karma start",
+    "unit:watch": "karma start",
     "build": "webpack --env DEV",
-    "build:prod": "webpack -p --env PROD",
+    "build:min": "webpack -p --env PROD",
     "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {

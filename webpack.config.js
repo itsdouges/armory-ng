@@ -15,7 +15,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var VERSION = process.env.TRAVIS_COMMIT || 'local-build';
 
-var ENVIRONMENT = argv.env;
+var ENVIRONMENT = argv.env || 'DEV';
 if (!ENVIRONMENT) {
   throw 'WEBPACK_ENV not defined!';
 }
@@ -38,7 +38,6 @@ var htmlConfig = {
 console.log('Gonna get ' + ENVIRONMENT + ' up in here!');
 
 switch (ENVIRONMENT) {
-  case 'START:PROD':
   case 'PROD':
     environmentLongName = 'production';
     devtool = 'source-map';
@@ -55,7 +54,6 @@ switch (ENVIRONMENT) {
     imageLoaderSettings = 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}';
     break;
 
-  case 'START:DEV':
   case 'DEV':
   default:
     environmentLongName = 'development';

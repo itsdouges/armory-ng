@@ -5,7 +5,7 @@ install:
   - npm install
 script:
   - npm test &&
-    npm run build:prod
+    npm run build:min
 deploy:
   skip_cleanup: true
   provider: script
