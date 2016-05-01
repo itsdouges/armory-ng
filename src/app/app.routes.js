@@ -43,7 +43,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         title: 'Guild Wars 2 Armory'
       },
       template: `
-        <img title="Guild Wars 2 Armory" src="${armoryIcon}"></img>
+        <img title="Guild Wars 2 Armory" class="${styles.heroIcon}" src="${armoryIcon}"></img>
       `
     })
     .state('main.no-auth.with-container.login', {
