@@ -49,6 +49,7 @@ import SpecializationTrait from './components/dumb/specialization-trait';
 import Toast from './components/dumb/toast';
 import SocialButtons from './components/dumb/social-buttons';
 import Textbox from './components/dumb/textbox';
+import VisitingPreviewBar from './components/dumb/visiting-preview-bar';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -83,6 +84,7 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('visitingPreviewBar', VisitingPreviewBar)
 .directive('modalWatcher', ModalWatcher)
 .directive('searchModal', SearchModal)
 .directive('searchResult', SearchResult)
