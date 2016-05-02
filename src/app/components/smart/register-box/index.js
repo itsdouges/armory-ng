@@ -1,5 +1,3 @@
-'use strict';
-
 import { actionCreators } from '../../../actions/user';
 import { registerSelector } from '../../../selectors/user';
 
@@ -14,99 +12,44 @@ function component () {
 		controllerAs: 'ctrl',
 		template: `
 			<form ng-submit="ctrl.register()">
-				<div>
-					<div class="${forms.labelContainer}">
-						<label for="register-email">Email</label>
-					</div>
+				<textbox
+					label="Email"
+					on-change="ctrl.checkEmail"
+					control-id="register-email"
+					ng-model="ctrl.inputs.email"
+					required="true"
+					is-busy="ctrl.user.emailValidating"
+					is-valid="ctrl.user.emailValid"
+					error="ctrl.user.emailErrors[0]"></textbox>
 
-					<div
-						ng-if="ctrl.user.emailErrors || ctrl.user.aliasErrors || ctrl.user.passwordErrors" 
-						class="${message.title}"><strong>Uh-oh, pls fix?</strong></div>
+				<textbox
+					label="Alias"
+					on-change="ctrl.checkAlias"
+					control-id="register-alias"
+					ng-model="ctrl.inputs.alias"
+					required="true"
+					is-busy="ctrl.user.aliasValidating"
+					is-valid="ctrl.user.aliasValid"
+					error="ctrl.user.aliasErrors[0]"></textbox>
 
-					<ul 
-						ng-if="ctrl.user.emailErrors || ctrl.user.aliasErrors || ctrl.user.passwordErrors" 
-						class="${message.message} ${message.error}">
-						<li ng-if="ctrl.user.emailErrors">{{ ctrl.user.emailErrors[0] }}</li>
-						<li ng-if="ctrl.user.aliasErrors">{{ ctrl.user.aliasErrors[0] }}</li>
-						<li ng-if="ctrl.user.passwordErrors">{{ ctrl.user.passwordErrors[0] }}</li>
-					</ul>
+				<textbox
+					label="Password"
+					on-change="ctrl.checkPasswords"
+					control-id="register-password"
+					ng-model="ctrl.inputs.password1"
+					required="true"
+					type="password"
+					is-valid="ctrl.user.passwordValue"></textbox>
 
-					<div class="${forms.inputContainer}">
-						<input 
-							placeholder="Email" 
-							ng-model="ctrl.inputs.email" 
-							ng-change="ctrl.checkEmail()" 
-							id="register-email" 
-							type="email" 
-							required="required" />
-						
-						<input-validity 
-							data-busy="ctrl.user.emailValidating"
-							data-valid="ctrl.user.emailValid">
-						</input-validity>
-					</div>
-				</div>
-
-				<div>
-					<div class="${forms.labelContainer}">
-						<label for="register-alias">Alias</label>
-					</div>
-
-					<div class="${forms.inputContainer}">
-						<input 
-							placeholder="Alias" 
-							ng-change="ctrl.checkAlias()" 
-							id="register-alias" 
-							type="text" 
-							ng-model="ctrl.inputs.alias" 
-							required="required" />
-
-						<input-validity 
-							data-busy="ctrl.user.aliasValidating"
-							data-valid="ctrl.user.aliasValid">
-						</input-validity>
-					</div>
-				</div>
-
-				<div>
-					<div class="${forms.labelContainer}">
-						<label for="register-password">Password</label>
-					</div>
-
-					<div class="${forms.inputContainer}">
-						<input 
-							placeholder="Password" 
-							ng-change="ctrl.checkPasswords()" 
-							id="register-password" 
-							type="password" 
-							ng-model="ctrl.inputs.password1" 
-							required="required" />
-
-						<input-validity
-							data-valid="ctrl.user.passwordValue">
-						</input-validity>
-					</div>
-				</div>
-
-				<div>
-					<div class="${forms.labelContainer}">
-						<label for="register-confirm-password">Confirm Password</label>
-					</div>
-
-					<div class="${forms.inputContainer}">
-						<input 
-							placeholder="Confirm Password" 
-							id="register-confirm-password" 
-							type="password" 
-							ng-change="ctrl.checkPasswords()" 
-							ng-model="ctrl.inputs.password2" 
-							required="required" />
-
-						<input-validity
-							data-valid="ctrl.user.passwordValue">
-						</input-validity>
-					</div>
-				</div>
+				<textbox
+					label="Confirm password"
+					on-change="ctrl.checkPasswords"
+					control-id="register-confirm-password"
+					ng-model="ctrl.inputs.password2"
+					required="true"
+					type="password"
+					is-valid="ctrl.user.passwordValue"
+					error="ctrl.user.passwordErrors[0]"></textbox>
 
 				<div class="${forms.buttonGroup}">
 					<busy-button 

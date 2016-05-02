@@ -25,7 +25,7 @@ function component () {
 					</div>
 				</div>
 
-				<div class="row">
+				<div>
 					<div class="${forms.labelContainer}">
 						<label for="password">Password</label>
 					</div>

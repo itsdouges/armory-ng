@@ -48,6 +48,7 @@ import CharacterAttributes from './components/dumb/character-attributes';
 import SpecializationTrait from './components/dumb/specialization-trait';
 import Toast from './components/dumb/toast';
 import SocialButtons from './components/dumb/social-buttons';
+import Textbox from './components/dumb/textbox';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -123,6 +124,7 @@ const App = angular.module('gw2armory', [
 .directive('specializationTrait', SpecializationTrait)
 .directive('toast', Toast)
 .directive('toastsEnabled', ToastCreator)
+.directive('textbox', Textbox)
 .directive('characterSpecialization', CharacterSpecialization);
 
 angular.bootstrap(document, ['gw2armory'], {
