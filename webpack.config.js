@@ -57,7 +57,7 @@ switch (ENVIRONMENT) {
   case 'DEV':
   default:
     environmentLongName = 'development';
-    devtool = 'inline-source-map';
+    devtool = 'cheap-eval-source-map';
     outputFile = appName;
     htmlConfig.minify = false;
     cssLoaderSettings = 'css?modules&importLoaders=1!postcss';
