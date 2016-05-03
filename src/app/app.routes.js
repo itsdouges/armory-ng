@@ -5,7 +5,7 @@ import styles from './app.less';
 
 // @ngInject
 function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(false).hashPrefix('!');
+  $locationProvider.html5Mode(true).hashPrefix('!');
     
   $stateProvider
     .state('main', {

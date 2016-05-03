@@ -1,7 +1,4 @@
-'use strict';
-
 import axios from 'axios';
-
 import showToast from './actions/toast';
 import { actionCreators } from './actions/user/auth';
 import { userAuthSelector } from './selectors/user';
