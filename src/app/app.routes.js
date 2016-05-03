@@ -1,5 +1,3 @@
-'use strict';
-
 import containerStyles from './styles/container/container.less';
 import cardStyles from './styles/cards/cards.less';
 import armoryIcon from '../assets/images/logo.png';
@@ -17,6 +15,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         <ui-view
           toasts-enabled></ui-view>
 
+        <visiting-preview-bar></visiting-preview-bar>
         <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>
       `,
       abstract: true
@@ -43,7 +42,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
         title: 'Guild Wars 2 Armory'
       },
       template: `
-        <img title="Guild Wars 2 Armory" src="${armoryIcon}"></img>
+        <img title="Guild Wars 2 Armory" class="${styles.heroIcon}" src="${armoryIcon}"></img>
       `
     })
     .state('main.no-auth.with-container.login', {

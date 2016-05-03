@@ -15,7 +15,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var VERSION = process.env.TRAVIS_COMMIT || 'local-build';
 
-var ENVIRONMENT = argv.env;
+var ENVIRONMENT = argv.env || 'DEV';
 if (!ENVIRONMENT) {
   throw 'WEBPACK_ENV not defined!';
 }
@@ -38,7 +38,6 @@ var htmlConfig = {
 console.log('Gonna get ' + ENVIRONMENT + ' up in here!');
 
 switch (ENVIRONMENT) {
-  case 'START:PROD':
   case 'PROD':
     environmentLongName = 'production';
     devtool = 'source-map';
@@ -55,11 +54,10 @@ switch (ENVIRONMENT) {
     imageLoaderSettings = 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}';
     break;
 
-  case 'START:DEV':
   case 'DEV':
   default:
     environmentLongName = 'development';
-    devtool = 'inline-source-map';
+    devtool = 'cheap-eval-source-map';
     outputFile = appName;
     htmlConfig.minify = false;
     cssLoaderSettings = 'css?modules&importLoaders=1!postcss';
@@ -71,7 +69,7 @@ var environmentPlugin = new webpack.DefinePlugin({
   __DEV__: ENVIRONMENT.indexOf('DEV') >= 0,
   __PROD__: ENVIRONMENT === 'PROD',
   __VERSION__: JSON.stringify(VERSION.slice(0, 7)),
-  __DATE__: JSON.stringify(new Date().toGMTString()),
+  __DATE__: JSON.stringify(new Date().toLocaleDateString()),
   'process.env.NODE_ENV': JSON.stringify(environmentLongName)
 });
 

@@ -15,6 +15,6 @@ export default function component () {
 
 class BuildStats {
 	constructor () {
-		this.data = `${env.build.version} | ${env.build.date}`;
+		this.data = `${env.build.version} ${env.build.date}`;
 	}
 }

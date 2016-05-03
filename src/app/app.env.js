@@ -3,6 +3,7 @@ const environment = {
   gw2: {
     endpoint: 'https://api.guildwars2.com/',
   },
+  previewDomain: window.location.host === 'preview.gw2armory.com',
 };
 
 if (__DEV__) {

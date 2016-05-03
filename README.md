@@ -2,35 +2,14 @@
 
 ## Usage
 
-### Install dependencies
 ```
 npm install
-```
-
-### Run local build
-```
 npm start
+npm run unit:watch
 ```
 
-### Run minified build
-```
-npm run start:prod
-```
+## Pull Requests
 
-### Run tests
-```
-npm test
-npm run test:auto
-```
+Like to contribute? Look at the [trello board](https://trello.com/b/qGvDe622/gw2armory-com) or contact me on [reddit](https://www.reddit.com/r/gw2armory) or [twitter](https://twitter.com/itsmadou) to find something you'd like to work on, then make a pull request against the `development` branch.
 
-### Build local
-```
-npm run build:dev
-```
-
-### Build prod
-```
-npm run build:prod
-```
-
-© 2016 gw2armory.com
+© 2016 ArenaNet, Michael Dougall, gw2armory.com

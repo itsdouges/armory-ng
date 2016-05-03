@@ -1,29 +1,15 @@
 <!doctype html>
 <html>
-  <head>
-    <title>gw2armory</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Guild Wars 2 Armory - Easily view and share your account, characters, and guild information on your pc and mobile! Join today and start sharing!">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" href="<%= htmlWebpackPlugin.favicon %>" type="image/x-icon">
-  </head>
-  <body modal-watcher>
-    <ui-view
-      class="app-container"
-      autoscroll></ui-view>
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      if (window.location.hostname.indexOf('beta.gw2armory.com') >= -1) {
-        ga('create', 'UA-69365005-2', 'auto');
-      } else if (window.location.hostname.indexOf('gw2armory.com') >= -1) {
-        ga('create', 'UA-69365005-1', 'auto');
-      }
-    </script>
-  </body>
+<head>
+<title>gw2armory</title>
+<meta charset="utf-8">
+<meta name="description" content="Guild Wars 2 Armory - Easily view and share your account, characters, and guild information on your pc and mobile! Join today and start sharing!">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="<%= htmlWebpackPlugin.favicon %>" type="image/x-icon">
+</head>
+<body modal-watcher>
+<ui-view class="app-container" autoscroll></ui-view>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-69365005-1','auto');</script>
+</body>
 </html>

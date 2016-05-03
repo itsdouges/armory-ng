@@ -1,5 +1,3 @@
-'use strict';
-
 import { actionCreators } from '../../../actions/characters';
 import * as gw2 from '../../../actions/gw2-data';
 import { characterViewerSelector } from '../../../selectors/characters';
@@ -36,11 +34,13 @@ function component () {
 
 					<div class="${styles.title}">
 						<h2 class="${styles.name}">
-							<a 
+							{{ ctrl.character.name }}
+
+							<a
 								title="View {{ ctrl.character.guild_name }}"
 								ng-href="/#!/g/{{ ctrl.character.guild_name }}"
-								ng-if="ctrl.character.guild"><i>[{{ ctrl.character.guild_tag }}] </i></a>
-							{{ ctrl.character.name }}
+								ng-if="ctrl.character.guild"><i>[{{ ctrl.character.guild_tag }}] </i>
+							</a>
 						</h2>
 
 						<div class="${styles.subtitle}">
