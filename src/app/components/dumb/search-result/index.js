@@ -41,13 +41,13 @@ class SearchResult {
 	getLink () {
 		switch (this.data.resource) {
 			case 'characters':
-				return `/#!/${this.data.alias}/characters/${this.data.name}`;
+				return `/${this.data.alias}/characters/${this.data.name}`;
 
 			case 'users':
-				return `/#!/${this.data.name}`;
+				return `/${this.data.name}`;
 
 			case 'guilds':
-				return `/#!/g/${this.data.name}`;
+				return `/g/${this.data.name}`;
 		}
 	}
 

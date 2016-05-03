@@ -16,7 +16,7 @@ function component () {
       changePassword: '&'
     },
     template: `
-      <form>
+      <form class="${formStyles.container}">
         <textbox
           label="Current password"
           control-id="current-password"

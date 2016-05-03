@@ -1,12 +1,13 @@
 import styles from './user-tokens.less';
 import messageStyles from '../../../styles/message/message.less';
 import formStyles from '../../../styles/forms/forms.less';
+import containerStyles from '../../../styles/container/container.less';
 
 function component () {
   let directive = {
     restrict: 'E',
     controller: UserTokens,
-    controllerAs: 'ctrl',
+    controllerAs: 'userTokens',
     scope: {},
     bindToController: {
       validateToken: '&',
@@ -16,35 +17,41 @@ function component () {
       addingToken: '=',
       addToken: '&',
       removeToken: '&',
-      tokens: '='
+      tokens: '=',
+      selectPrimaryToken: '&',
     },
     template: `
-      <div class="${messageStyles.message}">
-        Need ArenaNet api tokens? <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>Go generate one <i class="fa fa-external-link"></i></strong></a>. Make sure you select characters, builds, and pvp permissions :-).
+      <div class="${containerStyles.padding}">
+        <div ng-if="!userTokens.tokens.length" class="${messageStyles.message}">
+          Oh, you have no api tokens.. <a target="_blank" title="Opens in a new window" href="https://account.arena.net/applications/create"><strong>go generate one <i class="fa fa-external-link"></i></strong></a> ..! Make sure you select characters, builds, and pvp permissions :-).
+        </div>
+
+        <gw2-token
+          select-primary-token="userTokens.selectPrimaryToken(token.token)"
+          remove-token="userTokens.removeToken({ token: token })"
+          ng-repeat="token in userTokens.tokens"
+          token="token"
+          mode="view">
+        </gw2-token>
       </div>
 
-      <gw2-token
-        remove-token="ctrl.removeToken({ token: token })"
-        ng-repeat="token in ctrl.tokens"
-        token="token"
-        mode="view">
-      </gw2-token>
+      <hr />
 
-      <form ng-submit="ctrl.addToken({ token: ctrl.newGw2Token })">
+      <form class="${formStyles.container}" ng-submit="userTokens.addToken({ token: ctrl.newGw2Token })">
         <textbox
-          label="Add token"
-          on-change="ctrl.validateTokenDebounce"
+          label="Add gw2 token"
+          on-change="userTokens.validateTokenDebounce"
           control-id="add-token"
-          ng-model="ctrl.newGw2Token"
+          ng-model="userTokens.newGw2Token"
           required="true"
-          is-busy="ctrl.validatingToken"
-          is-valid="ctrl.validToken"
-          error="ctrl.tokenError"></textbox>
+          is-busy="userTokens.validatingToken"
+          is-valid="userTokens.validToken"
+          error="userTokens.tokenError"></textbox>
 
         <div class="${formStyles.buttonGroup}">
           <busy-button 
-            button-disabled="!ctrl.validToken" 
-            busy="ctrl.addingToken">
+            button-disabled="!userTokens.validToken" 
+            busy="userTokens.addingToken">
             <i class="fa fa-plus"></i>
           </busy-button>
         </div>
@@ -71,6 +78,10 @@ function UserTokens (debounce) {
     });
 
     tokenDebounce();
+  };
+
+  this.selectPrimaryToken = (token) => {
+    console.log(token);
   };
 }
 
