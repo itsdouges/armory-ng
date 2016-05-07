@@ -16,17 +16,17 @@ function component () {
       <toggle-button
         ng-click="token.selectPrimaryToken()"
         style="margin: 0.75rem 0.75rem 0.75rem 0;"
-        selected="token.primary">
+        selected="token.token.primary">
       </toggle-button>
 
       <div class="${styles.tokenContainer}">
         <div>
-          <strong>{{ ::token.token.accountName }}</strong>
-          <span ng-if="token.primary"> (primary)</span>
+          <strong>{{ token.token.accountName }}</strong>
+          <span ng-if="token.token.primary"> (primary)</span>
         </div>
 
         <span class="${styles.permissions}">
-          <span>{{ ::token.token.permissions.split(',').join(' | '); }}</span>
+          <span>{{ token.token.permissions.split(',').join(' | '); }}</span>
         </span>
       </div>
 

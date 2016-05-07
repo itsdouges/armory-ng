@@ -29,17 +29,16 @@ function component () {
         <gw2-token
           select-primary-token="userTokens.selectPrimaryToken(token.token)"
           remove-token="userTokens.removeToken({ token: token })"
-          ng-repeat="token in userTokens.tokens"
-          token="token"
-          mode="view">
+          ng-repeat="token in userTokens.tokens track by token.token"
+          token="token">
         </gw2-token>
       </div>
 
       <hr />
 
-      <form class="${formStyles.container}" ng-submit="userTokens.addToken({ token: ctrl.newGw2Token })">
+      <form class="${formStyles.container}" ng-submit="userTokens.addToken({ token: userTokens.newGw2Token })">
         <textbox
-          label="Add gw2 token"
+          label="Add token"
           on-change="userTokens.validateTokenDebounce"
           control-id="add-token"
           ng-model="userTokens.newGw2Token"
@@ -70,6 +69,7 @@ function UserTokens (debounce) {
   that.validateToken = that.validateToken();
   that.addToken = that.addToken();
   that.removeToken = that.removeToken();
+  that.selectPrimaryToken = that.selectPrimaryToken();
 
   let tokenDebounce;
   that.validateTokenDebounce = () => {
@@ -78,10 +78,6 @@ function UserTokens (debounce) {
     });
 
     tokenDebounce();
-  };
-
-  this.selectPrimaryToken = (token) => {
-    console.log(token);
   };
 }
 
