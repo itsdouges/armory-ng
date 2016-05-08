@@ -197,6 +197,13 @@ function fetchMeThunk () {
   };
 }
 
+function selectPrimaryTokenThunk (token) {
+  return (dispatch) => {
+    dispatch(selectPrimaryToken(token));
+    return axios.put(`${config.api.endpoint}users/me/gw2-tokens/${token}/set-primary`);
+  };
+}
+
 function selectPrimaryToken (token) {
   return {
     type: actions.SELECT_PRIMARY_TOKEN,
@@ -213,6 +220,7 @@ export const actionCreators = {
   fetchMeThunk,
   changePasswordThunk,
   selectPrimaryToken,
+  selectPrimaryTokenThunk,
 };
 
 export default actionCreators;

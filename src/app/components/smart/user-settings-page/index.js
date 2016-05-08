@@ -83,7 +83,7 @@ function UserSettingsPage ($ngRedux, $scope) {
   };
 
   that.selectPrimaryToken = (token) => {
-    $ngRedux.dispatch(actionCreators.selectPrimaryToken(token));
+    $ngRedux.dispatch(actionCreators.selectPrimaryTokenThunk(token));
   };
 
   init();
