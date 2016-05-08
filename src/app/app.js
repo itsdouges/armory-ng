@@ -50,6 +50,7 @@ import Toast from './components/dumb/toast';
 import SocialButtons from './components/dumb/social-buttons';
 import Textbox from './components/dumb/textbox';
 import VisitingPreviewBar from './components/dumb/visiting-preview-bar';
+import ToggleButton from './components/dumb/toggle-button';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -84,6 +85,7 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('toggleButton', ToggleButton)
 .directive('visitingPreviewBar', VisitingPreviewBar)
 .directive('modalWatcher', ModalWatcher)
 .directive('searchModal', SearchModal)

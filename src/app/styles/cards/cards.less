@@ -6,13 +6,19 @@
 @small-card: 200px;
 
 .card {
-	padding: 2em;
 	border-radius: 1px;
 	margin: 0 0 3em 0;
 	width: 100%;
 	flex-grow: 0;
 	position: relative;
 	composes: low from '../box-shadow/box-shadow.less';
+}
+
+hr {
+	margin: 0;
+	border: 0;
+	background: rgba(0, 0, 0, 0.2);
+	height: 1px!important;
 }
 
 .primary {
@@ -35,6 +41,6 @@
 
 @media only screen and (min-width: @tablet) {
 	.medium {
-		width: @tablet - 20;
+		width: @tablet - 150;
 	}
 }

@@ -3,69 +3,74 @@
 @import '../box-shadow/box-shadow.less';
 
 .clearButton {
-	background: transparent;
-	outline: none;
-	border: none;
+  background: transparent;
+  outline: none;
+  border: none;
 }
 
 .inputContainer {
-	position: relative;	
-	margin-bottom: 1em;
+  position: relative; 
+  margin-bottom: 1em;
 }
 
 .labelContainer {
-	display: none;
+  display: none;
 }
 
 .primary {
-	border: none;
-	background-color: @positive;
-	color: white;
+  border: none;
+  background-color: @positive;
+  color: white;
+}
+
+.container {
+  padding: 1.5em;
+  padding-top: 2em;
 }
 
 .buttonGroup {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .button {
-	margin: 0;
-	width: 3em;
-	height: 3em;
-	transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s;
-	font-size: 1.3em;
-	opacity: 1;
-	font-weight: bold;
-	border-radius: 50%;
-	.low;
+  margin: 0;
+  width: 3em;
+  height: 3em;
+  transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+  font-size: 1.3em;
+  opacity: 1;
+  font-weight: bold;
+  border-radius: 50%;
+  .low;
 }
 
 .button[disabled] {
-	background-color: @negative;
-	cursor: not-allowed;
+  background-color: @negative;
+  cursor: not-allowed;
 }
 
 .button[disabled]:hover,
 .button[disabled]:focus {
-	.low;
+  .low;
 }
 
 .button:hover,
 .button:focus {
-	.high;
+  .high;
 }
 
 input {
-	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 input[type=text],
 input[type=password],
 input[type=email] {
-	padding: 0.4em;
-	width: 100%;
-	margin: 0;
-	font-size: 1.3em;
-	border-radius: 0;
+  padding: 0.4em;
+  width: 100%;
+  margin: 0;
+  font-size: 1.3em;
+  border-radius: 0;
 }

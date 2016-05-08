@@ -31,7 +31,7 @@ function component () {
             <avatar
               title="Me"
               small-mode="true"
-              link="/#!/me"
+              link="/me"
               image-location="//api.adorable.io/avatars/20/{{ ctrl.username }}.png"></avatar>
 
             <span class="${styles.username} ${styles.hideWhenSmall}">{{ ctrl.username }}</span>
