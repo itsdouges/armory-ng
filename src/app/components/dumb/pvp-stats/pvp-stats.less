@@ -1,0 +1,41 @@
+@import '../../../styles/variables/colours.less';
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2em 0;
+}
+
+.ranksContainer {
+  text-align: center;
+  margin-top: -0.8em;
+}
+
+.unrankedContainer,
+.rankedContainer {
+  width: 40%;
+  display: inline-block;
+}
+
+.unrankedContainer {
+  text-align: right;
+  margin-right: 1em;
+}
+
+.rankedContainer {
+  text-align: left;
+  margin-left: 1em;
+}
+
+.rank {
+  font-size: 1.6em;
+}
+
+.win {
+  font-size: 2em;
+  color: @positive;
+}
+
+.lose {
+  color: @negative;
+}

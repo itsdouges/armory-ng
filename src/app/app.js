@@ -51,6 +51,9 @@ import SocialButtons from './components/dumb/social-buttons';
 import Textbox from './components/dumb/textbox';
 import VisitingPreviewBar from './components/dumb/visiting-preview-bar';
 import ToggleButton from './components/dumb/toggle-button';
+import PvpStats from './components/dumb/pvp-stats';
+import PvpRank from './components/dumb/pvp-rank';
+import ProgressBar from './components/dumb/progress-bar';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -94,6 +97,9 @@ const App = angular.module('gw2armory', [
 .directive('avatar', Avatar)
 .directive('searchBox', SearchBox)
 .directive('title', Title)
+.directive('pvpStats', PvpStats)
+.directive('progressBar', ProgressBar)
+.directive('pvpRank', PvpRank)
 .directive('buildStats', BuildStats)
 .directive('copyToClipboard', CopyToClipboard)
 .directive('socialButtons', SocialButtons)
