@@ -1,5 +1,4 @@
 import 'file!../assets/images/favicons/favicon.ico';
-
 import 'font-awesome/css/font-awesome.css';
 
 import { polyfill } from 'es6-promise';
@@ -54,6 +53,7 @@ import ToggleButton from './components/dumb/toggle-button';
 import PvpStats from './components/dumb/pvp-stats';
 import PvpRank from './components/dumb/pvp-rank';
 import ProgressBar from './components/dumb/progress-bar';
+import Card from './components/dumb/card';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -95,6 +95,7 @@ const App = angular.module('gw2armory', [
 .directive('searchResult', SearchResult)
 .directive('guildPage', GuildPage)
 .directive('avatar', Avatar)
+.directive('card', Card)
 .directive('searchBox', SearchBox)
 .directive('title', Title)
 .directive('pvpStats', PvpStats)

@@ -1,9 +1,10 @@
-import { actionCreators } from '../../../actions/users';
+import { actionCreators, fetchPvpStatsThunk } from '../../../actions/users';
 import { usersSelector } from '../../../selectors/users';
 import showToast from '../../../actions/toast';
 import userActions from '../../../actions/user/data';
 import styles from './user-page.less';
 import positionStyles from '../../../styles/positioning/positioning.less';
+import { whoAmI } from '../../../services/who-am-i';
 
 function component () {
   return {
@@ -29,18 +30,17 @@ function component () {
   characters="user.user.characters">
 </characters-grid>
 
-<pvp-stats stats=""></pvp-stats>
+<pvp-stats stats="user.user.pvpStats"></pvp-stats>
 
-<social-buttons 
-  send-toast="user.sendToast"
+<social-buttons
   location="{{ user.location }}">
 </social-buttons>
-    `
+`
   };
 }
 
 // @ngInject
-function UserDetails ($ngRedux, $stateParams, $scope, $location) {
+function UserDetails ($ngRedux, $stateParams, $scope, $location, $timeout) {
   let that = this;
 
   function constructor () {
@@ -53,7 +53,10 @@ function UserDetails ($ngRedux, $stateParams, $scope, $location) {
           break;
 
         case 'authenticated':
-          that.user = state.me;
+          that.user = {
+            ...state.me,
+            ...state.users.data[whoAmI()],
+          };
           that.fetchingCharacters = state.me.fetching;
           that.location = $location.$$absUrl.replace('me', state.me.alias);
           break;
@@ -77,6 +80,8 @@ function UserDetails ($ngRedux, $stateParams, $scope, $location) {
       default:
         throw 'Mode not handled';
     }
+
+    $ngRedux.dispatch(fetchPvpStatsThunk($stateParams.alias || whoAmI()));
   }
 
   that.sendToast = (message) => {

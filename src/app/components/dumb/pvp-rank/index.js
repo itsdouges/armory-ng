@@ -18,6 +18,7 @@ export default function component () {
       <div class="${styles.name}">{{ rank.rankName }}</div>
       <progress-bar
         bar-colour="rgb(85, 35, 164)"
+        background-colour="rgb(41, 41, 41)"
         current="rank.calculateExperienceInCurrentLevel(rank.rank, rank.points)"
         max="rank.calculateRankExperience(rank.rank)">
       </progress-bar>
@@ -30,8 +31,14 @@ export default function component () {
 
 class PvpRank {
   calculateExperienceInCurrentLevel (rank, currentPoints) {
-    // todo :)
-    return 0;
+    let totalExperience = 0;
+    const nextLevel = +rank;
+
+    for (let i = 1; i <= nextLevel; i++) {
+      totalExperience += this.calculateRankExperience(i);
+    }
+
+    return totalExperience - currentPoints;
   }
 
   calculateRankExperience (rank) {

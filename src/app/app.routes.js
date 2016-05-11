@@ -12,8 +12,7 @@ function routerConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
       template: `
         <header></header>
 
-        <ui-view
-          toasts-enabled></ui-view>
+        <ui-view toasts-enabled></ui-view>
 
         <visiting-preview-bar></visiting-preview-bar>
         <footer class="${containerStyles.container} ${containerStyles.withColumns}"></footer>
