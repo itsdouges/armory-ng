@@ -20,6 +20,7 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Gw2Map from './components/dumb/gw2-map';
 import Footer from './components/dumb/footer';
 import SearchModal from './components/dumb/search-modal';
 import Avatar from './components/dumb/avatar';
@@ -52,8 +53,11 @@ import VisitingPreviewBar from './components/dumb/visiting-preview-bar';
 import ToggleButton from './components/dumb/toggle-button';
 import PvpStats from './components/dumb/pvp-stats';
 import PvpRank from './components/dumb/pvp-rank';
+import PvpGames from './components/dumb/pvp-games';
+import PvpGame from './components/dumb/pvp-game';
 import ProgressBar from './components/dumb/progress-bar';
 import Card from './components/dumb/card';
+import Icon from './components/dumb/icon';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -88,6 +92,8 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('gw2Map', Gw2Map)
+.directive('icon', Icon)
 .directive('toggleButton', ToggleButton)
 .directive('visitingPreviewBar', VisitingPreviewBar)
 .directive('modalWatcher', ModalWatcher)
@@ -99,8 +105,10 @@ const App = angular.module('gw2armory', [
 .directive('searchBox', SearchBox)
 .directive('title', Title)
 .directive('pvpStats', PvpStats)
+.directive('pvpGames', PvpGames)
 .directive('progressBar', ProgressBar)
 .directive('pvpRank', PvpRank)
+.directive('pvpGame', PvpGame)
 .directive('buildStats', BuildStats)
 .directive('copyToClipboard', CopyToClipboard)
 .directive('socialButtons', SocialButtons)

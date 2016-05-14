@@ -5,35 +5,40 @@ import userActions from '../../../actions/user/data';
 import styles from './user-page.less';
 import positionStyles from '../../../styles/positioning/positioning.less';
 import { whoAmI } from '../../../services/who-am-i';
+import pvpGames from './games';
 
 function component () {
   return {
     restrict: 'E',
     scope: {},
     controller: UserDetails,
-    controllerAs: 'user',
+    controllerAs: 'details',
     bindToController: {
       mode: '@',
     },
     template: `
 <div class="${positionStyles.textCenter}">
   <avatar
-    ng-if="user.user.alias"
-    name="{{ user.user.alias }}"
-    image-location="//api.adorable.io/avatars/200/{{ user.user.alias }}.png">
+    ng-if="details.user.alias"
+    name="{{ details.user.alias }}"
+    image-location="//api.adorable.io/avatars/200/{{ details.user.alias }}.png">
   </avatar>
 </div>
 
 <characters-grid
-  fetching="user.fetchingCharacters"
-  mode="{{ user.mode }}"
-  characters="user.user.characters">
+  fetching="details.fetchingCharacters"
+  mode="{{ details.mode }}"
+  characters="details.user.characters">
 </characters-grid>
 
-<pvp-stats stats="user.user.pvpStats"></pvp-stats>
+<pvp-stats stats="details.user.pvpStats"></pvp-stats>
+
+<pvp-games games="details.pvpGames"></pvp-games>
+
+<br/><br/>
 
 <social-buttons
-  location="{{ user.location }}">
+  location="{{ details.location }}">
 </social-buttons>
 `
   };
@@ -42,6 +47,7 @@ function component () {
 // @ngInject
 function UserDetails ($ngRedux, $stateParams, $scope, $location, $timeout) {
   let that = this;
+  this.pvpGames = pvpGames;
 
   function constructor () {
     const unsubscribe = $ngRedux.connect(usersSelector)(state => {    

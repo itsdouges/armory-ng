@@ -22,21 +22,53 @@ export default function component () {
     class="${styles.ranksContainer}">
     <div class="${styles.unrankedContainer}">
       <div class="${styles.win}">
-        {{ pvp.stats.ladders.unranked.wins || 0 }} Wins
+        <div class="${styles.bigWin}">
+          {{ pvp.stats.ladders.unranked.wins || 0 }} Wins
+        </div>
+      
+        <div>
+          {{ pvp.stats.ladders.unranked.byes || 0 }} Byes
+        </div>
       </div>
 
       <div class="${styles.lose}">
-        {{ pvp.stats.ladders.unranked.losses || 0 }} Losses
+        <div>
+          {{ pvp.stats.ladders.unranked.losses || 0 }} Losses
+        </div>
+      
+        <div>
+          {{ pvp.stats.ladders.unranked.forfeits || 0 }} Forfeits
+        </div>
+
+        <div>
+          {{ pvp.stats.ladders.unranked.desertions || 0 }} Desertions
+        </div>
       </div>
     </div>
 
     <div class="${styles.rankedContainer}">
       <div class="${styles.win}">
-        {{ pvp.stats.ladders.ranked.wins || 0 }} Wins
+        <div class="${styles.bigWin}">
+          {{ pvp.stats.ladders.ranked.wins || 0 }} Wins
+        </div>
+      
+        <div>
+          {{ pvp.stats.ladders.ranked.byes || 0 }} Byes
+        </div>
       </div>
 
       <div class="${styles.lose}">
-        {{ pvp.stats.ladders.ranked.losses || 0 }} Losses
+        <div>
+          {{ pvp.stats.ladders.ranked.losses || 0 }} Losses
+        </div>
+
+        <div>
+          {{ pvp.stats.ladders.ranked.forfeits || 0 }} Forfeits
+        </div>
+
+        <div>
+          {{ pvp.stats.ladders.ranked.desertions || 0 }} Desertions
+        </div>
       </div>
     </div>
   </card>

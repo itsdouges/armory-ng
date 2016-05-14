@@ -10,11 +10,12 @@ export default function component () {
       cardTitle: '@',
       cardTitleRight: '@',
       class: '@',
+      mode: '@',
     },
     transclude: true,
     template: `
-<div ng-class="card.class">
-  <h2 class="${styles.title}">
+<div ng-class="card.mode === 'inline' ? '${styles.inline}' : ''">
+  <h2 ng-if="card.cardTitle || card.cardTitleRight" class="${styles.title}">
     <span>{{ card.cardTitle }}</span>
     <span class="${styles.titleRight}">{{ card.cardTitleRight }}</span>
   </h2>
