@@ -5,7 +5,6 @@ import userActions from '../../../actions/user/data';
 import styles from './user-page.less';
 import positionStyles from '../../../styles/positioning/positioning.less';
 import { whoAmI } from '../../../services/who-am-i';
-import pvpGames from './games';
 
 function component () {
   return {
@@ -31,9 +30,9 @@ function component () {
   characters="details.user.characters">
 </characters-grid>
 
-<pvp-stats stats="details.user.pvpStats"></pvp-stats>
+<pvp-stats ng-if="details.user.pvpStats.pvp_rank" stats="details.user.pvpStats"></pvp-stats>
 
-<pvp-games games="details.user.pvpGames"></pvp-games>
+<pvp-games ng-if="details.user.pvpGames.length" games="details.user.pvpGames"></pvp-games>
 
 <br/><br/>
 
@@ -46,8 +45,7 @@ function component () {
 
 // @ngInject
 function UserDetails ($ngRedux, $stateParams, $scope, $location, $timeout) {
-  let that = this;
-  this.pvpGames = pvpGames;
+  const that = this;
 
   function constructor () {
     const unsubscribe = $ngRedux.connect(usersSelector)(state => {    
