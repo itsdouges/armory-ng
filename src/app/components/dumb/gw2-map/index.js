@@ -20,10 +20,12 @@ function component () {
 }
 
 class Gw2Map {
-  constructor () {
+  /*@ngInject*/
+  constructor ($scope) {
     getMapData(this.mapId)
       .then((data) => {
         this.name = data.name;
+        $scope.$apply();
       });
   }
 }

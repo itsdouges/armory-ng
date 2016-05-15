@@ -1,4 +1,4 @@
-import { actionCreators, fetchPvpStatsThunk } from '../../../actions/users';
+import { actionCreators, fetchPvpStatsThunk, fetchPvpGamesThunk } from '../../../actions/users';
 import { usersSelector } from '../../../selectors/users';
 import showToast from '../../../actions/toast';
 import userActions from '../../../actions/user/data';
@@ -33,7 +33,7 @@ function component () {
 
 <pvp-stats stats="details.user.pvpStats"></pvp-stats>
 
-<pvp-games games="details.pvpGames"></pvp-games>
+<pvp-games games="details.user.pvpGames"></pvp-games>
 
 <br/><br/>
 
@@ -87,7 +87,9 @@ function UserDetails ($ngRedux, $stateParams, $scope, $location, $timeout) {
         throw 'Mode not handled';
     }
 
-    $ngRedux.dispatch(fetchPvpStatsThunk($stateParams.alias || whoAmI()));
+    const alias = $stateParams.alias || whoAmI();
+    $ngRedux.dispatch(fetchPvpStatsThunk(alias));
+    $ngRedux.dispatch(fetchPvpGamesThunk(alias));
   }
 
   that.sendToast = (message) => {

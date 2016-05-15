@@ -68,7 +68,6 @@ function fetchUserThunk (alias) {
   };
 }
 
-
 export function fetchPvpStatsSuccess (alias, data) {
   return {
     type: actions.FETCH_PVP_STATS_RESULT,
@@ -79,7 +78,7 @@ export function fetchPvpStatsSuccess (alias, data) {
   };
 }
 
-export function fetchPvpGamesSuccess (alais, data) {
+export function fetchPvpGamesSuccess (alias, data) {
   return {
     type: actions.FETCH_PVP_GAMES_RESULT,
     payload: {
