@@ -57,15 +57,15 @@ function component () {
 
 class PvpGame {
   stringToDate (date) {
-    return new Date(date).toDateString();
+    return !!date && new Date(date).toDateString();
   }
 
   teamToClass (team) {
-    return styles[team.toLowerCase()];
+    return !!team && styles[team.toLowerCase()];
   }
 
   calculateMatchInMinutes (start, end) {
-    return new Date(new Date(end) - new Date(start)).getMinutes();
+    return !!start && !!end && new Date(new Date(end) - new Date(start)).getMinutes();
   }
 }
 

@@ -22,7 +22,7 @@ function component () {
 class Gw2Map {
   /*@ngInject*/
   constructor ($scope) {
-    getMapData(this.mapId)
+    this.mapId && getMapData(this.mapId)
       .then((data) => {
         this.name = data.name;
         $scope.$apply();
