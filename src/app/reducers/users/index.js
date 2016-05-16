@@ -90,7 +90,9 @@ function fetchPvpGamesResult (state, action) {
     newState.data[action.payload.alias] = {};
   }
 
-  newState.data[action.payload.alias].pvpGames = action.payload.data;
+  newState.data[action.payload.alias].pvpGames = action.payload.data.sort((game1, game2) => {
+    return game1.ended < game2.ended;
+  });
 
   return newState;
 }

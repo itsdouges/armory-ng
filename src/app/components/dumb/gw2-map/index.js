@@ -12,8 +12,8 @@ function component () {
       mapId: '@',
     },
     template: `
-<div class="${styles.map}">
-  <span title="{{ map.name }}" class="${styles.name}">{{ map.name }}</span>
+<div ng-style="{ backgroundImage: 'url({{ map.getImage(map.mapId) }})' }" class="${styles.map}">
+  <span title="{{ map.name }}" class="${styles.name}"><redacted on="!map.mapId">{{ map.name || 'Unknown' }}</redacted></span>
 </div>
 `,
   };
@@ -27,6 +27,10 @@ class Gw2Map {
         this.name = data.name;
         $scope.$apply();
       });
+  }
+
+  getImage (id) {
+    // return id && require(`../../../../assets/images/maps/${id}.jpg`);
   }
 }
 

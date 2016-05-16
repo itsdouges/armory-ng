@@ -30,9 +30,9 @@ function component () {
   characters="details.user.characters">
 </characters-grid>
 
-<pvp-stats ng-if="details.user.pvpStats.pvp_rank" stats="details.user.pvpStats"></pvp-stats>
+<pvp-stats stats="details.user.pvpStats"></pvp-stats>
 
-<pvp-games ng-if="details.user.pvpGames.length" games="details.user.pvpGames"></pvp-games>
+<pvp-games games="details.user.pvpGames"></pvp-games>
 
 <br/><br/>
 

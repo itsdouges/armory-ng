@@ -20,6 +20,7 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Redcated from './components/dumb/redacted';
 import Gw2Map from './components/dumb/gw2-map';
 import Footer from './components/dumb/footer';
 import SearchModal from './components/dumb/search-modal';
@@ -92,6 +93,7 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('redacted', Redcated)
 .directive('gw2Map', Gw2Map)
 .directive('icon', Icon)
 .directive('toggleButton', ToggleButton)

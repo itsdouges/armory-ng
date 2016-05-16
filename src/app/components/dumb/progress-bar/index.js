@@ -16,7 +16,7 @@ function component () {
 <div class="${styles.container}" ng-style="{ backgroundColor: '{{ bar.backgroundColour }}' }">
   <span class="${styles.bar}" ng-style="bar.calcBarStyles(bar.current, bar.max)"></span>
   <span class="${styles.progress}">
-    <span>{{ bar.current }}/{{ bar.max }}</span>
+    <redacted on="!bar.current">{{ bar.current }}/{{ bar.max }}</redacted>
   </span> 
 </div>
 `,

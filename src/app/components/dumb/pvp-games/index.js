@@ -10,22 +10,26 @@ function component () {
       games: '=',
     },
     template: `
-<div>
-  <div class="${styles.listContainer}">
-    <h2>Recent games</h2>
+<div class="${styles.listContainer}">
+  <h2>Recent games</h2>
 
-    <div class="${styles.list}">
-      <pvp-game
-        ng-repeat="game in pvp.games"
-        game="game">
-      </pvp-game>
-    </div>
+  <div ng-class="pvp.expanded ? '${styles.expanded}' : ''" class="${styles.list}">
+    <pvp-game
+      ng-repeat="game in pvp.games track by game.id"
+      game="game">
+    </pvp-game>
+
+    <pvp-game ng-if="!pvp.games || !pvp.games.length"></pvp-game>
   </div>
 </div>
 `,
   };
 }
 
-class PvpGames {}
+class PvpGames {
+  expand () {
+    this.expanded = true;
+  }
+}
 
 export default component;

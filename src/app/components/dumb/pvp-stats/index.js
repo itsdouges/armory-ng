@@ -23,25 +23,25 @@ export default function component () {
     <div class="${styles.unrankedContainer}">
       <div class="${styles.win}">
         <div class="${styles.bigWin}">
-          {{ pvp.stats.ladders.unranked.wins || 0 }} Wins
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.unranked.wins || 0 }} Wins</redacted>
         </div>
       
         <div>
-          {{ pvp.stats.ladders.unranked.byes || 0 }} Byes
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.unranked.byes || 0 }} Byes</redacted>
         </div>
       </div>
 
       <div class="${styles.lose}">
         <div>
-          {{ pvp.stats.ladders.unranked.losses || 0 }} Losses
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.unranked.losses || 0 }} Losses</redacted>
         </div>
       
         <div>
-          {{ pvp.stats.ladders.unranked.forfeits || 0 }} Forfeits
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.unranked.forfeits || 0 }} Forfeits</redacted>
         </div>
 
         <div>
-          {{ pvp.stats.ladders.unranked.desertions || 0 }} Desertions
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.unranked.desertions || 0 }} Desertions</redacted>
         </div>
       </div>
     </div>
@@ -49,25 +49,25 @@ export default function component () {
     <div class="${styles.rankedContainer}">
       <div class="${styles.win}">
         <div class="${styles.bigWin}">
-          {{ pvp.stats.ladders.ranked.wins || 0 }} Wins
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.ranked.wins || 0 }} Wins</redacted>
         </div>
       
         <div>
-          {{ pvp.stats.ladders.ranked.byes || 0 }} Byes
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.ranked.byes || 0 }} Byes</redacted>
         </div>
       </div>
 
       <div class="${styles.lose}">
         <div>
-          {{ pvp.stats.ladders.ranked.losses || 0 }} Losses
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.ranked.losses || 0 }} Losses</redacted>
         </div>
 
         <div>
-          {{ pvp.stats.ladders.ranked.forfeits || 0 }} Forfeits
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.ranked.forfeits || 0 }} Forfeits</redacted>
         </div>
 
         <div>
-          {{ pvp.stats.ladders.ranked.desertions || 0 }} Desertions
+          <redacted on="!pvp.stats.pvp_rank">{{ pvp.stats.ladders.ranked.desertions || 0 }} Desertions</redacted>
         </div>
       </div>
     </div>

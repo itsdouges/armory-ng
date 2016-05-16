@@ -15,7 +15,8 @@ export default function component () {
   <div class="${styles.rankContainer}">
     <div class="${styles.icon}" ng-style="rank.calculateIconStyle(rank.rank)"></div>
     <div class="${styles.progressContainer}">
-      <div class="${styles.name}">{{ rank.rankName }}</div>
+      <redacted on="!rank.rank && !rank.points" class="${styles.name}">{{ rank.rankName }}</redacted>
+
       <progress-bar
         bar-colour="rgb(85, 35, 164)"
         background-colour="rgb(41, 41, 41)"
@@ -97,8 +98,8 @@ class PvpRank {
       name = 'Dragon';
       image = require('../../../../assets/images/pvp/dragon.png');
     } else {
-      name = 'Rabbit';
-      image = require('../../../../assets/images/pvp/rabbit.png');
+      name = 'Dragon';
+      image = require('../../../../assets/images/pvp/dragon.png');
     }
 
     this.rankName = name;
