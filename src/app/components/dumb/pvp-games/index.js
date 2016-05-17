@@ -13,14 +13,14 @@ function component () {
 <div class="${styles.listContainer}">
   <h2>Recent games</h2>
 
-  <div ng-class="pvp.expanded ? '${styles.expanded}' : ''" class="${styles.list}">
+  <carousel max="pvp.games.length - 1">
     <pvp-game
       ng-repeat="game in pvp.games track by game.id"
       game="game">
     </pvp-game>
 
     <pvp-game ng-if="!pvp.games || !pvp.games.length"></pvp-game>
-  </div>
+  </carousel>
 </div>
 `,
   };
