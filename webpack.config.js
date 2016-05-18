@@ -125,7 +125,7 @@ var config = {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
         exclude: /node_modules/, 
         loaders: [
-          'url?limit=20000&name=images/[sha512:hash:base64:7].[ext]',
+          'url?limit=10000&name=images/[sha512:hash:base64:7].[ext]',
           imageLoaderSettings
         ]
       },

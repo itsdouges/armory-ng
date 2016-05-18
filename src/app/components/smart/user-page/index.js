@@ -1,89 +1,100 @@
-import { actionCreators } from '../../../actions/users';
+import { actionCreators, fetchPvpStatsThunk, fetchPvpGamesThunk } from '../../../actions/users';
 import { usersSelector } from '../../../selectors/users';
-
 import showToast from '../../../actions/toast';
 import userActions from '../../../actions/user/data';
-
 import styles from './user-page.less';
 import positionStyles from '../../../styles/positioning/positioning.less';
+import { whoAmI } from '../../../services/who-am-i';
 
 function component () {
-	return {
-		restrict: 'E',
-		scope: {},
-		controller: UserDetails,
-		controllerAs: 'ctrl',
-		bindToController: {
-			mode: '@',
-		},
-		template: `
-			<div class="${positionStyles.textCenter}">
-				<avatar
-					ng-if="ctrl.user.alias"
-					name="{{ ctrl.user.alias }}"
-					image-location="//api.adorable.io/avatars/200/{{ ctrl.user.alias }}.png"></avatar>
-			</div>
-			
-			<characters-grid
-				fetching="ctrl.fetchingCharacters"
-				mode="{{ ctrl.mode }}"
-				characters="ctrl.user.characters"></characters-grid>
+  return {
+    restrict: 'E',
+    scope: {},
+    controller: UserDetails,
+    controllerAs: 'details',
+    bindToController: {
+      mode: '@',
+    },
+    template: `
+<div class="${positionStyles.textCenter}">
+  <avatar
+    ng-if="details.user.alias"
+    name="{{ details.user.alias }}"
+    image-location="//api.adorable.io/avatars/200/{{ details.user.alias }}.png">
+  </avatar>
+</div>
 
-			<br/>
-			<br/>
+<characters-grid
+  fetching="details.fetchingCharacters"
+  mode="{{ details.mode }}"
+  characters="details.user.characters">
+</characters-grid>
 
-			<social-buttons 
-				send-toast="ctrl.sendToast"
-				location="{{ ctrl.location }}"></social-buttons>
-		`
-	};
+<pvp-stats stats="details.user.pvpStats"></pvp-stats>
+
+<pvp-games games="details.user.pvpGames"></pvp-games>
+
+<br/><br/>
+
+<social-buttons
+  location="{{ details.location }}">
+</social-buttons>
+`
+  };
 }
 
 // @ngInject
-function UserDetails ($ngRedux, $stateParams, $scope, $location) {
-	let that = this;
+function UserDetails ($ngRedux, $stateParams, $scope, $location, $timeout) {
+  const that = this;
 
-	function constructor () {
-		const unsubscribe = $ngRedux.connect(usersSelector)(state => {		
-			switch (that.mode) {
-				case 'public':
-					that.fetchingCharacters = state.users.fetching;
-					that.user = state.users.data[$stateParams.alias];
-					that.location = $location.$$absUrl;
-					break;
+  function constructor () {
+    const unsubscribe = $ngRedux.connect(usersSelector)(state => {    
+      switch (that.mode) {
+        case 'public':
+          that.fetchingCharacters = state.users.fetching;
+          that.user = state.users.data[$stateParams.alias];
+          that.location = $location.$$absUrl;
+          break;
 
-				case 'authenticated':
-					that.user = state.me;
-					that.fetchingCharacters = state.me.fetching;
-					that.location = $location.$$absUrl.replace('me', state.me.alias);
-					break;
+        case 'authenticated':
+          that.user = {
+            ...state.me,
+            ...state.users.data[whoAmI()],
+          };
+          that.fetchingCharacters = state.me.fetching;
+          that.location = $location.$$absUrl.replace('me', state.me.alias);
+          break;
 
-				default:
-					throw 'Mode not handled';
-			}
-		});
+        default:
+          throw 'Mode not handled';
+      }
+    });
 
-		$scope.$on('$destroy', unsubscribe);
+    $scope.$on('$destroy', unsubscribe);
 
-		switch (that.mode) {
-			case 'public':
-				$ngRedux.dispatch(actionCreators.fetchUserThunk($stateParams.alias));
-				break;
+    switch (that.mode) {
+      case 'public':
+        $ngRedux.dispatch(actionCreators.fetchUserThunk($stateParams.alias));
+        break;
 
-			case 'authenticated':
-				$ngRedux.dispatch(userActions.fetchMeThunk());
-				break;
+      case 'authenticated':
+        $ngRedux.dispatch(userActions.fetchMeThunk());
+        break;
 
-			default:
-				throw 'Mode not handled';
-		}
-	}
+      default:
+        throw 'Mode not handled';
+    }
 
-	that.sendToast = (message) => {
-		$ngRedux.dispatch(showToast(message));
-	}
+    const alias = $stateParams.alias || whoAmI();
+    $ngRedux.dispatch(fetchPvpStatsThunk(alias));
+    $ngRedux.dispatch(fetchPvpGamesThunk(alias));
+  }
 
-	constructor();
+  that.sendToast = (message) => {
+    $ngRedux.dispatch(showToast(message));
+  }
+
+  constructor();
 }
 
 export default component;

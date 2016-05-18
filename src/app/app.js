@@ -1,5 +1,4 @@
 import 'file!../assets/images/favicons/favicon.ico';
-
 import 'font-awesome/css/font-awesome.css';
 
 import { polyfill } from 'es6-promise';
@@ -21,6 +20,9 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Carousel from './components/dumb/carousel';
+import Redcated from './components/dumb/redacted';
+import Gw2Map from './components/dumb/gw2-map';
 import Footer from './components/dumb/footer';
 import SearchModal from './components/dumb/search-modal';
 import Avatar from './components/dumb/avatar';
@@ -51,6 +53,13 @@ import SocialButtons from './components/dumb/social-buttons';
 import Textbox from './components/dumb/textbox';
 import VisitingPreviewBar from './components/dumb/visiting-preview-bar';
 import ToggleButton from './components/dumb/toggle-button';
+import PvpStats from './components/dumb/pvp-stats';
+import PvpRank from './components/dumb/pvp-rank';
+import PvpGames from './components/dumb/pvp-games';
+import PvpGame from './components/dumb/pvp-game';
+import ProgressBar from './components/dumb/progress-bar';
+import Card from './components/dumb/card';
+import Icon from './components/dumb/icon';
 
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
@@ -85,6 +94,10 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('carousel', Carousel)
+.directive('redacted', Redcated)
+.directive('gw2Map', Gw2Map)
+.directive('icon', Icon)
 .directive('toggleButton', ToggleButton)
 .directive('visitingPreviewBar', VisitingPreviewBar)
 .directive('modalWatcher', ModalWatcher)
@@ -92,8 +105,14 @@ const App = angular.module('gw2armory', [
 .directive('searchResult', SearchResult)
 .directive('guildPage', GuildPage)
 .directive('avatar', Avatar)
+.directive('card', Card)
 .directive('searchBox', SearchBox)
 .directive('title', Title)
+.directive('pvpStats', PvpStats)
+.directive('pvpGames', PvpGames)
+.directive('progressBar', ProgressBar)
+.directive('pvpRank', PvpRank)
+.directive('pvpGame', PvpGame)
 .directive('buildStats', BuildStats)
 .directive('copyToClipboard', CopyToClipboard)
 .directive('socialButtons', SocialButtons)
