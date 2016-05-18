@@ -10,7 +10,7 @@ function component () {
       game: '=',
     },
     template: `
-<card mode="inline">
+<card mode="inline" style="width: calc(100% - 10px); margin-right: 1px; margin-left: 5px;">
   <div class="${styles.container}">
     <gw2-map map-id="{{ pvp.game.map_id }}"></gw2-map>
 

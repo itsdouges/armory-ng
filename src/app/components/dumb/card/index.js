@@ -13,6 +13,7 @@ export default function component () {
       mode: '@',
     },
     transclude: true,
+    replace: true,
     template: `
 <div ng-class="card.mode === 'inline' ? '${styles.inline}' : ''">
   <h2 ng-if="card.cardTitle || card.cardTitleRight" class="${styles.title}">

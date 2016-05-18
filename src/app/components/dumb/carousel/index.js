@@ -57,7 +57,7 @@ class Carousel {
 
   getStyle () {
     return {
-      transform: `translateX(${-100 * this.current}%)`,
+      transform: `translate3d(${-100 * this.current}%, 0, 0)`,
     };
   }
 }

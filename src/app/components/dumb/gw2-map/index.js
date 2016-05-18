@@ -30,7 +30,7 @@ class Gw2Map {
   }
 
   getImage (id) {
-    // return id && require(`../../../../assets/images/maps/${id}.jpg`);
+    return id && require(`../../../../assets/images/maps/${id}.jpg`);
   }
 }
 
