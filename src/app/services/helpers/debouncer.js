@@ -1,7 +1,7 @@
 'use strict';
 
 let DEFAULTS = {
-	delay: 500 // ms
+    delay: 500 // ms
 };
 
 /*
@@ -11,21 +11,21 @@ let DEFAULTS = {
  */
 // @ngInject
 function DebounceService($rootScope) {
-	function debounce(func, delay) {
-		let timeout;
+    function debounce(func, delay) {
+        let timeout;
 
-		return function () {
-			let scope = this;
-			clearTimeout(timeout);
+        return function () {
+            let scope = this;
+            clearTimeout(timeout);
 
-			timeout = setTimeout(function () {
-				func.apply(scope, arguments);
-				$rootScope.$apply();
-			}, delay || DEFAULTS.delay);
-		};
-	}
+            timeout = setTimeout(function () {
+                func.apply(scope, arguments);
+                $rootScope.$apply();
+            }, delay || DEFAULTS.delay);
+        };
+    }
 
-	this.func = debounce;
+    this.func = debounce;
 }
 
 export default DebounceService;

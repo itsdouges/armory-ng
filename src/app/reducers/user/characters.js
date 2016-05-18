@@ -1,34 +1,34 @@
 import { actions } from '../../actions/user/characters';
 
 function fetchMyCharactersReducer (state, action) {
-	let newState = {
-		...state,
-	};
+    let newState = {
+        ...state,
+    };
 
-	newState.characters = action.payload;
+    newState.characters = action.payload;
 
-	return newState;
+    return newState;
 };
 
 function fetchingMyCharactersReducer (state, action) {
-	let newState = {
-		...state,
-	};
+    let newState = {
+        ...state,
+    };
 
-	newState.fetchingCharacters = action.payload;
+    newState.fetchingCharacters = action.payload;
 
-	return newState;
+    return newState;
 };
 
 export function charactersReducer (state, action) {
-	switch (action.type) {
-		case actions.FETCH_MY_CHARACTERS_RESULT:
-			return fetchMyCharactersReducer(state, action);
+    switch (action.type) {
+        case actions.FETCH_MY_CHARACTERS_RESULT:
+            return fetchMyCharactersReducer(state, action);
 
-		case actions.FETCHING_MY_CHARACTERS:
-			return fetchingMyCharactersReducer(state, action);
+        case actions.FETCHING_MY_CHARACTERS:
+            return fetchingMyCharactersReducer(state, action);
 
-		default:
-			return state;
-	}
+        default:
+            return state;
+    }
 }

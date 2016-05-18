@@ -3,52 +3,52 @@
 import { actions } from '../../actions/characters';
 
 function fetchCharactersReducer (state, action) {
-	let newState = {
-		...state
-	};
+    let newState = {
+        ...state
+    };
 
-	newState.data[action.payload.name] = action.payload.data;
+    newState.data[action.payload.name] = action.payload.data;
 
-	return newState;
+    return newState;
 };
 
 function fetchingCharacterReducer (state, action) {
-	let newState = {
-		...state
-	};
+    let newState = {
+        ...state
+    };
 
-	newState.fetching = action.payload;
+    newState.fetching = action.payload;
 
-	return newState;
+    return newState;
 }
 
 function selectCharacterReducer (state, action) {
-	let newState = {
-		...state
-	};
+    let newState = {
+        ...state
+    };
 
-	newState.selected = action.payload;
-	newState.mode = 'pve'; // TODO: Add functionality to switch between pve/pvp/wvw.
+    newState.selected = action.payload;
+    newState.mode = 'pve'; // TODO: Add functionality to switch between pve/pvp/wvw.
 
-	return newState;
+    return newState;
 }
 
 const initalState = {
-	data: {}
+    data: {}
 };
 
 export default function reducer (state = initalState, action) {
-	switch (action.type) {
-		case actions.FETCH_CHARACTER_RESULT:
-			return fetchCharactersReducer(state, action);
+    switch (action.type) {
+        case actions.FETCH_CHARACTER_RESULT:
+            return fetchCharactersReducer(state, action);
 
-		case actions.FETCHING_CHARACTER:
-			return fetchingCharacterReducer(state, action);
+        case actions.FETCHING_CHARACTER:
+            return fetchingCharacterReducer(state, action);
 
-		case actions.SELECT_CHARACTER:
-			return selectCharacterReducer(state, action);
+        case actions.SELECT_CHARACTER:
+            return selectCharacterReducer(state, action);
 
-		default:
-			return state;
-	}
+        default:
+            return state;
+    }
 }
