@@ -1,76 +1,76 @@
 function MouseFollowDirective ($window) {
-	"ngInject";
-	let state = {};
-	let domEle;
-	let mouse = {};
+    "ngInject";
+    let state = {};
+    let domEle;
+    let mouse = {};
 
-	function link (scope, element, attrs) {
-		domEle = element[0];
+    function link (scope, element, attrs) {
+        domEle = element[0];
 
-		scope.$watch(() => {
-			return domEle.offsetWidth;
-		}, () => {
-			calculateState();
-			calculateElementPosition();
-		});
+        scope.$watch(() => {
+            return domEle.offsetWidth;
+        }, () => {
+            calculateState();
+            calculateElementPosition();
+        });
 
-		function calculateState() {
-			let elementWidth = domEle.offsetWidth;
-			let elementHeight = domEle.offsetHeight;
+        function calculateState() {
+            let elementWidth = domEle.offsetWidth;
+            let elementHeight = domEle.offsetHeight;
 
-			let elementRelativeToWindowPosition = domEle.getBoundingClientRect();
-			if (elementRelativeToWindowPosition.right > $window.innerWidth) {
-				state.flipRight = true;
-			} else if (state.flipRight && elementRelativeToWindowPosition.right + elementWidth <= $window.innerWidth) {
-				state.flipRight = false;
-			}
+            let elementRelativeToWindowPosition = domEle.getBoundingClientRect();
+            if (elementRelativeToWindowPosition.right > $window.innerWidth) {
+                state.flipRight = true;
+            } else if (state.flipRight && elementRelativeToWindowPosition.right + elementWidth <= $window.innerWidth) {
+                state.flipRight = false;
+            }
 
-			if (elementRelativeToWindowPosition.bottom > $window.innerHeight) {
-				state.flipTop = true;
-			} else if (state.flipTop && elementRelativeToWindowPosition.bottom + elementHeight <= $window.innerHeight) {
-				state.flipTop = false;
-			}
-		}
+            if (elementRelativeToWindowPosition.bottom > $window.innerHeight) {
+                state.flipTop = true;
+            } else if (state.flipTop && elementRelativeToWindowPosition.bottom + elementHeight <= $window.innerHeight) {
+                state.flipTop = false;
+            }
+        }
 
-		function calculateElementPosition() {
-			let elementWidth = domEle.offsetWidth;
-			let elementHeight = domEle.offsetHeight;
+        function calculateElementPosition() {
+            let elementWidth = domEle.offsetWidth;
+            let elementHeight = domEle.offsetHeight;
 
-			let x = mouse.x;
-			let y = mouse.y;
+            let x = mouse.x;
+            let y = mouse.y;
 
-			if (state.flipRight) {
-				x -= elementWidth;
-			}
+            if (state.flipRight) {
+                x -= elementWidth;
+            }
 
-			if (state.flipTop) {
-				y -= elementHeight;
-			}
+            if (state.flipTop) {
+                y -= elementHeight;
+            }
 
-			let css = `translate3d(${x}px, ${y}px, 0)`;
-			element[0].style.transform = css;
-		}
+            let css = `translate3d(${x}px, ${y}px, 0)`;
+            element[0].style.transform = css;
+        }
 
-		function onMouseMove(e) {
-			mouse.x = e.clientX;
-			mouse.y = e.clientY;
+        function onMouseMove(e) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
 
-			calculateState();
-			calculateElementPosition();
-		}
+            calculateState();
+            calculateElementPosition();
+        }
 
-		$window.addEventListener('mousemove', onMouseMove, false);
-		element.on('$destroy', () => {
-			$window.removeEventListener('mousemove', onMouseMove);
-		});
-	}
+        $window.addEventListener('mousemove', onMouseMove, false);
+        element.on('$destroy', () => {
+            $window.removeEventListener('mousemove', onMouseMove);
+        });
+    }
 
-	let directive = {
-		restrict: 'A',
-		link: link
-	};
+    let directive = {
+        restrict: 'A',
+        link: link
+    };
 
-	return directive;
+    return directive;
 }
 
 export default MouseFollowDirective;

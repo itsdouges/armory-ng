@@ -4,60 +4,60 @@ import styles from './modal-watcher.less';
 import searchActions from '../../actions/search';
 
 export default function component () {
-	return {
-		restrict: 'A',
-		scope: {},
-		controller: ModalWatcher,
-		controllerAs: 'modalWatcher',
-		transclude: true,
-		template: `
-			<div 
-				ng-if="modalWatcher.show"
-				class="${styles.modal}">
-				<search-modal
-					search="modalWatcher.doSearch"
-					searching="modalWatcher.search.searching"
-					term="modalWatcher.search.term"
-					results="modalWatcher.search.results"
-					close="modalWatcher.closeSearchModal"></search-modal>
-			</div>
+    return {
+        restrict: 'A',
+        scope: {},
+        controller: ModalWatcher,
+        controllerAs: 'modalWatcher',
+        transclude: true,
+        template: `
+            <div 
+                ng-if="modalWatcher.show"
+                class="${styles.modal}">
+                <search-modal
+                    search="modalWatcher.doSearch"
+                    searching="modalWatcher.search.searching"
+                    term="modalWatcher.search.term"
+                    results="modalWatcher.search.results"
+                    close="modalWatcher.closeSearchModal"></search-modal>
+            </div>
 
-			<ng-transclude></ng-transclude>
-		`
-	};
+            <ng-transclude></ng-transclude>
+        `
+    };
 }
 
 // @ngInject
 function ModalWatcher ($ngRedux, $scope, $element) {
-	let that = this;
+    let that = this;
 
-	function init () {
-		const unsubscribeModal = $ngRedux.connect(modalSelector)((state) => {
-			that.show = state.show;
+    function init () {
+        const unsubscribeModal = $ngRedux.connect(modalSelector)((state) => {
+            that.show = state.show;
 
-			if (state.show) {
-				$element.addClass('modal-open');
-			} else {
-				$element.removeClass('modal-open');
-			}
-		});
+            if (state.show) {
+                $element.addClass('modal-open');
+            } else {
+                $element.removeClass('modal-open');
+            }
+        });
 
-		const unsubscribeSelector = $ngRedux.connect(searchSelector)(that);
+        const unsubscribeSelector = $ngRedux.connect(searchSelector)(that);
 
-		$scope.$on('$destroy', unsubscribeModal);
-		$scope.$on('$destroy', unsubscribeSelector);
-	}
+        $scope.$on('$destroy', unsubscribeModal);
+        $scope.$on('$destroy', unsubscribeSelector);
+    }
 
-	function closeSearchModal () {
-		$ngRedux.dispatch(searchActions.closeSearchThunk());
-	}
+    function closeSearchModal () {
+        $ngRedux.dispatch(searchActions.closeSearchThunk());
+    }
 
-	function doSearch (term) {
-		$ngRedux.dispatch(searchActions.searchThunk(term));
-	}
+    function doSearch (term) {
+        $ngRedux.dispatch(searchActions.searchThunk(term));
+    }
 
-	this.doSearch = doSearch;
-	this.closeSearchModal = closeSearchModal;
+    this.doSearch = doSearch;
+    this.closeSearchModal = closeSearchModal;
 
-	init();
+    init();
 }

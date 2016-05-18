@@ -3,39 +3,39 @@
 import { actions } from '../../actions/user/register';
 
 function registeringUserReducer (state, action) {
-	let newState = {
-		...state
-	};
+    let newState = {
+        ...state
+    };
 
-	newState.registering = action.payload;
+    newState.registering = action.payload;
 
-	return newState;
+    return newState;
 }
 
 function registeringUserResultReducer (state, action) {
-	let newState = {
-		...state
-	};
+    let newState = {
+        ...state
+    };
 
-	if (action.error) {
-		newState.registerErrors = action.payload;
-	} else {
-		newState.registerErrors = undefined;
-		newState.registerSuccess = true;
-	}
+    if (action.error) {
+        newState.registerErrors = action.payload;
+    } else {
+        newState.registerErrors = undefined;
+        newState.registerSuccess = true;
+    }
 
-	return newState;
+    return newState;
 }
 
 export function registerReducer (state, action) {
-	switch (action.type) {
-		case actions.REGISTERING_USER:
-			return registeringUserReducer(state, action);
+    switch (action.type) {
+        case actions.REGISTERING_USER:
+            return registeringUserReducer(state, action);
 
-		case actions.REGISTER_USER_RESULT: 
-			return registeringUserResultReducer(state, action);
+        case actions.REGISTER_USER_RESULT: 
+            return registeringUserResultReducer(state, action);
 
-		default:
-			return state;
-	}
+        default:
+            return state;
+    }
 }

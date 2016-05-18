@@ -13,16 +13,16 @@ import modal from './modal';
 import search from './search';
 
 const rootReducer = combineReducers({
-	user,
-	router,
-	window: _window,
-	characters,
-	gw2,
-	toast,
-	users,
-	guilds,
-	modal,
-	search
+    user,
+    router,
+    window: _window,
+    characters,
+    gw2,
+    toast,
+    users,
+    guilds,
+    modal,
+    search
 });
 
 export default rootReducer;

@@ -80,7 +80,7 @@ import { combineReducers } from 'redux';
 import store from './app.redux-store';
 
 const App = angular.module('gw2armory', [
-	ngRedux,
+    ngRedux,
   uiRouter,
   ngReduxRouter
 ])
