@@ -20,6 +20,11 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Tier from './components/dumb/tier';
+import Pip from './components/dumb/pip';
+import SeasonDivision from './components/dumb/season-division';
+import PvpSeason from './components/dumb/pvp-season';
+import PvpStandings from './components/dumb/pvp-standings';
 import Carousel from './components/dumb/carousel';
 import Redcated from './components/dumb/redacted';
 import Gw2Map from './components/dumb/gw2-map';
@@ -94,6 +99,11 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('tier', Tier)
+.directive('pip', Pip)
+.directive('seasonDivision', SeasonDivision)
+.directive('pvpSeason', PvpSeason)
+.directive('pvpStandings', PvpStandings)
 .directive('carousel', Carousel)
 .directive('redacted', Redcated)
 .directive('gw2Map', Gw2Map)
