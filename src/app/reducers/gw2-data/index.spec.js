@@ -24,6 +24,7 @@ describe('gw2 reducer', () => {
             specializations: {
                 data: {}
             },
+            pvpSeasons: {},
             tooltip: {
                 open: true,
                 item: 'item',
