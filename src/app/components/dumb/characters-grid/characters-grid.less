@@ -1,39 +1,80 @@
 @import '../../../styles/variables/colours.less';
 @import '../../../styles/variables/sizes.less';
-@import '../../dumb/slider-control/slider-control.less';
 
 characters-grid {
-	display: block;
-	position: relative;
-	padding: 26px 0 0 0;
+  display: block;
+  position: relative;
+  padding: 26px 0 0 0;
 }
 
 .grid {
-	white-space: inherit;
+  white-space: inherit;
 }
 
 .sliderMessage {
-	display: block;
-	margin: 0 auto;
-	text-align: center;
-	white-space: normal;
-	padding: 1.3em 0;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  white-space: normal;
+  padding: 1.3em 0;
 }
 
 .progress {
-	display: block;
-	text-align: center;
+  display: block;
+  text-align: center;
 }
 
 .container {
-	background: @card-bg;
-	composes: low from '../../../styles/box-shadow/box-shadow.less';
-	position: relative;
-	overflow-x: auto;
-	overflow-y: hidden;
-	-webkit-overflow-scrolling: touch;
+  background: @card-bg;
+  composes: low from '../../../styles/box-shadow/box-shadow.less';
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .slider {
-	white-space: nowrap;
+  white-space: nowrap;
+}
+
+.borderContainer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.borderContainerTop {
+  top: 0;
+}
+
+.borderContainerBottom {
+  bottom: 0;
+  transform: scaleY(-1);
+}
+
+.border {
+  flex-shrink: 0;
+  height: 26px;
+  width: 284px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-image: url('../../../../assets/images/slider-border.png');
+  overflow: hidden;
+}
+.borderTopLeft {
+  margin-right: 2em;
+}
+
+.borderBottomLeft {
+  margin-right: 7em;
+}
+
+.borderTopRight {
+  transform: scaleX(-1);
+}
+
+.borderBottomRight {
+  transform: scaleX(-1);
 }

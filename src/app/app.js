@@ -39,7 +39,6 @@ import UserTokens from './components/dumb/user-tokens';
 import CopyToClipboard from './components/dumb/copy-to-clipboard';
 import CharacterViewer from './components/dumb/character-viewer';
 import CharactersGrid from './components/dumb/characters-grid';
-import SliderControl from './components/dumb/slider-control';
 import InlineCharacters from './components/dumb/inline-characters';
 import ProgressIndicator from './components/dumb/progress-indicator';
 import Gw2Token from './components/dumb/gw2-token';
@@ -79,13 +78,12 @@ import angular from 'angular';
 import ngRedux from 'ng-redux';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
-
 import reducers from './reducers';
 import { combineReducers } from 'redux';
 import store from './app.redux-store';
 
 const App = angular.module('gw2armory', [
-    ngRedux,
+  ngRedux,
   uiRouter,
   ngReduxRouter
 ])
@@ -137,7 +135,6 @@ const App = angular.module('gw2armory', [
 .directive('itemTooltip', ItemTooltip)
 .directive('progressIndicator', ProgressIndicator)
 .directive('charactersGrid', CharactersGrid)
-.directive('sliderControl', SliderControl)
 .directive('inlineCharacters', InlineCharacters)
 .directive('characterViewer', CharacterViewer)
 .directive('gw2Token', Gw2Token)

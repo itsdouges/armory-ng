@@ -12,19 +12,18 @@ export default function component () {
     controllerAs: 'standings',
     template: `
 <div class="${styles.container}">
-  <pvp-season
-    current="standings.latest().current"
-    season="standings.seasons[standings.latest().season_id]">
-  </pvp-season>
+  <carousel max="standings.standings.length - 1">
+    <pvp-season
+      ng-repeat="standing in standings.standings"
+      current="standing.current"
+      season="standings.seasons[standing.season_id]">
+    </pvp-season>
+
+    <pvp-season ng-if="!standings.standings.length"></pvp-season>
+  </carousel>
 </div>
 `
   };
 }
 
-class PvpStandings {
-  latest () {
-    if (this.seasons && this.standings) {
-      return this.standings[this.standings.length - 1];
-    }
-  }
-}
+class PvpStandings {}

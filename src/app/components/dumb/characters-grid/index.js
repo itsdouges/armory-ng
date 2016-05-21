@@ -1,5 +1,4 @@
 import styles from './characters-grid.less';
-import sliderStyles from '../../smart/characters-slider/characters-slider.less';
 
 function component () {
   let directive = {
@@ -15,9 +14,9 @@ function component () {
       displayMode: '@'
     },
     template: `
-      <div class="${sliderStyles.borderContainer} ${sliderStyles.borderContainerTop}">
-        <div class="${sliderStyles.border} ${sliderStyles.borderTopLeft}"></div>
-        <div class="${sliderStyles.border} ${sliderStyles.borderTopRight}"></div>
+      <div class="${styles.borderContainer} ${styles.borderContainerTop}">
+        <div class="${styles.border} ${styles.borderTopLeft}"></div>
+        <div class="${styles.border} ${styles.borderTopRight}"></div>
       </div>
 
       <div 
