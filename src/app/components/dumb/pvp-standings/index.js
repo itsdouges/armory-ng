@@ -18,7 +18,6 @@ export default function component () {
       current="standing.current"
       season="standings.seasons[standing.season_id]">
     </pvp-season>
-
     <pvp-season ng-if="!standings.standings.length"></pvp-season>
   </carousel>
 </div>

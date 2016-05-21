@@ -21,27 +21,27 @@ function config ($logProvider, $compileProvider, $urlMatcherFactoryProvider) {
 
 // @ngInject
 function run ($ngRedux, $state, $window, $rootScope, $location) {
-    axios.interceptors.request.use((config) => {
-        const userAuth = userAuthSelector($ngRedux.getState());
-        if (userAuth.token && !config.ignoreAuth) {
-            config.headers.Authorization = userAuth.token;
-        }
+  axios.interceptors.request.use((config) => {
+    const userAuth = userAuthSelector($ngRedux.getState());
+    if (userAuth.token && !config.ignoreAuth) {
+        config.headers.Authorization = userAuth.token;
+    }
 
-      return config;
-    });
+    return config;
+  });
 
-    axios.interceptors.response.use(null, (response) => {
+  axios.interceptors.response.use(null, (response) => {
     if (response instanceof Error || response.status === 0) {
       console.error('Error', response);
       $ngRedux.dispatch(showToast('We\'re having trouble talking to the server. It might be down! But check your connection just incase.'));
     } else if (response.status === 401 && response.config.url.indexOf(conf.api.endpoint) >= 0 && response.config.url.indexOf('token') === -1) {
-        // unauthorized
-        $ngRedux.dispatch(actionCreators.clearUserData());
+      // unauthorized
+      $ngRedux.dispatch(actionCreators.clearUserData());
       $ngRedux.dispatch(showToast('Sorry I\'ve lost you! Can you please login again?'));
       $ngRedux.dispatch(stateGo('main.no-auth.with-container.login'));
     } else if (response.status === 403) {
-        // forbidden
-        $ngRedux.dispatch(stateGo('main.with-auth.forbidden'));
+      // forbidden
+      $ngRedux.dispatch(stateGo('main.with-auth.forbidden'));
     } else if (response.status === 404) {
         // not found
       if (response.config.url.indexOf(conf.api.endpoint) === -1) {
@@ -50,12 +50,11 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
         $state.go('main.no-auth.with-container.not-found');
       }
     } else if (response.status >= 500) {
-        // server error
-        $ngRedux.dispatch(showToast('Sorry.. Some wierd stuff is happening on the server, wait a bit and try again!'));
+      // server error
+      $ngRedux.dispatch(showToast('Sorry.. Some wierd stuff is happening on the server, wait a bit and try again!'));
     }
-
     return Promise.reject(response);
-    });
+  });
 
   $rootScope.$on('$stateChangeSuccess', (event) => {
     if (!$window.ga) {
@@ -69,8 +68,8 @@ function run ($ngRedux, $state, $window, $rootScope, $location) {
 }
 
 export default {
-    config,
-    run
+  config,
+  run
 }
 
 // how to run in prod https://docs.angularjs.org/guide/production

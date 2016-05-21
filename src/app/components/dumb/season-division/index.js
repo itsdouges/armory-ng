@@ -20,22 +20,24 @@ export default function component () {
 
   <div class="${styles.name}"><redacted on="!division.division">{{ division.division.name || 'Division n: Squared' }}</redacted></div>
   
-  <tier
-    ng-repeat="tier in division.division.tiers track by $index"
-    on="{{ $index < division.current.tier }}"
-    points="division.current.points"
-    pips="{{ tier.points }}"
-    pip-icon="division.division.pip_icon"
-    number="{{ $index + 1 }}">
-  </tier>
+  <div class="${styles.tierContainer}">
+    <tier
+      ng-repeat="tier in division.division.tiers track by $index"
+      on="{{ $index < division.current.tier }}"
+      points="division.current.points"
+      pips="{{ tier.points }}"
+      pip-icon="division.division.pip_icon"
+      number="{{ $index + 1 }}">
+    </tier>
 
-  <tier ng-if="!division.division.tiers"
-    ng-repeat="num in [1, 2, 3, 4, 5]"
-    on="{{ false }}"
-    points="0"
-    pips="5"
-    number="{{ num }}">
-  </tier>
+    <tier ng-if="!division.division.tiers"
+      ng-repeat="num in [1, 2, 3, 4, 5]"
+      on="{{ false }}"
+      points="0"
+      pips="5"
+      number="{{ num }}">
+    </tier>
+  </div>
 
   <!--<div class="${styles.rules}">Division Rules</div>
   <div>
