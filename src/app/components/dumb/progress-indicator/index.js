@@ -1,37 +1,24 @@
-'use strict';
-
+import { Component } from '@angular/core';
 import styles from './progress-indicator.less';
 import iconStyles from '../../../styles/icons/icons.less';
 import accessibilityStyles from '../../../styles/helpers/accessibility.less';
+import { NgClass } from '@angular/common';
 
-function component () {
-    let directive = {
-        restrict: 'E',
-        controller: ProgressIndicator,
-        controllerAs: 'ctrl',
-        scope: {},
-        bindToController: {
-            'busy': '=',
-            'size': '@'
-        },
-        template: `
-            <i ng-if="ctrl.busy" ng-class="ctrl.getIconSize(ctrl.size)" class="${iconStyles.icon} ${styles.progress}">
-                <span class="${accessibilityStyles.hideText}">Loading..</span>
-            </i>
-        `
-    };
-
-    return directive;
+@Component({
+  selector: 'progress-indicator',
+  inputs: ['busy', 'size'],
+  directives: [NgClass],
+  template: `
+<i
+  *ngIf="busy"
+  [ngClass]="getStyle()"
+  class="${iconStyles.icon} ${styles.progress}">
+  <span class="${accessibilityStyles.hideText}">Loading..</span>
+</i>
+`,
+})
+export default class ProgressIndicator {
+  getStyle () {
+    return styles[this.size || 'small'];
+  }
 }
-
-class ProgressIndicator {
-    constructor () {
-
-    }
-
-    getIconSize (size) {
-        return styles[size || 'small'];
-    }
-}
-
-export default component;

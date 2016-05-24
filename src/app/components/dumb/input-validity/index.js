@@ -1,37 +1,14 @@
+import { Component } from '@angular/core';
 import styles from './input-validity.less';
+import ProgressIndicator from '../progress-indicator';
 
-function component () {
-  let directive = {
-    restrict: 'E',
-    controller: InputValidity,
-    controllerAs: 'inputValidity',
-    bindToController: {
-      valid: '=',
-      busy: '='
-    },
-    scope: {},
-    template: `
-      <span ng-if="!inputValidity.busy">
-        <i ng-class="inputValidity.getClass()"></i>
-      </span>
-
-      <progress-indicator
-        size="mini"
-        busy="inputValidity.busy"></progress-indicator>
-    `
-  };
-
-  return directive;
-}
-
-class InputValidity {
-  getClass () {
-    if (this.valid) {
-      return ['fa', 'fa-check', styles.valid];
-    } else {
-      return ['fa', 'fa-times', styles.invalid];
-    }
-  }
-}
-
-export default component;
+@Component({
+  selector: 'input-validity',
+  inputs: ['valid'],
+  template: `
+<div class="${styles.container}">
+  <i [attr.class]="valid ? 'fa fa-check ${styles.valid}' : 'fa fa-times ${styles.invalid}'"></i>
+</div>
+`,
+})
+export default class InputValidity {} 

@@ -2,6 +2,7 @@ import styles from './user-tokens.less';
 import messageStyles from '../../../styles/message/message.less';
 import formStyles from '../../../styles/forms/forms.less';
 import containerStyles from '../../../styles/container/container.less';
+import debounce from 'app/services/helpers/debounce';
 
 function component () {
   let directive = {
@@ -62,7 +63,7 @@ function component () {
 }
 
 // @ngInject
-function UserTokens (debounce) {
+function UserTokens () {
   let that = this;
 
   // Angular directives passing functions around........ smh..
@@ -73,7 +74,7 @@ function UserTokens (debounce) {
 
   let tokenDebounce;
   that.validateTokenDebounce = () => {
-    tokenDebounce = tokenDebounce || debounce.func(() => {
+    tokenDebounce = tokenDebounce || debounce(() => {
       that.validateToken({ token: that.newGw2Token });
     });
 

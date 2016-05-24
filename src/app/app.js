@@ -1,3 +1,6 @@
+import 'zone.js';
+import 'reflect-metadata';
+
 import 'file!../assets/images/favicons/favicon.ico';
 import 'font-awesome/css/font-awesome.css';
 
@@ -68,11 +71,9 @@ import Icon from './components/dumb/icon';
 import ModalWatcher from './directives/modal-watcher';
 import Title from './directives/title';
 import MouseFollow from './directives/mouse-follow';
-import ColumnsCalculator from './directives/columns-calculator';
 import ToastCreator from './directives/toast-creator';
 
 import AuthService from './services/auth/auth';
-import debounce from './services/helpers/debouncer';
 
 import angular from 'angular';
 import ngRedux from 'ng-redux';
@@ -81,6 +82,9 @@ import ngReduxRouter from 'redux-ui-router';
 import reducers from './reducers';
 import { combineReducers } from 'redux';
 import store from './app.redux-store';
+
+import { UpgradeAdapter } from '@angular/upgrade';
+const upgradeAdapter = new UpgradeAdapter();
 
 const App = angular.module('gw2armory', [
   ngRedux,
@@ -95,7 +99,6 @@ const App = angular.module('gw2armory', [
 .run(configuration.run)
 
 .service('authService', AuthService)
-.service('debounce', debounce)
 
 .directive('tier', Tier)
 .directive('pip', Pip)
@@ -127,13 +130,11 @@ const App = angular.module('gw2armory', [
 .directive('characterPage', CharacterPage)
 .directive('userPage', UserPage)
 .directive('userSettingsPage', UserSettingsPage)
-.directive('columnsCalculator', ColumnsCalculator)
 .directive('mouseFollow', MouseFollow)
 .directive('characterAttributes', CharacterAttributes)
 .directive('itemBlock', ItemBlock)
 .directive('busyButton', BusyButton)
 .directive('itemTooltip', ItemTooltip)
-.directive('progressIndicator', ProgressIndicator)
 .directive('charactersGrid', CharactersGrid)
 .directive('inlineCharacters', InlineCharacters)
 .directive('characterViewer', CharacterViewer)
@@ -143,7 +144,6 @@ const App = angular.module('gw2armory', [
 .directive('changeAlias', ChangeAlias)
 .directive('changePassword', ChangePassword)
 .directive('upgradeComponent', ItemUpgrade)
-.directive('inputValidity', InputValidity)
 .directive('header', HeaderBlock)
 .directive('footer', Footer)
 .directive('craftingBlock', CraftingBlock)
@@ -154,9 +154,12 @@ const App = angular.module('gw2armory', [
 .directive('specializationTrait', SpecializationTrait)
 .directive('toast', Toast)
 .directive('toastsEnabled', ToastCreator)
-.directive('textbox', Textbox)
-.directive('characterSpecialization', CharacterSpecialization);
+.directive('characterSpecialization', CharacterSpecialization)
 
-angular.bootstrap(document, ['gw2armory'], {
+.directive('progressIndicator', upgradeAdapter.downgradeNg2Component(ProgressIndicator))
+.directive('inputValidity', upgradeAdapter.downgradeNg2Component(InputValidity))
+.directive('textbox', upgradeAdapter.downgradeNg2Component(Textbox));
+
+upgradeAdapter.bootstrap(document, ['gw2armory'], {
   strictDi: true
 });

@@ -1,6 +1,7 @@
 import styles from './change-password.less';
 import messageStyles from '../../../styles/message/message.less';
 import formStyles from '../../../styles/forms/forms.less';
+import debounce from 'app/services/helpers/debounce';
 
 function component () {
   let directive = {
@@ -60,13 +61,13 @@ function component () {
 }
 
 // @ngInject
-function ChangePassword (debounce) {
+function ChangePassword () {
   let scope = this;
 
   scope.changePassword = scope.changePassword();
   scope.validatePasswords = scope.validatePasswords();
 
-  scope.validatePasswordsDebounce = debounce.func(() => {
+  scope.validatePasswordsDebounce = debounce(() => {
     scope.validatePasswords({ password1: scope.inputs.password1, password2: scope.inputs.password2 });
   }, 500);
 }

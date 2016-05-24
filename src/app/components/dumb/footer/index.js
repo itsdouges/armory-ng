@@ -2,7 +2,7 @@ import styles from './footer.less';
 import { actionCreators } from '../../../actions/window';
 
 // @ngInject
-function component ($window, debounce, $timeout) {
+function component ($window, $timeout) {
   let directive = {
     restrict: 'E',
     scope: {},

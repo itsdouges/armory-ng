@@ -1,59 +1,37 @@
-import forms from '../../../styles/forms/forms.less';
+import { Component } from '@angular/core';
 import styles from './textbox.less';
+import InputValidity from '../input-validity';
 
-function component () {
-  let directive = {
-    restrict: 'E',
-    controller: Textbox,
-    controllerAs: 'textbox',
-    scope: {},
-    bindToController: {
-      label: '@',
-      controlId: '@',
-      onChange: '&',
-      ngModel: '=',
-      required: '@',
-      isBusy: '=',
-      isValid: '=',
-      type: '@',
-      error: '=',
-    },
-    template: `
-      <div>
-        <div class="${styles.labelContainer}">
-          <label for="{{ textbox.controlId }}">{{ textbox.label }}</label>
-        </div>
+@Component({
+  selector: 'textbox',
+  inputs: ['label', 'errorMessage', 'busy', 'valid', 'required', 'id', 'onChange', 'type'],
+  directives: [InputValidity],
+  template: `
+<div>
+  <div class="${styles.labelContainer}">
+    <label [attr.for]="id">{{ label }}</label>
+  </div>
 
-        <div class="${styles.textboxContainer}">
-          <input
-            placeholder="{{ textbox.label }}"
-            ng-change="textbox.onChange()"
-            id="{{ textbox.controlId }}"
-            type="{{ textbox.type }}"
-            ng-model="textbox.ngModel"
-            ng-required="{{ textbox.required ? 'required': '' }}" />
+  <div class="${styles.textboxContainer}">
+    <input
+      [placeholder]="label"
+      [attr.id]="id"
+      [attr.type]="type || 'text'"
+      [attr.required]="required"
+      (change)="onChange($event.target.value)" />
 
-          <input-validity
-            data-busy="textbox.isBusy"
-            data-valid="textbox.isValid">
-          </input-validity>
+    <input-validity
+      [busy]="busy"
+      [valid]="valid">
+    </input-validity>
 
-          <div title="{{ textbox.error }}" class="${styles.error}" ng-if="textbox.error">
-            {{ textbox.error }}
-          </div>
-        </div>
-      </div>
-    `
-  };
-
-  return directive;
-}
-
-class Textbox {
-  constructor () {
-    this.onChange = this.onChange();
-    this.type = this.type || 'text';
-  }
-}
-
-export default component;
+    <div
+      [title]="errorMessage"
+      class="${styles.error}">
+      {{ busy ? '...' : errorMessage }}
+    </div>
+  </div>
+</div>
+`,
+})
+export default class Textbox {}

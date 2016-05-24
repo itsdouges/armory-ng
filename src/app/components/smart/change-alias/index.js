@@ -1,63 +1,62 @@
-'use strict';
-
 import { actionCreators } from '../../../actions/user';
 import { userDataSelector } from '../../../selectors/user';
 
 import styles from './change-alias.less';
 import inputStyles from '../../../styles/forms/forms.less';
+import debounce from 'app/services/helpers/debounce';
 
 function component () {
-    let directive = {
-        restrict: 'E',
-        controller: ChangeAlias,
-        controllerAs: 'ctrl',
-        scope: {},
-        template: `
-            <form>
-                    <div class="${inputStyles.inputContainer}">
-                    <input placeholder="Alias" ng-change="ctrl.checkAlias()" id="add-token" type="text" ng-model="ctrl.user.alias" required="required" />
+  return {
+    restrict: 'E',
+    controller: ChangeAlias,
+    controllerAs: 'ctrl',
+    scope: {},
+    template: `
+<form>
+  <div class="${inputStyles.inputContainer}">
+    <input placeholder="Alias" ng-change="ctrl.checkAlias()" id="add-token" type="text" ng-model="ctrl.user.alias" required="required" />
 
-                    <input-validity
-                        data-busy="ctrl.busy"
-                        data-valid="ctrl.token.valid">
-                    </input-validity>
-                </div>
+    <input-validity
+      data-busy="ctrl.busy"
+      data-valid="ctrl.token.valid">
+    </input-validity>
+  </div>
 
-                <div class="${inputStyles.buttonGroup}">
-                    <busy-button button-disabled="!ctrl.user.validAlias" busy="ctrl.user.savingAlias">
-                        <i class="fa fa-floppy-o"></i>
-                    </busy-button>
-                </div>
-            </form>
-        `
-    };
+  <div class="${inputStyles.buttonGroup}">
+    <busy-button button-disabled="!ctrl.user.validAlias" busy="ctrl.user.savingAlias">
+      <i class="fa fa-floppy-o"></i>
+    </busy-button>
+  </div>
+</form>
+    `
+  };
 
-    return directive;
+  return directive;
 }
 
 // @ngInject
-function ChangeAlias ($ngRedux, $scope, debounce) {
-    let scope = this;
+function ChangeAlias ($ngRedux, $scope) {
+  let scope = this;
 
-    const unsubscribe = $ngRedux.connect(userDataSelector)(this);
-    $scope.$on('$destroy', unsubscribe);
+  const unsubscribe = $ngRedux.connect(userDataSelector)(this);
+  $scope.$on('$destroy', unsubscribe);
 
-    var checkAliasDebounce;
-    this.checkAlias = () => {
-        if (scope.user.aliasValid) {
-            $ngRedux.dispatch(actionCreators.invalidateAlias());
-        }
+  var checkAliasDebounce;
+  this.checkAlias = () => {
+    if (scope.user.aliasValid) {
+        $ngRedux.dispatch(actionCreators.invalidateAlias());
+    }
 
-        checkAliasDebounce = checkAliasDebounce || debounce.func(() => {
-            $ngRedux.dispatch(actionCreators.checkAliasThunk(scope.user.alias));
-        });
+    checkAliasDebounce = checkAliasDebounce || debounce(() => {
+      $ngRedux.dispatch(actionCreators.checkAliasThunk(scope.user.alias));
+    });
 
-        checkAliasDebounce();
-    };
+    checkAliasDebounce();
+  };
 
-    this.saveAlias = () => {
-        $ngRedux.dispatch(actionCreators.saveAliasThunk(scope.user.alias));
-    };
+  this.saveAlias = () => {
+    $ngRedux.dispatch(actionCreators.saveAliasThunk(scope.user.alias));
+  };
 }
 
 export default component;

@@ -3,6 +3,7 @@ import { registerSelector } from '../../../selectors/user';
 import styles from './register-box.less';
 import forms from '../../../styles/forms/forms.less';
 import message from '../../../styles/message/message.less';
+import debounce from 'app/services/helpers/debounce';
 
 function component () {
   let directive = {
@@ -10,57 +11,57 @@ function component () {
     controller: RegisterBox,
     controllerAs: 'ctrl',
     template: `
-      <form class="${forms.container}" ng-submit="ctrl.register()">
-        <textbox
-          label="Email"
-          on-change="ctrl.checkEmail"
-          control-id="register-email"
-          ng-model="ctrl.inputs.email"
-          required="true"
-          is-busy="ctrl.user.emailValidating"
-          is-valid="ctrl.user.emailValid"
-          error="ctrl.user.emailErrors[0]"></textbox>
+<form class="${forms.container}" ng-submit="ctrl.register()">
+  <textbox
+    label="Email"
+    [on-change]="ctrl.checkEmail"
+    [id]="'register-email'"
+    [required]="true"
+    [busy]="ctrl.user.emailValidating"
+    [valid]="ctrl.user.emailValid"
+    [error-message]="ctrl.user.emailErrors[0]">
+  </textbox>
 
-        <textbox
-          label="Alias"
-          on-change="ctrl.checkAlias"
-          control-id="register-alias"
-          ng-model="ctrl.inputs.alias"
-          required="true"
-          is-busy="ctrl.user.aliasValidating"
-          is-valid="ctrl.user.aliasValid"
-          error="ctrl.user.aliasErrors[0]"></textbox>
+  <textbox
+    label="Alias"
+    [on-change]="ctrl.checkAlias"
+    [id]="'register-alias'"
+    [required]="true"
+    [busy]="ctrl.user.aliasValidating"
+    [valid]="ctrl.user.aliasValid"
+    [error-message]="ctrl.user.aliasErrors[0]">
+  </textbox>
 
-        <textbox
-          label="Password"
-          on-change="ctrl.checkPasswords"
-          control-id="register-password"
-          ng-model="ctrl.inputs.password1"
-          required="true"
-          type="password"
-          is-valid="ctrl.user.passwordValue"></textbox>
+  <textbox
+    type="password"
+    label="Password"
+    [on-change]="ctrl.checkPasswords"
+    [id]="'register-password'"
+    [required]="true"
+    [valid]="ctrl.user.passwordValue">
+  </textbox>
 
-        <textbox
-          label="Confirm password"
-          on-change="ctrl.checkPasswords"
-          control-id="register-confirm-password"
-          ng-model="ctrl.inputs.password2"
-          required="true"
-          type="password"
-          is-valid="ctrl.user.passwordValue"
-          error="ctrl.user.passwordErrors[0]"></textbox>
+  <textbox
+    type="password"
+    label="Confirm password"
+    [on-change]="ctrl.checkPasswords"
+    [id]="'register-confirm-password'"
+    [required]="true"
+    [valid]="ctrl.user.passwordValue"
+    [error-message]="ctrl.user.passwordErrors[0]">
+  </textbox>
 
-        <div class="${forms.buttonGroup}">
-          <busy-button 
-            button-disabled="!ctrl.canRegister" 
-            busy="ctrl.user.registering">
-            <i 
-              class="fa fa-paper-plane"
-              style="margin-left: -4px">
-            </i>
-          </busy-button>
-        </div>
-      </form>
+  <div class="${forms.buttonGroup}">
+    <busy-button 
+      button-disabled="!ctrl.canRegister" 
+      busy="ctrl.user.registering">
+      <i 
+        class="fa fa-paper-plane"
+        style="margin-left: -4px">
+      </i>
+    </busy-button>
+  </div>
+</form>
     `,
     bindToController: {
       state: '@'
@@ -72,7 +73,7 @@ function component () {
 }
 
 // @ngInject
-function RegisterBox (debounce, $ngRedux, $scope) {
+function RegisterBox ($ngRedux, $scope) {
   let scope = this;
 
   const unsubscribe = $ngRedux.connect(registerSelector)(this);
@@ -86,35 +87,18 @@ function RegisterBox (debounce, $ngRedux, $scope) {
     $ngRedux.dispatch(actionCreators.registerThunk(scope.user));
   };
 
-  let checkEmailDebounce;
-  this.checkEmail = () => {
-    if (scope.user.emailValid) {
-      $ngRedux.dispatch(actionCreators.invalidateEmail());
-    }
+  this.checkEmail = debounce((email) => {
+    scope.user.emailValid && $ngRedux.dispatch(actionCreators.invalidateEmail());
+    email && $ngRedux.dispatch(actionCreators.validateEmailThunk(email));
+  });
 
-    checkEmailDebounce = checkEmailDebounce || debounce.func(() => {
-      $ngRedux.dispatch(actionCreators.validateEmailThunk(scope.inputs.email));
-    });
+  this.checkAlias = debounce((alias) => {
+    scope.user.aliasValid && $ngRedux.dispatch(actionCreators.invalidateAlias());
+    alias && $ngRedux.dispatch(actionCreators.checkAliasThunk(alias));
+  });
 
-    checkEmailDebounce();
-  };
-
-  var checkAliasDebounce;
-  this.checkAlias = () => {
-    if (scope.user.aliasValid) {
-      $ngRedux.dispatch(actionCreators.invalidateAlias());
-    }
-
-    checkAliasDebounce = checkAliasDebounce || debounce.func(() => {
-      $ngRedux.dispatch(actionCreators.checkAliasThunk(scope.inputs.alias));
-    });
-
-    checkAliasDebounce();
-  };
-
-  this.checkPasswords = debounce.func(() => {
-    let action = actionCreators.checkPasswords(scope.inputs.password1, scope.inputs.password2);
-    $ngRedux.dispatch(action);
+  this.checkPasswords = debounce((password, password2) => {
+    $ngRedux.dispatch(actionCreators.checkPasswords(scope.inputs.password1, scope.inputs.password2));
   }, 500);
 
   init();
