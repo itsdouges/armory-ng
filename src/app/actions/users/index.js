@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../../app.env';
+import { fetchPvpSeasonThunk } from 'app/actions/gw2-data';
 
 export const actions = {
   FETCHING_USER: 'FETCHING_USER',
@@ -123,7 +124,13 @@ export function fetchPvpStandingsThunk (alias) {
     return axios
       .get(`${config.api.endpoint}users/${alias}/pvp/standings`)
       .then((response) => {
-        dispatch(fetchPvpStandingsSuccess(alias, response.data));
+        const standings = response.data;
+        
+        standings.forEach((standing) => {
+          dispatch(fetchPvpSeasonThunk(standing.season_id));
+        });
+
+        dispatch(fetchPvpStandingsSuccess(alias, standings));
       });
     };
 }

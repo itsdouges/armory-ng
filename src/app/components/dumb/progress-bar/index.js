@@ -25,7 +25,7 @@ function component () {
 
 class ProgressBar {
   calcBarStyles (current, max) {
-    const percent = max ? Math.ceil((current / max || 0) * 100) : 100;
+    const percent = max ? Math.ceil((current / max || 0) * 100) : 0;
 
     return {
       width: `${percent}%`,

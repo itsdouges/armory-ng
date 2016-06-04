@@ -2,6 +2,15 @@ import axios from 'axios';
 import config from '../../app.env';
 import gw2Parse from './gw2-parse';
 
+export const readPvpSeason = (id) => axios
+  .get(`${config.gw2.endpoint}v2/pvp/seasons/${id}`, {
+    ignoreAuth: true,
+    cache: true
+  })
+  .then((data) => {
+    return data.data;
+  });
+
 export const readAllItemIds = () => axios
   .get(`${config.gw2.endpoint}v2/items`, {
     ignoreAuth: true,

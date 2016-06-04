@@ -40,7 +40,7 @@ function clearStorageIfTime () {
 clearStorageIfTime();
 
 function fetchingItemsReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -50,7 +50,7 @@ function fetchingItemsReducer (state, action) {
 }
 
 function fetchingSkinsReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -60,7 +60,7 @@ function fetchingSkinsReducer (state, action) {
 }
 
 function fetchingSpecializationsReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -70,7 +70,7 @@ function fetchingSpecializationsReducer (state, action) {
 }
 
 function fetchingTraitsReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -80,7 +80,7 @@ function fetchingTraitsReducer (state, action) {
 }
 
 function fetchItemsResultReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -95,7 +95,7 @@ function fetchItemsResultReducer (state, action) {
 }
 
 function fetchSkinsResultReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -110,7 +110,7 @@ function fetchSkinsResultReducer (state, action) {
 }
 
 function fetchTraitsResultReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -125,7 +125,7 @@ function fetchTraitsResultReducer (state, action) {
 }
 
 function fetchSpecializationsResultReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -139,8 +139,18 @@ function fetchSpecializationsResultReducer (state, action) {
   return newState;
 }
 
+function fetchPvpSeasonResultReducer (state, action) {
+  const newState = {
+    ...state
+  };
+
+  newState.pvpSeasons[action.payload.id] = action.payload;
+
+  return newState;
+}
+
 function showTooltipReducer (state, action) {
-  let newState = {
+  const newState = {
     ...state
   };
 
@@ -175,6 +185,7 @@ const initalState = {
   specializations: {
     data: JSON.parse(localStorage.getItem(SPECIALIZATIONS_KEY)) || {}
   },
+  pvpSeasons: {},
   tooltip: {
     open: false
   }
@@ -205,6 +216,9 @@ export default function reducer (state = initalState, action) {
 
     case actions.FETCH_SPECIALIZATIONS_RESULT:
       return fetchSpecializationsResultReducer(state, action);
+
+    case actions.FETCH_PVP_SEASON_RESULT:
+      return fetchPvpSeasonResultReducer(state, action);
 
     case actions.SHOW_TOOLTIP:
       return showTooltipReducer(state, action);

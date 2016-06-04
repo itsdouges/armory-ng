@@ -20,6 +20,11 @@ import UserSettingsPage from './components/smart/user-settings-page';
 import CharacterPage from './components/smart/character-page';
 import UserPage from './components/smart/user-page';
 
+import Tier from './components/dumb/tier';
+import Pip from './components/dumb/pip';
+import SeasonDivision from './components/dumb/season-division';
+import PvpSeason from './components/dumb/pvp-season';
+import PvpStandings from './components/dumb/pvp-standings';
 import Carousel from './components/dumb/carousel';
 import Redcated from './components/dumb/redacted';
 import Gw2Map from './components/dumb/gw2-map';
@@ -34,7 +39,6 @@ import UserTokens from './components/dumb/user-tokens';
 import CopyToClipboard from './components/dumb/copy-to-clipboard';
 import CharacterViewer from './components/dumb/character-viewer';
 import CharactersGrid from './components/dumb/characters-grid';
-import SliderControl from './components/dumb/slider-control';
 import InlineCharacters from './components/dumb/inline-characters';
 import ProgressIndicator from './components/dumb/progress-indicator';
 import Gw2Token from './components/dumb/gw2-token';
@@ -74,13 +78,12 @@ import angular from 'angular';
 import ngRedux from 'ng-redux';
 import uiRouter from 'angular-ui-router';
 import ngReduxRouter from 'redux-ui-router';
-
 import reducers from './reducers';
 import { combineReducers } from 'redux';
 import store from './app.redux-store';
 
 const App = angular.module('gw2armory', [
-    ngRedux,
+  ngRedux,
   uiRouter,
   ngReduxRouter
 ])
@@ -94,6 +97,11 @@ const App = angular.module('gw2armory', [
 .service('authService', AuthService)
 .service('debounce', debounce)
 
+.directive('tier', Tier)
+.directive('pip', Pip)
+.directive('seasonDivision', SeasonDivision)
+.directive('pvpSeason', PvpSeason)
+.directive('pvpStandings', PvpStandings)
 .directive('carousel', Carousel)
 .directive('redacted', Redcated)
 .directive('gw2Map', Gw2Map)
@@ -127,7 +135,6 @@ const App = angular.module('gw2armory', [
 .directive('itemTooltip', ItemTooltip)
 .directive('progressIndicator', ProgressIndicator)
 .directive('charactersGrid', CharactersGrid)
-.directive('sliderControl', SliderControl)
 .directive('inlineCharacters', InlineCharacters)
 .directive('characterViewer', CharacterViewer)
 .directive('gw2Token', Gw2Token)

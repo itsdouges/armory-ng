@@ -10,7 +10,7 @@ function component () {
       game: '=',
     },
     template: `
-<card mode="inline">
+<card mode="inline" style="width: calc(100% - 10px); margin-right: 1px; margin-left: 5px;">
   <div class="${styles.container}">
     <gw2-map map-id="{{ pvp.game.map_id }}"></gw2-map>
 
@@ -40,11 +40,10 @@ function component () {
       <div class="${styles.stats} ${styles.spreadItems} ${styles.big}">
         <div>
           <div><redacted on="!pvp.game.id">{{ pvp.game.rating_type || 'Ranked' }}</redacted></div>
-          <!--<div ng-if="pvp.game.season"><a ng-href="pvp/season/{{ pvp.game.season }}">View Season</a></div>-->
         </div>
 
         <div>
-          <div><redacted on="!pvp.game.id">{{ pvp.calculateMatchInMinutes(pvp.game.started, pvp.game.ended) || 0 }} minutes, on</redacted></div>
+          <div><redacted on="!pvp.game.id">{{ pvp.calculateMatchInMinutes(pvp.game.started, pvp.game.ended) || 0 }} minutes</redacted></div>
           <div><redacted on="!pvp.game.id">{{ pvp.stringToDate(pvp.game.ended) || 'Groundhog Day' }}</redacted></div>
         </div>
       </div>

@@ -76,7 +76,7 @@ function fetchPvpStandingsResult (state, action) {
     newState.data[action.payload.alias] = {};
   }
 
-  newState.data[action.payload.alias].pvpStandings = action.payload.data;
+  newState.data[action.payload.alias].pvpStandings = action.payload.data.reverse();
 
   return newState;
 }

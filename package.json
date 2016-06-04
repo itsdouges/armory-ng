@@ -1,9 +1,8 @@
 {
-  "name": "gw2armory",
+  "name": "gw2armory.com",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --watch --inline --hot --env DEV",
-    "start:min": "webpack-dev-server -p --env PROD",
     "test": "karma start --single-run",
     "unit:watch": "karma start",
     "build": "webpack --env DEV",

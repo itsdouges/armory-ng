@@ -12,8 +12,10 @@ export default function component () {
     transclude: true,
     template: `
 <div class="${styles.carouselContainer}">
-  <div class="${styles.carousel}" ng-style="carousel.getStyle()">
-    <ng-transclude></ng-transclude>
+  <div
+    ng-transclude
+    class="${styles.carousel}"
+    ng-style="carousel.getStyle()">
   </div>
 
   <div
@@ -56,8 +58,10 @@ class Carousel {
   }
 
   getStyle () {
+    const transform = `translate3d(${-100 * this.current}%, 0, 0)`;
     return {
-      transform: `translateX(${-100 * this.current}%)`,
+      transform: transform,
+      'webkit-transform': transform,
     };
   }
 }
