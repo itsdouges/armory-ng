@@ -8,7 +8,8 @@ const environment = {
 
 if (__DEV__) {
   environment.api = {
-    endpoint: 'http://192.168.59.103/',
+    // endpoint: 'http://192.168.59.103/',
+    endpoint: '//api.gw2armory.com/',
     secret: 'bacon',
   };
 }

@@ -44,11 +44,13 @@ export default function component () {
 
             <div class="${styles.container}">
                 <div class="${styles.inner}">
-                    <progress-indicator busy="searchModal.searching"></progress-indicator>
+                    <progress-indicator [busy]="searchModal.searching"></progress-indicator>
 
                     <div 
                         ng-if="!searchModal.searching && !searchModal.results.length" 
-                        class="${styles.notFound}">Nothing could be found :-(</div>
+                        class="${styles.notFound}">
+                        Nothing could be found :-(
+                    </div>
 
                     <search-result
                         ng-click="searchModal.close()"

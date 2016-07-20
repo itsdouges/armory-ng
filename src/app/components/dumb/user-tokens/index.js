@@ -40,13 +40,14 @@ function component () {
       <form class="${formStyles.container}" ng-submit="userTokens.addToken({ token: userTokens.newGw2Token })">
         <textbox
           label="Add token"
-          on-change="userTokens.validateTokenDebounce"
-          control-id="add-token"
-          ng-model="userTokens.newGw2Token"
-          required="true"
-          is-busy="userTokens.validatingToken"
-          is-valid="userTokens.validToken"
-          error="userTokens.tokenError"></textbox>
+          [on-change]="userTokens.validateTokenDebounce"
+          [id]="add-token"
+          [(value)]="userTokens.newGw2Token"
+          [required]="true"
+          [busy]="userTokens.validatingToken"
+          [valid]="userTokens.validToken"
+          [error-message]="userTokens.tokenError">
+        </textbox>
 
         <div class="${formStyles.buttonGroup}">
           <busy-button 

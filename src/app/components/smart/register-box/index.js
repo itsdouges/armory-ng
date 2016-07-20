@@ -38,6 +38,7 @@ function component () {
     [on-change]="ctrl.checkPasswords"
     [id]="'register-password'"
     [required]="true"
+    [(value)]="ctrl.password"
     [valid]="ctrl.user.passwordValue">
   </textbox>
 
@@ -48,6 +49,7 @@ function component () {
     [id]="'register-confirm-password'"
     [required]="true"
     [valid]="ctrl.user.passwordValue"
+    [(value)]="ctrl.passwordConfirm"
     [error-message]="ctrl.user.passwordErrors[0]">
   </textbox>
 
@@ -55,14 +57,14 @@ function component () {
     <busy-button 
       button-disabled="!ctrl.canRegister" 
       busy="ctrl.user.registering">
-      <i 
+      <i
         class="fa fa-paper-plane"
         style="margin-left: -4px">
       </i>
     </busy-button>
   </div>
 </form>
-    `,
+`,
     bindToController: {
       state: '@'
     }, 
@@ -74,7 +76,7 @@ function component () {
 
 // @ngInject
 function RegisterBox ($ngRedux, $scope) {
-  let scope = this;
+  const scope = this;
 
   const unsubscribe = $ngRedux.connect(registerSelector)(this);
   $scope.$on('$destroy', unsubscribe);
@@ -97,8 +99,8 @@ function RegisterBox ($ngRedux, $scope) {
     alias && $ngRedux.dispatch(actionCreators.checkAliasThunk(alias));
   });
 
-  this.checkPasswords = debounce((password, password2) => {
-    $ngRedux.dispatch(actionCreators.checkPasswords(scope.inputs.password1, scope.inputs.password2));
+  this.checkPasswords = debounce(() => {
+    $ngRedux.dispatch(actionCreators.checkPasswords(scope.password, scope.passwordConfirm));
   }, 500);
 
   init();

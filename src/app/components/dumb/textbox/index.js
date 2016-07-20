@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import styles from './textbox.less';
 import InputValidity from '../input-validity';
 
 @Component({
   selector: 'textbox',
-  inputs: ['label', 'errorMessage', 'busy', 'valid', 'required', 'id', 'onChange', 'type'],
   directives: [InputValidity],
   template: `
 <div>
@@ -18,10 +17,11 @@ import InputValidity from '../input-validity';
       [attr.id]="id"
       [attr.type]="type || 'text'"
       [attr.required]="required"
-      (change)="onChange($event.target.value)" />
+      [(ngModel)]="value"
+      (ngModelChange)="onModelChange($event)" />
 
     <input-validity
-      [busy]="busy"
+      *ngIf="!noValidation"
       [valid]="valid">
     </input-validity>
 
@@ -34,4 +34,21 @@ import InputValidity from '../input-validity';
 </div>
 `,
 })
-export default class Textbox {}
+export default class Textbox {
+  @Input() label = '';
+  @Input() errorMessage = '';
+  @Input() valid = false;
+  @Input() required = false;
+  @Input() busy = false;
+  @Input() id = '';
+  @Input() onChange = undefined;
+  @Input() type = '';
+  @Input() noValidation = false;
+  @Input() value = '';
+  @Output() valueChange = new EventEmitter();
+
+  onModelChange (value) {
+    this.onChange && this.onChange(value);
+    this.valueChange.emit(value);
+  }
+}

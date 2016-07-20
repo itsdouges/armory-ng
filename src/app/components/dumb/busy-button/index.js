@@ -19,7 +19,8 @@ function component () {
         
         <progress-indicator 
           size="mini"
-          busy="busyButton.busy"></progress-indicator>
+          [busy]="busyButton.busy">
+        </progress-indicator>
       </button>
     `,
     scope: {},

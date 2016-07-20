@@ -31,11 +31,13 @@ function component () {
 
         <progress-indicator
           class="${styles.progress}"
-          busy="ctrl.fetching && !ctrl.hasCharacters()"></progress-indicator>
+          [busy]="ctrl.fetching && !ctrl.hasCharacters()">
+        </progress-indicator>
 
         <inline-characters
           mode="{{ ctrl.mode }}"
-          characters="ctrl.characters"></inline-characters>
+          characters="ctrl.characters">
+        </inline-characters>
       </div>
     `
   };

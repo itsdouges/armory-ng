@@ -10,27 +10,26 @@ function component () {
     controllerAs: 'ctrl',
     template: `
       <form class="${forms.container}" ng-submit="ctrl.login()">
-        <div class="${message.message}">Don't have an account? <strong><a title="Signup" ui-sref="main.no-auth.with-container.signup">Go signup!</a></strong></div>
-
-        <div>
-          <div class="${forms.labelContainer}">
-            <label for="email">Email</label>
-          </div>
-
-          <div class="${forms.inputContainer}">
-            <input placeholder="Email" id="email" type="text" ng-model="ctrl.email" required="required" />
-          </div>
+        <div class="${message.message}">
+          Don't have an account? <strong><a title="Signup" ui-sref="main.no-auth.with-container.signup">Go signup!</a></strong>
         </div>
 
-        <div>
-          <div class="${forms.labelContainer}">
-            <label for="password">Password</label>
-          </div>
+        <textbox
+          label="Email"
+          [id]="'email'"
+          [required]="true"
+          [(value)]="ctrl.email"
+          no-validation="true">
+        </textbox>
 
-          <div class="${forms.inputContainer}">
-            <input placeholder="Password" id="password" type="password" ng-model="ctrl.password" required="required" />
-          </div>
-        </div>
+        <textbox
+          type="password"
+          label="Password"
+          [id]="'password'"
+          [(value)]="ctrl.password"
+          [required]="true"
+          no-validation="true">
+        </textbox>
 
         <div class="${forms.buttonGroup}">
           <busy-button busy="ctrl.fetchingToken">

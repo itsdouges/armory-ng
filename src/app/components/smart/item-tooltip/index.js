@@ -103,7 +103,7 @@ function component () {
                     </div>
                 </div>
 
-                <progress-indicator busy="ctrl.fetching"></progress-indicator>
+                <progress-indicator [busy]="ctrl.fetching"></progress-indicator>
             </div>
         `
     };
