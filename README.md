@@ -1,4 +1,4 @@
-# gw2armory.com
+# gw2armory.com [![Build Status](https://travis-ci.org/madou/armory-ng.svg?branch=master)](https://travis-ci.org/madou/armory-ng)
 
 The `Guild Wars 2 Armory` frontend is currently being remade over at the [armory-react](https://github.com/madou/armory-react) repo, come check it out!
 
